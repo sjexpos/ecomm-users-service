@@ -1,0 +1,20 @@
+{
+    "Records": [
+        {
+            "messageId": "45f4d02b-e89c-48e3-b6db-52dced3f2efe",
+            "receiptHandle": "AQEBKNZZr46yBoikdveaNOLWGmPp2X7Wz9u400xI7rx7ZZwU71VOMMDAZhx9DsKecPppQE7k6+to19r/7Scc1tf0fWMJuNqY5TKz1SFEOTlpowgApIt6mU2ugYMNSblsWft29Pex0bWc93Dm1xXudpTaam3gGOb+gQYZoqFYxdzGZwEytz6HpHhuXhQdf2wDRSPdLDvrFCGQs5GMbiwLUa4va6dJ+uHBhTWTvyxZF/Kwa3+nZ+updxiJKb/e5Eq6RXEZEzWRXOn2OHK8nHIapiP0N7iPpZjL9d+k8mRVnd/KEWsZcx1/uza5rFmBG3aHB0wH+FYyaebCdmb1oE2T1Z5mc4D9f2EwGuZzwIiDewooUsnrGmoSZzQZtCpFdxZwZyxJJ91amfbozjUViWGx+WYaMWxDSC4j3I1tJYjNMw1gxy4=",
+            "body": "{\"Records\":[{\"eventVersion\":\"2.1\",\"eventSource\":\"aws:s3\",\"awsRegion\":\"us-east-1\",\"eventTime\":\"2023-02-06T18:02:31.257Z\",\"eventName\":\"ObjectCreated:Put\",\"userIdentity\":{\"principalId\":\"AWS:AIDAY5XUF3TGEHG74SPKY\"},\"requestParameters\":{\"sourceIPAddress\":\"3.85.86.222\"},\"responseElements\":{\"x-amz-request-id\":\"WS59J9FNZMNDCQE0\",\"x-amz-id-2\":\"0qUEty+KSLK6dDsw636or9XMRKbVV71q9+ySROq6HvGKDZ0Az/thlI3j5gBh/9veUJz4VppbB9/lv8fLRNMBB2zjTl8egMQa\"},\"s3\":{\"s3SchemaVersion\":\"1.0\",\"configurationId\":\"f63bcc24-f419-4b71-a247-2f9bf29b9c49\",\"bucket\":{\"name\":\"ecomm-assets-dev\",\"ownerIdentity\":{\"principalId\":\"A3J4D2N8UAZML\"},\"arn\":\"arn:aws:s3:::ecomm-assets-dev\"},\"object\":{\"key\":\"users/profiles/images/20threads-2022-07-05+18-42-06.png\",\"size\":192517,\"eTag\":\"c8303dcde9b9a725bf3733e6b931a5c6\",\"sequencer\":\"0063E140B72BC06CB1\"}}}]}",
+            "md5OfBody": "f552f1cd464303464be7ef0fd9af7c83",
+            "eventSourceArn": "arn:aws:sqs:us-east-1:613618670796:ecomm-users-assets-events-queue-dev",
+            "eventSource": "aws:sqs",
+            "awsRegion": "us-east-1",
+            "attributes": {
+                "ApproximateReceiveCount": "1",
+                "SentTimestamp": "1675706551887",
+                "SenderId": "AIDAJHIPRHEMV73VRJEBU",
+                "ApproximateFirstReceiveTimestamp": "1675706551901"
+            },
+            "messageAttributes": {}
+        }
+    ]
+}

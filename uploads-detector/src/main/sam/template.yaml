@@ -1,0 +1,94 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: EComm - Users assets uploads detector - ${project.version}
+
+Parameters:
+  Product:
+    Type: String
+    Default: 'ecomm'
+  Environment:
+    Type: String
+    Description: ''
+    AllowedValues:
+      - local
+      - dev
+      - qa
+      - stage
+      - prod
+  Project:
+    Type: String
+    Default: 'users-assets-upload-detector'
+  SecurityGroups:
+    Type: List<AWS::EC2::SecurityGroup::Id>
+  SubnetIds:
+    Type: List<AWS::EC2::Subnet::Id>
+  UsersServiceUri:
+    Type: String
+    Description: 'Users service URI. Eg. http://<host>:<port>/api'
+  AssetsBucket:
+    Type: String
+    Description: S3 bucket that's used for Lambda event notification
+  UsersAssetsEventsQueueArn:
+    Type: String
+    Default: 'arn:aws:sqs:${AWS::Region}:${AWS::AccountId}:${Product}-users-assets-events-queue-${Environment}'
+
+Resources:
+
+  S3NotificationLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: EComm - Users assets uploads detector - ${project.version}
+      FunctionName: !Join [ "-", [ !Ref Product, !Ref Project, !Ref Environment ], ]
+      Runtime: java11
+      Handler: io.oigres.ecomm.S3EventHandler::handleRequest
+      CodeUri: ./${project.artifactId}-${project.version}.zip
+      Timeout: 200 # this is in seconds; Max is 900 sec = 15 minutes
+      MemorySize: 2048
+      Tracing: Active
+      Policies:
+        - AWSLambdaExecute
+        - AWSLambdaVPCAccessExecutionRole
+        - Version: 2012-10-17
+          Statement:
+            - Effect: Allow
+              Action:
+                - sqs:ReceiveMessage
+                - sqs:DeleteMessage
+                - sqs:GetQueueAttributes
+              Resource:
+                - !Ref UsersAssetsEventsQueueArn
+      VpcConfig:
+        SecurityGroupIds: !Ref SecurityGroups
+        SubnetIds: !Ref SubnetIds
+      Environment:
+        Variables:
+          USERS_SERVICE_URI: !Ref UsersServiceUri
+          APP_LOG_LEVEL: INFO
+
+  S3NotificationLambdaFunctionLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Join [ '', [ '/aws/lambda/', !Ref S3NotificationLambdaFunction, ], ]
+      RetentionInDays: 120
+
+  S3NotificationLambdaFunctionSourceMapping:
+    Type: AWS::Lambda::EventSourceMapping
+    Properties:
+      EventSourceArn: !Ref UsersAssetsEventsQueueArn
+      FunctionName: !GetAtt S3NotificationLambdaFunction.Arn
+
+Outputs:
+  S3NotificationLambdaFunctionOutput:
+    Description: Users uploads detector 
+    Value: !GetAtt S3NotificationLambdaFunction.Arn
+    Export:
+      Name:
+        !Join [ 
+          '-', 
+          [ 
+          !Ref Product,
+          !Ref Environment,
+          'users-assets-detector-lambda-arn'
+          ],
+        ]
+

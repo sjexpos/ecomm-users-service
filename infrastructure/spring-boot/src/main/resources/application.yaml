@@ -1,0 +1,138 @@
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+  error:
+    include-stacktrace: never
+    include-message: always
+    include-exception: true
+    include-binding-errors: always
+
+spring:
+  application:
+    name: users-service
+  cache:
+    type: redis
+    redis:
+      cache-null-values: true
+      use-key-prefix: true
+      key-prefix: ECOMM-USER-MS
+      time-to-live: 5000
+  redis:
+    host: localhost
+    port: 6379
+    ssl: false
+    timeout: 1000
+  datasource:
+    host: localhost
+    port: 5432
+    schemaName: ecomm_users
+    url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.schemaName}?serverTimezone=UTC
+    driver-class-name: org.postgresql.Driver
+    username: users_service
+    password: 1234
+  jpa:
+    show-sql: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        cache:
+          use_second_level_cache: true
+          use_query_cache: true
+          factory_class: org.redisson.hibernate.RedissonRegionFactory
+          redisson:
+            fallback: true
+            config: redisson-dev.yaml
+        search:
+          schema_management:
+            strategy: create-or-validate
+          automatic_indexing:
+            enabled: true
+            enable_dirty_check: true
+            synchronization:
+              strategy: write-sync
+          query:
+            loading:
+              fetch_size: 30
+              cache_lookup:
+                strategy: persistence-context-then-second-level-cache
+          mapping:
+            process_annotations: false
+            configurer: bean:searchMappingConfigurer
+          backend:
+            type: elasticsearch
+            hosts: localhost:9200
+            protocol: http
+#          backend:  # uncomment this to connect to AWS OpenSearch from local
+#            type: elasticsearch
+#            hosts: <opensearch endpoint>:443
+#            protocol: https
+#            aws:
+#              signing:
+#                enabled: true
+#              region: us-east-1
+#              credentials:
+#                type: static
+#                access_key_id: <value>
+#                secret_access_key: <value>
+
+management:
+  server:
+    port: 8080
+  endpoints:
+    web:
+      exposure:
+        include: info, health, httptrace, loggers, metrics, threaddump
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+      show-components: always
+  info:
+    git:
+      mode: full
+  health:
+    elasticsearch:
+      enabled: false # if we need health check, we need to create a health indicator which will use the connection from hibernate search
+
+springdoc:
+  show-actuator: false
+  show-login-endpoint: false
+  api-docs:
+    path: /openapiv3
+  swagger-ui:
+    path: /api-docs.html
+    operationsSorter: method
+    disable-swagger-default-url: true
+
+logging:
+  pattern:
+    console: '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%-5p) [%clr(%18.18t){faint}] [%clr(%32X{X-EComm-Trace-Id}){blue}] %clr(%40.40logger{5.10}:%-4L){cyan} : %m %n'
+  level:
+    io.oigres.ecomm.service.users: INFO
+#    org.hibernate.SQL: DEBUG
+#    org.hibernate.internal: TRACE
+#    org.springframework.orm.jpa: DEBUG
+#    org.springframework.transaction: DEBUG
+#    org.springframework.transaction.interceptor: TRACE
+#    org.springframework.jdbc: DEBUG
+
+ecomm:
+  termsOfService: https://ecomm.oigres.io/terms/
+  license: https://ecomm.oigres.io/license/
+  service:
+    users:
+      name: EComm
+      version: ${project.version}
+      assets:
+        bucket:
+          name: ecomm-assets-dev
+          rootFolder: users
+          signatureDuration: 10m
+        cleanup:
+          cards:
+            imagesTimeAfterOffset: 24h

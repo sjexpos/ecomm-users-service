@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings version="1.0">
+    <persistence-unit-metadata>
+        <persistence-unit-defaults>
+            <entity-listeners>
+                <entity-listener class="io.oigres.ecomm.service.users.orm.CustomAuditingEntityListener"/>
+            </entity-listeners>
+        </persistence-unit-defaults>
+    </persistence-unit-metadata>
+</entity-mappings>

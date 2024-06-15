@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    host: ${tests.db.hostname}
+    port: ${tests.db.port}
+    schemaName: ${tests.db.database}
+    url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.schemaName}?serverTimezone=UTC
+    driver-class-name: org.postgresql.Driver
+    username: ${tests.db.username}
+    password: ${tests.db.password}
+  jpa:
+    show-sql: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        search:
+          schema_management:
+            strategy: create-or-validate
+          automatic_indexing:
+            enabled: true
+            enable_dirty_check: true
+            synchronization:
+              strategy: write-sync
+          query:
+            loading:
+              fetch_size: 30
+              cache_lookup:
+                strategy: persistence-context-then-second-level-cache
+          mapping:
+            process_annotations: false
+            configurer: bean:searchMappingConfigurer
+          backend:
+            type: elasticsearch
+            hosts: ${tests.opensearch.hostname}:${tests.opensearch.port}
+            protocol: http
