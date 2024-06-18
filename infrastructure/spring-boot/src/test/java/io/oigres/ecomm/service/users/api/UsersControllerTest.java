@@ -38,7 +38,6 @@ import io.oigres.ecomm.service.users.repository.UserJpaRepository;
 @SetEnvironmentVariable(key = "AWS_DEFAULT_REGION", value = "us-east-1")
 @SetEnvironmentVariable(key = "AWS_ACCESS_KEY_ID", value = "test")
 @SetEnvironmentVariable(key = "AWS_SECRET_ACCESS_KEY", value = "test")
-@Disabled
 class UsersControllerTest {
 
     @Autowired UserJpaRepository userJpaRepository;

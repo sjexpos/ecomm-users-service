@@ -6,8 +6,8 @@ on:
     
 jobs:
 
-  build-lib:
-    name: Build library
+  build-app:
+    name: Build Application
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,5 +21,38 @@ jobs:
         uses: codecov/codecov-action@v4.0.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4.3.3
+        with:
+          name: compiled-sources
+          path: ./
+
+  build-docker-image:
+    name: Create docker image
+    needs: [build-app]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download compiled sources
+        uses: actions/download-artifact@v4.1.7
+        with:
+          name: compiled-sources
+          path: ./
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./
+          file: Dockerfile
+          platforms: linux/amd64
+          push: false
+          tags: sjexpos/ecomm-users-service:latest
 
 # mvn jacoco:prepare-agent jacoco:report surefire:test
