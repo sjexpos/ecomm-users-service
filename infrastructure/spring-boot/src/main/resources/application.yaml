@@ -1,6 +1,9 @@
 
 server:
   port: 8080
+  tomcat:
+    max-connections: 2000 # Maximum connections
+    accept-count: 200     # Maximum waiting number
   servlet:
     context-path: /api
   error:
@@ -8,6 +11,8 @@ server:
     include-message: always
     include-exception: true
     include-binding-errors: always
+
+# spring.threads.virtual.enabled=true - Enable virtual thread with JDK 21 and spring boot >= 3.2
 
 spring:
   application:
@@ -136,3 +141,4 @@ ecomm:
         cleanup:
           cards:
             imagesTimeAfterOffset: 24h
+

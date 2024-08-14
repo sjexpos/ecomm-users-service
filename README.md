@@ -1,11 +1,11 @@
 
 # Users service
 
-[![GitHub release](https://img.shields.io/github/release/sjexpos/ecommecomm-users-service.svg?style=plastic)](https://github.com/sjexpos/ecomm-users-service/releases/latest)
+[![GitHub release](https://img.shields.io/github/release/sjexpos/ecomm-users-service.svg?style=plastic)](https://github.com/sjexpos/ecomm-users-service/releases/latest)
 [![CI workflow](https://img.shields.io/github/actions/workflow/status/sjexpos/ecomm-users-service/ci.yaml?branch=main&label=ci&logo=github&style=plastic)](https://github.com/sjexpos/ecomm-users-service/actions?workflow=CI)
 [![Codecov](https://img.shields.io/codecov/c/github/sjexpos/ecomm-users-service?logo=codecov&style=plastic)](https://codecov.io/gh/sjexpos/ecomm-users-service)
 [![Issues](https://img.shields.io/github/issues-search/sjexpos/ecomm-users-service?query=is%3Aopen&label=issues&style=plastic)](https://github.com/sjexpos/ecomm-users-service/issues)
-![Commits](https://img.shields.io/github/last-commit/sjexpos/ecomm-users-service?logo=github&style=plastic)
+[![Commits](https://img.shields.io/github/last-commit/sjexpos/ecomm-users-service?logo=github&style=plastic)](https://github.com/sjexpos/ecomm-users-service/commits)
 
 
 This microservice is responsible for ...
@@ -14,12 +14,12 @@ This microservice is responsible for ...
 
 This project has a hexagonal architecture and the modules are:
 
-* **api** - interfaces which are implemented as controllers on **api-rest**
+* **api** - interfaces which are implemented as controllers on **rest-api**
 * **db-scripts** - flyway database scripts
 * **domain** - domain objects
 * **application** - use cases
 * **infrastructure**
-   * **api-rest** - controllers which implement interfaces on **api**
+   * **rest-api** - controllers which implement interfaces on **api**
    * **persistence** - all classes and functionality related to how domain object are stored.
    * **spring-boot** - all classes and configuration related to IoC container (spring boot)
 * **sdk** - classes which implement interfaces on module **api** to call services of this microservice remotely.

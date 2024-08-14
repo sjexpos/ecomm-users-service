@@ -23,7 +23,6 @@
     <tests.opensearch.port>9200</tests.opensearch.port>
     <tests.redis.hostname>localhost</tests.redis.hostname>
     <tests.redis.port>6379</tests.redis.port>
-
   </properties>
 
   <dependencies>
@@ -40,10 +39,35 @@
       <groupId>io.oigres.ecomm</groupId>
       <artifactId>users-service-rest-api</artifactId>
     </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+
+<!-- If Jetty is preferred to run as embedded container instead of Tomcat
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jetty</artifactId>
+    </dependency>
+-->
+    <!-- Add Undertow starter dependency 
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-undertow</artifactId>
+    </dependency>
+    -->
+    
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-validation</artifactId>
@@ -67,7 +91,6 @@
     <dependency>
       <groupId>org.redisson</groupId>
       <artifactId>redisson-hibernate-53</artifactId>
-      <version>3.17.5</version>
     </dependency>
     <dependency>
       <groupId>software.amazon.awssdk</groupId>
@@ -296,6 +319,7 @@
                               <port>${tests.db.port}</port>
                             </ports>
                           </tcp>
+                          <time>20000</time>
                         </wait>
                         <log>
                           <enabled>true</enabled>
@@ -355,6 +379,7 @@
                               <port>${tests.opensearch.port}</port>
                             </ports>
                           </tcp>
+                          <time>20000</time>
                         </wait>
                         <log>
                           <enabled>true</enabled>
@@ -389,6 +414,7 @@
                               <port>${tests.redis.port}</port>
                             </ports>
                           </tcp>
+                          <time>20000</time>
                         </wait>
                         <log>
                           <enabled>true</enabled>
@@ -446,6 +472,7 @@
                               <port>4566</port>
                             </ports>
                           </tcp>
+                          <time>20000</time>
                         </wait>
                         <log>
                           <enabled>true</enabled>

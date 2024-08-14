@@ -196,6 +196,7 @@
                               <port>${tests.db.port}</port>
                             </ports>
                           </tcp>
+                          <time>20000</time>
                         </wait>
                         <log>
                           <enabled>true</enabled>
@@ -255,6 +256,7 @@
                               <port>${tests.opensearch.port}</port>
                             </ports>
                           </tcp>
+                          <time>20000</time>
                         </wait>
                         <log>
                           <enabled>true</enabled>

@@ -43,13 +43,17 @@
     <openapiv3.version>1.6.9</openapiv3.version>
     <swagger-annotations.version>2.2.0</swagger-annotations.version>
     <modelmapper.version>3.1.0</modelmapper.version>
+    <redisson.hibernate.version>3.17.5</redisson.hibernate.version>
     <hibernate.search.version>6.1.7.Final</hibernate.search.version>
     <postgresql-connector.version>42.4.0</postgresql-connector.version>
-    <awssdk.s3.version>2.18.9</awssdk.s3.version>
+
+    <awssdk.s3.version>2.19.9</awssdk.s3.version>
     <awssdk.sts.version>2.19.9</awssdk.sts.version>
     <slf4j.api.version>1.7.36</slf4j.api.version>
     <logback.version>1.2.11</logback.version>
     <awslambda-logback.version>1.0.0</awslambda-logback.version>
+    <awslambda.java.events.version>3.11.0</awslambda.java.events.version>
+    <awslambda.java.core.version>1.2.1</awslambda.java.core.version>
     <junit-pioneer.version>2.1.0</junit-pioneer.version>
   </properties>
 
@@ -144,6 +148,11 @@
         <version>${hibernate.search.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.redisson</groupId>
+        <artifactId>redisson-hibernate-53</artifactId>
+        <version>${redisson.hibernate.version}</version>
+      </dependency>      
+      <dependency>
         <groupId>org.hibernate.search</groupId>
         <artifactId>hibernate-search-backend-elasticsearch</artifactId>
         <version>${hibernate.search.version}</version>
@@ -219,6 +228,17 @@
         <artifactId>jlib-awslambda-logback</artifactId>
         <version>${awslambda-logback.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.amazonaws</groupId>
+        <artifactId>aws-lambda-java-events</artifactId>
+        <version>${awslambda.java.events.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.amazonaws</groupId>
+        <artifactId>aws-lambda-java-core</artifactId>
+        <version>${awslambda.java.core.version}</version>
+      </dependency>
+
       <dependency>
         <groupId>org.junit-pioneer</groupId>
         <artifactId>junit-pioneer</artifactId>

@@ -47,7 +47,6 @@
       <artifactId>spring-boot-starter-web</artifactId>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 
 </project>
