@@ -4,7 +4,7 @@ import lombok.*;
 
 import io.oigres.ecomm.service.users.enums.ResourceStatusEnum;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "card_images")

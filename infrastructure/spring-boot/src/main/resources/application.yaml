@@ -1,20 +1,21 @@
 
 server:
-  port: 8080
+  port: 9090
   tomcat:
     max-connections: 2000 # Maximum connections
     accept-count: 200     # Maximum waiting number
   servlet:
-    context-path: /api
+    context-path: /
   error:
     include-stacktrace: never
     include-message: always
     include-exception: true
     include-binding-errors: always
 
-# spring.threads.virtual.enabled=true - Enable virtual thread with JDK 21 and spring boot >= 3.2
-
 spring:
+  threads:
+    virtual:
+      enabled: true
   application:
     name: users-service
   cache:
@@ -24,11 +25,13 @@ spring:
       use-key-prefix: true
       key-prefix: ECOMM-USER-MS
       time-to-live: 5000
-  redis:
-    host: localhost
-    port: 6379
-    ssl: false
-    timeout: 1000
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      ssl: 
+        enabled: false
+      timeout: 1000
   datasource:
     host: localhost
     port: 5432
@@ -38,6 +41,7 @@ spring:
     username: users_service
     password: 1234
   jpa:
+    open-in-view: false
     show-sql: false
     generate-ddl: false
     hibernate:
@@ -55,10 +59,13 @@ spring:
           schema_management:
             strategy: create-or-validate
           automatic_indexing:
-            enabled: true
             enable_dirty_check: true
-            synchronization:
-              strategy: write-sync
+          indexing:
+            listeners:
+              enabled: true
+            plan:
+              synchronization:
+                strategy: write-sync
           query:
             loading:
               fetch_size: 30
@@ -86,7 +93,7 @@ spring:
 
 management:
   server:
-    port: 8080
+    port: ${server.port}
   endpoints:
     web:
       exposure:
@@ -108,9 +115,9 @@ springdoc:
   show-actuator: false
   show-login-endpoint: false
   api-docs:
-    path: /openapiv3
+    path: /api
   swagger-ui:
-    path: /api-docs.html
+    path: /
     operationsSorter: method
     disable-swagger-default-url: true
 

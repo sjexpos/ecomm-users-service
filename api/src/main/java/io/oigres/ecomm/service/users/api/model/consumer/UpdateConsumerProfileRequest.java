@@ -5,14 +5,16 @@ import io.oigres.ecomm.service.users.api.model.enums.ConsumerTypeApiEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class UpdateConsumerProfileRequest extends UpdateProfileRequest {
     @Schema(name = "firstName", example = "", required = true)
     @NotEmpty

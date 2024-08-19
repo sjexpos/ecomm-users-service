@@ -11,12 +11,12 @@ import io.oigres.ecomm.service.users.api.model.profile.ActiveStatusProfileRespon
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 
 public interface UsersService {
 
-    PageResponse<GetAllUsersResponse> getAllUsers(PageableRequestImpl pageable);
+    PageResponse<GetAllUsersResponse> getAllUsers(PageableRequest pageable);
 
     CreateAdminUserResponse createNewAdminUser(CreateAdminUserRequest request) throws ProfileException;
 
@@ -35,11 +35,11 @@ public interface UsersService {
 
     GetDispensaryUserResponse getDispensaryUserByDispensaryId(@Parameter(name = "dispensaryId", required = true) Long dispensaryId) throws NotFoundException;
 
-    PageResponse<GetAllAdminUsersResponse> getAllAdmins(PageableRequestImpl pageable);
+    PageResponse<GetAllAdminUsersResponse> getAllAdmins(PageableRequest pageable);
 
-    PageResponse<GetAllConsumerUsersResponse> getAllConsumers(PageableRequestImpl pageable);
+    PageResponse<GetAllConsumerUsersResponse> getAllConsumers(PageableRequest pageable);
 
-    PageResponse<GetAllDispensaryUsersResponse> getAllDispensaries(PageableRequestImpl pageable);
+    PageResponse<GetAllDispensaryUsersResponse> getAllDispensaries(PageableRequest pageable);
 
     UpdateAdminProfileResponse updateAdmin(@Parameter(name = "profileId", required = true, description = "identifier associated with the user (1..N)")
                                            @Min(value = 1, message = "profileId should be greater than zero") Long profileId,
@@ -100,11 +100,11 @@ public interface UsersService {
 
     void verifyCode(VerifyCodeRequest request) throws NotFoundException, InvalidRequestException;
 
-    PageResponse<GenderResponse> getAllGenders(PageableRequestImpl pageable) throws NotFoundException;
+    PageResponse<GenderResponse> getAllGenders(PageableRequest pageable) throws NotFoundException;
 
     GenderResponse getGenderById(long genderId) throws io.oigres.ecomm.service.users.api.model.exception.GenderNotFoundException;
 
-    PageResponse<UserTypeResponse> getAllUserTypes(@Parameter(hidden = true, required = true) PageableRequestImpl pageable);
+    PageResponse<UserTypeResponse> getAllUserTypes(@Parameter(hidden = true, required = true) PageableRequest pageable);
 
     UserTypeResponse getUserTypeById(long userTypeId) throws UserTypeNotFoundException;
 

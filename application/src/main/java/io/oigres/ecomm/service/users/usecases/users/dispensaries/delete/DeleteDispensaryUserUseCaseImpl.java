@@ -8,7 +8,7 @@ import io.oigres.ecomm.service.users.exception.profile.NotFoundProfileException;
 import io.oigres.ecomm.service.users.repository.UserRepository;
 import io.oigres.ecomm.service.users.repository.profiles.DispensaryProfileRepository;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 @Component
 @Transactional

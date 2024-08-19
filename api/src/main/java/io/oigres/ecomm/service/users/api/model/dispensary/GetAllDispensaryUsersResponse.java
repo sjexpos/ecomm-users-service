@@ -4,11 +4,13 @@ import io.oigres.ecomm.service.users.api.model.GetAllUsersResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class GetAllDispensaryUsersResponse extends GetAllUsersResponse {
     private Long dispensaryId;
 

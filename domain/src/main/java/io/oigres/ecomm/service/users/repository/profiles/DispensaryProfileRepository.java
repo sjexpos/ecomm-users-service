@@ -13,5 +13,4 @@ public interface DispensaryProfileRepository extends GenericRepository<Dispensar
     Optional<DispensaryProfile> findByDispensaryId(Long dispensaryId);
     Page<DispensaryProfile> findAll(Pageable pageable);
     DispensaryProfile save(DispensaryProfile dispensaryProfile);
-    void deleteByUserId(Long userId);
 }

@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
@@ -45,7 +46,7 @@ public class UsersServiceProxy extends MiddlewareProxy implements UsersService, 
 
     // --------------------------------- getAllUsers --------------------------------- //
 
-    public PageResponse<GetAllUsersResponse> getAllUsers(PageableRequestImpl pageable) {
+    public PageResponse<GetAllUsersResponse> getAllUsers(PageableRequest pageable) {
         return getPage(uriBuilder -> uriBuilder
                         .path(Routes.USERS_CONTROLLER_PATH)
                         .queryParam("page", pageable.getPageNumber())
@@ -181,7 +182,7 @@ public class UsersServiceProxy extends MiddlewareProxy implements UsersService, 
     // --------------------------------- getAllAdmins --------------------------------- //
 
     @Override
-    public PageResponse<GetAllAdminUsersResponse> getAllAdmins(PageableRequestImpl pageable) {
+    public PageResponse<GetAllAdminUsersResponse> getAllAdmins(PageableRequest pageable) {
         return getPage(uriBuilder -> uriBuilder
                         .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.GET_ALL_PROFILE_ADMIN_USER))
                         .queryParam("page", pageable.getPageNumber())
@@ -194,7 +195,7 @@ public class UsersServiceProxy extends MiddlewareProxy implements UsersService, 
     // --------------------------------- getAllAdmins --------------------------------- //
 
     @Override
-    public PageResponse<GetAllConsumerUsersResponse> getAllConsumers(PageableRequestImpl pageable) {
+    public PageResponse<GetAllConsumerUsersResponse> getAllConsumers(PageableRequest pageable) {
         return getPage(
             uriBuilder -> uriBuilder
                 .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.GET_ALL_PROFILE_CONSUMER_USER))
@@ -208,7 +209,7 @@ public class UsersServiceProxy extends MiddlewareProxy implements UsersService, 
     // --------------------------------- getAllDispensaries --------------------------------- //
 
     @Override
-    public PageResponse<GetAllDispensaryUsersResponse> getAllDispensaries(PageableRequestImpl pageable) {
+    public PageResponse<GetAllDispensaryUsersResponse> getAllDispensaries(PageableRequest pageable) {
         return getPage(
             uriBuilder -> uriBuilder
                 .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.GET_ALL_PROFILE_DISPENSARY_USER))
@@ -425,7 +426,7 @@ public class UsersServiceProxy extends MiddlewareProxy implements UsersService, 
     // --------------------------------- getAllGenders --------------------------------- //
 
     @Override
-    public PageResponse<GenderResponse> getAllGenders(PageableRequestImpl pageable) {
+    public PageResponse<GenderResponse> getAllGenders(PageableRequest pageable) {
         return getPage(
             uriBuilder -> uriBuilder
                 .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.GET_ALL_GENDERS))
@@ -463,7 +464,7 @@ public class UsersServiceProxy extends MiddlewareProxy implements UsersService, 
     // --------------------------------- getAllUserTypes --------------------------------- //
 
     @Override
-    public PageResponse<UserTypeResponse> getAllUserTypes(@Parameter(hidden = true, required = true) PageableRequestImpl pageable) {
+    public PageResponse<UserTypeResponse> getAllUserTypes(@Parameter(hidden = true, required = true) PageableRequest pageable) {
         return getPage(
             uriBuilder -> uriBuilder
                 .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.GET_ALL_USERTYPES))
@@ -526,8 +527,8 @@ public class UsersServiceProxy extends MiddlewareProxy implements UsersService, 
                     .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                     .accept(MediaType.APPLICATION_JSON)
                     .retrieve()
-                    .onStatus(HttpStatus::is4xxClientError, this::error4xxHandling)
-                    .onStatus(HttpStatus::is5xxServerError, this::error5xxHandling)
+                    .onStatus(HttpStatusCode::is4xxClientError, this::error4xxHandling)
+                    .onStatus(HttpStatusCode::is5xxServerError, this::error5xxHandling)
                     .bodyToMono(ImageUploadLocationResponse.class).block();
         } catch (WebClientRequestException e) {
             throw new RuntimeException(Constants.ERROR_500_USER_MESSAGE);
@@ -547,8 +548,8 @@ public class UsersServiceProxy extends MiddlewareProxy implements UsersService, 
                     .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                     .accept(MediaType.APPLICATION_JSON)
                     .retrieve()
-                    .onStatus(HttpStatus::is4xxClientError, this::error4xxHandling)
-                    .onStatus(HttpStatus::is5xxServerError, this::error5xxHandling)
+                    .onStatus(HttpStatusCode::is4xxClientError, this::error4xxHandling)
+                    .onStatus(HttpStatusCode::is5xxServerError, this::error5xxHandling)
                     .bodyToMono(ImageUploadLocationResponse.class).block();
         } catch (WebClientRequestException e) {
             throw new RuntimeException(Constants.ERROR_500_USER_MESSAGE);

@@ -3,7 +3,7 @@ package io.oigres.ecomm.service.users.repository;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 import org.hibernate.search.engine.search.query.SearchResult;
 import org.hibernate.search.mapper.orm.Search;

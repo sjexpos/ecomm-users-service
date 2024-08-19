@@ -63,14 +63,15 @@ import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -182,7 +183,7 @@ public class UsersController extends AbstractController implements UsersService 
     @PageableAsQueryParam
     @GetMapping(produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public PageResponse<GetAllUsersResponse> getAllUsers(@Parameter(hidden = true) PageableRequestImpl pageable) {
+    public PageResponse<GetAllUsersResponse> getAllUsers(@Parameter(hidden = true) @PageableDefault(page = 0, size = 40) PageableRequest pageable) {
         log.info("############ call getAllUsers ############");
         Page<User> users = this.getAllUsersUseCase.handle(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending()));
         List<GetAllUsersResponse> response = users.getContent().stream().map(u -> GetAllUsersResponse.builder().userId(u.getId()).email(u.getEmail()).build()).collect(Collectors.toList());
@@ -333,7 +334,7 @@ public class UsersController extends AbstractController implements UsersService 
     @GetMapping(value = Routes.GET_ALL_PROFILE_ADMIN_USER, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @Override
-    public PageResponse<GetAllAdminUsersResponse> getAllAdmins(@Parameter(hidden = true, required = true) PageableRequestImpl pageable) {
+    public PageResponse<GetAllAdminUsersResponse> getAllAdmins(@Parameter(hidden = true, required = true) PageableRequest pageable) {
         log.info("############ call getAllAdmins ############");
         Page<AdminProfile> adminProfilePage = getAllAdminsUseCase.handle(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending()));
         List<GetAllAdminUsersResponse> getAllAdminUsersResponseList = adminProfilePage.getContent().stream()
@@ -352,7 +353,7 @@ public class UsersController extends AbstractController implements UsersService 
     @GetMapping(value = Routes.GET_ALL_PROFILE_CONSUMER_USER, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @Override
-    public PageResponse<GetAllConsumerUsersResponse> getAllConsumers(@Parameter(hidden = true, required = true) PageableRequestImpl pageable) {
+    public PageResponse<GetAllConsumerUsersResponse> getAllConsumers(@Parameter(hidden = true, required = true) PageableRequest pageable) {
         log.info("############ call getAllConsumers ############");
         Page<ConsumerProfile> consumerProfilePage = getAllConsumersUseCase.handle(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending()));
 
@@ -369,7 +370,7 @@ public class UsersController extends AbstractController implements UsersService 
     @GetMapping(value = Routes.GET_ALL_PROFILE_DISPENSARY_USER, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @Override
-    public PageResponse<GetAllDispensaryUsersResponse> getAllDispensaries(@Parameter(hidden = true, required = true) PageableRequestImpl pageable) {
+    public PageResponse<GetAllDispensaryUsersResponse> getAllDispensaries(@Parameter(hidden = true, required = true) PageableRequest pageable) {
         log.info("############ call getAllDispensaries ############");
         Page<DispensaryProfile> dispensaryProfilePage = getAllDispensariesUseCase.handle(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending()));
         List<GetAllDispensaryUsersResponse> getAllDispensaryUsersResponseList = dispensaryProfilePage.getContent().stream()
@@ -708,7 +709,7 @@ public class UsersController extends AbstractController implements UsersService 
     @GetMapping(value = Routes.GET_ALL_GENDERS, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @Override
-    public PageResponse<GenderResponse> getAllGenders(@Parameter(hidden = true, required = true) PageableRequestImpl pageable) {
+    public PageResponse<GenderResponse> getAllGenders(@Parameter(hidden = true, required = true) PageableRequest pageable) {
         log.debug("############ call getAllGenders ############");
         Page<Gender> genders = this.getAllGendersUseCase.handle(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending()));
         List<GenderResponse> response = genders.getContent().stream()
@@ -737,7 +738,7 @@ public class UsersController extends AbstractController implements UsersService 
     @GetMapping(value = Routes.GET_ALL_USERTYPES, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @Override
-    public PageResponse<UserTypeResponse> getAllUserTypes(@Parameter(hidden = true, required = true) PageableRequestImpl pageable) {
+    public PageResponse<UserTypeResponse> getAllUserTypes(@Parameter(hidden = true, required = true) PageableRequest pageable) {
         log.debug("############ call getAllUserTypes ############");
         List<UserTypeResponse> response = Arrays.stream(ConsumerTypeEnum.values()).map(ct -> UserTypeResponse.builder().id(ct.getId()).name(ct.getPrettyName()).build()).collect(Collectors.toList());
         return new PageResponseImpl<>(response, pageable, response.size());

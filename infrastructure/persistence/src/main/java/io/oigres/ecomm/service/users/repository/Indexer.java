@@ -6,7 +6,7 @@ import org.hibernate.search.mapper.orm.session.SearchSession;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 @Transactional
 @Component

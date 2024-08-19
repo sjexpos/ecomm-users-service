@@ -6,7 +6,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import io.oigres.ecomm.service.users.enums.ResourceStatusEnum;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity

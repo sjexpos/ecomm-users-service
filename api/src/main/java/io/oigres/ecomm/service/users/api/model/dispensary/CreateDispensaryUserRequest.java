@@ -3,11 +3,12 @@ package io.oigres.ecomm.service.users.api.model.dispensary;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import io.oigres.ecomm.service.users.api.model.CreateUserRequest;
 
@@ -16,6 +17,7 @@ import io.oigres.ecomm.service.users.api.model.CreateUserRequest;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class CreateDispensaryUserRequest extends CreateUserRequest {
 
     @NotNull

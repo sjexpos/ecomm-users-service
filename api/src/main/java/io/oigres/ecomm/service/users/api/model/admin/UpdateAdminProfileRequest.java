@@ -4,14 +4,16 @@ import io.oigres.ecomm.service.users.api.model.UpdateProfileRequest;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class UpdateAdminProfileRequest extends UpdateProfileRequest {
     @Schema(name = "firstName", example = "SomeName", required = true)
     @NotEmpty

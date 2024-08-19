@@ -5,11 +5,13 @@ import io.oigres.ecomm.service.users.api.model.enums.ConsumerTypeApiEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class CreateConsumerUserResponse extends CreateUserResponse {
 
     private String firstName;

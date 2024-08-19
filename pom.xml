@@ -14,47 +14,49 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <java.version>11</java.version>
-    <maven.version>3.6.1</maven.version>
+    <java.version>21</java.version>
+    <maven.version>3.8.8</maven.version>
     <maven.resources.includeEmptyDirs>true</maven.resources.includeEmptyDirs>
     <maven.resources.overwrite>true</maven.resources.overwrite>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
-    <maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version>
-    <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
-    <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-    <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
-    <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-    <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
-    <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
-    <maven-dependency-plugin.version>3.3.0</maven-dependency-plugin.version>
-    <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
-    <flyway-maven-plugin.version>8.5.7</flyway-maven-plugin.version>
+    <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
+    <maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
+    <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+    <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+    <maven-surefire-plugin.version>3.3.1</maven-surefire-plugin.version>
+    <maven-failsafe-plugin.version>3.3.1</maven-failsafe-plugin.version>
+    <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
+    <maven-dependency-plugin.version>3.7.1</maven-dependency-plugin.version>
+    <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
+    <maven-deploy-plugin.version>3.1.2</maven-deploy-plugin.version>
+    <flyway-maven-plugin.version>10.9.1</flyway-maven-plugin.version>
     <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version>
-    <build-helper-maven-plugin.version>3.3.0</build-helper-maven-plugin.version>
-    <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
-    <fabric8-maven-plugin.version>0.39.1</fabric8-maven-plugin.version>
-    <spring-boot-maven-plugin.version>2.7.2</spring-boot-maven-plugin.version>
-    <copy-rename-maven-plugin.version>1.0</copy-rename-maven-plugin.version>
-    <maven-deploy-plugin.version>2.4</maven-deploy-plugin.version>
+    <build-helper-maven-plugin.version>3.6.0</build-helper-maven-plugin.version>
+    <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+    <fabric8-maven-plugin.version>0.45.0</fabric8-maven-plugin.version>
+    <spring-boot-maven-plugin.version>3.3.2</spring-boot-maven-plugin.version>
+    <copy-rename-maven-plugin.version>1.0.1</copy-rename-maven-plugin.version>
 
-    <spring-boot.version>2.7.2</spring-boot.version>
-    <spring-cloud.version>2021.0.3</spring-cloud.version>
-    <openapiv3.version>1.6.9</openapiv3.version>
-    <swagger-annotations.version>2.2.0</swagger-annotations.version>
-    <modelmapper.version>3.1.0</modelmapper.version>
-    <redisson.hibernate.version>3.17.5</redisson.hibernate.version>
-    <hibernate.search.version>6.1.7.Final</hibernate.search.version>
-    <postgresql-connector.version>42.4.0</postgresql-connector.version>
-
-    <awssdk.s3.version>2.19.9</awssdk.s3.version>
-    <awssdk.sts.version>2.19.9</awssdk.sts.version>
-    <slf4j.api.version>1.7.36</slf4j.api.version>
-    <logback.version>1.2.11</logback.version>
+    <spring-boot.version>3.3.2</spring-boot.version>
+    <hibernate.search.version>7.2.0.Final</hibernate.search.version>
+    <hibernate.orm.version>6.6.0.Final</hibernate.orm.version>
+    <jboss.logging.version>3.6.0.Final</jboss.logging.version>
+    <elasticsearch.client.version>8.15.0</elasticsearch.client.version>
+    <spring-cloud.version>2023.0.3</spring-cloud.version>
+    <springdoc.version>2.6.0</springdoc.version>
+    <swagger-annotations.version>2.2.22</swagger-annotations.version>
+    <modelmapper.version>3.2.1</modelmapper.version>
+    <redisson.hibernate.version>3.34.1</redisson.hibernate.version>
+    <postgresql-connector.version>42.7.3</postgresql-connector.version>
+    <awssdk.s3.version>2.27.6</awssdk.s3.version>
+    <awssdk.sts.version>2.27.6</awssdk.sts.version>
+    <slf4j.api.version>2.0.9</slf4j.api.version>
+    <logback.version>1.5.6</logback.version>
     <awslambda-logback.version>1.0.0</awslambda-logback.version>
-    <awslambda.java.events.version>3.11.0</awslambda.java.events.version>
-    <awslambda.java.core.version>1.2.1</awslambda.java.core.version>
-    <junit-pioneer.version>2.1.0</junit-pioneer.version>
+    <awslambda.java.events.version>3.13.0</awslambda.java.events.version>
+    <awslambda.java.core.version>1.2.3</awslambda.java.core.version>
+    <junit-pioneer.version>2.2.0</junit-pioneer.version>
   </properties>
 
   <developers>
@@ -101,6 +103,31 @@
         <scope>import</scope>
       </dependency>
       <dependency>
+        <groupId>org.hibernate.search</groupId>
+        <artifactId>hibernate-search-bom</artifactId>
+        <version>${hibernate.search.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate.orm</groupId>
+        <artifactId>hibernate-platform</artifactId>
+        <version>${hibernate.orm.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate.orm</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>${hibernate.orm.version}</version>
+      </dependency>
+      <dependency> <!-- It's needed for hibernate 6.6 -->
+        <groupId>org.jboss.logging</groupId>
+        <artifactId>jboss-logging</artifactId>
+        <version>${jboss.logging.version}</version>
+      </dependency>
+
+      <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
         <version>${spring-cloud.version}</version>
@@ -108,25 +135,33 @@
         <scope>import</scope>
       </dependency>
       <dependency>
+        <groupId>org.elasticsearch.client</groupId>
+        <artifactId>elasticsearch-rest-client</artifactId>
+        <version>${elasticsearch.client.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.elasticsearch.client</groupId>
+        <artifactId>elasticsearch-rest-client-sniffer</artifactId>
+        <version>${elasticsearch.client.version}</version>
+      </dependency>
+
+      <!-- Open API 3.0 (swagger) dependencies -->
+      <dependency>
         <groupId>org.springdoc</groupId>
-        <artifactId>springdoc-openapi-common</artifactId>
-        <version>${openapiv3.version}</version>
+        <artifactId>springdoc-openapi-starter-common</artifactId>
+        <version>${springdoc.version}</version>
       </dependency>
       <dependency>
         <groupId>org.springdoc</groupId>
-        <artifactId>springdoc-openapi-ui</artifactId>
-        <version>${openapiv3.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springdoc</groupId>
-        <artifactId>springdoc-openapi-data-rest</artifactId>
-        <version>${openapiv3.version}</version>
+        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        <version>${springdoc.version}</version>
       </dependency>
       <dependency>
         <groupId>io.swagger.core.v3</groupId>
         <artifactId>swagger-annotations</artifactId>
         <version>${swagger-annotations.version}</version>
       </dependency>
+
       <dependency>
         <groupId>org.modelmapper</groupId>
         <artifactId>modelmapper</artifactId>
@@ -149,18 +184,8 @@
       </dependency>
       <dependency>
         <groupId>org.redisson</groupId>
-        <artifactId>redisson-hibernate-53</artifactId>
+        <artifactId>redisson-hibernate-6</artifactId>
         <version>${redisson.hibernate.version}</version>
-      </dependency>      
-      <dependency>
-        <groupId>org.hibernate.search</groupId>
-        <artifactId>hibernate-search-backend-elasticsearch</artifactId>
-        <version>${hibernate.search.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.hibernate.search</groupId>
-        <artifactId>hibernate-search-backend-elasticsearch-aws</artifactId>
-        <version>${hibernate.search.version}</version>
       </dependency>
       <dependency>
         <groupId>software.amazon.awssdk</groupId>
@@ -328,6 +353,11 @@
           <artifactId>flyway-maven-plugin</artifactId>
           <version>${flyway-maven-plugin.version}</version>
           <dependencies>
+            <dependency>
+              <groupId>org.flywaydb</groupId>
+              <artifactId>flyway-database-postgresql</artifactId>
+              <version>${flyway-maven-plugin.version}</version>
+            </dependency>
             <dependency>
               <groupId>org.postgresql</groupId>
               <artifactId>postgresql</artifactId>

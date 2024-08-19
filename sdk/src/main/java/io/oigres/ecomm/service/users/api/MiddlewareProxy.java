@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -78,8 +79,8 @@ public class MiddlewareProxy implements InvocationHandler {
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .onStatus(HttpStatus::is4xxClientError, this::error4xxHandling)
-                .onStatus(HttpStatus::is5xxServerError, this::error5xxHandling);
+                .onStatus(HttpStatusCode::is4xxClientError, this::error4xxHandling)
+                .onStatus(HttpStatusCode::is5xxServerError, this::error5xxHandling);
     }
 
     protected <T> Mono<T> makeGet(RequestHeadersSpec<?> request, Class<T> responseClass) {
@@ -114,8 +115,8 @@ public class MiddlewareProxy implements InvocationHandler {
             responseSpec = postBody.retrieve();
         }
         return responseSpec
-                .onStatus(HttpStatus::is4xxClientError, this::error4xxHandling)
-                .onStatus(HttpStatus::is5xxServerError, this::error5xxHandling);
+                .onStatus(HttpStatusCode::is4xxClientError, this::error4xxHandling)
+                .onStatus(HttpStatusCode::is5xxServerError, this::error5xxHandling);
     }
 
     protected <T> Mono<T> makePost(RequestBodySpec request, Object requestData, Class<T> responseClass) {

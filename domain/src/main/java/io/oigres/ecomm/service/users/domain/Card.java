@@ -3,7 +3,7 @@ package io.oigres.ecomm.service.users.domain;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity

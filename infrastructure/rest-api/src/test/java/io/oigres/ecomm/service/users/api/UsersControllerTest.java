@@ -105,7 +105,7 @@ class UsersControllerTest {
         given(getAllUsersUseCase.handle(any(Pageable.class)))
             .willReturn(PageableExecutionUtils.getPage(List.of(user1, user2), Pageable.unpaged(), () -> 2));
 
-        mvc.perform(get("/v1/users")
+        mvc.perform(get("/api/v1/users")
                 .param("page", "0")
                 .param("size", "20")
                 .contentType(MediaType.APPLICATION_JSON)

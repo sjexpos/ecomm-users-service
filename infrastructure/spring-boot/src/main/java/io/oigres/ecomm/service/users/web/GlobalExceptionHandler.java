@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolationException;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
 
 import io.oigres.ecomm.service.users.api.model.CommonErrorHandlerResponse;
 import io.oigres.ecomm.service.users.api.model.exception.*;
@@ -20,6 +20,7 @@ import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorContro
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
@@ -42,8 +43,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		this.basicErrorController = basicErrorController;
 	}
 	
-	protected ResponseEntity<Object> customHandleException(HttpStatus status, Exception ex, HttpServletRequest request) {
-		LOGGER.debug(String.format("Handling exception %s, it will response status %s (%s) ", ex.getClass().getSimpleName(), status.getReasonPhrase(), status.value()));
+	protected ResponseEntity<Object> customHandleException(HttpStatusCode status, Exception ex, HttpServletRequest request) {
+		LOGGER.debug(String.format("Handling exception %s, it will response status %s (%s) ", ex.getClass().getSimpleName(), status.toString(), status.value()));
 		request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, status.value());
 		request.setAttribute(RequestDispatcher.ERROR_EXCEPTION, ex);
 		request.setAttribute(RequestDispatcher.ERROR_REQUEST_URI, request.getRequestURI());
@@ -63,8 +64,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        LOGGER.info(String.format("Handling exception %s, it will response status %s (%s) ", ex.getClass().getSimpleName(), status.getReasonPhrase(), status.value()));
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+        LOGGER.info(String.format("Handling exception %s, it will response status %s (%s) ", ex.getClass().getSimpleName(), status.toString(), status.value()));
         List<String> errorList = new ArrayList<>();
         List<ObjectError> exceptionMessage = ex.getBindingResult().getAllErrors();
         for (ObjectError error : exceptionMessage) {
@@ -72,7 +73,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         }
         return new ResponseEntity<>(
                 CommonErrorHandlerResponse.builder()
-                        .error(status.getReasonPhrase())
+                        .error(Integer.toString(status.value()))
                         .status(status.value())
                         .message(errorList.toString())
                         .path("")
@@ -86,11 +87,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 	@Override
-	protected ResponseEntity<Object> handleExceptionInternal(Exception ex, @Nullable Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
+	protected ResponseEntity<Object> handleExceptionInternal(Exception ex, @Nullable Object body, HttpHeaders headers, HttpStatusCode statusCode, WebRequest request) {
 		if (body == null && request instanceof ServletWebRequest) {
-			return customHandleException(status, ex, ((ServletWebRequest)request).getRequest());
+			return customHandleException(statusCode, ex, ((ServletWebRequest)request).getRequest());
 		}
-		return super.handleExceptionInternal(ex, body, headers, status, request);
+		return super.handleExceptionInternal(ex, body, headers, statusCode, request);
 	}	
 	
 	@ExceptionHandler(DomainException.class)

@@ -81,6 +81,10 @@
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.jboss.logging</groupId>
+      <artifactId>jboss-logging</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-cache</artifactId>
     </dependency>
@@ -90,7 +94,7 @@
     </dependency>
     <dependency>
       <groupId>org.redisson</groupId>
-      <artifactId>redisson-hibernate-53</artifactId>
+      <artifactId>redisson-hibernate-6</artifactId>
     </dependency>
     <dependency>
       <groupId>software.amazon.awssdk</groupId>
@@ -111,11 +115,7 @@
     </dependency>
     <dependency>
       <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-ui</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-data-rest</artifactId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
     </dependency>
 
     <dependency>
@@ -342,7 +342,7 @@
                   <skip>${skipTests}</skip>
                   <images>
                     <image>
-                      <name>opensearchproject/opensearch:1.2.4</name>
+                      <name>opensearchproject/opensearch:2.16.0</name>
                       <alias>it-opensearch</alias>
                       <run>
                         <env>

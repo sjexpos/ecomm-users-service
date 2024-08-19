@@ -21,5 +21,4 @@ public interface UserRepository {
 
     long countAllByDeletedAtIsNull();
 
-    void deleteById(Long userId);
 }

@@ -219,7 +219,7 @@
                   <skip>${skipTests}</skip>
                   <images>
                     <image>
-                      <name>opensearchproject/opensearch:1.2.4</name>
+                      <name>opensearchproject/opensearch:2.16.0</name>
                       <alias>it-opensearch</alias>
                       <run>
                         <env>

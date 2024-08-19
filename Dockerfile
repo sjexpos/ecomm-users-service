@@ -1,4 +1,4 @@
-FROM amazoncorretto:17-al2-jdk
+FROM amazoncorretto:21-al2-jdk
 MAINTAINER Sergio Exposito <sjexpos@gmail.com>
 
 # ENV JAVA_XMS             <set initial Java heap size>
@@ -72,4 +72,3 @@ RUN chmod 755 /opt/entrypoint.sh
 EXPOSE ${PORT}
 
 ENTRYPOINT [ "/opt/entrypoint.sh" ]
-

@@ -3,7 +3,6 @@ package io.oigres.ecomm.service.users.api;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junitpioneer.jupiter.SetEnvironmentVariable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +54,7 @@ class UsersControllerTest {
             .build();
         userJpaRepository.saveAllAndFlush(List.of(user1, user2));
 
-        mvc.perform(get("/v1/users")
+        mvc.perform(get("/api/v1/users")
                 .param("page", "0")
                 .param("size", "20")
                 .contentType(MediaType.APPLICATION_JSON)

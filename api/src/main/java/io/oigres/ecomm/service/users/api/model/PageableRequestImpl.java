@@ -1,5 +1,7 @@
 package io.oigres.ecomm.service.users.api.model;
 
+import java.beans.ConstructorProperties;
+
 import io.oigres.ecomm.service.users.api.model.SortRequest.Direction;
 
 /**
@@ -20,7 +22,8 @@ public class PageableRequestImpl extends AbstractPageableRequest {
 	 * @param size the size of the page to be returned, must be greater than 0.
 	 * @param sort must not be {@literal null}, use {@link SortRequest#unsorted()} instead.
 	 */
-	protected PageableRequestImpl(int page, int size, SortRequest sort) {
+	@ConstructorProperties({"page", "size", "sort"})
+	public PageableRequestImpl(int page, int size, SortRequest sort) {
 		super(page, size);
 		this.sort = sort;
 	}

@@ -3,10 +3,11 @@ package io.oigres.ecomm.service.users.api.model.admin;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 
 import io.oigres.ecomm.service.users.api.model.CreateUserRequest;
 
@@ -14,6 +15,7 @@ import io.oigres.ecomm.service.users.api.model.CreateUserRequest;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class CreateAdminUserRequest extends CreateUserRequest {
     @NotEmpty
     private String firstName;

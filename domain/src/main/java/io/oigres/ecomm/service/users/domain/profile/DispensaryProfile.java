@@ -2,9 +2,7 @@ package io.oigres.ecomm.service.users.domain.profile;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import jakarta.persistence.*;
 
 import io.oigres.ecomm.service.users.domain.Profile;
 import io.oigres.ecomm.service.users.domain.ProfileType;

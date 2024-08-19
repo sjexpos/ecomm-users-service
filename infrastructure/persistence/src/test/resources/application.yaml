@@ -18,10 +18,13 @@ spring:
           schema_management:
             strategy: create-or-validate
           automatic_indexing:
-            enabled: true
             enable_dirty_check: true
-            synchronization:
-              strategy: write-sync
+          indexing:
+            listeners:
+              enabled: true
+            plan:
+              synchronization:
+                strategy: write-sync
           query:
             loading:
               fetch_size: 30
