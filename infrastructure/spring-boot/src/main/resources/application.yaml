@@ -17,7 +17,7 @@ spring:
     virtual:
       enabled: true
   application:
-    name: users-service
+    name: users-srv
   cache:
     type: redis
     redis:
@@ -48,6 +48,7 @@ spring:
       ddl-auto: none
     properties:
       hibernate:
+#        format_sql: true
         cache:
           use_second_level_cache: true
           use_query_cache: true
@@ -110,6 +111,12 @@ management:
   health:
     elasticsearch:
       enabled: false # if we need health check, we need to create a health indicator which will use the connection from hibernate search
+  tracing:
+    sampling:
+      probability: 1.0
+
+tracing:
+  url: http://localhost:4318/v1/traces
 
 springdoc:
   show-actuator: false
@@ -123,7 +130,7 @@ springdoc:
 
 logging:
   pattern:
-    console: '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%-5p) [%clr(%18.18t){faint}] [%clr(%32X{X-EComm-Trace-Id}){blue}] %clr(%40.40logger{5.10}:%-4L){cyan} : %m %n'
+    console: '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%-5p) [${spring.application.name}] [%clr(%15.15t){faint}] [%clr(%32X{traceId}-%16X{spanId}){blue}] %clr(%40.40logger{5.10}:%-4L){cyan} : %m %n'
   level:
     io.oigres.ecomm.service.users: INFO
 #    org.hibernate.SQL: DEBUG

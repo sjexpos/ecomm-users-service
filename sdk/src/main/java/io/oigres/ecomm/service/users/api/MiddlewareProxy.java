@@ -7,21 +7,17 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.net.URI;
-import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
-import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ClientResponse;
@@ -39,43 +35,23 @@ import io.oigres.ecomm.service.users.api.model.JacksonPageImpl;
 import io.oigres.ecomm.service.users.api.model.PageResponse;
 import io.oigres.ecomm.service.users.api.model.exception.GenericExceptionTracker;
 import reactor.core.publisher.Mono;
-import reactor.netty.http.client.HttpClient;
 
 public class MiddlewareProxy implements InvocationHandler {
     private final Logger log = Logger.getLogger(getClass().getName());
 
     private final WebClient webClient;
-    private final Supplier<String> traceIdExtractor;
     private final Gson gson = new Gson();
     
-    public MiddlewareProxy(final WebClient webClient, final Supplier<String> traceIdExtractor) {
+    public MiddlewareProxy(final WebClient webClient) {
         this.webClient = webClient;
-        this.traceIdExtractor = traceIdExtractor;
-    }
-
-    public MiddlewareProxy(final String baseUri, final Duration responseTimeout, final Supplier<String> traceIdExtractor) {
-        this.webClient = WebClient.builder()
-            .baseUrl(baseUri)
-            .clientConnector(
-                new ReactorClientHttpConnector(
-                    HttpClient.create().responseTimeout(responseTimeout)
-                )
-            )
-            .build();
-        this.traceIdExtractor = traceIdExtractor;
     }
 
     public WebClient getWebClient() {
         return this.webClient;
     }
 
-    public Supplier<String> getTraceIdExtractor() {
-        return traceIdExtractor;
-    }
-    
     protected ResponseSpec buildResponseSpecFromRequestHeadersSpec(RequestHeadersSpec<?> request) {
         return request
-                .header(Constants.HTTP_HEADER_DISTRIBUTED_TRACE_ID, getTraceIdExtractor().get())
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
@@ -84,24 +60,23 @@ public class MiddlewareProxy implements InvocationHandler {
     }
 
     protected <T> Mono<T> makeGet(RequestHeadersSpec<?> request, Class<T> responseClass) {
-        return buildResponseSpecFromRequestHeadersSpec(request).bodyToMono(responseClass);
+        return buildResponseSpecFromRequestHeadersSpec(request).bodyToMono(responseClass).contextCapture();
     }
 
     protected <T> Mono<T> makeGet(RequestHeadersSpec<?> request, ParameterizedTypeReference<T> responseTypeRef) {
-        return buildResponseSpecFromRequestHeadersSpec(request).bodyToMono(responseTypeRef);
+        return buildResponseSpecFromRequestHeadersSpec(request).bodyToMono(responseTypeRef).contextCapture();
     }
 
     protected <T> Mono<T> makeDelete(RequestHeadersSpec<?> request, Class<T> responseClass) {
-        return buildResponseSpecFromRequestHeadersSpec(request).bodyToMono(responseClass);
+        return buildResponseSpecFromRequestHeadersSpec(request).bodyToMono(responseClass).contextCapture();
     }
 
     protected <T> Mono<T> makeDelete(RequestHeadersSpec<?> request, ParameterizedTypeReference<T> responseTypeRef) {
-        return buildResponseSpecFromRequestHeadersSpec(request).bodyToMono(responseTypeRef);
+        return buildResponseSpecFromRequestHeadersSpec(request).bodyToMono(responseTypeRef).contextCapture();
     }
 
     protected RequestBodySpec buildRequestBodySpec(RequestBodySpec request) {
         return request
-            .header(Constants.HTTP_HEADER_DISTRIBUTED_TRACE_ID, getTraceIdExtractor().get())
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON);
     }
@@ -120,27 +95,27 @@ public class MiddlewareProxy implements InvocationHandler {
     }
 
     protected <T> Mono<T> makePost(RequestBodySpec request, Object requestData, Class<T> responseClass) {
-        return buildResponseSpecFromRequestBodySpec(request, requestData).bodyToMono(responseClass);
+        return buildResponseSpecFromRequestBodySpec(request, requestData).bodyToMono(responseClass).contextCapture();
     }
 
     protected <T> Mono<T> makePost(RequestBodySpec request, Object requestData, ParameterizedTypeReference<T> responseTypeRef) {
-        return buildResponseSpecFromRequestBodySpec(request, requestData).bodyToMono(responseTypeRef);
+        return buildResponseSpecFromRequestBodySpec(request, requestData).bodyToMono(responseTypeRef).contextCapture();
     }
 
     protected <T> Mono<T> makePut(RequestBodySpec request, Object requestData, Class<T> responseClass) {
-        return buildResponseSpecFromRequestBodySpec(request, requestData).bodyToMono(responseClass);
+        return buildResponseSpecFromRequestBodySpec(request, requestData).bodyToMono(responseClass).contextCapture();
     }
 
     protected <T> Mono<T> makePut(RequestBodySpec request, Object requestData, ParameterizedTypeReference<T> responseTypeRef) {
-        return buildResponseSpecFromRequestBodySpec(request, requestData).bodyToMono(responseTypeRef);
+        return buildResponseSpecFromRequestBodySpec(request, requestData).bodyToMono(responseTypeRef).contextCapture();
     }
 
     protected <T> Mono<T> makePatch(RequestBodySpec request, Object requestData, Class<T> responseClass) {
-        return buildResponseSpecFromRequestBodySpec(request, requestData).bodyToMono(responseClass);
+        return buildResponseSpecFromRequestBodySpec(request, requestData).bodyToMono(responseClass).contextCapture();
     }
 
     protected <T> Mono<T> makePatch(RequestBodySpec request, Object requestData, ParameterizedTypeReference<T> responseTypeRef) {
-        return buildResponseSpecFromRequestBodySpec(request, requestData).bodyToMono(responseTypeRef);
+        return buildResponseSpecFromRequestBodySpec(request, requestData).bodyToMono(responseTypeRef).contextCapture();
     }
 
 
@@ -274,7 +249,7 @@ public class MiddlewareProxy implements InvocationHandler {
 
 
     public Mono<Exception> error4xxHandling(ClientResponse clientResponse) {
-        return clientResponse.bodyToMono(String.class).flatMap(this::error4xxHandling);
+        return clientResponse.bodyToMono(String.class).contextCapture().flatMap(this::error4xxHandling);
     }
 
     private Mono<Exception> error4xxHandling(String errorBody) {

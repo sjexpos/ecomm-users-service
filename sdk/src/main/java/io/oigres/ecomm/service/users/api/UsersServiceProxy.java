@@ -2,7 +2,6 @@ package io.oigres.ecomm.service.users.api;
 
 import io.oigres.ecomm.service.users.Constants;
 import io.oigres.ecomm.service.users.Routes;
-import io.oigres.ecomm.service.users.api.UsersService;
 import io.oigres.ecomm.service.users.api.model.*;
 import io.oigres.ecomm.service.users.api.model.admin.*;
 import io.oigres.ecomm.service.users.api.model.consumer.*;
@@ -19,7 +18,6 @@ import io.oigres.ecomm.service.users.api.profiles.AsyncDispensaryUsersService;
 import io.swagger.v3.oas.annotations.Parameter;
 
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -29,19 +27,13 @@ import org.springframework.web.util.UriBuilder;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
-import java.time.Duration;
 import java.util.concurrent.Future;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class UsersServiceProxy extends MiddlewareProxy implements UsersService, AsyncUsersService, AsyncAdminUsersService, AsyncConsumerUsersService, AsyncDispensaryUsersService {
 
-    public UsersServiceProxy(WebClient webClient, Supplier<String> traceIdExtractor) {
-        super(webClient, traceIdExtractor);
-    }
-
-    public UsersServiceProxy(final String baseUri, final Supplier<String> traceIdExtractor) {
-        super(baseUri, Duration.ofMillis(2000), traceIdExtractor);
+    public UsersServiceProxy(WebClient webClient) {
+        super(webClient);
     }
 
     // --------------------------------- getAllUsers --------------------------------- //
@@ -523,13 +515,14 @@ public class UsersServiceProxy extends MiddlewareProxy implements UsersService, 
                             .queryParam("extension", imageExtension)
                             .build(imageExtension)
                     )
-                    .header(Constants.HTTP_HEADER_DISTRIBUTED_TRACE_ID, getTraceIdExtractor().get())
                     .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                     .accept(MediaType.APPLICATION_JSON)
                     .retrieve()
                     .onStatus(HttpStatusCode::is4xxClientError, this::error4xxHandling)
                     .onStatus(HttpStatusCode::is5xxServerError, this::error5xxHandling)
-                    .bodyToMono(ImageUploadLocationResponse.class).block();
+                    .bodyToMono(ImageUploadLocationResponse.class)
+                    .contextCapture()
+                    .block();
         } catch (WebClientRequestException e) {
             throw new RuntimeException(Constants.ERROR_500_USER_MESSAGE);
         }
@@ -544,13 +537,14 @@ public class UsersServiceProxy extends MiddlewareProxy implements UsersService, 
                             .queryParam("extension", extension)
                             .build(extension)
                     )
-                    .header(Constants.HTTP_HEADER_DISTRIBUTED_TRACE_ID, getTraceIdExtractor().get())
                     .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                     .accept(MediaType.APPLICATION_JSON)
                     .retrieve()
                     .onStatus(HttpStatusCode::is4xxClientError, this::error4xxHandling)
                     .onStatus(HttpStatusCode::is5xxServerError, this::error5xxHandling)
-                    .bodyToMono(ImageUploadLocationResponse.class).block();
+                    .bodyToMono(ImageUploadLocationResponse.class)
+                    .contextCapture()
+                    .block();
         } catch (WebClientRequestException e) {
             throw new RuntimeException(Constants.ERROR_500_USER_MESSAGE);
         }
@@ -568,11 +562,11 @@ public class UsersServiceProxy extends MiddlewareProxy implements UsersService, 
                         .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.UPLOADS_CARDS))
                         .queryParam("imageUrl", imageUrl)
                         .build())
-                .header(Constants.HTTP_HEADER_DISTRIBUTED_TRACE_ID, getTraceIdExtractor().get())
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .bodyToMono(UpdateCardImageToUploadedStateResponse.class);
+                .bodyToMono(UpdateCardImageToUploadedStateResponse.class)
+                .contextCapture();
     }
 
     @Override

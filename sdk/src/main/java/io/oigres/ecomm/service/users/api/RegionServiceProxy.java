@@ -4,7 +4,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriBuilder;
 
 import io.oigres.ecomm.service.users.Routes;
-import io.oigres.ecomm.service.users.api.IRegionService;
 import io.oigres.ecomm.service.users.api.model.PageResponse;
 import io.oigres.ecomm.service.users.api.model.PageableRequestImpl;
 import io.oigres.ecomm.service.users.api.model.exception.NotFoundException;
@@ -14,19 +13,13 @@ import io.oigres.ecomm.service.users.api.model.region.StateResponse;
 import io.oigres.ecomm.service.users.api.model.region.ZipCodeResponse;
 
 import java.net.URI;
-import java.time.Duration;
 import java.util.concurrent.Future;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class RegionServiceProxy extends MiddlewareProxy implements IRegionService, AsyncRegionService {
 
-    public RegionServiceProxy(WebClient webClient, Supplier<String> traceIdExtractor) {
-        super(webClient, traceIdExtractor);
-    }
-
-    public RegionServiceProxy(String baseUri, Supplier<String> traceIdExtractor) {
-        super(baseUri, Duration.ofMillis(2000), traceIdExtractor);
+    public RegionServiceProxy(WebClient webClient) {
+        super(webClient);
     }
 
     // --------------------------------- getStates --------------------------------- //

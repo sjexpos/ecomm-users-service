@@ -55,7 +55,7 @@ public class S3EventHandler implements RequestHandler<SQSEvent, SQSBatchResponse
                         )
                 )
                 .build();
-        usersService = new UsersServiceProxy(webClient, () -> "");
+        usersService = new UsersServiceProxy(webClient);
         gson = new GsonBuilder()
                 .enableComplexMapKeySerialization()
                 .serializeNulls()
