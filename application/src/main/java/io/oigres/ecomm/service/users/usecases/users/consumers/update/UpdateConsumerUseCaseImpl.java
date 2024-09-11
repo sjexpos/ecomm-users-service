@@ -18,14 +18,13 @@ import io.oigres.ecomm.service.users.repository.profiles.CardImageRepository;
 import io.oigres.ecomm.service.users.repository.profiles.ConsumerProfileRepository;
 import io.oigres.ecomm.service.users.repository.profiles.ProfileRepository;
 
+import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -50,15 +49,33 @@ public class UpdateConsumerUseCaseImpl implements UpdateConsumerUseCase{
         this.passwordEncoder = passwordEncoder;
     }
 
+    private void updateCardImage(ConsumerProfile current, ConsumerProfile request) {
+        CardImage currentCardImage = current.getCard().getCardImage();
+
+        if(currentCardImage != null
+                && !request.getCard().getCardImage().getImageURL().equals(currentCardImage.getImageURL())) {
+            currentCardImage.setStatus(ResourceStatusEnum.DELETED);
+            cardImageRepository.save(currentCardImage);
+            CardImage image = cardImageRepository.findByImageURL(request.getCard().getCardImage().getImageURL())
+                    .or(() -> Optional.of(CardImage.builder()
+                            .imageURL(request.getCard().getCardImage().getImageURL())
+                            .status(ResourceStatusEnum.PENDING)
+                            .build()))
+                    .get();
+            cardImageRepository.save(image);
+            current.getCard().setCardImage(image);
+        }
+    }
+
     @Override
-    @Transactional
+    @Transactional(Transactional.TxType.REQUIRED)
     public ConsumerProfile handle(Long userId, ConsumerProfile request) throws ProfileUserException, GenderNotFoundException, StateNotFoundException, ZipcodeNotFoundDomainException {
         ConsumerProfile current = consumerProfileRepository.findById(userId)
                 .orElseThrow(NotFoundProfileException::new);
 
         if (request.getProfileImage() == null) {
-            request.setProfileImage(new ProfileImage(null, null, ResourceStatusEnum.PENDING, LocalDateTime.now()));            
-        } 
+            request.setProfileImage(new ProfileImage(null, null, ResourceStatusEnum.PENDING, LocalDateTime.now()));
+        }
         if (request.getProfileImage().getImageURL() != null && !StringUtils.hasText(request.getProfileImage().getImageURL())) {
             throw new ProfileUserException(ProfileErrorMessages.INVALID_PROFILE_IMAGE);
         }
@@ -96,24 +113,6 @@ public class UpdateConsumerUseCaseImpl implements UpdateConsumerUseCase{
             updateCardImage(current,request);
 
         return consumerProfileRepository.save(current);
-    }
-
-    private void updateCardImage(ConsumerProfile current, ConsumerProfile request) {
-        CardImage currentCardImage = current.getCard().getCardImage();
-
-        if(currentCardImage != null
-                && !request.getCard().getCardImage().getImageURL().equals(currentCardImage.getImageURL())) {
-            currentCardImage.setStatus(ResourceStatusEnum.DELETED);
-            cardImageRepository.save(currentCardImage);
-            CardImage image = cardImageRepository.findByImageURL(request.getCard().getCardImage().getImageURL())
-                    .or(() -> Optional.of(CardImage.builder()
-                            .imageURL(request.getCard().getCardImage().getImageURL())
-                            .status(ResourceStatusEnum.PENDING)
-                            .build()))
-                    .get();
-            cardImageRepository.save(image);
-            current.getCard().setCardImage(image);
-        }
     }
 
     private void updateConsumer(ConsumerProfile request, ConsumerProfile current) {

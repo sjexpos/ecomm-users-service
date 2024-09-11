@@ -22,6 +22,7 @@ public class DeleteConsumerUserUseCaseImpl implements DeleteConsumerUserUseCase 
     }
 
     @Override
+    @Transactional(Transactional.TxType.REQUIRED)
     public ConsumerProfile handle(Long userId) throws NotFoundProfileException, UserNotFoundException {
         ConsumerProfile profile = consumerProfileRepository.findById(userId)
                 .orElseThrow(NotFoundProfileException::new);

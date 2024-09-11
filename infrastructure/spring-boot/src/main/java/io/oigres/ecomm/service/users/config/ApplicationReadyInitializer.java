@@ -16,17 +16,24 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import io.oigres.ecomm.service.users.jobs.CardImagesCleanUpJobConfiguration;
+import io.oigres.ecomm.service.users.jobs.MessageRelayServiceJobConfiguration;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Order(0)
 @Slf4j
 public class ApplicationReadyInitializer implements ApplicationListener<ApplicationReadyEvent> {
+	private final Environment environment;
+	private final CardImagesCleanUpJobConfiguration cardImagesCleanUpJobConfiguration;
+	private final MessageRelayServiceJobConfiguration messageRelayServiceJobConfiguration;
 
-	@Autowired
-	private Environment environment;
-	@Autowired
-	private CardImagesCleanUpJobConfiguration cardImagesCleanUpJobConfiguration;
+	public ApplicationReadyInitializer(Environment environment,
+			CardImagesCleanUpJobConfiguration cardImagesCleanUpJobConfiguration,
+			MessageRelayServiceJobConfiguration messageRelayServiceJobConfiguration) {
+		this.environment = environment;
+		this.cardImagesCleanUpJobConfiguration = cardImagesCleanUpJobConfiguration;
+		this.messageRelayServiceJobConfiguration = messageRelayServiceJobConfiguration;
+	}
 
 	@Override
 	public void onApplicationEvent(ApplicationReadyEvent event) {
@@ -57,6 +64,10 @@ public class ApplicationReadyInitializer implements ApplicationListener<Applicat
 		log.info("------------------------ Redis --------------------------");
         log.info("Redisson config: {}", environment.getProperty("spring.jpa.properties.hibernate.cache.redisson.config"));
 		new ConfigPrinter().print(log, environment.getProperty("spring.jpa.properties.hibernate.cache.redisson.config"));
+		log.info("--------------------------- Kafka -----------------------");
+        log.info("Hosts: {}", environment.getProperty("spring.kafka.bootstrap-servers"));
+		log.info("-------------------------- Tracing ----------------------");
+		log.info("URL: {}", environment.getProperty("ecomm.service.tracing.url"));
 		log.info("-------------------- Assets Bucket --------------------------");
 		log.info("Name:               {}", environment.getProperty("ecomm.service.users.assets.bucket.name"));
 		log.info("Root :              {}", environment.getProperty("ecomm.service.users.assets.bucket.rootFolder"));
@@ -64,6 +75,11 @@ public class ApplicationReadyInitializer implements ApplicationListener<Applicat
 		log.info("-------------------- Cards resources clean up job --------------------------");
 		log.info("Initial delay:      {}m", cardImagesCleanUpJobConfiguration.getInitialDelay());
 		log.info("Fixed rate:         {}m", cardImagesCleanUpJobConfiguration.getFixedRate());
+		log.info("-------------------- Message Relay Service job --------------------------");
+		log.info("Process Initial delay:  {}m", messageRelayServiceJobConfiguration.getProcessInitialDelay());
+		log.info("Process Fixed rate:     {}m", messageRelayServiceJobConfiguration.getProcessFixedRate());
+		log.info("CleanUp Initial delay:  {}m", messageRelayServiceJobConfiguration.getProcessInitialDelay());
+		log.info("CleanUp Fixed rate:     {}m", messageRelayServiceJobConfiguration.getCleanUpFixedRate());
         log.info("********************************************************************");
         log.info("");
 	}

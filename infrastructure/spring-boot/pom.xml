@@ -137,6 +137,12 @@
       <artifactId>opentelemetry-exporter-otlp</artifactId>
     </dependency>
 
+    <!-- Kafka -->
+    <dependency>
+      <groupId>org.springframework.kafka</groupId>
+      <artifactId>spring-kafka</artifactId>
+    </dependency>
+
     <!-- Testing -->
     <dependency>
       <groupId>io.oigres.ecomm</groupId>

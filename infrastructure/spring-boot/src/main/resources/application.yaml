@@ -41,7 +41,7 @@ spring:
     username: users_service
     password: 1234
   jpa:
-    open-in-view: false
+    open-in-view: true
     show-sql: false
     generate-ddl: false
     hibernate:
@@ -91,6 +91,14 @@ spring:
 #                type: static
 #                access_key_id: <value>
 #                secret_access_key: <value>
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    listener:
+      observation-enabled: true
 
 management:
   server:
@@ -115,9 +123,6 @@ management:
     sampling:
       probability: 1.0
 
-tracing:
-  url: http://localhost:4318/v1/traces
-
 springdoc:
   show-actuator: false
   show-login-endpoint: false
@@ -136,7 +141,7 @@ logging:
 #    org.hibernate.SQL: DEBUG
 #    org.hibernate.internal: TRACE
 #    org.springframework.orm.jpa: DEBUG
-#    org.springframework.transaction: DEBUG
+#    org.springframework.transaction: TRACE
 #    org.springframework.transaction.interceptor: TRACE
 #    org.springframework.jdbc: DEBUG
 
@@ -155,4 +160,8 @@ ecomm:
         cleanup:
           cards:
             imagesTimeAfterOffset: 24h
+      topics:
+        entities-update: users-entities-update-topic
+    tracing:
+      url: http://localhost:4318/v1/traces
 

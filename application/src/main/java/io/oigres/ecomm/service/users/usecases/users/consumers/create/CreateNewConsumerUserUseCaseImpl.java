@@ -17,6 +17,7 @@ import io.oigres.ecomm.service.users.repository.profiles.CardRepository;
 import io.oigres.ecomm.service.users.repository.profiles.ConsumerProfileRepository;
 import io.oigres.ecomm.service.users.repository.profiles.ProfileTypeRepository;
 
+import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.modelmapper.ModelMapper;
@@ -56,6 +57,7 @@ public class CreateNewConsumerUserUseCaseImpl implements CreateNewConsumerUserUs
 
 
     @Override
+    @Transactional(Transactional.TxType.REQUIRED)
     public ConsumerProfile handle(CreateConsumerUserRequest consumerProfileReq) throws DeletedProfileException, ExistingProfileException, TypeNotFoundProfileException, GenderNotFoundException, ZipcodeNotFoundDomainException, StateNotFoundException, UserTypeNotFoundException {
         Optional<User> opUser = this.userRepository.findByEmail(consumerProfileReq.getEmail());
 

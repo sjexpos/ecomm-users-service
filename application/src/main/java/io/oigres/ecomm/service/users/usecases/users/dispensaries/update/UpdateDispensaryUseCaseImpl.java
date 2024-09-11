@@ -1,5 +1,6 @@
 package io.oigres.ecomm.service.users.usecases.users.dispensaries.update;
 
+import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,7 @@ public class UpdateDispensaryUseCaseImpl implements UpdateDispensaryUseCase{
     }
 
     @Override
+    @Transactional(Transactional.TxType.REQUIRED)
     public DispensaryProfile handle(Long userId, DispensaryProfile request) throws ProfileUserException {
         DispensaryProfile current = dispensaryProfileRepository.findById(userId)
                 .orElseThrow(NotFoundProfileException::new);

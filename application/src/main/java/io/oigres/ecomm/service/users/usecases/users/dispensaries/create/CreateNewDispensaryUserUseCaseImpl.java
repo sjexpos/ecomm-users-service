@@ -12,6 +12,7 @@ import io.oigres.ecomm.service.users.exception.profile.TypeNotFoundProfileExcept
 import io.oigres.ecomm.service.users.repository.UserRepository;
 import io.oigres.ecomm.service.users.repository.profiles.ProfileTypeRepository;
 
+import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +33,7 @@ public class CreateNewDispensaryUserUseCaseImpl implements CreateNewDispensaryUs
     }
 
     @Override
+    @Transactional(Transactional.TxType.REQUIRED)
     public DispensaryProfile handle(DispensaryProfile dispensaryProfile) throws DeletedProfileException, ExistingProfileException, TypeNotFoundProfileException {
         Optional<User> opUser = this.userRepository.findByEmail(dispensaryProfile.getUser().getEmail());
         User user;

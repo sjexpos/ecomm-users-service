@@ -22,6 +22,7 @@ public class DeleteDispensaryUserUseCaseImpl implements DeleteDispensaryUserUseC
     }
 
     @Override
+    @Transactional(Transactional.TxType.REQUIRED)
     public DispensaryProfile handle(Long dispensaryId) throws NotFoundProfileException, UserNotFoundException {
         DispensaryProfile profile = dispensaryProfileRepository.findByDispensaryId(dispensaryId)
                 .orElseThrow(NotFoundProfileException::new);

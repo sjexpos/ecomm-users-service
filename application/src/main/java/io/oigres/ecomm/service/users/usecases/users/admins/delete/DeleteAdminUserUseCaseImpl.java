@@ -22,6 +22,7 @@ public class DeleteAdminUserUseCaseImpl implements DeleteAdminUserUseCase {
     }
 
     @Override
+    @Transactional(Transactional.TxType.REQUIRED)
     public AdminProfile handle(Long userId) throws NotFoundProfileException, UserNotFoundException {
         AdminProfile profile = adminProfileRepository.findById(userId)
                 .orElseThrow(NotFoundProfileException::new);

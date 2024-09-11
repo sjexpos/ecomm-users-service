@@ -13,7 +13,7 @@ import lombok.Data;
 public class TracingConfiguration {
 
     @Data
-    @ConfigurationProperties(prefix = "tracing")
+    @ConfigurationProperties(prefix = "ecomm.service.tracing")
     public static class TracingProperties {
         @NotNull
         @NotBlank

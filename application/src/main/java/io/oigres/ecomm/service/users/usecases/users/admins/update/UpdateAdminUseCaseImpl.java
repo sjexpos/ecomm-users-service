@@ -1,5 +1,6 @@
 package io.oigres.ecomm.service.users.usecases.users.admins.update;
 
+import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ public class UpdateAdminUseCaseImpl implements UpdateAdminUseCase {
     }
 
     @Override
+    @Transactional(Transactional.TxType.REQUIRED)
     public AdminProfile handle(Long profileId, AdminProfile request) throws NotFoundProfileException {
         AdminProfile current = adminProfileRepository.findById(profileId)
                 .orElseThrow(NotFoundProfileException::new);

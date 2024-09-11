@@ -11,6 +11,8 @@ import io.oigres.ecomm.service.users.exception.profile.ExistingProfileException;
 import io.oigres.ecomm.service.users.exception.profile.TypeNotFoundProfileException;
 import io.oigres.ecomm.service.users.repository.UserRepository;
 import io.oigres.ecomm.service.users.repository.profiles.ProfileTypeRepository;
+import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -20,20 +22,24 @@ import java.util.Optional;
 import java.util.Set;
 
 @Component
+@Slf4j
 public class CreateNewAdminUserUseCaseImpl implements CreateNewAdminUserUseCase {
     private final UserRepository userRepository;
     private final ProfileTypeRepository profileTypeRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public CreateNewAdminUserUseCaseImpl(UserRepository userRepository, ProfileTypeRepository profileTypeRepository, PasswordEncoder passwordEncoder) {
+    public CreateNewAdminUserUseCaseImpl(
+        UserRepository userRepository, 
+        ProfileTypeRepository profileTypeRepository, 
+        PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.profileTypeRepository = profileTypeRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
+    @Transactional(Transactional.TxType.REQUIRED)
     public AdminProfile handle(AdminProfile adminProfile) throws DeletedProfileException, ExistingProfileException, TypeNotFoundProfileException {
-
         Optional<User> opUser = this.userRepository.findByEmail(adminProfile.getUser().getEmail());
         User user;
         if (opUser.isPresent() ) {

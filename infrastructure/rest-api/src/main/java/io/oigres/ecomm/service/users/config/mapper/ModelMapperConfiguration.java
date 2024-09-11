@@ -4,17 +4,23 @@ import io.oigres.ecomm.service.users.api.model.admin.*;
 import io.oigres.ecomm.service.users.api.model.consumer.*;
 import io.oigres.ecomm.service.users.api.model.dispensary.*;
 import io.oigres.ecomm.service.users.api.model.profile.ActiveStatusProfileResponse;
+import io.oigres.ecomm.service.users.api.txoutbox.UserOutbox;
 import io.oigres.ecomm.service.users.domain.Profile;
+import io.oigres.ecomm.service.users.domain.User;
 import io.oigres.ecomm.service.users.domain.profile.AdminProfile;
 import io.oigres.ecomm.service.users.domain.profile.ConsumerProfile;
 import io.oigres.ecomm.service.users.domain.profile.DispensaryProfile;
+import lombok.extern.slf4j.Slf4j;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 @Configuration
+@Slf4j
 public class ModelMapperConfiguration {
     @Bean
     public ModelMapper customModelMapper() {
@@ -26,7 +32,7 @@ public class ModelMapperConfiguration {
         typeMapAdminResponse.addMappings( mapper -> {
             mapper.map( source -> source.getUser().getEmail(), CreateAdminUserResponse::setEmail);
             mapper.map( source -> source.getUser().getId(), CreateAdminUserResponse::setId);
-            mapper.map( source -> source.getEnabled(), CreateAdminUserResponse::setIsActive);
+            mapper.map(Profile::getEnabled, CreateAdminUserResponse::setIsActive);
         });
 
         TypeMap<UpdateAdminProfileRequest, AdminProfile> typeMapUpdateAdminRequest = modelMapper.createTypeMap(UpdateAdminProfileRequest.class, AdminProfile.class);
@@ -80,13 +86,13 @@ public class ModelMapperConfiguration {
         TypeMap<AdminProfile, GetAdminUserResponse> typeMapGetAdminResponse = modelMapper.createTypeMap(AdminProfile.class, GetAdminUserResponse.class);
         typeMapGetAdminResponse.addMappings( mapper -> {
             mapper.map( source -> source.getUser().getEmail(), GetAdminUserResponse::setEmail);
-            mapper.map( source -> source.getEnabled(), GetAdminUserResponse::setIsActive);
+            mapper.map(Profile::getEnabled, GetAdminUserResponse::setIsActive);
         });
 
         TypeMap<AdminProfile, GetAllAdminUsersResponse> typeMapGetAllAdminResponse = modelMapper.createTypeMap(AdminProfile.class, GetAllAdminUsersResponse.class);
         typeMapGetAllAdminResponse.addMappings( mapper -> {
             mapper.map( source -> source.getUser().getEmail(), GetAllAdminUsersResponse::setEmail);
-            mapper.map( source -> source.getEnabled(), GetAllAdminUsersResponse::setIsActive);
+            mapper.map(Profile::getEnabled, GetAllAdminUsersResponse::setIsActive);
         });
 
         TypeMap<AdminProfile, DeleteAdminProfileResponse> typeMapDeleteAdminResponse = modelMapper.createTypeMap(AdminProfile.class, DeleteAdminProfileResponse.class);
@@ -99,26 +105,26 @@ public class ModelMapperConfiguration {
         TypeMap<CreateDispensaryUserRequest, DispensaryProfile> typeMapDispensaryRequest = modelMapper.createTypeMap(CreateDispensaryUserRequest.class, DispensaryProfile.class);
         typeMapDispensaryRequest.addMappings( mapper -> {
             mapper.skip(DispensaryProfile::setId);
-            mapper.map( source -> source.getDispensaryId(), DispensaryProfile::setDispensaryId);
+            mapper.map(CreateDispensaryUserRequest::getDispensaryId, DispensaryProfile::setDispensaryId);
         });
 
         TypeMap<DispensaryProfile, CreateDispensaryUserResponse> typeMapDispensaryResponse = modelMapper.createTypeMap(DispensaryProfile.class, CreateDispensaryUserResponse.class);
         typeMapDispensaryResponse.addMappings( mapper -> {
             mapper.map( source -> source.getUser().getEmail(), CreateDispensaryUserResponse::setEmail);
             mapper.map( source -> source.getUser().getId(), CreateDispensaryUserResponse::setId);
-            mapper.map( source -> source.getEnabled(), CreateDispensaryUserResponse::setIsActive);
+            mapper.map(Profile::getEnabled, CreateDispensaryUserResponse::setIsActive);
         });
 
         TypeMap<DispensaryProfile, GetDispensaryUserResponse> typeMapGetDispensaryResponse = modelMapper.createTypeMap(DispensaryProfile.class, GetDispensaryUserResponse.class);
         typeMapGetDispensaryResponse.addMappings( mapper -> {
             mapper.map( source -> source.getUser().getEmail(), GetDispensaryUserResponse::setEmail);
-            mapper.map( source -> source.getEnabled(), GetDispensaryUserResponse::setIsActive);
+            mapper.map(Profile::getEnabled, GetDispensaryUserResponse::setIsActive);
         });
 
         TypeMap<DispensaryProfile, GetAllDispensaryUsersResponse> typeMapAllGetDispensaryResponse = modelMapper.createTypeMap(DispensaryProfile.class, GetAllDispensaryUsersResponse.class);
         typeMapAllGetDispensaryResponse.addMappings( mapper -> {
             mapper.map( source -> source.getUser().getEmail(), GetAllDispensaryUsersResponse::setEmail);
-            mapper.map( source -> source.getEnabled(), GetAllDispensaryUsersResponse::setIsActive);
+            mapper.map(Profile::getEnabled, GetAllDispensaryUsersResponse::setIsActive);
         });
 
         TypeMap<DispensaryProfile, DeleteDispensaryProfileResponse> typeMapDeleteDispensaryResponse = modelMapper.createTypeMap(DispensaryProfile.class, DeleteDispensaryProfileResponse.class);
@@ -138,7 +144,7 @@ public class ModelMapperConfiguration {
         typeMapConsumerResponse.addMappings( mapper -> {
             mapper.map( source -> source.getUser().getEmail(), CreateConsumerUserResponse::setEmail);
             mapper.map( source -> source.getUser().getId(), CreateConsumerUserResponse::setId);
-            mapper.map( source -> source.getEnabled(), CreateConsumerUserResponse::setIsActive);
+            mapper.map(Profile::getEnabled, CreateConsumerUserResponse::setIsActive);
             mapper.map( source -> source.getGender().getId(), CreateConsumerUserResponse::setGenderId);
             mapper.map( source -> source.getZipCode().getState().getId(), CreateConsumerUserResponse::setZipcodeStateId);
             mapper.map( source -> source.getZipCode().getId(), CreateConsumerUserResponse::setZipcodeId);
@@ -150,7 +156,7 @@ public class ModelMapperConfiguration {
         typeMapGetConsumerResponse.addMappings( mapper -> {
             mapper.map( source -> source.getUser().getEmail(), GetConsumerUserResponse::setEmail);
             mapper.map( source -> source.getUser().getId(), GetConsumerUserResponse::setUserId);
-            mapper.map( source -> source.getEnabled(), GetConsumerUserResponse::setIsActive);
+            mapper.map(Profile::getEnabled, GetConsumerUserResponse::setIsActive);
             mapper.map( source -> source.getGender().getId(), GetConsumerUserResponse::setGenderId);
             mapper.map(source -> source.getCard().getCardImage().getImageURL(), GetConsumerUserResponse::setMmjCard);
             mapper.map( source -> source.getZipCode().getState().getId(), GetConsumerUserResponse::setZipcodeStateId);
@@ -169,9 +175,18 @@ public class ModelMapperConfiguration {
         TypeMap<Profile, ActiveStatusProfileResponse> typeMapActiveStatusProfileResponse = modelMapper.createTypeMap(Profile.class, ActiveStatusProfileResponse.class);
         typeMapActiveStatusProfileResponse.addMappings( mapper -> {
             mapper.map( source -> source.getUser().getId(), ActiveStatusProfileResponse::setId);
-            mapper.map( source -> source.getEnabled(), ActiveStatusProfileResponse::setEnabled);
+            mapper.map(Profile::getEnabled, ActiveStatusProfileResponse::setEnabled);
         });
 
+        TypeMap<User, UserOutbox> typeMapUserOutbox = modelMapper.createTypeMap(User.class, UserOutbox.class);
+        typeMapUserOutbox.addMappings( mapper -> {
+            mapper.map(User::getId, UserOutbox::setId);
+            mapper.map(User::getEmail, UserOutbox::setEmail);
+            mapper.map(User::getCreatedAt, UserOutbox::setCreatedAt);
+            mapper.map(User::getModifiedAt, UserOutbox::setModifiedAt);
+            mapper.map(User::getDeletedAt, UserOutbox::setDeletedAt);
+        });
         return modelMapper;
     }
+
 }
