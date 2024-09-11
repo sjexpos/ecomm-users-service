@@ -1,5 +1,6 @@
 package io.oigres.ecomm.service.users.api;
 
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import io.oigres.ecomm.service.users.Routes;
 import io.oigres.ecomm.service.users.api.model.*;
 import io.oigres.ecomm.service.users.api.model.admin.*;
@@ -57,6 +58,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 
 import org.modelmapper.ModelMapper;
 import org.springdoc.core.converters.models.PageableAsQueryParam;
@@ -183,6 +186,7 @@ public class UsersController extends AbstractController implements UsersService 
     @PageableAsQueryParam
     @GetMapping(produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
+    @RateLimiter(name = "get-all-users-endpoint")
     public PageResponse<GetAllUsersResponse> getAllUsers(@Parameter(hidden = true) @PageableDefault(page = 0, size = 40) PageableRequest pageable) {
         log.info("############ call getAllUsers ############");
         Page<User> users = this.getAllUsersUseCase.handle(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending()));
@@ -194,6 +198,7 @@ public class UsersController extends AbstractController implements UsersService 
     @PostMapping(value = Routes.PROFILE_ADMIN_USER, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     @Override
+    @RateLimiter(name = "create-new-admin-user-endpoint")
     public CreateAdminUserResponse createNewAdminUser(@RequestBody @Valid CreateAdminUserRequest request) throws ProfileException {
         log.info("############ call createNewAdminUser [{}] ############", request.getEmail());
         try {

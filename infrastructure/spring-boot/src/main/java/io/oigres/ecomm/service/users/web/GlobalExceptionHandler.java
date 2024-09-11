@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
@@ -36,7 +37,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	private final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 	
-	private BasicErrorController basicErrorController;
+	private final BasicErrorController basicErrorController;
 
 	public GlobalExceptionHandler(BasicErrorController basicErrorController) {
 		super();
@@ -63,7 +64,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return customHandleException(HttpStatus.BAD_REQUEST, ex, request);
     }
 
-    @Override
+	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         LOGGER.info(String.format("Handling exception %s, it will response status %s (%s) ", ex.getClass().getSimpleName(), status.toString(), status.value()));
         List<String> errorList = new ArrayList<>();
@@ -103,7 +104,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<Object> handleInvalidRequestException(InvalidRequestException ex, HttpServletRequest request) {
 		return customHandleException(HttpStatus.BAD_REQUEST, ex, request);
 	}
-	
+
+	@ExceptionHandler(RequestNotPermitted.class)
+	public ResponseEntity<Object> handleRequestNotPermitted(RequestNotPermitted ex, HttpServletRequest request) {
+		logger.warn("RATE LIMIT EXCEEDED: " + ex.getMessage());
+		return customHandleException(HttpStatus.TOO_MANY_REQUESTS, ex, request);
+	}
+
 	@ExceptionHandler(NotFoundException.class)
 	public ResponseEntity<Object> handleNotFoundException(NotFoundException ex, HttpServletRequest request) {
 		return customHandleException(HttpStatus.NOT_FOUND, ex, request);

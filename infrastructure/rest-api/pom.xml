@@ -41,6 +41,8 @@
       <groupId>org.modelmapper</groupId>
       <artifactId>modelmapper</artifactId>
     </dependency>
+
+    <!-- Open API 3 -->
     <dependency>
       <groupId>io.swagger.core.v3</groupId>
       <artifactId>swagger-annotations</artifactId>
@@ -48,6 +50,12 @@
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-common</artifactId>
+    </dependency>
+
+    <!-- Resilience4j (Retry, Circuit Breaker, Rate Limiter, Bulkhead, and Time Limiter) -->
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
     </dependency>
 
     <!-- testing -->
