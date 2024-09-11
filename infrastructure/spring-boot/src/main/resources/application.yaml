@@ -1,6 +1,6 @@
 
 server:
-  port: 9090
+  port: 6061
   tomcat:
     max-connections: 2000 # Maximum connections
     accept-count: 200     # Maximum waiting number
@@ -98,6 +98,8 @@ spring:
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     listener:
+      observation-enabled: true
+    template:
       observation-enabled: true
 
 management:

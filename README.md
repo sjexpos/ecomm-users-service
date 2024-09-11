@@ -80,7 +80,7 @@ mvn -Dtests.db.database=ecomm_users pre-integration-test
 
 ## Swagger UI
 
-http://localhost:9090/
+http://localhost:6061/
 
 
 ## Run application from IDE
