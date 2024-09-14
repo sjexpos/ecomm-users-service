@@ -22,6 +22,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Upload artifacts
+        id: upload-compiled-sources
         uses: actions/upload-artifact@v4.3.3
         with:
           name: compiled-sources
@@ -36,6 +37,8 @@ jobs:
         with:
           name: users-service-sdk
           path: ./sdk/target/users-service-sdk-0.1.0-SNAPSHOT.jar
+    outputs:
+      compiled-sources-artifact-id: ${{ steps.upload-compiled-sources.outputs.artifact-id }}
 
   build-docker-image:
     name: Create docker image
@@ -64,5 +67,20 @@ jobs:
           platforms: linux/amd64
           push: false
           tags: sjexpos/ecomm-users-service:latest
+
+  delete-unused-artifact:
+    name: Delete unused artifact
+    needs: [build-app, build-docker-image]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete Artifact
+        uses: actions/github-script@v7
+        with:
+          script: |
+              github.rest.actions.deleteArtifact({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                artifact_id: ${{ needs.build-app.outputs.compiled-sources-artifact-id }}
+              });
 
 # mvn jacoco:prepare-agent jacoco:report surefire:test
