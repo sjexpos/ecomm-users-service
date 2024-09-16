@@ -7,8 +7,10 @@
 [![Issues](https://img.shields.io/github/issues-search/sjexpos/ecomm-users-service?query=is%3Aopen&label=issues&style=plastic)](https://github.com/sjexpos/ecomm-users-service/issues)
 [![Commits](https://img.shields.io/github/last-commit/sjexpos/ecomm-users-service?logo=github&style=plastic)](https://github.com/sjexpos/ecomm-users-service/commits)
 
+![](docs/images/arch-users.png)
 
 This microservice is responsible for ...
+
 
 ## Modules structure
 
