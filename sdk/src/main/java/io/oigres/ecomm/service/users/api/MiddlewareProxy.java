@@ -281,12 +281,7 @@ public class MiddlewareProxy implements InvocationHandler {
     }
 
     public Mono<Exception> error5xxHandling(ClientResponse clientResponse) {
-        return clientResponse.bodyToMono(String.class)
-                            .flatMap(this::error5xxHandling);
-    }
-
-    private Mono<Exception> error5xxHandling(String errorBody) {
-        return  Mono.error(new RuntimeException(Constants.ERROR_500_USER_MESSAGE));
+        return  Mono.error(new RemoteServiceUnavailableException(Constants.ERROR_500_USER_MESSAGE));
     }
 
     @Override
