@@ -1,6 +1,8 @@
 package io.oigres.ecomm.service.users.api.model.exception;
 
-public class UnauthorizedException extends Exception {
+import io.oigres.ecomm.service.users.api.model.BusinessApiException;
+
+public class UnauthorizedException extends BusinessApiException {
     public UnauthorizedException() {}
 
     public UnauthorizedException(String message) {super(message);}

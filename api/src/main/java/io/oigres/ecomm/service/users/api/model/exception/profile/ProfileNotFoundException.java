@@ -1,6 +1,8 @@
 package io.oigres.ecomm.service.users.api.model.exception.profile;
 
-public class ProfileNotFoundException extends ProfileException {
+import io.oigres.ecomm.service.users.api.model.exception.NotFoundException;
+
+public class ProfileNotFoundException extends NotFoundException {
     public ProfileNotFoundException() {
     }
 

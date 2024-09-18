@@ -18,11 +18,11 @@ public interface UsersService {
 
     PageResponse<GetAllUsersResponse> getAllUsers(PageableRequest pageable);
 
-    CreateAdminUserResponse createNewAdminUser(CreateAdminUserRequest request) throws ProfileException;
+    CreateAdminUserResponse createNewAdminUser(CreateAdminUserRequest request) throws ProfileException, ProfileTypeNotFoundException;
 
-    CreateConsumerUserResponse createNewConsumerUser(CreateConsumerUserRequest request) throws ProfileException, StateNotFoundException, GenderNotFoundException, ZipcodeNotFoundException, UserTypeNotFoundException;
+    CreateConsumerUserResponse createNewConsumerUser(CreateConsumerUserRequest request) throws ProfileException, StateNotFoundException, GenderNotFoundException, ZipcodeNotFoundException, UserTypeNotFoundException, ProfileTypeNotFoundException;
 
-    CreateDispensaryUserResponse createNewDispensaryUser(CreateDispensaryUserRequest request) throws ProfileException;
+    CreateDispensaryUserResponse createNewDispensaryUser(CreateDispensaryUserRequest request) throws ProfileException, ProfileTypeNotFoundException;
 
 
     GetUserResponse getUserById(Long userId) throws NotFoundException;
@@ -65,10 +65,10 @@ public interface UsersService {
                                                              @Min(value = 1, message = "dispensaryId should be greater than zero") Long dispensaryId) throws NotFoundException;
 
     ActiveStatusProfileResponse activateAdmin(@Parameter(name = "userId", required = true, description = "identifier associated with the user (0..N)")
-                                                 @Min(value = 1, message = "userId should be greater than zero") Long userId) throws ProfileException;
+                                                 @Min(value = 1, message = "userId should be greater than zero") Long userId) throws ProfileException, ProfileNotFoundException, ProfileTypeNotFoundException;
 
     ActiveStatusProfileResponse deactivateAdmin(@Parameter(name = "userId", required = true, description = "identifier associated with the user (0..N)")
-                                                     @Min(value = 1, message = "userId should be greater than zero") Long userId) throws ProfileException;
+                                                     @Min(value = 1, message = "userId should be greater than zero") Long userId) throws ProfileException, ProfileNotFoundException, ProfileTypeNotFoundException;
 
     ActiveStatusProfileResponse activateConsumerUser(
             @Parameter(name = "userId", required = true, description = "identifier associated with the user (1..N)")

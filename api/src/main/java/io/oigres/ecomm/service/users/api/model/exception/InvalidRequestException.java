@@ -1,6 +1,8 @@
 package io.oigres.ecomm.service.users.api.model.exception;
 
-public class InvalidRequestException extends Exception {
+import io.oigres.ecomm.service.users.api.model.BusinessApiException;
+
+public class InvalidRequestException extends BusinessApiException {
     public InvalidRequestException() {}
 
     public InvalidRequestException(String message) {super(message);}

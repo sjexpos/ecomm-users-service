@@ -1,6 +1,8 @@
 package io.oigres.ecomm.service.users.api.model.exception;
 
-public class NotFoundException extends Exception {
+import io.oigres.ecomm.service.users.api.model.BusinessApiException;
+
+public class NotFoundException extends BusinessApiException {
     public NotFoundException() {}
 
     public NotFoundException(String message) {super(message);}

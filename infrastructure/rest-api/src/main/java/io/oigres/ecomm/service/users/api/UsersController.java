@@ -199,7 +199,7 @@ public class UsersController extends AbstractController implements UsersService 
     @ResponseStatus(HttpStatus.CREATED)
     @Override
     @RateLimiter(name = "create-new-admin-user-endpoint")
-    public CreateAdminUserResponse createNewAdminUser(@RequestBody @Valid CreateAdminUserRequest request) throws ProfileException {
+    public CreateAdminUserResponse createNewAdminUser(@RequestBody @Valid CreateAdminUserRequest request) throws ProfileException, ProfileTypeNotFoundException {
         log.info("############ call createNewAdminUser [{}] ############", request.getEmail());
         try {
             AdminProfile adminProfile = this.createNewAdminUserUseCase.handle(modelMapper.map(request, AdminProfile.class));
@@ -217,7 +217,7 @@ public class UsersController extends AbstractController implements UsersService 
     @PostMapping(value = Routes.PROFILE_CONSUMER_USER, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     @Override
-    public CreateConsumerUserResponse createNewConsumerUser(@RequestBody @Valid CreateConsumerUserRequest request) throws ProfileException, io.oigres.ecomm.service.users.api.model.exception.StateNotFoundException, io.oigres.ecomm.service.users.api.model.exception.GenderNotFoundException, io.oigres.ecomm.service.users.api.model.exception.ZipcodeNotFoundException, UserTypeNotFoundException {
+    public CreateConsumerUserResponse createNewConsumerUser(@RequestBody @Valid CreateConsumerUserRequest request) throws ProfileException, io.oigres.ecomm.service.users.api.model.exception.StateNotFoundException, io.oigres.ecomm.service.users.api.model.exception.GenderNotFoundException, io.oigres.ecomm.service.users.api.model.exception.ZipcodeNotFoundException, UserTypeNotFoundException, ProfileTypeNotFoundException {
         log.info("############ call createNewConsumerUser [{}] ############", request.getEmail());
         try {
             ConsumerProfile consumerProfile = this.createNewConsumerUserUseCase.handle(request);
@@ -243,7 +243,7 @@ public class UsersController extends AbstractController implements UsersService 
     @PostMapping(value = Routes.PROFILE_DISPENSARY_USER, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     @Override
-    public CreateDispensaryUserResponse createNewDispensaryUser(@RequestBody @Valid CreateDispensaryUserRequest request) throws ProfileException {
+    public CreateDispensaryUserResponse createNewDispensaryUser(@RequestBody @Valid CreateDispensaryUserRequest request) throws ProfileException, ProfileTypeNotFoundException {
         log.info("############ call createNewDispensaryUser [{}, {}] ############", request.getEmail(), request.getDispensaryId());
         try {
             DispensaryProfile dispensaryProfile = this.createNewDispensaryUserUseCase.handle(modelMapper.map(request, DispensaryProfile.class));
@@ -511,7 +511,7 @@ public class UsersController extends AbstractController implements UsersService 
     @ResponseStatus(HttpStatus.OK)
     public ActiveStatusProfileResponse activateAdmin(@Parameter(name = "userId", required = true, description = "identifier associated with the user (0..N)")
                                                         @Min(value = 1, message = "userId should be greater than zero")
-                                                        @PathVariable(name = "userId") Long userId) throws ProfileException {
+                                                        @PathVariable(name = "userId") Long userId) throws ProfileException, ProfileNotFoundException, ProfileTypeNotFoundException {
         log.info("############ call activeAdmin [{}] ############", userId);
         try {
             Profile profile = enableAdminUseCase.handle(userId);
@@ -534,7 +534,7 @@ public class UsersController extends AbstractController implements UsersService 
     @ResponseStatus(HttpStatus.OK)
     public ActiveStatusProfileResponse deactivateAdmin(@Parameter(name = "userId", required = true, description = "identifier associated with the user (0..N)")
                                                             @Min(value = 1, message = "userId should be greater than zero")
-                                                            @PathVariable(name = "userId") Long userId) throws ProfileException {
+                                                            @PathVariable(name = "userId") Long userId) throws ProfileException, ProfileNotFoundException, ProfileTypeNotFoundException {
         log.info("############ call deactivateAdmin [{}] ############", userId);
         try {
             Profile profile = disableAdminUseCase.handle(userId);

@@ -1,6 +1,8 @@
 package io.oigres.ecomm.service.users.api.model.exception.profile;
 
-public class ProfileBadRequestExceptionResponseApi extends Exception {
+import io.oigres.ecomm.service.users.api.model.BusinessApiException;
+
+public class ProfileBadRequestExceptionResponseApi extends BusinessApiException {
     public ProfileBadRequestExceptionResponseApi() {
     }
 

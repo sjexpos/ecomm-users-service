@@ -1,6 +1,6 @@
 package io.oigres.ecomm.service.users.api.model.exception;
 
-public class ZipcodeNotFoundException extends Exception{
+public class ZipcodeNotFoundException extends NotFoundException {
     public ZipcodeNotFoundException() {
     }
 

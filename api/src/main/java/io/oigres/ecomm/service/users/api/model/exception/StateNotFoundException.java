@@ -1,6 +1,6 @@
 package io.oigres.ecomm.service.users.api.model.exception;
 
-public class StateNotFoundException extends Exception{
+public class StateNotFoundException extends NotFoundException {
     public StateNotFoundException() {
     }
 
