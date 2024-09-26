@@ -143,6 +143,12 @@
       <artifactId>spring-kafka</artifactId>
     </dependency>
 
+    <!-- Cloud Native Spring Admin connector -->
+    <dependency>
+      <groupId>de.codecentric</groupId>
+      <artifactId>spring-boot-admin-starter-client</artifactId>
+    </dependency>
+
     <!-- Testing -->
     <dependency>
       <groupId>io.oigres.ecomm</groupId>
@@ -235,6 +241,7 @@
             <id>repackage</id>
             <goals>
               <goal>repackage</goal>
+              <goal>build-info</goal>
             </goals>
           </execution>
         </executions>

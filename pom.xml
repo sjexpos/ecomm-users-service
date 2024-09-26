@@ -172,6 +172,13 @@
         <version>${swagger-annotations.version}</version>
       </dependency>
 
+      <!-- Cloud Native Spring Admin connector -->
+      <dependency>
+        <groupId>de.codecentric</groupId>
+        <artifactId>spring-boot-admin-starter-client</artifactId>
+        <version>${spring-boot.version}</version>
+      </dependency>
+
       <dependency>
         <groupId>org.modelmapper</groupId>
         <artifactId>modelmapper</artifactId>

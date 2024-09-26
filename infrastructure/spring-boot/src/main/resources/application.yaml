@@ -12,7 +12,13 @@ server:
     include-exception: true
     include-binding-errors: always
 
+
 spring:
+  boot:
+    admin:
+      client:
+        # Cloud Native Spring Admin Server is running
+        url: http://localhost:9090
   threads:
     virtual:
       enabled: true
@@ -108,7 +114,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: info, health, httptrace, loggers, metrics, threaddump
+        include: "*"
   endpoint:
     health:
       probes:
