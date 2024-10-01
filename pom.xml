@@ -455,6 +455,7 @@
           <source>${maven.compiler.source}</source>
           <target>${maven.compiler.target}</target>
           <encoding>${project.build.sourceEncoding}</encoding>
+          <parameters>true</parameters> <!-- store method argument names on byte code. Useful for spring SPEL -->
         </configuration>
       </plugin>
       <plugin>
