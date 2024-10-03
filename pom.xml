@@ -477,10 +477,27 @@
             </goals>
           </execution>
           <execution>
+            <id>jacoco-initialize-integration</id>
+            <goals>
+              <goal>prepare-agent-integration</goal>
+            </goals>
+          </execution>
+          <execution>
             <id>jacoco-site</id>
-            <phase>verify</phase>
             <goals>
               <goal>report</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>jacoco-site-integration</id>
+            <goals>
+              <goal>report-integration</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>jacoco-site-all</id>
+            <goals>
+              <goal>report-aggregate</goal>
             </goals>
           </execution>
         </executions>
