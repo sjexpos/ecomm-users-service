@@ -39,7 +39,7 @@ This project has a hexagonal architecture and the modules are:
 ## Requirements
 
 * [Java 21](https://openjdk.org/install/)
-* [Maven 3.6+](https://maven.apache.org/download.cgi)
+* [Maven 3.8.8+](https://maven.apache.org/download.cgi)
 * [AWS Cli](https://aws.amazon.com/es/cli/)
 * [Docker](https://www.docker.com/)
 
