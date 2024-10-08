@@ -7,6 +7,9 @@
 [![Issues](https://img.shields.io/github/issues-search/sjexpos/ecomm-users-service?query=is%3Aopen&label=issues&style=plastic)](https://github.com/sjexpos/ecomm-users-service/issues)
 [![Commits](https://img.shields.io/github/last-commit/sjexpos/ecomm-users-service?logo=github&style=plastic)](https://github.com/sjexpos/ecomm-users-service/commits)
 
+[![Docker pulls](https://img.shields.io/docker/pulls/sjexposecomm/users-service?logo=docker&style=plastic)](https://hub.docker.com/r/sjexposecomm/users-service)
+[![Docker size](https://img.shields.io/docker/image-size/sjexposecomm/users-service?logo=docker&style=plastic)](https://hub.docker.com/r/sjexposecomm/users-service/tags)
+
 ![](docs/images/arch-users.png)
 
 This microservice is responsible for ...
