@@ -188,4 +188,3 @@ ecomm:
         entities-update: users-entities-update-topic
     tracing:
       url: http://localhost:4318/v1/traces
-
