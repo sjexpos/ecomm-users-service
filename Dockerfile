@@ -11,10 +11,7 @@ MAINTAINER Sergio Exposito <sjexpos@gmail.com>
 # ENV DATABASE_PASSWORD    <postgres password>
 # ENV REDIS_HOST           <redis server host name>
 # ENV REDIS_PORT           <redis server port>
-# ENV SEARCH_AWS_SIGNING   <if AWS signing is required to connect to OpenSearch. true | false>
-# ENV SEARCH_AWS_REGION    <AWS region where OpenSearchis running>
-# ENV SEARCH_HOSTS         <OpenSearch domain endpoint>
-# ENV SEARCH_PROTOCOL      <OpenSearch connection protocol. http | https>
+# ENV OPENSEARCH_AWS
 # ENV ASSETS_BUCKET        <Images bucket name>
 
 ADD infrastructure/spring-boot/target/*.jar /opt/user-service.jar
@@ -60,10 +57,7 @@ RUN echo "#!/usr/bin/env bash" > /opt/entrypoint.sh && \
         -Dspring.datasource.password=\$DATABASE_PASSWORD \
         -Dspring.redis.host=\$REDIS_HOST \
         -Dspring.jpa.properties.hibernate.cache.redisson.config=/opt/redisson.yaml \
-        -Dspring.jpa.properties.hibernate.search.backend.aws.signing.enabled=\$SEARCH_AWS_SIGNING \
-        -Dspring.jpa.properties.hibernate.search.backend.aws.region=\$SEARCH_AWS_REGION \
-        -Dspring.jpa.properties.hibernate.search.backend.hosts=\$SEARCH_HOSTS \
-        -Dspring.jpa.properties.hibernate.search.backend.protocol=\$SEARCH_PROTOCOL \
+        \$OPENSEARCH_AWS \
         -Decomm.service.users.assets.bucket.name=\$ASSETS_BUCKET \
         -jar /opt/user-service.jar" >> /opt/entrypoint.sh
 
