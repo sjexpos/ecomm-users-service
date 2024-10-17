@@ -13,7 +13,11 @@ MAINTAINER Sergio Exposito <sjexpos@gmail.com>
 # ENV REDIS_HOST           <redis server host name>
 # ENV REDIS_PORT           <redis server port>
 # ENV OPENSEARCH_CONN
-# ENV KAFKA_SERVERS
+# ENV KAFKA_SERVERS            <kafka servers host name and port>
+# ENV KAFKA_SECURITY_PROTOCOL
+# ENV KAFKA_SASL_MECHANISM
+# ENV KAFKA_SASL_JAAS_CONFIG
+# ENV KAFKA_EXTRAS
 # ENV ASSETS_BUCKET        <Images bucket name>
 # ENV AWS_ACCESS_KEY_ID
 # ENV AWS_SECRET_ACCESS_KEY
@@ -43,6 +47,10 @@ RUN echo "#!/usr/bin/env bash" > /opt/entrypoint.sh && \
     echo "echo \"REDIS_PORT: \$REDIS_PORT \" " >> /opt/entrypoint.sh && \
     echo "echo \"OPENSEARCH_CONN: \$OPENSEARCH_CONN \" " >> /opt/entrypoint.sh && \
     echo "echo \"KAFKA_SERVERS: \$KAFKA_SERVERS \" " >> /opt/entrypoint.sh && \
+    echo "echo \"KAFKA_SECURITY_PROTOCOL: \$KAFKA_SECURITY_PROTOCOL \" " >> /opt/entrypoint.sh && \
+    echo "echo \"KAFKA_SASL_MECHANISM: \$KAFKA_SASL_MECHANISM \" " >> /opt/entrypoint.sh && \
+    echo "echo \"KAFKA_SASL_JAAS_CONFIG: \$KAFKA_SASL_JAAS_CONFIG \" " >> /opt/entrypoint.sh && \
+    echo "echo \"KAFKA_EXTRAS: \$KAFKA_EXTRAS \" " >> /opt/entrypoint.sh && \
     echo "echo \"ASSETS_BUCKET: \$ASSETS_BUCKET \" " >> /opt/entrypoint.sh && \
     echo "echo \"AWS_ACCESS_KEY_ID: \$AWS_ACCESS_KEY_ID \" " >> /opt/entrypoint.sh && \
     echo "echo \"AWS_SECRET_ACCESS_KEY: \$AWS_SECRET_ACCESS_KEY \" " >> /opt/entrypoint.sh && \
@@ -67,6 +75,10 @@ RUN echo "#!/usr/bin/env bash" > /opt/entrypoint.sh && \
         -Dspring.jpa.properties.hibernate.cache.redisson.config=/opt/redisson.yaml \
         \$OPENSEARCH_CONN \
         -Dspring.kafka.bootstrap-servers=\$KAFKA_SERVERS \
+        -Dspring.kafka.properties.security.protocol=\$KAFKA_SECURITY_PROTOCOL \
+        -Dspring.kafka.properties.sasl.mechanism=\$KAFKA_SASL_MECHANISM \
+        -Dspring.kafka.properties.sasl.jaas.config=\"\$KAFKA_SASL_JAAS_CONFIG\" \
+        \$KAFKA_EXTRAS \
         -Decomm.service.users.assets.bucket.name=\$ASSETS_BUCKET \
         -Decomm.service.tracing.url=\$TRACING_URL \
         -jar /opt/user-service.jar" >> /opt/entrypoint.sh

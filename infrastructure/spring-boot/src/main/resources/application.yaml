@@ -99,6 +99,13 @@ spring:
 #                secret_access_key: <value>
   kafka:
     bootstrap-servers: localhost:9092
+    properties:
+      security:
+        protocol: PLAINTEXT
+      sasl:
+        mechanism: GSSAPI
+        jaas:
+          config:
     consumer:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
     producer:
