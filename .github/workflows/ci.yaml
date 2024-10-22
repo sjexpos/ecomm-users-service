@@ -1,8 +1,9 @@
 name: CI
 on:
   push:
-    branches:
-    - '**'
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "main" ]
     
 jobs:
 
@@ -16,6 +17,11 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+      - name: Extract version
+        run: |
+          version_value=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "version=$version_value"
+          echo "version=$version_value" >> $GITHUB_ENV
       - run: mvn --batch-mode --update-snapshots install
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
@@ -31,17 +37,17 @@ jobs:
         uses: actions/upload-artifact@v4.3.3
         with:
           name: users-service-api
-          path: ./api/target/users-service-api-0.1.0-SNAPSHOT.jar
+          path: ./api/target/users-service-api-${{ env.version }}.jar
       - name: Publish users-service-sdk
         uses: actions/upload-artifact@v4.3.3
         with:
           name: users-service-sdk
-          path: ./sdk/target/users-service-sdk-0.1.0-SNAPSHOT.jar
+          path: ./sdk/target/users-service-sdk-${{ env.version }}.jar
     outputs:
       compiled-sources-artifact-id: ${{ steps.upload-compiled-sources.outputs.artifact-id }}
 
   build-docker-image:
-    name: Create docker image
+    name: Create docker image & publish
     needs: [build-app]
     runs-on: ubuntu-latest
     steps:
@@ -50,37 +56,12 @@ jobs:
         with:
           name: compiled-sources
           path: ./
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-      - name: Install cosign
-        if: github.event_name != 'pull_request'
-        uses: sigstore/cosign-installer@v3.7.0
+      - name: Docker build and publish
+        uses: sjexpos/ecomm-cicd-actions/.github/actions/docker-build-and-publish@main
         with:
-          cosign-release: 'v2.4.1'
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Login to Docker Hub
-        if: github.event_name != 'pull_request'
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Extract Docker metadata
-        id: meta
-        uses: docker/metadata-action@v5.5.1
-        with:
-          images: sjexposecomm/users-service
-      - name: Build and push
-        uses: docker/build-push-action@v6
-        with:
-          context: ./
-          file: Dockerfile
-          platforms: linux/amd64
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: |
-            sjexposecomm/users-service:latest
-            sjexposecomm/users-service:${{ github.sha }}
-          labels: ${{ steps.meta.outputs.labels }}
+          registry_user: ${{ secrets.DOCKERHUB_USERNAME }}
+          registry_token: ${{ secrets.DOCKERHUB_TOKEN }}
+          image_name: sjexposecomm/users-service
 
   delete-unused-artifact:
     name: Delete unused artifact
