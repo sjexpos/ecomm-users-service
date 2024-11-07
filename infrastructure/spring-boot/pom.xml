@@ -149,6 +149,12 @@
       <artifactId>opentelemetry-exporter-otlp</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>net.ttddyy.observation</groupId>
+      <artifactId>datasource-micrometer-spring-boot</artifactId>
+      <version>1.0.5</version>
+    </dependency>
+
     <!-- Prometheus -->
     <dependency>
       <groupId>io.micrometer</groupId>
