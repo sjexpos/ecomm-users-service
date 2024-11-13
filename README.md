@@ -39,6 +39,16 @@ This project has a hexagonal architecture and the modules are:
 * [Hibernate 6.6](https://hibernate.org/orm/)
 * [Hibernate Search 7.2.0](https://hibernate.org/search/)
 
+## Observability
+
+This project implements observability using [micrometer](https://micrometer.io/)
+
+* traces: they are exported using micrometer but [OpenTelemetry](https://opentelemetry.io) protocol (otlp) is used. The receiver of the information is [Jaeger](https://www.jaegertracing.io/). In kubernetes, jaeger collector is used. 
+* metrics: they are pulled by [Prometheus](https://prometheus.io/). Metrics are exposed by Spring Boot Actuators. In kubernetes, a service monitor is used
+* logs: they are sent to console. In kubernetes, Loki pulls logs from pods.
+
+![](docs/images/observability-micrometer.png)
+
 ## Requirements
 
 * [Java 21](https://openjdk.org/install/)
