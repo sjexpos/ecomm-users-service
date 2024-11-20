@@ -44,6 +44,7 @@
     <jboss.logging.version>3.6.0.Final</jboss.logging.version>
     <spring-kafka.version>3.2.3</spring-kafka.version>
     <elasticsearch.client.version>8.15.0</elasticsearch.client.version>
+    <micrometer.datasource.version>1.0.5</micrometer.datasource.version>
     <spring-cloud.version>2023.0.3</spring-cloud.version>
     <springdoc.version>2.6.0</springdoc.version>
     <swagger-annotations.version>2.2.22</swagger-annotations.version>
@@ -153,6 +154,12 @@
         <groupId>org.elasticsearch.client</groupId>
         <artifactId>elasticsearch-rest-client-sniffer</artifactId>
         <version>${elasticsearch.client.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>net.ttddyy.observation</groupId>
+        <artifactId>datasource-micrometer-spring-boot</artifactId>
+        <version>${micrometer.datasource.version}</version>
       </dependency>
 
       <!-- Open API 3.0 (swagger) dependencies -->
