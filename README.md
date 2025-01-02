@@ -24,9 +24,9 @@ This project has a hexagonal architecture and the modules are:
 * **domain** - domain objects
 * **application** - use cases
 * **infrastructure**
-   * **rest-api** - controllers which implement interfaces on **api**
-   * **persistence** - all classes and functionality related to how domain object are stored.
-   * **spring-boot** - all classes and configuration related to IoC container (spring boot)
+  * **rest-api** - controllers which implement interfaces on **api**
+  * **persistence** - all classes and functionality related to how domain object are stored.
+  * **spring-boot** - all classes and configuration related to IoC container (spring boot)
 * **sdk** - classes which implement interfaces on module **api** to call services of this microservice remotely.
 * **uploads-detector** - AWS lambda function which is triggered when a file is uploaded to S3 using URL signed, and it invokes an user service endpoint to notify this.
 
