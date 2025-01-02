@@ -120,3 +120,5 @@ and the following command will allow you to see the message which are generated 
 ```bash
 /bin/kafka-console-consumer --bootstrap-server localhost:9092 --from-beginning --topic users-entities-update-topic
 ```
+
+
