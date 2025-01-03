@@ -1,6 +1,6 @@
 FROM amazoncorretto:21-al2-jdk
-LABEL AUTHOR = 'Sergio Exposito'
-LABEL EMAIL = 'sjexpos@gmail.com'
+LABEL AUTHOR 'Sergio Exposito'
+LABEL EMAIL 'sjexpos@gmail.com'
 
 # ENV JAVA_XMS             <set initial Java heap size>
 # ENV JAVA_XMX             <set maximum Java heap size>
