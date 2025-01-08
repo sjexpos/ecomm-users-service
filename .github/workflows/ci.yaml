@@ -11,6 +11,6 @@ jobs:
     with:
       sonar_project_key: users-service
       sonar_project_name: Users Service
-      docker_image_name: sjexposecomm/users-service
+      docker_images: "['sjexposecomm/users-service']"
       files_as_artifacts: "['./api/target/users-service-api','./sdk/target/users-service-sdk']"
 
