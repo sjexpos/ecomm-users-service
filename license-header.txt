@@ -15,15 +15,3 @@
  **********/
 // Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
 
-package io.oigres.ecomm.service.users.usecases.users.profiles;
-
-import io.oigres.ecomm.service.users.domain.Profile;
-import io.oigres.ecomm.service.users.enums.ProfileTypeEnum;
-import io.oigres.ecomm.service.users.exception.profile.BadRequestProfileException;
-import io.oigres.ecomm.service.users.exception.profile.EnableStatusProfileException;
-import io.oigres.ecomm.service.users.exception.profile.NotFoundProfileException;
-
-public interface ToggleEnabledProfileUseCase {
-  public Profile handle(Long userId, ProfileTypeEnum profileType, Boolean enabledStatus)
-      throws NotFoundProfileException, EnableStatusProfileException, BadRequestProfileException;
-}
