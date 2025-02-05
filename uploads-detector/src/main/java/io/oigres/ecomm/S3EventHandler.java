@@ -1,13 +1,30 @@
+/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See <https://www.gnu.org/licenses/gpl-3.0.html>.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
 package io.oigres.ecomm;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
-import com.amazonaws.services.lambda.runtime.events.models.s3.S3EventNotification;
-import com.amazonaws.services.lambda.runtime.events.SQSEvent;
-import com.amazonaws.services.lambda.runtime.events.SQSEvent.SQSMessage;
 import com.amazonaws.services.lambda.runtime.events.SQSBatchResponse;
 import com.amazonaws.services.lambda.runtime.events.SQSBatchResponse.BatchItemFailure;
+import com.amazonaws.services.lambda.runtime.events.SQSEvent;
+import com.amazonaws.services.lambda.runtime.events.SQSEvent.SQSMessage;
+import com.amazonaws.services.lambda.runtime.events.models.s3.S3EventNotification;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -18,10 +35,11 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.JsonSyntaxException;
-
 import io.oigres.ecomm.service.users.api.UsersService;
 import io.oigres.ecomm.service.users.api.UsersServiceProxy;
-
+import java.lang.reflect.Type;
+import java.time.Duration;
+import java.util.ArrayList;
 import org.joda.time.DateTime;
 import org.joda.time.format.ISODateTimeFormat;
 import org.slf4j.Logger;
@@ -30,103 +48,105 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 
-import java.time.Duration;
-import java.util.ArrayList;
-import java.lang.reflect.Type;
-
 public class S3EventHandler implements RequestHandler<SQSEvent, SQSBatchResponse> {
-    private Logger log = LoggerFactory.getLogger(getClass());
+  private Logger log = LoggerFactory.getLogger(getClass());
 
-    private UsersService usersService;
-    private WebClient webClient;
-    private Gson gson;
-    private static final String BUCKET_PREFIX = "users/";
+  private UsersService usersService;
+  private WebClient webClient;
+  private Gson gson;
+  private static final String BUCKET_PREFIX = "users/";
 
-    public S3EventHandler() {
-        log.info("**************************** S3EventHandler ****************************");
-        String serviceUri = System.getenv("USERS_SERVICE_URI");
-        log.info("Service URI: {}", serviceUri);
-        webClient = WebClient.builder().build();
-        webClient = WebClient.builder()
-                .baseUrl(serviceUri)
-                .clientConnector(
-                        new ReactorClientHttpConnector(
-                                HttpClient.create().responseTimeout(Duration.ofMillis(15000))
-                        )
-                )
-                .build();
-        usersService = new UsersServiceProxy(webClient);
-        gson = new GsonBuilder()
-                .enableComplexMapKeySerialization()
-                .serializeNulls()
-                .registerTypeAdapter(DateTime.class, new JsonSerializer<DateTime>() {
-                    @Override
-                    public JsonElement serialize(DateTime json, Type typeOfSrc, JsonSerializationContext context) {
-                        return new JsonPrimitive(ISODateTimeFormat.dateTime().print(json));
-                    }
+  public S3EventHandler() {
+    log.info("**************************** S3EventHandler ****************************");
+    String serviceUri = System.getenv("USERS_SERVICE_URI");
+    log.info("Service URI: {}", serviceUri);
+    webClient = WebClient.builder().build();
+    webClient =
+        WebClient.builder()
+            .baseUrl(serviceUri)
+            .clientConnector(
+                new ReactorClientHttpConnector(
+                    HttpClient.create().responseTimeout(Duration.ofMillis(15000))))
+            .build();
+    usersService = new UsersServiceProxy(webClient);
+    gson =
+        new GsonBuilder()
+            .enableComplexMapKeySerialization()
+            .serializeNulls()
+            .registerTypeAdapter(
+                DateTime.class,
+                new JsonSerializer<DateTime>() {
+                  @Override
+                  public JsonElement serialize(
+                      DateTime json, Type typeOfSrc, JsonSerializationContext context) {
+                    return new JsonPrimitive(ISODateTimeFormat.dateTime().print(json));
+                  }
                 })
-                .registerTypeAdapter(DateTime.class, new JsonDeserializer<DateTime>() {
-                    @Override
-                    public DateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-                        DateTime dt = ISODateTimeFormat.dateTime().parseDateTime(json.getAsString());
-                        return dt;
-                    }
+            .registerTypeAdapter(
+                DateTime.class,
+                new JsonDeserializer<DateTime>() {
+                  @Override
+                  public DateTime deserialize(
+                      JsonElement json, Type typeOfT, JsonDeserializationContext context)
+                      throws JsonParseException {
+                    DateTime dt = ISODateTimeFormat.dateTime().parseDateTime(json.getAsString());
+                    return dt;
+                  }
                 })
-                .setPrettyPrinting()
-                .setVersion(1.0)
-                .create();
-    }
+            .setPrettyPrinting()
+            .setVersion(1.0)
+            .create();
+  }
 
-    @Override
-    public SQSBatchResponse handleRequest(SQSEvent event, Context context) {
-        log.info("**************************** handleRequest ****************************");
-        log.debug("SQS Event: " + gson.toJson(event));
-        log.debug("-----------------------------------------------------------------------");
-        SQSBatchResponse response = new SQSBatchResponse();
-        response.setBatchItemFailures(new ArrayList<>());
-        if (event.getRecords() != null) {
-            for (SQSMessage msg : event.getRecords()) {
-                S3Event s3Event = null;
-                String msgId = msg.getMessageId();
-                String body = msg.getBody();
-                log.info("Processing SQS message: {}", msgId);
-                try {
-                    body = body.replace("Records", "records");
-                    s3Event = gson.fromJson(body, S3Event.class);
-                } catch (JsonSyntaxException e) {
-                    log.warn("Invalid S3Event format: ", e);
-                    log.warn(body);
-                    continue;
-                }
-                try {
-                    doWork(s3Event, context);
-                } catch (Exception e) {
-                    log.warn("SQS message will be retry because of: ", e);
-                    response.getBatchItemFailures().add(new BatchItemFailure(msgId));
-                }
-            }
+  @Override
+  public SQSBatchResponse handleRequest(SQSEvent event, Context context) {
+    log.info("**************************** handleRequest ****************************");
+    log.debug("SQS Event: " + gson.toJson(event));
+    log.debug("-----------------------------------------------------------------------");
+    SQSBatchResponse response = new SQSBatchResponse();
+    response.setBatchItemFailures(new ArrayList<>());
+    if (event.getRecords() != null) {
+      for (SQSMessage msg : event.getRecords()) {
+        S3Event s3Event = null;
+        String msgId = msg.getMessageId();
+        String body = msg.getBody();
+        log.info("Processing SQS message: {}", msgId);
+        try {
+          body = body.replace("Records", "records");
+          s3Event = gson.fromJson(body, S3Event.class);
+        } catch (JsonSyntaxException e) {
+          log.warn("Invalid S3Event format: ", e);
+          log.warn(body);
+          continue;
         }
-        log.info("***********************************************************************");
-        return response;
-    }
-
-    public void doWork(S3Event s3Event, Context context) {
-        log.debug("S3 Event: " + gson.toJson(s3Event));
-        for(S3EventNotification.S3EventNotificationRecord record: s3Event.getRecords()) {
-            String objectKey = record.getS3().getObject().getKey();
-            log.info("S3 key {} was created", objectKey);
-            String resourceName = objectKey.substring(objectKey.lastIndexOf("/") + 1);
-            String folderPath = objectKey.replace(resourceName, "").replace(BUCKET_PREFIX, "");
-            log.info("Resource Name: " + resourceName);
-            log.info("Folder path: : " + folderPath);
-            if(BlobType.PROFILE_IMAGE.getFolder().equals(folderPath)) {
-                log.info("Changing status for profile image {}", objectKey);
-                usersService.changeProfileImageStatus(objectKey);
-            } else if(BlobType.MMJ_CARD_IMAGE.getFolder().equals(folderPath)) {
-                log.info("Changing status for mmj card image {}", objectKey);
-                usersService.updateCardImageStatus(objectKey);
-            }
+        try {
+          doWork(s3Event, context);
+        } catch (Exception e) {
+          log.warn("SQS message will be retry because of: ", e);
+          response.getBatchItemFailures().add(new BatchItemFailure(msgId));
         }
+      }
     }
+    log.info("***********************************************************************");
+    return response;
+  }
 
+  public void doWork(S3Event s3Event, Context context) {
+    log.debug("S3 Event: " + gson.toJson(s3Event));
+    for (S3EventNotification.S3EventNotificationRecord record : s3Event.getRecords()) {
+      String objectKey = record.getS3().getObject().getKey();
+      log.info("S3 key {} was created", objectKey);
+      String resourceName = objectKey.substring(objectKey.lastIndexOf("/") + 1);
+      String folderPath = objectKey.replace(resourceName, "").replace(BUCKET_PREFIX, "");
+      log.info("Resource Name: " + resourceName);
+      log.info("Folder path: : " + folderPath);
+      if (BlobType.PROFILE_IMAGE.getFolder().equals(folderPath)) {
+        log.info("Changing status for profile image {}", objectKey);
+        usersService.changeProfileImageStatus(objectKey);
+      } else if (BlobType.MMJ_CARD_IMAGE.getFolder().equals(folderPath)) {
+        log.info("Changing status for mmj card image {}", objectKey);
+        usersService.updateCardImageStatus(objectKey);
+      }
+    }
+  }
 }
