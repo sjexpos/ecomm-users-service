@@ -20,19 +20,13 @@ package io.oigres.ecomm.service.users.api.model.consumer;
 import io.oigres.ecomm.service.users.api.model.CreateUserRequest;
 import io.oigres.ecomm.service.users.api.model.enums.ConsumerTypeApiEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@EqualsAndHashCode(callSuper = false)
+@SuperBuilder
+@Getter
 public class CreateConsumerUserRequest extends CreateUserRequest {
   @Schema(name = "firstName", example = "", required = true)
   @NotEmpty
@@ -63,29 +57,4 @@ public class CreateConsumerUserRequest extends CreateUserRequest {
 
   @Schema(name = "zipcodeId", example = "", required = true)
   @NotNull private Long zipcodeId;
-
-  @Builder(builderMethodName = "consumerBuilder")
-  public CreateConsumerUserRequest(
-      @NotEmpty @Email String email,
-      @NotEmpty String password,
-      String firstName,
-      String lastName,
-      String avatar,
-      String cardImageURL,
-      ConsumerTypeApiEnum userType,
-      Long genderId,
-      String phone,
-      Long zipcodeStateId,
-      Long zipcodeId) {
-    super(email, password);
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.avatar = avatar;
-    this.cardImageURL = cardImageURL;
-    this.userType = userType;
-    this.genderId = genderId;
-    this.phone = phone;
-    this.zipcodeStateId = zipcodeStateId;
-    this.zipcodeId = zipcodeId;
-  }
 }

@@ -25,6 +25,7 @@ import io.oigres.ecomm.service.users.api.model.exception.StateNotFoundException;
 import io.oigres.ecomm.service.users.api.model.exception.ZipcodeNotFoundException;
 import io.oigres.ecomm.service.users.api.model.region.StateResponse;
 import io.oigres.ecomm.service.users.api.model.region.ZipCodeResponse;
+import io.oigres.ecomm.service.users.config.mapper.ResponsesMapper;
 import io.oigres.ecomm.service.users.domain.State;
 import io.oigres.ecomm.service.users.domain.ZipCode;
 import io.oigres.ecomm.service.users.exception.NotFoundException;
@@ -37,9 +38,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -58,15 +57,14 @@ public class RegionController extends AbstractController implements IRegionServi
   private final GetStateByIdUseCase getStateByIdUseCase;
   private final GetZipCodesByStateUseCase getZipCodesByState;
   private final GetZipCodeByIdUseCase getZipCodeByIdUseCase;
-
-  private final ModelMapper mapper;
+  private final ResponsesMapper mapper;
 
   public RegionController(
       GetStatesUseCase getStatesUseCase,
       GetStateByIdUseCase getStateByIdUseCase,
       GetZipCodesByStateUseCase getZipCodesByState,
       GetZipCodeByIdUseCase getZipCodeByIdUseCase,
-      ModelMapper mapper) {
+      ResponsesMapper mapper) {
     this.getStatesUseCase = getStatesUseCase;
     this.getStateByIdUseCase = getStateByIdUseCase;
     this.getZipCodesByState = getZipCodesByState;
@@ -86,10 +84,7 @@ public class RegionController extends AbstractController implements IRegionServi
         this.getStatesUseCase.handle(
             PageRequest.of(
                 pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending()));
-    List<StateResponse> response =
-        states.getContent().stream()
-            .map(state -> this.mapper.map(state, StateResponse.class))
-            .collect(Collectors.toList());
+    List<StateResponse> response = this.mapper.toStateResponse(states.getContent());
     return new PageResponseImpl<>(response, pageable, states.getTotalElements());
   }
 
@@ -131,10 +126,7 @@ public class RegionController extends AbstractController implements IRegionServi
             stateId,
             PageRequest.of(
                 pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending()));
-    List<ZipCodeResponse> response =
-        zipCodes.getContent().stream()
-            .map(zipCode -> this.mapper.map(zipCode, ZipCodeResponse.class))
-            .collect(Collectors.toList());
+    List<ZipCodeResponse> response = this.mapper.toZipCodeResponse(zipCodes.getContent());
     return new PageResponseImpl<>(response, pageable, zipCodes.getTotalElements());
   }
 

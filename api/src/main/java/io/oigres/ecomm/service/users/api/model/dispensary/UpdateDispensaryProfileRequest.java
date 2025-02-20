@@ -20,15 +20,11 @@ package io.oigres.ecomm.service.users.api.model.dispensary;
 import io.oigres.ecomm.service.users.api.model.UpdateProfileRequest;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@EqualsAndHashCode(callSuper = false)
+@SuperBuilder
+@Getter
 public class UpdateDispensaryProfileRequest extends UpdateProfileRequest {
   @Schema(name = "dispensaryId", example = "", required = true)
   @NotNull private Long dispensaryId;

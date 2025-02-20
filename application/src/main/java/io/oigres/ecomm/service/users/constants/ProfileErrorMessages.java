@@ -15,7 +15,7 @@
  **********/
 // Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
 
-package io.oigres.ecomm.service.users.api;
+package io.oigres.ecomm.service.users.constants;
 
 public class ProfileErrorMessages {
   public static final String PROFILE_ERROR_MMJCARDIMAGE_USED =

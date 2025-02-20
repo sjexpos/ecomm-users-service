@@ -18,27 +18,13 @@
 package io.oigres.ecomm.service.users.api.model.dispensary;
 
 import io.oigres.ecomm.service.users.api.model.CreateUserRequest;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
+@Getter
 public class CreateDispensaryUserRequest extends CreateUserRequest {
 
   @NotNull private Long dispensaryId;
-
-  @Builder(builderMethodName = "dispensaryBuilder")
-  public CreateDispensaryUserRequest(
-      @NotEmpty @Email String email, @NotEmpty String password, Long dispensaryId) {
-    super(email, password);
-    this.dispensaryId = dispensaryId;
-  }
 }

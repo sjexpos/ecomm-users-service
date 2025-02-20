@@ -38,8 +38,9 @@
     </dependency>
 
     <dependency>
-      <groupId>org.modelmapper</groupId>
-      <artifactId>modelmapper</artifactId>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct</artifactId>
+      <scope>provided</scope>
     </dependency>
 
     <!-- Open API 3 -->

@@ -20,15 +20,11 @@ package io.oigres.ecomm.service.users.api.model;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@SuperBuilder
+@Getter
 public class CreateUserRequest implements Serializable {
 
   @NotEmpty @Email private String email;

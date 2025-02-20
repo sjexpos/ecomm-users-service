@@ -46,6 +46,6 @@ public class RemoteMethodArgumentNotValidException extends RuntimeException {
   }
 
   public List<Error> getErrors() {
-    return this.errors;
+    return List.copyOf(this.errors);
   }
 }

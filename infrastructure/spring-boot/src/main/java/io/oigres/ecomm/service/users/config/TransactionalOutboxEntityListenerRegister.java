@@ -45,8 +45,12 @@ public class TransactionalOutboxEntityListenerRegister {
     SessionFactoryImpl sessionFactoryImpl = sessionFactory.unwrap(SessionFactoryImpl.class);
     ServiceRegistryImplementor serviceRegistry = sessionFactoryImpl.getServiceRegistry();
     EventListenerRegistry registry = serviceRegistry.getService(EventListenerRegistry.class);
-    registry.getEventListenerGroup(EventType.POST_INSERT).appendListener(listener);
-    registry.getEventListenerGroup(EventType.POST_UPDATE).appendListener(listener);
-    registry.getEventListenerGroup(EventType.POST_DELETE).appendListener(listener);
+    if (registry != null) {
+      registry.getEventListenerGroup(EventType.POST_INSERT).appendListener(listener);
+      registry.getEventListenerGroup(EventType.POST_UPDATE).appendListener(listener);
+      registry.getEventListenerGroup(EventType.POST_DELETE).appendListener(listener);
+    } else {
+      log.error("It was not possible to register TransactionalOutboxPatternEntityListener!");
+    }
   }
 }

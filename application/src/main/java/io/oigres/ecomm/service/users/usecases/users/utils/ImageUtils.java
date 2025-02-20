@@ -23,9 +23,8 @@ import io.oigres.ecomm.service.users.domain.profile.ConsumerProfile;
 import io.oigres.ecomm.service.users.enums.ResourceStatusEnum;
 
 public class ImageUtils {
-  public ImageUtils() {
-    throw new AssertionError();
-  }
+
+  private ImageUtils() {}
 
   public static String getProfileImageURLForConsumerUser(ConsumerProfile profile) {
     ProfileImage profileImage = profile.getProfileImage();

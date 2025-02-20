@@ -17,8 +17,7 @@
 
 package io.oigres.ecomm.service.users.usecases.users.consumers.create;
 
-import io.oigres.ecomm.service.users.api.ProfileErrorMessages;
-import io.oigres.ecomm.service.users.api.model.consumer.CreateConsumerUserRequest;
+import io.oigres.ecomm.service.users.constants.ProfileErrorMessages;
 import io.oigres.ecomm.service.users.domain.*;
 import io.oigres.ecomm.service.users.domain.profile.ConsumerProfile;
 import io.oigres.ecomm.service.users.enums.ConsumerTypeEnum;
@@ -37,7 +36,6 @@ import jakarta.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -53,7 +51,6 @@ public class CreateNewConsumerUserUseCaseImpl implements CreateNewConsumerUserUs
   private final CardRepository cardRepository;
   private final ConsumerProfileRepository consumerProfileRepository;
   private final PasswordEncoder passwordEncoder;
-  private final ModelMapper modelMapper;
 
   public CreateNewConsumerUserUseCaseImpl(
       UserRepository userRepository,
@@ -65,8 +62,7 @@ public class CreateNewConsumerUserUseCaseImpl implements CreateNewConsumerUserUs
       ProfileImageRepository profileImageRepository,
       CardRepository cardRepository,
       ConsumerProfileRepository consumerProfileRepository,
-      PasswordEncoder passwordEncoder,
-      ModelMapper modelMapper) {
+      PasswordEncoder passwordEncoder) {
     this.userRepository = userRepository;
     this.profileTypeRepository = profileTypeRepository;
     this.genderRepository = genderRepository;
@@ -77,12 +73,22 @@ public class CreateNewConsumerUserUseCaseImpl implements CreateNewConsumerUserUs
     this.cardRepository = cardRepository;
     this.consumerProfileRepository = consumerProfileRepository;
     this.passwordEncoder = passwordEncoder;
-    this.modelMapper = modelMapper;
   }
 
   @Override
   @Transactional(Transactional.TxType.REQUIRED)
-  public ConsumerProfile handle(CreateConsumerUserRequest consumerProfileReq)
+  public ConsumerProfile handle(
+      String email,
+      String password,
+      String firstName,
+      String lastName,
+      String phone,
+      String avatar,
+      String cardImageURL,
+      ConsumerTypeEnum userType,
+      Long genderId,
+      Long zipcodeStateId,
+      Long zipcodeId)
       throws DeletedProfileException,
           ExistingProfileException,
           TypeNotFoundProfileException,
@@ -90,11 +96,11 @@ public class CreateNewConsumerUserUseCaseImpl implements CreateNewConsumerUserUs
           ZipcodeNotFoundDomainException,
           StateNotFoundException,
           UserTypeNotFoundException {
-    Optional<User> opUser = this.userRepository.findByEmail(consumerProfileReq.getEmail());
+    Optional<User> opUser = this.userRepository.findByEmail(email);
 
     User user;
     if (opUser.isPresent()) {
-      user = opUser.get();
+      user = opUser.orElseThrow(IllegalStateException::new);
       if (user.isDeleted()) {
         throw new DeletedProfileException(ProfileErrorMessages.PROFILE_DELETED);
       } else if (isConsumer(user)) {
@@ -104,21 +110,20 @@ public class CreateNewConsumerUserUseCaseImpl implements CreateNewConsumerUserUs
       Set<Profile> profileSet = new HashSet<>();
       user =
           User.builder()
-              .password(this.passwordEncoder.encode((consumerProfileReq.getPassword())))
-              .email(consumerProfileReq.getEmail())
+              .password(this.passwordEncoder.encode((password)))
+              .email(email)
               .profiles(profileSet)
               .build();
     }
-    ConsumerProfile consumerProfile = modelMapper.map(consumerProfileReq, ConsumerProfile.class);
+    ConsumerProfile consumerProfile =
+        ConsumerProfile.builder().firstName(firstName).lastName(lastName).phone(phone).build();
 
-    evalAndSetMmjCardImage(consumerProfileReq.getCardImageURL(), consumerProfile);
-    if (consumerProfileReq.getAvatar() != null)
-      evalAndSetAvatarImage(consumerProfileReq.getAvatar(), consumerProfile);
+    evalAndSetMmjCardImage(cardImageURL, consumerProfile);
+    if (avatar != null) evalAndSetAvatarImage(avatar, consumerProfile);
 
-    if (consumerProfileReq.getUserType() != null
-        && consumerProfileReq.getUserType().getId() != null) {
+    if (userType != null && userType.getId() != null) {
       consumerProfile.setUserType(
-          ConsumerTypeEnum.getById(consumerProfileReq.getUserType().getId())
+          ConsumerTypeEnum.getById(userType.getId())
               .orElseThrow(
                   () -> new UserTypeNotFoundException(ProfileErrorMessages.USER_TYPE_NOT_EXIST)));
     }
@@ -131,17 +136,17 @@ public class CreateNewConsumerUserUseCaseImpl implements CreateNewConsumerUserUs
 
     Gender gender =
         genderRepository
-            .findById(consumerProfileReq.getGenderId())
+            .findById(genderId)
             .orElseThrow(() -> new GenderNotFoundException(ProfileErrorMessages.GENDER_NOT_EXIST));
 
     State state =
         this.stateRepository
-            .findById(consumerProfileReq.getZipcodeStateId())
+            .findById(zipcodeStateId)
             .orElseThrow(() -> new StateNotFoundException(ProfileErrorMessages.STATE_NOT_FOUND));
 
     ZipCode zipCode =
         this.zipCodeRepository
-            .findById(consumerProfileReq.getZipcodeId())
+            .findById(zipcodeId)
             .orElseThrow(
                 () -> new ZipcodeNotFoundDomainException(ProfileErrorMessages.ZIPCODE_NOT_FOUND));
     zipCode.setState(state);
@@ -173,7 +178,7 @@ public class CreateNewConsumerUserUseCaseImpl implements CreateNewConsumerUserUs
                             .imageURL(avatarUrl)
                             .status(ResourceStatusEnum.PENDING)
                             .build()))
-            .get();
+            .orElse(null);
     consumerProfile.setProfileImage(image);
   }
 
@@ -186,7 +191,7 @@ public class CreateNewConsumerUserUseCaseImpl implements CreateNewConsumerUserUs
         cardImageRepository
             .findByImageURL(cardImageURL)
             .or(() -> Optional.of(createCardImageUrlPending(cardImageURL)))
-            .get();
+            .orElse(null);
     Card card = Card.builder().mmjCard(true).cardImage(image).idCard(true).build();
     consumerProfile.setCard(card);
   }

@@ -35,6 +35,8 @@ public class CardImagesCleanUpJob {
   static final int PAGE_NUMBER = 0;
   static final int PAGE_SIZE_MAX = 101;
   static final int PAGE_SIZE_MIN = 100;
+  private static final Random RANDOM = new Random();
+
   private Duration imagesTimeAfterOffset;
   private final CleanUpBrokenCardImagesUseCase cleanUpBrokenCardImagesUseCase;
 
@@ -51,8 +53,7 @@ public class CardImagesCleanUpJob {
       fixedDelayString = "#{@cardImagesCleanUpJobConfiguration.getFixedRate()}",
       timeUnit = TimeUnit.MINUTES)
   public void cleanUpBrokenCardImages() {
-    Random random = new Random();
-    int randomPageSize = random.nextInt(PAGE_SIZE_MAX - PAGE_SIZE_MIN) + PAGE_SIZE_MIN;
+    int randomPageSize = RANDOM.nextInt(PAGE_SIZE_MAX - PAGE_SIZE_MIN) + PAGE_SIZE_MIN;
     Sort.Direction randomDirection =
         randomPageSize % 2 == 0 ? Sort.Direction.ASC : Sort.Direction.DESC;
     PageRequest pageRequest = PageRequest.of(PAGE_NUMBER, randomPageSize, randomDirection, "id");

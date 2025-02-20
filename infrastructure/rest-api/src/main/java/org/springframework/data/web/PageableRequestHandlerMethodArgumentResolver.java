@@ -359,7 +359,7 @@ public class PageableRequestHandlerMethodArgumentResolver implements HandlerMeth
         sortResolver.resolveArgument(methodParameter, mavContainer, webRequest, binderFactory);
     PageableRequest pageable = getPageable(methodParameter, page, pageSize);
 
-    if (!sort.isSorted()) {
+    if (sort == null || !sort.isSorted()) {
       return pageable;
     }
 

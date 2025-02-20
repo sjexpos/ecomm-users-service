@@ -17,7 +17,7 @@
 
 package io.oigres.ecomm.service.users.usecases.users.dispensaries.create;
 
-import io.oigres.ecomm.service.users.api.ProfileErrorMessages;
+import io.oigres.ecomm.service.users.constants.ProfileErrorMessages;
 import io.oigres.ecomm.service.users.domain.Profile;
 import io.oigres.ecomm.service.users.domain.ProfileType;
 import io.oigres.ecomm.service.users.domain.User;
@@ -57,7 +57,7 @@ public class CreateNewDispensaryUserUseCaseImpl implements CreateNewDispensaryUs
     Optional<User> opUser = this.userRepository.findByEmail(dispensaryProfile.getUser().getEmail());
     User user;
     if (opUser.isPresent()) {
-      user = opUser.get();
+      user = opUser.orElseThrow(IllegalStateException::new);
       if (user.isDeleted()) {
         throw new DeletedProfileException(ProfileErrorMessages.PROFILE_DELETED);
       } else if (isDispensary(user)) {

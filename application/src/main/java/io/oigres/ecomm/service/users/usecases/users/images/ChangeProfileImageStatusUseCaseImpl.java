@@ -39,7 +39,7 @@ public class ChangeProfileImageStatusUseCaseImpl implements ChangeProfileImageSt
     Optional<ProfileImage> optional = profileImageRepository.findByImageURL(imageUrl);
 
     if (optional.isPresent()) {
-      profileImage = optional.get();
+      profileImage = optional.orElseThrow();
       profileImage.setStatus(ResourceStatusEnum.UPLOADED);
     } else {
       profileImage =
