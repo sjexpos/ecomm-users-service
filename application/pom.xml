@@ -25,10 +25,6 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.modelmapper</groupId>
-      <artifactId>modelmapper</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
     </dependency>
@@ -39,11 +35,6 @@
     <dependency>
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-commons</artifactId>
-    </dependency>
-
-    <dependency> <!-- TODO - It should be removed because application layer must be independent of the service API -->
-      <groupId>io.oigres.ecomm</groupId>
-      <artifactId>users-service-api</artifactId>
     </dependency>
 
     <dependency>

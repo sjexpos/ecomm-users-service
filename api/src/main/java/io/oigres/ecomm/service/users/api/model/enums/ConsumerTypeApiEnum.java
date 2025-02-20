@@ -17,6 +17,10 @@
 
 package io.oigres.ecomm.service.users.api.model.enums;
 
+import java.util.stream.Stream;
+import lombok.Getter;
+
+@Getter
 public enum ConsumerTypeApiEnum {
   MEDICAL(1L, "Medical"),
   RECREATIONAL(2L, "Recreational");
@@ -28,11 +32,7 @@ public enum ConsumerTypeApiEnum {
     this.prettyName = prettyName;
   }
 
-  public Long getId() {
-    return id;
-  }
-
-  public String getPrettyName() {
-    return prettyName;
+  public static ConsumerTypeApiEnum findById(Long id) {
+    return Stream.of(values()).filter(t -> t.getId().equals(id)).findFirst().orElse(null);
   }
 }

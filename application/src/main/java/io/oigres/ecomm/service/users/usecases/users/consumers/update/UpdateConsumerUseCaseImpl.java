@@ -17,7 +17,7 @@
 
 package io.oigres.ecomm.service.users.usecases.users.consumers.update;
 
-import io.oigres.ecomm.service.users.api.ProfileErrorMessages;
+import io.oigres.ecomm.service.users.constants.ProfileErrorMessages;
 import io.oigres.ecomm.service.users.domain.*;
 import io.oigres.ecomm.service.users.domain.profile.ConsumerProfile;
 import io.oigres.ecomm.service.users.enums.ConsumerTypeEnum;
@@ -37,7 +37,6 @@ import io.oigres.ecomm.service.users.repository.profiles.ProfileRepository;
 import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -82,14 +81,11 @@ public class UpdateConsumerUseCaseImpl implements UpdateConsumerUseCase {
       CardImage image =
           cardImageRepository
               .findByImageURL(request.getCard().getCardImage().getImageURL())
-              .or(
-                  () ->
-                      Optional.of(
-                          CardImage.builder()
-                              .imageURL(request.getCard().getCardImage().getImageURL())
-                              .status(ResourceStatusEnum.PENDING)
-                              .build()))
-              .get();
+              .orElse(
+                  CardImage.builder()
+                      .imageURL(request.getCard().getCardImage().getImageURL())
+                      .status(ResourceStatusEnum.PENDING)
+                      .build());
       cardImageRepository.save(image);
       current.getCard().setCardImage(image);
     }

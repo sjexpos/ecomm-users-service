@@ -60,6 +60,7 @@ public class MiddlewareProxy implements InvocationHandler {
     this.webClient = webClient;
   }
 
+  // EI_EXPOSE_REP
   public WebClient getWebClient() {
     return this.webClient;
   }

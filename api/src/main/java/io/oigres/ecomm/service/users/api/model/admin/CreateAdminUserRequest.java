@@ -18,18 +18,12 @@
 package io.oigres.ecomm.service.users.api.model.admin;
 
 import io.oigres.ecomm.service.users.api.model.CreateUserRequest;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@EqualsAndHashCode(callSuper = false)
+@SuperBuilder
+@Getter
 public class CreateAdminUserRequest extends CreateUserRequest {
   @NotEmpty private String firstName;
   @NotEmpty private String lastName;
@@ -37,19 +31,4 @@ public class CreateAdminUserRequest extends CreateUserRequest {
   private String avatar;
 
   @NotEmpty private String phone;
-
-  @Builder(builderMethodName = "adminBuilder")
-  public CreateAdminUserRequest(
-      @NotEmpty @Email String email,
-      @NotEmpty String password,
-      String firstName,
-      String lastName,
-      String avatar,
-      String phone) {
-    super(email, password);
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.avatar = avatar;
-    this.phone = phone;
-  }
 }

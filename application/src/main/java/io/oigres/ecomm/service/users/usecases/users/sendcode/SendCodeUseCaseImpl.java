@@ -46,12 +46,11 @@ public class SendCodeUseCaseImpl implements SendCodeUseCase {
   @Override
   public void handle(String email) throws UserNotFoundException, InvalidException {
     Optional<ConsumerProfile> opConsumerProfile = consumerProfileRepository.findByUserEmail(email);
-    if (opConsumerProfile.isEmpty()
-        || opConsumerProfile.get().getUser().isDeleted()
-        || Boolean.FALSE.equals(opConsumerProfile.get().getEnabled())) {
+    ConsumerProfile consumerProfile = opConsumerProfile.orElseThrow(UserNotFoundException::new);
+    if (consumerProfile.getUser().isDeleted()
+        || Boolean.FALSE.equals(consumerProfile.getEnabled())) {
       throw new UserNotFoundException();
     }
-    ConsumerProfile consumerProfile = opConsumerProfile.get();
     if (Boolean.TRUE.equals(consumerProfile.getVerified())) {
       throw new InvalidException(String.format("User %s is already verified", email));
     }

@@ -17,15 +17,26 @@
 
 package io.oigres.ecomm.service.users.usecases.users.consumers.create;
 
-import io.oigres.ecomm.service.users.api.model.consumer.CreateConsumerUserRequest;
 import io.oigres.ecomm.service.users.domain.profile.ConsumerProfile;
+import io.oigres.ecomm.service.users.enums.ConsumerTypeEnum;
 import io.oigres.ecomm.service.users.exception.GenderNotFoundException;
 import io.oigres.ecomm.service.users.exception.StateNotFoundException;
 import io.oigres.ecomm.service.users.exception.ZipcodeNotFoundDomainException;
 import io.oigres.ecomm.service.users.exception.profile.*;
 
 public interface CreateNewConsumerUserUseCase {
-  ConsumerProfile handle(CreateConsumerUserRequest consumerProfile)
+  ConsumerProfile handle(
+      String email,
+      String password,
+      String firstName,
+      String lastName,
+      String phone,
+      String avatar,
+      String cardImageURL,
+      ConsumerTypeEnum userType,
+      Long genderId,
+      Long zipcodeStateId,
+      Long zipcodeId)
       throws DeletedProfileException,
           ExistingProfileException,
           TypeNotFoundProfileException,

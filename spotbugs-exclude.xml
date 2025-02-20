@@ -1,0 +1,52 @@
+<FindBugsFilter
+        xmlns="https://github.com/spotbugs/filter/3.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://github.com/spotbugs/filter/3.0.0 https://raw.githubusercontent.com/spotbugs/spotbugs/3.1.0/spotbugs/etc/findbugsfilter.xsd">
+
+    <!-- https://github.com/spotbugs/spotbugs/issues/2710 -->
+    <Match>
+        <Package name="~io\.oigres\.ecomm\.service\.users\.api\.model.*"/>
+        <Bug pattern="CT_CONSTRUCTOR_THROW" />
+    </Match>
+
+    <Match>
+        <Class name="io.oigres.ecomm.service.users.api.model.PageResponseImpl"/>
+        <Bug pattern="NP_NULL_PARAM_DEREF" />
+    </Match>
+
+    <Match>
+        <Class name="io.oigres.ecomm.service.users.api.model.ValidateUserResponse"/>
+        <Bug pattern="EI_EXPOSE_REP" />
+    </Match>
+
+    <Match>
+        <Class name="~io\.oigres\.ecomm\.service\.users\.domain.*_"/>
+        <Bug pattern="UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD" />
+    </Match>
+
+    <Match>
+        <Package name="~io\.oigres\.ecomm\.service\.users\.domain.*"/>
+        <Bug pattern="EI_EXPOSE_REP" />
+    </Match>
+
+    <Match>
+        <Package name="~io\.oigres\.ecomm\.service\.users.*"/>
+        <Bug pattern="EI_EXPOSE_REP2" />
+    </Match>
+
+    <Match>
+        <Class name="io.oigres.ecomm.service.users.api.MiddlewareProxy"/>
+        <Bug pattern="EI_EXPOSE_REP" />
+    </Match>
+
+    <Match>
+        <Class name="io.oigres.ecomm.service.users.config.UsersAssetsCleanUpConfig"/>
+        <Bug pattern="EI_EXPOSE_REP" />
+    </Match>
+
+    <Match>
+        <Class name="io.oigres.ecomm.service.users.config.UsersAssetsConfig"/>
+        <Bug pattern="EI_EXPOSE_REP" />
+    </Match>
+
+</FindBugsFilter>

@@ -39,10 +39,10 @@ public class ValidateUserUseCaseImpl implements ValidateUserUseCase {
   public User handle(String email, String password)
       throws UserNotFoundException, PasswordInvalidException {
     Optional<User> opUser = this.userRepository.findByEmail(email);
-    if (opUser.isEmpty() || opUser.get().isDeleted()) {
+    User user = opUser.orElseThrow(UserNotFoundException::new);
+    if (user.isDeleted()) {
       throw new UserNotFoundException();
     }
-    User user = opUser.get();
     if (!passwordEncoder.matches(password, user.getPassword())) {
       throw new PasswordInvalidException();
     }

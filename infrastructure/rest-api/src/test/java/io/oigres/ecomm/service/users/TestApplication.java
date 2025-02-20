@@ -18,10 +18,14 @@
 package io.oigres.ecomm.service.users;
 
 import io.oigres.ecomm.service.users.config.WebConfiguration;
-import io.oigres.ecomm.service.users.config.mapper.ModelMapperConfiguration;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
-@Import({ModelMapperConfiguration.class, WebConfiguration.class})
-public class TestApplication {}
+@Import({WebConfiguration.class})
+public class TestApplication {
+
+  @Test
+  void testStartUp() {}
+}

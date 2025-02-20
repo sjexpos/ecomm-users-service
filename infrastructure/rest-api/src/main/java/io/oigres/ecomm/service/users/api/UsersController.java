@@ -29,6 +29,7 @@ import io.oigres.ecomm.service.users.api.model.exception.UnauthorizedException;
 import io.oigres.ecomm.service.users.api.model.exception.UserTypeNotFoundException;
 import io.oigres.ecomm.service.users.api.model.exception.profile.*;
 import io.oigres.ecomm.service.users.api.model.profile.ActiveStatusProfileResponse;
+import io.oigres.ecomm.service.users.config.mapper.ResponsesMapper;
 import io.oigres.ecomm.service.users.domain.*;
 import io.oigres.ecomm.service.users.domain.profile.AdminProfile;
 import io.oigres.ecomm.service.users.domain.profile.ConsumerProfile;
@@ -81,9 +82,9 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -129,7 +130,7 @@ public class UsersController extends AbstractController implements UsersService 
   private final GetStoreLocationUseCase getStoreLocationUseCase;
   private final ChangeProfileImageStatusUseCase changeProfileImageStatusUseCase;
   private final ChangeCardImageStatusUseCase changeCardImageStatusUseCase;
-  private final ModelMapper modelMapper;
+  private final ResponsesMapper responsesMapper;
 
   public UsersController(
       CreateNewAdminUserUseCase createNewAdminUserUseCase,
@@ -162,7 +163,7 @@ public class UsersController extends AbstractController implements UsersService 
       GetStoreLocationUseCase getStoreLocationUseCase,
       ChangeProfileImageStatusUseCase changeProfileImageStatusUseCase,
       ChangeCardImageStatusUseCase changeCardImageStatusUseCase,
-      ModelMapper modelMapper) {
+      ResponsesMapper responsesMapper) {
     this.createNewAdminUserUseCase = createNewAdminUserUseCase;
     this.createNewConsumerUserUseCase = createNewConsumerUserUseCase;
     this.createNewDispensaryUserUseCase = createNewDispensaryUserUseCase;
@@ -193,7 +194,7 @@ public class UsersController extends AbstractController implements UsersService 
     this.getStoreLocationUseCase = getStoreLocationUseCase;
     this.changeProfileImageStatusUseCase = changeProfileImageStatusUseCase;
     this.changeCardImageStatusUseCase = changeCardImageStatusUseCase;
-    this.modelMapper = modelMapper;
+    this.responsesMapper = responsesMapper;
   }
 
   @Operation(summary = "Get all users")
@@ -209,9 +210,7 @@ public class UsersController extends AbstractController implements UsersService 
             PageRequest.of(
                 pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending()));
     List<GetAllUsersResponse> response =
-        users.getContent().stream()
-            .map(u -> GetAllUsersResponse.builder().userId(u.getId()).email(u.getEmail()).build())
-            .collect(Collectors.toList());
+        this.responsesMapper.toGetAllUsersResponse(users.getContent());
     return new PageResponseImpl<>(response, pageable, users.getTotalElements());
   }
 
@@ -226,8 +225,8 @@ public class UsersController extends AbstractController implements UsersService 
     log.info("############ call createNewAdminUser [{}] ############", request.getEmail());
     try {
       AdminProfile adminProfile =
-          this.createNewAdminUserUseCase.handle(modelMapper.map(request, AdminProfile.class));
-      return modelMapper.map(adminProfile, CreateAdminUserResponse.class);
+          this.createNewAdminUserUseCase.handle(this.responsesMapper.toAdminProfile(request));
+      return this.responsesMapper.toCreateAdminUserResponse(adminProfile);
     } catch (DeletedProfileException e) {
       throw new ProfileDeletedException(e.getMessage());
     } catch (ExistingProfileException e) {
@@ -253,8 +252,22 @@ public class UsersController extends AbstractController implements UsersService 
           ProfileTypeNotFoundException {
     log.info("############ call createNewConsumerUser [{}] ############", request.getEmail());
     try {
-      ConsumerProfile consumerProfile = this.createNewConsumerUserUseCase.handle(request);
-      return modelMapper.map(consumerProfile, CreateConsumerUserResponse.class);
+      ConsumerProfile consumerProfile =
+          this.createNewConsumerUserUseCase.handle(
+              request.getEmail(),
+              request.getPassword(),
+              request.getFirstName(),
+              request.getLastName(),
+              request.getPhone(),
+              request.getAvatar(),
+              request.getCardImageURL(),
+              Objects.isNull(request.getUserType())
+                  ? null
+                  : ConsumerTypeEnum.getById(request.getUserType().getId()).orElse(null),
+              request.getGenderId(),
+              request.getZipcodeStateId(),
+              request.getZipcodeId());
+      return this.responsesMapper.toCreateConsumerUserResponse(consumerProfile);
     } catch (DeletedProfileException e) {
       throw new ProfileDeletedException(e.getMessage());
     } catch (ExistingProfileException e) {
@@ -291,8 +304,8 @@ public class UsersController extends AbstractController implements UsersService 
     try {
       DispensaryProfile dispensaryProfile =
           this.createNewDispensaryUserUseCase.handle(
-              modelMapper.map(request, DispensaryProfile.class));
-      return modelMapper.map(dispensaryProfile, CreateDispensaryUserResponse.class);
+              this.responsesMapper.toCreateDispensaryUserRequest(request));
+      return this.responsesMapper.toCreateDispensaryUserResponse(dispensaryProfile);
     } catch (DeletedProfileException e) {
       throw new ProfileDeletedException(e.getMessage());
     } catch (ExistingProfileException e) {
@@ -329,9 +342,7 @@ public class UsersController extends AbstractController implements UsersService 
     try {
       AdminProfile adminProfile = getAdminByIdUseCase.handle(userId);
       String url = ImageUtils.getProfileImageURLForAdminUser(adminProfile);
-      GetAdminUserResponse response = modelMapper.map(adminProfile, GetAdminUserResponse.class);
-      response.setAvatar(url);
-      return response;
+      return this.responsesMapper.toGetAdminUserResponse(adminProfile, url);
     } catch (NotFoundProfileException e) {
       throw new NotFoundException(e.getMessage());
     }
@@ -349,9 +360,7 @@ public class UsersController extends AbstractController implements UsersService 
     try {
       ConsumerProfile cp = getConsumerByIdUseCase.handle(userId);
       String url = ImageUtils.getProfileImageURLForConsumerUser(cp);
-      GetConsumerUserResponse response = modelMapper.map(cp, GetConsumerUserResponse.class);
-      response.setAvatar(url);
-      return response;
+      return this.responsesMapper.toGetConsumerUserResponse(cp, url);
     } catch (NotFoundProfileException e) {
       throw new NotFoundException(e.getMessage());
     }
@@ -368,7 +377,7 @@ public class UsersController extends AbstractController implements UsersService 
     log.info("############ call getDispensaryUserById [{}] ############", userId);
     try {
       DispensaryProfile dispensaryProfile = getDispensaryByIdUseCase.handle(userId);
-      return modelMapper.map(dispensaryProfile, GetDispensaryUserResponse.class);
+      return this.responsesMapper.toGetDispensaryUserResponse(dispensaryProfile);
     } catch (NotFoundProfileException e) {
       throw new NotFoundException(e.getMessage());
     }
@@ -385,7 +394,7 @@ public class UsersController extends AbstractController implements UsersService 
     log.info("############ call getDispensaryUserByDispensaryId [{}] ############", dispensaryId);
     try {
       DispensaryProfile dispensaryProfile = getDispensaryByDispensaryIdUseCase.handle(dispensaryId);
-      return modelMapper.map(dispensaryProfile, GetDispensaryUserResponse.class);
+      return this.responsesMapper.toGetDispensaryUserResponse(dispensaryProfile);
     } catch (NotFoundProfileException e) {
       throw new NotFoundException(e.getMessage());
     }
@@ -409,11 +418,8 @@ public class UsersController extends AbstractController implements UsersService 
         adminProfilePage.getContent().stream()
             .map(
                 adminProfile -> {
-                  GetAllAdminUsersResponse response =
-                      modelMapper.map(adminProfile, GetAllAdminUsersResponse.class);
                   String url = ImageUtils.getProfileImageURLForAdminUser(adminProfile);
-                  response.setAvatar(url);
-                  return response;
+                  return this.responsesMapper.toGetAllAdminUsersResponse(adminProfile, url);
                 })
             .collect(Collectors.toList());
     return new PageResponseImpl<>(
@@ -434,26 +440,8 @@ public class UsersController extends AbstractController implements UsersService 
         getAllConsumersUseCase.handle(
             PageRequest.of(
                 pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending()));
-
     List<GetAllConsumerUsersResponse> getAllConsumerUsersResponseList =
-        consumerProfilePage.getContent().stream()
-            .map(
-                cp ->
-                    GetAllConsumerUsersResponse.getAllConsumerResponseBuilder()
-                        .userId(cp.getUser().getId())
-                        .email(cp.getUser().getEmail())
-                        .firstName(cp.getFirstName())
-                        .lastName(cp.getLastName())
-                        .avatar(ImageUtils.getProfileImageURLForConsumerUser(cp))
-                        .gender(cp.getGender().getGenderName())
-                        .phone(cp.getPhone())
-                        .state(cp.getZipCode().getState().getName())
-                        .zipCode(cp.getZipCode().getCode().toString())
-                        .userType(cp.getUserType().getPrettyName())
-                        .isActive(cp.getEnabled())
-                        .verified(cp.getVerified())
-                        .build())
-            .collect(Collectors.toList());
+        this.responsesMapper.toGetAllConsumerUsersResponse(consumerProfilePage.getContent());
     return new PageResponseImpl<>(
         getAllConsumerUsersResponseList, pageable, consumerProfilePage.getTotalElements());
   }
@@ -473,11 +461,7 @@ public class UsersController extends AbstractController implements UsersService 
             PageRequest.of(
                 pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending()));
     List<GetAllDispensaryUsersResponse> getAllDispensaryUsersResponseList =
-        dispensaryProfilePage.getContent().stream()
-            .map(
-                dispensaryProfile ->
-                    modelMapper.map(dispensaryProfile, GetAllDispensaryUsersResponse.class))
-            .collect(Collectors.toList());
+        this.responsesMapper.toGetAllDispensaryUsersResponse(dispensaryProfilePage.getContent());
     return new PageResponseImpl<>(
         getAllDispensaryUsersResponseList, pageable, dispensaryProfilePage.getTotalElements());
   }
@@ -497,10 +481,10 @@ public class UsersController extends AbstractController implements UsersService 
       @RequestBody @Valid UpdateAdminProfileRequest request)
       throws NotFoundException {
     log.info("############ call updateAdmin [{}] ############", userId);
-    AdminProfile adminProfile = modelMapper.map(request, AdminProfile.class);
+    AdminProfile adminProfile = this.responsesMapper.toAdminProfile(request);
     try {
-      return modelMapper.map(
-          updateAdminUseCase.handle(userId, adminProfile), UpdateAdminProfileResponse.class);
+      return this.responsesMapper.toUpdateAdminProfileResponse(
+          updateAdminUseCase.handle(userId, adminProfile));
     } catch (ProfileUserException e) {
       throw new NotFoundException(e.getMessage());
     }
@@ -521,19 +505,14 @@ public class UsersController extends AbstractController implements UsersService 
       @RequestBody @Valid UpdateConsumerProfileRequest request)
       throws NotFoundException {
     log.info("############ call updateConsumer [{}] ############", userId);
-    ConsumerProfile consumerProfile = modelMapper.map(request, ConsumerProfile.class);
+    ConsumerProfile consumerProfile = this.responsesMapper.toConsumerProfile(request);
     consumerProfile.setProfileImage(
         new ProfileImage(
             null, request.getAvatar(), ResourceStatusEnum.PENDING, LocalDateTime.now()));
 
     try {
       ConsumerProfile profile = updateConsumerUseCase.handle(userId, consumerProfile);
-      UpdateConsumerProfileResponse response =
-          modelMapper.map(profile, UpdateConsumerProfileResponse.class);
-      response.setAvatar(
-          profile.getProfileImage() != null ? profile.getProfileImage().getImageURL() : null);
-
-      return response;
+      return this.responsesMapper.toUpdateConsumerProfileResponse(profile);
     } catch (ProfileUserException
         | GenderNotFoundException
         | StateNotFoundException
@@ -559,11 +538,10 @@ public class UsersController extends AbstractController implements UsersService 
       @RequestBody @Valid UpdateDispensaryProfileRequest request)
       throws NotFoundException {
     log.info("############ call updateDispensary [{}] ############", userId);
-    DispensaryProfile dispensaryProfile = modelMapper.map(request, DispensaryProfile.class);
+    DispensaryProfile dispensaryProfile = this.responsesMapper.toDispensaryProfile(request);
     try {
-      return modelMapper.map(
-          updateDispensaryUseCase.handle(userId, dispensaryProfile),
-          UpdateDispensaryProfileResponse.class);
+      return this.responsesMapper.toUpdateDispensaryProfileResponse(
+          updateDispensaryUseCase.handle(userId, dispensaryProfile));
     } catch (ProfileUserException e) {
       throw new NotFoundException(e.getMessage());
     }
@@ -600,7 +578,7 @@ public class UsersController extends AbstractController implements UsersService 
     log.info("############ call deleteAdminUserById [{}] ############", userId);
     try {
       AdminProfile profile = this.deleteAdminUserUseCase.handle(userId);
-      return modelMapper.map(profile, DeleteAdminProfileResponse.class);
+      return this.responsesMapper.toDeleteAdminProfileResponse(profile);
     } catch (UserNotFoundException | NotFoundProfileException e) {
       throw new NotFoundException(e.getMessage());
     }
@@ -624,7 +602,7 @@ public class UsersController extends AbstractController implements UsersService 
     log.info("############ call deleteConsumerUserById [{}] ############", userId);
     try {
       ConsumerProfile profile = this.deleteConsumerUserUseCase.handle(userId);
-      return modelMapper.map(profile, DeleteConsumerProfileResponse.class);
+      return this.responsesMapper.toDeleteConsumerProfileResponse(profile);
     } catch (UserNotFoundException | NotFoundProfileException e) {
       throw new NotFoundException(e.getMessage());
     }
@@ -649,7 +627,7 @@ public class UsersController extends AbstractController implements UsersService 
         "############ call deleteDispensaryUserByDispensaryId [{}] ############", dispensaryId);
     try {
       DispensaryProfile profile = this.deleteDispensaryUserUseCase.handle(dispensaryId);
-      return modelMapper.map(profile, DeleteDispensaryProfileResponse.class);
+      return this.responsesMapper.toDeleteDispensaryProfileResponse(profile);
     } catch (UserNotFoundException | NotFoundProfileException e) {
       throw new NotFoundException(e.getMessage());
     }
@@ -671,10 +649,7 @@ public class UsersController extends AbstractController implements UsersService 
     log.info("############ call activeAdmin [{}] ############", userId);
     try {
       Profile profile = enableAdminUseCase.handle(userId);
-      return ActiveStatusProfileResponse.builder()
-          .id(profile.getUser().getId())
-          .enabled(profile.getEnabled())
-          .build();
+      return this.responsesMapper.toActiveStatusProfileResponse(profile);
     } catch (NotFoundProfileException e) {
       throw new ProfileNotFoundException(e.getMessage());
     } catch (TypeNotFoundProfileException e) {
@@ -702,10 +677,7 @@ public class UsersController extends AbstractController implements UsersService 
     log.info("############ call deactivateAdmin [{}] ############", userId);
     try {
       Profile profile = disableAdminUseCase.handle(userId);
-      return ActiveStatusProfileResponse.builder()
-          .id(profile.getUser().getId())
-          .enabled(profile.getEnabled())
-          .build();
+      return this.responsesMapper.toActiveStatusProfileResponse(profile);
     } catch (NotFoundProfileException e) {
       throw new ProfileNotFoundException(e.getMessage());
     } catch (TypeNotFoundProfileException e) {
@@ -732,9 +704,8 @@ public class UsersController extends AbstractController implements UsersService 
       throws ProfileNotFoundException, ProfileEnableStatusExceptionResponseApi {
     log.info("############ call activateConsumerUser [{}] ############", userId);
     try {
-      return modelMapper.map(
-          toggleEnabledProfileUseCaseImpl.handle(userId, ProfileTypeEnum.CONSUMER, Boolean.TRUE),
-          ActiveStatusProfileResponse.class);
+      return this.responsesMapper.toActiveStatusProfileResponse(
+          toggleEnabledProfileUseCaseImpl.handle(userId, ProfileTypeEnum.CONSUMER, Boolean.TRUE));
     } catch (NotFoundProfileException e) {
       throw new ProfileNotFoundException(e.getMessage());
     } catch (EnableStatusProfileException e) {
@@ -759,9 +730,8 @@ public class UsersController extends AbstractController implements UsersService 
       throws ProfileNotFoundException, ProfileEnableStatusExceptionResponseApi {
     log.info("############ call deactivateConsumerUser [{}] ############", userId);
     try {
-      return modelMapper.map(
-          toggleEnabledProfileUseCaseImpl.handle(userId, ProfileTypeEnum.CONSUMER, Boolean.FALSE),
-          ActiveStatusProfileResponse.class);
+      return this.responsesMapper.toActiveStatusProfileResponse(
+          toggleEnabledProfileUseCaseImpl.handle(userId, ProfileTypeEnum.CONSUMER, Boolean.FALSE));
     } catch (NotFoundProfileException e) {
       throw new ProfileNotFoundException(e.getMessage());
     } catch (EnableStatusProfileException e) {
@@ -786,9 +756,8 @@ public class UsersController extends AbstractController implements UsersService 
       throws ProfileNotFoundException, ProfileEnableStatusExceptionResponseApi {
     log.info("############ call activateConsumerUser [{}] ############", userId);
     try {
-      return modelMapper.map(
-          toggleEnabledProfileUseCaseImpl.handle(userId, ProfileTypeEnum.DISPENSARY, Boolean.TRUE),
-          ActiveStatusProfileResponse.class);
+      return this.responsesMapper.toActiveStatusProfileResponse(
+          toggleEnabledProfileUseCaseImpl.handle(userId, ProfileTypeEnum.DISPENSARY, Boolean.TRUE));
     } catch (NotFoundProfileException e) {
       throw new ProfileNotFoundException(e.getMessage());
     } catch (EnableStatusProfileException e) {
@@ -813,9 +782,9 @@ public class UsersController extends AbstractController implements UsersService 
       throws ProfileNotFoundException, ProfileEnableStatusExceptionResponseApi {
     log.info("############ call activateConsumerUser [{}] ############", userId);
     try {
-      return modelMapper.map(
-          toggleEnabledProfileUseCaseImpl.handle(userId, ProfileTypeEnum.DISPENSARY, Boolean.FALSE),
-          ActiveStatusProfileResponse.class);
+      return this.responsesMapper.toActiveStatusProfileResponse(
+          toggleEnabledProfileUseCaseImpl.handle(
+              userId, ProfileTypeEnum.DISPENSARY, Boolean.FALSE));
     } catch (NotFoundProfileException e) {
       throw new ProfileNotFoundException(e.getMessage());
     } catch (EnableStatusProfileException e) {
@@ -919,10 +888,7 @@ public class UsersController extends AbstractController implements UsersService 
         this.getAllGendersUseCase.handle(
             PageRequest.of(
                 pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending()));
-    List<GenderResponse> response =
-        genders.getContent().stream()
-            .map(b -> this.modelMapper.map(b, GenderResponse.class))
-            .collect(Collectors.toList());
+    List<GenderResponse> response = this.responsesMapper.toGenderResponse(genders.getContent());
     return new PageResponseImpl<>(response, pageable, genders.getTotalElements());
   }
 
@@ -1048,8 +1014,7 @@ public class UsersController extends AbstractController implements UsersService 
   public UpdateCardImageToUploadedStateResponse updateCardImageStatus(
       @RequestParam String imageUrl) {
     log.info("############ call changeBrandImageStatus [{}] ############", imageUrl);
-    return modelMapper.map(
-        changeCardImageStatusUseCase.handle(imageUrl),
-        UpdateCardImageToUploadedStateResponse.class);
+    return this.responsesMapper.toUpdateCardImageToUploadedStateResponse(
+        changeCardImageStatusUseCase.handle(imageUrl));
   }
 }

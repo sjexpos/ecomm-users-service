@@ -132,7 +132,7 @@ public class ConsumerProfile extends Profile {
       response =
           card.getMmjCard()
               ? ((card.getCardImage() != null
-                      && card.getCardImage().getStatus().equals(ResourceStatusEnum.UPLOADED))
+                      && ResourceStatusEnum.UPLOADED.equals(card.getCardImage().getStatus()))
                   ? card.getCardImage().getImageURL()
                   : null)
               : null;

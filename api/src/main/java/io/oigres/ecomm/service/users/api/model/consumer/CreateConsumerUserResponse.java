@@ -19,16 +19,11 @@ package io.oigres.ecomm.service.users.api.model.consumer;
 
 import io.oigres.ecomm.service.users.api.model.CreateUserResponse;
 import io.oigres.ecomm.service.users.api.model.enums.ConsumerTypeApiEnum;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@EqualsAndHashCode(callSuper = false)
+@SuperBuilder
+@Getter
 public class CreateConsumerUserResponse extends CreateUserResponse {
 
   private String firstName;
@@ -42,33 +37,4 @@ public class CreateConsumerUserResponse extends CreateUserResponse {
   private ConsumerTypeApiEnum userType;
   private Boolean isActive;
   private Boolean verified;
-
-  @Builder(builderMethodName = "consumerResponseBuilder")
-  public CreateConsumerUserResponse(
-      Long id,
-      String email,
-      String firstName,
-      String lastName,
-      String avatar,
-      Long genderId,
-      String phone,
-      String cardImageURL,
-      Long zipcodeStateId,
-      Long zipcodeId,
-      ConsumerTypeApiEnum userType,
-      Boolean isActive,
-      Boolean verified) {
-    super(id, email);
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.avatar = avatar;
-    this.genderId = genderId;
-    this.phone = phone;
-    this.cardImageURL = cardImageURL;
-    this.zipcodeStateId = zipcodeStateId;
-    this.zipcodeId = zipcodeId;
-    this.userType = userType;
-    this.isActive = isActive;
-    this.verified = verified;
-  }
 }

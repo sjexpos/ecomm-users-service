@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.oigres.ecomm.service.users.api.txoutbox.UserOutbox;
+import io.oigres.ecomm.service.users.config.mapper.ResponsesMapper;
 import io.oigres.ecomm.service.users.domain.Aggregate;
 import io.oigres.ecomm.service.users.domain.TransactionalOutbox;
 import io.oigres.ecomm.service.users.domain.User;
@@ -34,7 +35,6 @@ import org.hibernate.event.spi.PostInsertEventListener;
 import org.hibernate.event.spi.PostUpdateEvent;
 import org.hibernate.event.spi.PostUpdateEventListener;
 import org.hibernate.persister.entity.EntityPersister;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -43,11 +43,11 @@ public class TransactionalOutboxPatternEntityListener
     implements PostInsertEventListener, PostUpdateEventListener, PostDeleteEventListener {
 
   private final TransactionalOutboxRepository transactionalOutboxRepository;
-  private final ModelMapper modelMapper;
+  private final ResponsesMapper modelMapper;
   private final ObjectMapper json;
 
   public TransactionalOutboxPatternEntityListener(
-      TransactionalOutboxRepository transactionalOutboxRepository, ModelMapper modelMapper) {
+      TransactionalOutboxRepository transactionalOutboxRepository, ResponsesMapper modelMapper) {
     this.transactionalOutboxRepository = transactionalOutboxRepository;
     this.modelMapper = modelMapper;
     this.json = new ObjectMapper();
@@ -67,7 +67,7 @@ public class TransactionalOutboxPatternEntityListener
       return;
     }
     if (User.class.isAssignableFrom(entity.getClass())) {
-      saveEntityStateChangedEvent(entity, Aggregate.USER, UserOutbox.class);
+      saveEntityStateChangedEvent((User) entity, Aggregate.USER);
     }
   }
 
@@ -78,17 +78,16 @@ public class TransactionalOutboxPatternEntityListener
       return;
     }
     if (User.class.isAssignableFrom(entity.getClass())) {
-      saveEntityStateChangedEvent(entity, Aggregate.USER, UserOutbox.class);
+      saveEntityStateChangedEvent((User) entity, Aggregate.USER);
     }
   }
 
   @Override
   public void onPostDelete(PostDeleteEvent event) {}
 
-  private void saveEntityStateChangedEvent(
-      Object object, Aggregate aggregate, Class<?> outboxClass) {
+  private void saveEntityStateChangedEvent(User user, Aggregate aggregate) {
     try {
-      Object outbox = this.modelMapper.map(object, outboxClass);
+      UserOutbox outbox = this.modelMapper.toUserOutbox(user);
       TransactionalOutbox txOutbox =
           TransactionalOutbox.builder()
               .aggregate(aggregate)

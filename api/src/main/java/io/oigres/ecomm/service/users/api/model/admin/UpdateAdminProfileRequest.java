@@ -21,15 +21,11 @@ import io.oigres.ecomm.service.users.api.model.UpdateProfileRequest;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@EqualsAndHashCode(callSuper = false)
+@SuperBuilder
+@Getter
 public class UpdateAdminProfileRequest extends UpdateProfileRequest {
   @Schema(name = "firstName", example = "SomeName", required = true)
   @NotEmpty

@@ -109,17 +109,17 @@ public class CleanUpBrokenCardImagesUseCaseImpl implements CleanUpBrokenCardImag
       List<Long> selectedForDeletionAssetsIds =
           selectedForDeletionAssets.stream().map(CardImage::getId).collect(Collectors.toList());
       if (!selectedForDeletionAssetsIds.isEmpty()) {
-        log.info("cleaned up ids list: " + selectedForDeletionAssetsIds);
-        selectedForDeletionAssets.stream()
-            .forEach(
-                cardImage -> {
-                  Optional<Card> cardOptional =
-                      cardRepository.findByCardImage_imageURL(cardImage.getImageURL());
-                  if (cardOptional.isPresent() && !cardOptional.isEmpty()) {
-                    cardOptional.get().setCardImage(null);
-                    cardRepository.save(cardOptional.get());
-                  }
-                });
+        log.info("cleaned up ids list: {}", selectedForDeletionAssetsIds);
+        selectedForDeletionAssets.forEach(
+            cardImage -> {
+              Optional<Card> cardOptional =
+                  cardRepository.findByCardImage_imageURL(cardImage.getImageURL());
+              if (cardOptional.isPresent()) {
+                Card card = cardOptional.orElseThrow();
+                card.setCardImage(null);
+                cardRepository.save(card);
+              }
+            });
         cardImageRepository.deleteByIdIn(selectedForDeletionAssetsIds);
       }
     }

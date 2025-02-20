@@ -18,15 +18,10 @@
 package io.oigres.ecomm.service.users.api.txoutbox;
 
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@Getter
 public class UserOutbox {
   private Long id;
   private String email;

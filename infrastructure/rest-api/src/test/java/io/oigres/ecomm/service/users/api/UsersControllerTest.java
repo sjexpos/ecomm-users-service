@@ -27,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import io.oigres.ecomm.service.users.config.mapper.ResponsesMapperImpl;
 import io.oigres.ecomm.service.users.domain.User;
 import io.oigres.ecomm.service.users.usecases.uploads.GetStoreLocationUseCase;
 import io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCase;
@@ -63,12 +64,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(UsersController.class)
+@Import(ResponsesMapperImpl.class)
 class UsersControllerTest {
 
   @MockBean CreateNewAdminUserUseCase createNewAdminUserUseCase;

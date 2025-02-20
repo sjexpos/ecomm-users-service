@@ -24,10 +24,7 @@ class StateResponseTest {
 
   @Test
   void check_get_and_set() {
-    StateResponse response = StateResponse.builder().build();
-    response.setId(15L);
-    response.setName("Oregon");
-    response.setShortName("OR");
+    StateResponse response = StateResponse.builder().id(15L).name("Oregon").shortName("OR").build();
 
     Assertions.assertEquals(15L, response.getId());
     Assertions.assertEquals("Oregon", response.getName());

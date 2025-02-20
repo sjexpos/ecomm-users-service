@@ -17,9 +17,9 @@
 
 package org.redisson.config;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.cache.CacheException;
 import org.redisson.hibernate.RedissonRegionFactory;
@@ -34,13 +34,13 @@ public class ConfigPrinter {
       log.info("Client name: {}", clusterServersConfig.getClientName());
       log.info("Nodes: {}", clusterServersConfig.getNodeAddresses());
       log.info("Username: {}", clusterServersConfig.getUsername());
-      String password = clusterServersConfig.getPassword();
-      password =
-          password.substring(0, 1)
-              + StringUtils.repeat("*", password.length() - 2)
-              + password.substring(password.length() - 1);
+      String rawPassword = clusterServersConfig.getPassword();
+      String password =
+          rawPassword.substring(0, 1)
+              + StringUtils.repeat("*", rawPassword.length() - 2)
+              + rawPassword.substring(rawPassword.length() - 1);
 
-      log.info("Password: {}", clusterServersConfig.getPassword());
+      log.info("Password: {}", password);
       log.info("Connection timeout: {}", clusterServersConfig.getConnectTimeout());
       log.info("Timeout: {}", clusterServersConfig.getTimeout());
       log.info(
@@ -80,12 +80,13 @@ public class ConfigPrinter {
   }
 
   private Config loadConfig(String configPath) {
+    Path path = Path.of(configPath);
     try {
-      return Config.fromYAML(new File(configPath));
+      return Config.fromYAML(path.toFile());
     } catch (IOException e) {
       // trying next format
       try {
-        return Config.fromJSON(new File(configPath));
+        return Config.fromJSON(path.toFile());
       } catch (IOException e1) {
         throw new CacheException("Can't parse default yaml config", e1);
       }
