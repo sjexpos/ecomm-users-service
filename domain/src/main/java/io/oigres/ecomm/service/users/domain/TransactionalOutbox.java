@@ -56,6 +56,7 @@ public class TransactionalOutbox {
   private String message;
 
   @Column(name = "is_delivered", nullable = false)
+  @Builder.Default
   private Boolean delivered = false;
 
   @CreatedDate
