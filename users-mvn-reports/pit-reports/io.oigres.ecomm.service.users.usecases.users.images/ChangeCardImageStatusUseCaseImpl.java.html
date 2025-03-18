@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>ChangeCardImageStatusUseCaseImpl.java</h1>
+
+<table class="src">
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/**********</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> This project is free software; you can redistribute it and/or modify it under</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> the terms of the GNU General Public License as published by the</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> Free Software Foundation; either version 3.0 of the License, or (at your</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> option) any later version. (See &#60;https://www.gnu.org/licenses/gpl-3.0.html&#62;.)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> This project is distributed in the hope that it will be useful, but WITHOUT</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> FOR A PARTICULAR PURPOSE.  See the GNU General Public License for</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> more details.</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> You should have received a copy of the GNU General Public License</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> along with this project; if not, write to the Free Software Foundation, Inc.,</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> **********/</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              </span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package io.oigres.ecomm.service.users.usecases.users.images;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.domain.Card;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.domain.CardImage;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.enums.ResourceStatusEnum;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.repository.profiles.CardImageRepository;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.repository.profiles.CardRepository;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.repository.profiles.ConsumerProfileRepository;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.time.LocalDateTime;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.springframework.stereotype.Component;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>@Component</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public class ChangeCardImageStatusUseCaseImpl implements ChangeCardImageStatusUseCase {</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  private final CardImageRepository cardImageRepository;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  private final CardRepository cardRepository;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  private final ConsumerProfileRepository consumerProfileRepository;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  public ChangeCardImageStatusUseCaseImpl(</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>      CardImageRepository cardImageRepository,</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>      ConsumerProfileRepository consumerProfileRepository,</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>      CardRepository cardRepository) {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_39'/>
+39
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_39'>1</a>
+<span>
+1. &#60;init&#62; : Removed assignment to member variable cardImageRepository &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>    this.cardImageRepository = cardImageRepository;</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_40'/>
+40
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_40'>1</a>
+<span>
+1. &#60;init&#62; : Removed assignment to member variable consumerProfileRepository &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>    this.consumerProfileRepository = consumerProfileRepository;</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_41'/>
+41
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_41'>1</a>
+<span>
+1. &#60;init&#62; : Removed assignment to member variable cardRepository &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>    this.cardRepository = cardRepository;</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>  }</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_43'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_44'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @Override</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  public CardImage handle(String imageUrl) {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_46'/>
+46
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_46'>1</a>
+<span>
+1. handle : replaced return value with null for io/oigres/ecomm/service/users/usecases/users/images/ChangeCardImageStatusUseCaseImpl::handle &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>    return cardImageRepository</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_47'/>
+47
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_47'>1</a>
+<span>
+1. handle : removed call to io/oigres/ecomm/service/users/repository/profiles/CardImageRepository::findByImageURL &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        .findByImageURL(imageUrl)</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_48'/>
+48
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_48'>2</a>
+<span>
+1. handle : removed call to java/util/Optional::map &rarr; NO_COVERAGE<br/>
+2. handle : replaced call to java/util/Optional::map with receiver &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        .map(</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_49'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            i -&#62; {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_50'/>
+50
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_50'>5</a>
+<span>
+1. lambda$handle$0 : removed conditional - replaced equality check with true &rarr; NO_COVERAGE<br/>
+2. lambda$handle$0 : negated conditional &rarr; NO_COVERAGE<br/>
+3. lambda$handle$0 : removed call to io/oigres/ecomm/service/users/domain/CardImage::getStatus &rarr; NO_COVERAGE<br/>
+4. lambda$handle$0 : removed conditional - replaced equality check with false &rarr; NO_COVERAGE<br/>
+5. lambda$handle$0 : removed call to io/oigres/ecomm/service/users/enums/ResourceStatusEnum::equals &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>              if (!ResourceStatusEnum.UPLOADED.equals(i.getStatus())) {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_51'/>
+51
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_51'>1</a>
+<span>
+1. lambda$handle$0 : removed call to io/oigres/ecomm/service/users/domain/CardImage::setStatus &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                i.setStatus(ResourceStatusEnum.UPLOADED);</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_52'/>
+52
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_52'>1</a>
+<span>
+1. lambda$handle$0 : removed call to io/oigres/ecomm/service/users/usecases/users/images/ChangeCardImageStatusUseCaseImpl::markUserAsActive &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                markUserAsActive(imageUrl);</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_53'/>
+53
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_53'>2</a>
+<span>
+1. lambda$handle$0 : replaced call to io/oigres/ecomm/service/users/repository/profiles/CardImageRepository::save with argument &rarr; NO_COVERAGE<br/>
+2. lambda$handle$0 : removed call to io/oigres/ecomm/service/users/repository/profiles/CardImageRepository::save &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                i = cardImageRepository.save(i);</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_54'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>              }</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_55'/>
+55
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_55'>1</a>
+<span>
+1. lambda$handle$0 : replaced return value with null for io/oigres/ecomm/service/users/usecases/users/images/ChangeCardImageStatusUseCaseImpl::lambda$handle$0 &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>              return i;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_56'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            })</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_57'/>
+57
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_57'>1</a>
+<span>
+1. handle : removed call to java/util/Optional::orElseGet &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        .orElseGet(</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_58'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            () -&#62; {</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_59'/>
+59
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_59'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>              CardImage cardImage =</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_60'/>
+60
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_60'>6</a>
+<span>
+1. lambda$handle$1 : replaced call to io/oigres/ecomm/service/users/domain/CardImage$CardImageBuilder::status with receiver &rarr; NO_COVERAGE<br/>
+2. lambda$handle$1 : removed call to io/oigres/ecomm/service/users/domain/CardImage$CardImageBuilder::build &rarr; NO_COVERAGE<br/>
+3. lambda$handle$1 : removed call to io/oigres/ecomm/service/users/domain/CardImage$CardImageBuilder::status &rarr; NO_COVERAGE<br/>
+4. lambda$handle$1 : replaced call to io/oigres/ecomm/service/users/domain/CardImage$CardImageBuilder::imageURL with receiver &rarr; NO_COVERAGE<br/>
+5. lambda$handle$1 : removed call to io/oigres/ecomm/service/users/domain/CardImage::builder &rarr; NO_COVERAGE<br/>
+6. lambda$handle$1 : removed call to io/oigres/ecomm/service/users/domain/CardImage$CardImageBuilder::imageURL &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                  CardImage.builder().status(ResourceStatusEnum.PENDING).imageURL(imageUrl).build();</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_61'/>
+61
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_61'>2</a>
+<span>
+1. lambda$handle$1 : replaced call to io/oigres/ecomm/service/users/repository/profiles/CardImageRepository::save with argument &rarr; NO_COVERAGE<br/>
+2. lambda$handle$1 : removed call to io/oigres/ecomm/service/users/repository/profiles/CardImageRepository::save &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>              CardImage savedCardImage = cardImageRepository.save(cardImage);</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_62'/>
+62
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_62'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>              Card card =</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_63'/>
+63
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_63'>2</a>
+<span>
+1. lambda$handle$1 : removed call to io/oigres/ecomm/service/users/domain/Card::builder &rarr; NO_COVERAGE<br/>
+2. lambda$handle$1 : Substituted 1 with 0 &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                  Card.builder()</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_64'/>
+64
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_64'>4</a>
+<span>
+1. lambda$handle$1 : Substituted 1 with 0 &rarr; NO_COVERAGE<br/>
+2. lambda$handle$1 : replaced call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::mmjCard with receiver &rarr; NO_COVERAGE<br/>
+3. lambda$handle$1 : removed call to java/lang/Boolean::valueOf &rarr; NO_COVERAGE<br/>
+4. lambda$handle$1 : removed call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::mmjCard &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                      .mmjCard(true)</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_65'/>
+65
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_65'>3</a>
+<span>
+1. lambda$handle$1 : removed call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::idCard &rarr; NO_COVERAGE<br/>
+2. lambda$handle$1 : replaced call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::idCard with receiver &rarr; NO_COVERAGE<br/>
+3. lambda$handle$1 : removed call to java/lang/Boolean::valueOf &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                      .idCard(true)</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_66'/>
+66
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_66'>3</a>
+<span>
+1. lambda$handle$1 : removed call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::createdAt &rarr; NO_COVERAGE<br/>
+2. lambda$handle$1 : replaced call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::createdAt with receiver &rarr; NO_COVERAGE<br/>
+3. lambda$handle$1 : removed call to java/time/LocalDateTime::now &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                      .createdAt(LocalDateTime.now())</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_67'/>
+67
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_67'>2</a>
+<span>
+1. lambda$handle$1 : removed call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::cardImage &rarr; NO_COVERAGE<br/>
+2. lambda$handle$1 : replaced call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::cardImage with receiver &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                      .cardImage(savedCardImage)</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_68'/>
+68
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_68'>1</a>
+<span>
+1. lambda$handle$1 : removed call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::build &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                      .build();</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_69'/>
+69
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_69'>2</a>
+<span>
+1. lambda$handle$1 : replaced call to io/oigres/ecomm/service/users/repository/profiles/CardRepository::save with argument &rarr; NO_COVERAGE<br/>
+2. lambda$handle$1 : removed call to io/oigres/ecomm/service/users/repository/profiles/CardRepository::save &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>              cardRepository.save(card);</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_70'/>
+70
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_70'>1</a>
+<span>
+1. lambda$handle$1 : replaced return value with null for io/oigres/ecomm/service/users/usecases/users/images/ChangeCardImageStatusUseCaseImpl::lambda$handle$1 &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>              return savedCardImage;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_71'/>
+71
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_71'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            });</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_72'/>
+72
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_72'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  }</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_73'/>
+73
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_73'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_74'/>
+74
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_74'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  private void markUserAsActive(String imageUrl) {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_75'/>
+75
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_75'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>    consumerProfileRepository</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_76'/>
+76
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_76'>1</a>
+<span>
+1. markUserAsActive : removed call to io/oigres/ecomm/service/users/repository/profiles/ConsumerProfileRepository::findByCardImageUrl &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        .findByCardImageUrl(imageUrl)</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_77'/>
+77
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_77'>1</a>
+<span>
+1. markUserAsActive : removed call to java/util/Optional::ifPresent &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        .ifPresent(</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_78'/>
+78
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_78'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            c -&#62; {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_79'/>
+79
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_79'>5</a>
+<span>
+1. lambda$markUserAsActive$2 : removed call to io/oigres/ecomm/service/users/domain/profile/ConsumerProfile::getEnabled &rarr; NO_COVERAGE<br/>
+2. lambda$markUserAsActive$2 : removed conditional - replaced equality check with false &rarr; NO_COVERAGE<br/>
+3. lambda$markUserAsActive$2 : removed call to java/lang/Boolean::booleanValue &rarr; NO_COVERAGE<br/>
+4. lambda$markUserAsActive$2 : negated conditional &rarr; NO_COVERAGE<br/>
+5. lambda$markUserAsActive$2 : removed conditional - replaced equality check with true &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>              if (!c.getEnabled()) {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_80'/>
+80
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_80'>3</a>
+<span>
+1. lambda$markUserAsActive$2 : removed call to io/oigres/ecomm/service/users/domain/profile/ConsumerProfile::setEnabled &rarr; NO_COVERAGE<br/>
+2. lambda$markUserAsActive$2 : Substituted 1 with 0 &rarr; NO_COVERAGE<br/>
+3. lambda$markUserAsActive$2 : removed call to java/lang/Boolean::valueOf &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                c.setEnabled(true);</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_81'/>
+81
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_81'>2</a>
+<span>
+1. lambda$markUserAsActive$2 : replaced call to io/oigres/ecomm/service/users/repository/profiles/ConsumerProfileRepository::save with argument &rarr; NO_COVERAGE<br/>
+2. lambda$markUserAsActive$2 : removed call to io/oigres/ecomm/service/users/repository/profiles/ConsumerProfileRepository::save &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                consumerProfileRepository.save(c);</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_82'/>
+82
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_82'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>              }</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_83'/>
+83
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_83'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>            });</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_84'/>
+84
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_84'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>  }</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3c424972_85'/>
+85
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_85'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_39'>39</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_39'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b></span></span> Removed assignment to member variable cardImageRepository &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_40'>40</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_40'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b></span></span> Removed assignment to member variable consumerProfileRepository &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_41'>41</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_41'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b></span></span> Removed assignment to member variable cardRepository &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_46'>46</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_46'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>handle<br/><b>Killed by : </b></span></span> replaced return value with null for io/oigres/ecomm/service/users/usecases/users/images/ChangeCardImageStatusUseCaseImpl::handle &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_47'>47</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_47'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>handle<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/repository/profiles/CardImageRepository::findByImageURL &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_48'>48</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_48'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>handle<br/><b>Killed by : </b></span></span> removed call to java/util/Optional::map &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>handle<br/><b>Killed by : </b></span></span> replaced call to java/util/Optional::map with receiver &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_50'>50</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_50'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$handle$0<br/><b>Killed by : </b></span></span> removed conditional - replaced equality check with true &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>lambda$handle$0<br/><b>Killed by : </b></span></span> negated conditional &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>lambda$handle$0<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/CardImage::getStatus &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>lambda$handle$0<br/><b>Killed by : </b></span></span> removed conditional - replaced equality check with false &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>lambda$handle$0<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/enums/ResourceStatusEnum::equals &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_51'>51</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_51'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$handle$0<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/CardImage::setStatus &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_52'>52</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_52'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$handle$0<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/usecases/users/images/ChangeCardImageStatusUseCaseImpl::markUserAsActive &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_53'>53</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_53'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$handle$0<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/repository/profiles/CardImageRepository::save with argument &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>lambda$handle$0<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/repository/profiles/CardImageRepository::save &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_55'>55</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_55'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$handle$0<br/><b>Killed by : </b></span></span> replaced return value with null for io/oigres/ecomm/service/users/usecases/users/images/ChangeCardImageStatusUseCaseImpl::lambda$handle$0 &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_57'>57</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_57'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>handle<br/><b>Killed by : </b></span></span> removed call to java/util/Optional::orElseGet &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_60'>60</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_60'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/domain/CardImage$CardImageBuilder::status with receiver &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/CardImage$CardImageBuilder::build &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/CardImage$CardImageBuilder::status &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/domain/CardImage$CardImageBuilder::imageURL with receiver &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/CardImage::builder &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/CardImage$CardImageBuilder::imageURL &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_61'>61</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_61'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/repository/profiles/CardImageRepository::save with argument &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/repository/profiles/CardImageRepository::save &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_63'>63</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_63'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/Card::builder &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> Substituted 1 with 0 &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_64'>64</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_64'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> Substituted 1 with 0 &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::mmjCard with receiver &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> removed call to java/lang/Boolean::valueOf &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::mmjCard &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_65'>65</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_65'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::idCard &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::idCard with receiver &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> removed call to java/lang/Boolean::valueOf &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_66'>66</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_66'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::createdAt &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::createdAt with receiver &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> removed call to java/time/LocalDateTime::now &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_67'>67</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_67'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::cardImage &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::cardImage with receiver &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_68'>68</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_68'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/Card$CardBuilder::build &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_69'>69</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_69'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/repository/profiles/CardRepository::save with argument &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/repository/profiles/CardRepository::save &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_70'>70</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_70'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$handle$1<br/><b>Killed by : </b></span></span> replaced return value with null for io/oigres/ecomm/service/users/usecases/users/images/ChangeCardImageStatusUseCaseImpl::lambda$handle$1 &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_76'>76</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_76'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>markUserAsActive<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/repository/profiles/ConsumerProfileRepository::findByCardImageUrl &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_77'>77</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_77'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>markUserAsActive<br/><b>Killed by : </b></span></span> removed call to java/util/Optional::ifPresent &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_79'>79</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_79'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$markUserAsActive$2<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/profile/ConsumerProfile::getEnabled &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>lambda$markUserAsActive$2<br/><b>Killed by : </b></span></span> removed conditional - replaced equality check with false &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>lambda$markUserAsActive$2<br/><b>Killed by : </b></span></span> removed call to java/lang/Boolean::booleanValue &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>lambda$markUserAsActive$2<br/><b>Killed by : </b></span></span> negated conditional &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>lambda$markUserAsActive$2<br/><b>Killed by : </b></span></span> removed conditional - replaced equality check with true &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_80'>80</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_80'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$markUserAsActive$2<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/profile/ConsumerProfile::setEnabled &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>lambda$markUserAsActive$2<br/><b>Killed by : </b></span></span> Substituted 1 with 0 &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>lambda$markUserAsActive$2<br/><b>Killed by : </b></span></span> removed call to java/lang/Boolean::valueOf &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3c424972_81'>81</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3c424972_81'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>lambda$markUserAsActive$2<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/repository/profiles/ConsumerProfileRepository::save with argument &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>lambda$markUserAsActive$2<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/repository/profiles/ConsumerProfileRepository::save &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+</ul>
+
+<br/>
+
+Report generated by <a href='https://pitest.org'>PIT</a> 1.16.2
+
+</body>
+</html>

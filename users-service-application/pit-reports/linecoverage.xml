@@ -1,0 +1,1120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$STATICHOOK1()V' number='5'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$STATICHOOK1()V' number='6'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$STATICHOOK1()V' number='3'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$STATICHOOK1()V' number='4'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$STATICHOOK1()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='setBeanFactory(Lorg/springframework/beans/factory/BeanFactory;)V' number='5'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$STATICHOOK1()V' number='2'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='setBeanFactory(Lorg/springframework/beans/factory/BeanFactory;)V' number='3'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$STATICHOOK1()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='setBeanFactory(Lorg/springframework/beans/factory/BeanFactory;)V' number='4'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig' method='&lt;init&gt;()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig' method='&lt;init&gt;()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='&lt;clinit&gt;()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='&lt;clinit&gt;()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='&lt;clinit&gt;()V' number='2'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='20'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='21'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='22'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='23'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='16'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='17'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='18'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='19'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='12'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='13'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='14'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='15'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='8'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='9'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='10'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='11'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='4'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='5'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='&lt;init&gt;(Lio/oigres/ecomm/service/users/repository/UserRepository;Lio/oigres/ecomm/service/users/repository/profiles/ProfileTypeRepository;Lorg/springframework/security/crypto/password/PasswordEncoder;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='6'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='7'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='2'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='3'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='setBeanFactory(Lorg/springframework/beans/factory/BeanFactory;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='&lt;init&gt;(Lio/oigres/ecomm/service/users/repository/UserRepository;Lio/oigres/ecomm/service/users/repository/profiles/ProfileTypeRepository;Lorg/springframework/security/crypto/password/PasswordEncoder;)V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='2'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='3'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='5'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='6'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='2'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='3'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='4'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='15'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='16'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='17'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='22'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='23'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='24'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='25'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='18'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='19'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='20'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='21'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='30'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='31'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='32'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='33'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='26'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='&lt;init&gt;()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='27'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='&lt;init&gt;()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='28'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='29'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='&lt;clinit&gt;()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='&lt;clinit&gt;()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='&lt;init&gt;()V' number='2'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='34'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='35'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$STATICHOOK2()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='36'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='37'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='32'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='33'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='34'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='35'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='28'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='29'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='30'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='31'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='24'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='25'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='26'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_create_an_admin_profile()V' number='27'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='&lt;init&gt;()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='&lt;init&gt;()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$SET_STATIC_CALLBACKS([Lorg/springframework/cglib/proxy/Callback;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_create_an_admin_profile()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='6'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='7'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='8'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='9'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='5'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='11'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='10'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='9'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='8'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='7'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='6'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='5'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='4'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='3'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='2'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='22'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='21'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='lambda$should_throw_DeletedProfileException$0(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='20'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='19'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='18'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='17'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='16'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='15'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='14'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='13'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_DeletedProfileException()V' number='12'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_DeletedProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='lambda$should_throw_ExistingProfileException$1(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='14'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='10'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='11'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='12'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='handle(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='13'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='35'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='isAdmin(Lio/oigres/ecomm/service/users/domain/User;)Ljava/lang/Boolean;' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='34'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseImpl' method='isAdmin(Lio/oigres/ecomm/service/users/domain/User;)Ljava/lang/Boolean;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='33'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='32'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='11'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='10'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='9'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='8'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='15'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='14'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='13'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='12'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='3'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='2'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='7'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='6'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='5'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='4'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='27'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='26'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='25'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='24'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='31'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='30'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='29'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='28'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='19'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='18'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='17'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='16'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='23'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='22'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='21'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest' method='should_throw_ExistingProfileException()V' number='20'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCaseTest]/[method:should_throw_ExistingProfileException()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig' method='&lt;init&gt;()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig' method='&lt;init&gt;()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='2'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='setBeanFactory(Lorg/springframework/beans/factory/BeanFactory;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='&lt;clinit&gt;()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$SET_STATIC_CALLBACKS([Lorg/springframework/cglib/proxy/Callback;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='&lt;clinit&gt;()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='&lt;clinit&gt;()V' number='2'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='10'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='9'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='8'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='7'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='6'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='setBeanFactory(Lorg/springframework/beans/factory/BeanFactory;)V' number='5'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='5'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='4'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='setBeanFactory(Lorg/springframework/beans/factory/BeanFactory;)V' number='3'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='3'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='setBeanFactory(Lorg/springframework/beans/factory/BeanFactory;)V' number='4'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='lambda$handle$0(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;Lio/oigres/ecomm/service/users/domain/Profile;)Z' number='6'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='lambda$handle$0(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;Lio/oigres/ecomm/service/users/domain/Profile;)Z' number='5'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='lambda$handle$0(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;Lio/oigres/ecomm/service/users/domain/Profile;)Z' number='3'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='lambda$handle$0(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;Lio/oigres/ecomm/service/users/domain/Profile;)Z' number='2'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='lambda$handle$0(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;Lio/oigres/ecomm/service/users/domain/Profile;)Z' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='lambda$handle$0(Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;Lio/oigres/ecomm/service/users/domain/Profile;)Z' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$STATICHOOK4()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='&lt;init&gt;()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='&lt;init&gt;()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='&lt;init&gt;()V' number='2'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='&lt;init&gt;()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='&lt;init&gt;()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='5'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='6'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='3'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='4'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='2'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='2'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='3'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='5'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest$TestConfig$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='6'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='47'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='46'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='45'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='2'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='44'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='43'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='4'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='3'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='6'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='5'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='8'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='7'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='10'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='9'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='18'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='17'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='16'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='15'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='14'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='13'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='&lt;init&gt;(Lio/oigres/ecomm/service/users/repository/UserRepository;Lio/oigres/ecomm/service/users/repository/profiles/AdminProfileRepository;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='12'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='&lt;init&gt;(Lio/oigres/ecomm/service/users/repository/UserRepository;Lio/oigres/ecomm/service/users/repository/profiles/AdminProfileRepository;)V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='11'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='26'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='25'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='24'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='23'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='22'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='21'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='20'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='19'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='12'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='34'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='11'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='33'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='14'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='32'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='13'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='31'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='16'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='30'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='15'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='29'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='18'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='28'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='17'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='27'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='42'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseImpl' method='handle(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='19'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='41'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='40'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='39'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='38'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='37'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='36'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest' method='should_delete_admin_user()V' number='35'><tests>
+<test name='io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCaseTest]/[method:should_delete_admin_user()]'/>
+</tests>
+</block>
+</coverage>

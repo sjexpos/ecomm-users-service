@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>SortRequestHandlerMethodArgumentResolver.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Aggregated Reports</a> &gt; <a href="../index.html" class="el_bundle">users-service-rest-api</a> &gt; <a href="index.source.html" class="el_package">org.springframework.data.web</a> &gt; <span class="el_source">SortRequestHandlerMethodArgumentResolver.java</span></div><h1>SortRequestHandlerMethodArgumentResolver.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package org.springframework.data.web;
+
+import io.oigres.ecomm.service.users.api.model.SortRequest;
+import io.oigres.ecomm.service.users.api.model.SortRequest.Direction;
+import io.oigres.ecomm.service.users.api.model.SortRequest.Order;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+import org.springframework.core.MethodParameter;
+import org.springframework.core.annotation.MergedAnnotation;
+import org.springframework.core.annotation.MergedAnnotations;
+import org.springframework.core.annotation.RepeatableContainers;
+import org.springframework.data.web.SortDefault.SortDefaults;
+import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.support.WebDataBinderFactory;
+import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.method.support.ModelAndViewContainer;
+import org.springframework.web.util.UriUtils;
+
+<span class="fc" id="L44">public class SortRequestHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {</span>
+
+  private static final String DEFAULT_PARAMETER = &quot;sort&quot;;
+  private static final String DEFAULT_PROPERTY_DELIMITER = &quot;,&quot;;
+  private static final String DEFAULT_QUALIFIER_DELIMITER = &quot;_&quot;;
+<span class="fc" id="L49">  private static final SortRequest DEFAULT_SORT = SortRequest.unsorted();</span>
+
+<span class="fc" id="L51">  private static final String SORT_DEFAULTS_NAME = SortDefaults.class.getSimpleName();</span>
+<span class="fc" id="L52">  private static final String SORT_DEFAULT_NAME = SortDefault.class.getSimpleName();</span>
+
+<span class="fc" id="L54">  private SortRequest fallbackSort = DEFAULT_SORT;</span>
+<span class="fc" id="L55">  private String sortParameter = DEFAULT_PARAMETER;</span>
+<span class="fc" id="L56">  private String propertyDelimiter = DEFAULT_PROPERTY_DELIMITER;</span>
+<span class="fc" id="L57">  private String qualifierDelimiter = DEFAULT_QUALIFIER_DELIMITER;</span>
+
+  /**
+   * propertyDel Configure the request parameter to lookup sort information from. Defaults to {@code sort}.
+   *
+   * @param sortParameter must not be {@literal null} or empty.
+   */
+  public void setSortParameter(String sortParameter) {
+
+<span class="nc" id="L66">    Assert.hasText(sortParameter, &quot;SortParameter must not be null nor empty&quot;);</span>
+<span class="nc" id="L67">    this.sortParameter = sortParameter;</span>
+<span class="nc" id="L68">  }</span>
+
+  /**
+   * Configures the delimiter used to separate property references and the direction to be sorted by. Defaults to
+   * {@code}, which means sort values look like this: {@code firstname,lastname,asc}.
+   *
+   * @param propertyDelimiter must not be {@literal null} or empty.
+   */
+  public void setPropertyDelimiter(String propertyDelimiter) {
+
+<span class="nc" id="L78">    Assert.hasText(propertyDelimiter, &quot;Property delimiter must not be null or empty&quot;);</span>
+<span class="nc" id="L79">    this.propertyDelimiter = propertyDelimiter;</span>
+<span class="nc" id="L80">  }</span>
+
+  /**
+   * @return the configured delimiter used to separate property references and the direction to be sorted by
+   */
+  public String getPropertyDelimiter() {
+<span class="nc" id="L86">    return propertyDelimiter;</span>
+  }
+
+  /**
+   * Configures the delimiter used to separate the qualifier from the sort parameter. Defaults to {@code _}, so a
+   * qualified sort property would look like {@code qualifier_sort}.
+   *
+   * @param qualifierDelimiter the qualifier delimiter to be used or {@literal null} to reset to the default.
+   */
+  public void setQualifierDelimiter(String qualifierDelimiter) {
+<span class="nc" id="L96">    this.qualifierDelimiter =</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        qualifierDelimiter == null ? DEFAULT_QUALIFIER_DELIMITER : qualifierDelimiter;</span>
+<span class="nc" id="L98">  }</span>
+
+  /**
+   * Configures the {@link Sort} to be used as fallback in case no {@link SortDefault} or {@link SortDefaults} (the
+   * latter only supported in legacy mode) can be found at the method parameter to be resolved.
+   * &lt;p&gt;
+   * If you set this to {@literal null}, be aware that you controller methods will get {@literal null} handed into them
+   * in case no {@link Sort} data can be found in the request.
+   *
+   * @param fallbackSort the {@link Sort} to be used as general fallback.
+   */
+  public void setFallbackSort(SortRequest fallbackSort) {
+<span class="nc" id="L110">    this.fallbackSort = fallbackSort;</span>
+<span class="nc" id="L111">  }</span>
+
+  /**
+   * Reads the default {@link Sort} to be used from the given {@link MethodParameter}. Rejects the parameter if both an
+   * {@link SortDefaults} and {@link SortDefault} annotation is found as we cannot build a reliable {@link Sort}
+   * instance then (property ordering).
+   *
+   * @param parameter will never be {@literal null}.
+   * @return the default {@link Sort} instance derived from the parameter annotations or the configured fallback-sort
+   *         {@link #setFallbackSort(Sort)}.
+   */
+  protected SortRequest getDefaultFromAnnotationOrFallback(MethodParameter parameter) {
+
+<span class="fc" id="L124">    MergedAnnotations mergedAnnotations =</span>
+<span class="fc" id="L125">        MergedAnnotations.from(</span>
+            parameter,
+<span class="fc" id="L127">            parameter.getParameterAnnotations(),</span>
+<span class="fc" id="L128">            RepeatableContainers.of(SortDefault.class, SortDefaults.class));</span>
+
+<span class="fc" id="L130">    List&lt;MergedAnnotation&lt;SortDefault&gt;&gt; annotations =</span>
+<span class="fc" id="L131">        mergedAnnotations.stream(SortDefault.class).toList();</span>
+
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">    if (annotations.isEmpty()) {</span>
+<span class="fc" id="L134">      return fallbackSort;</span>
+    }
+
+<span class="nc bnc" id="L137" title="All 2 branches missed.">    if (annotations.size() == 1) {</span>
+<span class="nc" id="L138">      return appendOrCreateSortTo(annotations.get(0), SortRequest.unsorted());</span>
+    }
+
+<span class="nc" id="L141">    SortRequest sort = SortRequest.unsorted();</span>
+
+<span class="nc bnc" id="L143" title="All 2 branches missed.">    for (MergedAnnotation&lt;SortDefault&gt; currentAnnotatedDefault : annotations) {</span>
+<span class="nc" id="L144">      sort = appendOrCreateSortTo(currentAnnotatedDefault, sort);</span>
+<span class="nc" id="L145">    }</span>
+
+<span class="nc" id="L147">    return sort;</span>
+  }
+
+  /**
+   * Creates a new {@link Sort} instance from the given {@link SortDefault} or appends it to the given {@link Sort}
+   * instance if it's not {@literal null}.
+   *
+   * @param sortDefault
+   * @param sortOrNull
+   * @return
+   */
+  private SortRequest appendOrCreateSortTo(
+      MergedAnnotation&lt;SortDefault&gt; sortDefault, SortRequest sortOrNull) {
+
+<span class="nc" id="L161">    String[] fields = sortDefault.getStringArray(&quot;sort&quot;);</span>
+
+<span class="nc bnc" id="L163" title="All 2 branches missed.">    if (fields.length == 0) {</span>
+<span class="nc" id="L164">      return SortRequest.unsorted();</span>
+    }
+
+<span class="nc" id="L167">    List&lt;Order&gt; orders = new ArrayList&lt;&gt;(fields.length);</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">    for (String field : fields) {</span>
+
+<span class="nc" id="L170">      Order order = new Order(sortDefault.getEnum(&quot;direction&quot;, SortRequest.Direction.class), field);</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">      orders.add(sortDefault.getBoolean(&quot;caseSensitive&quot;) ? order : order.ignoreCase());</span>
+    }
+
+<span class="nc" id="L174">    return sortOrNull.and(SortRequest.by(orders));</span>
+  }
+
+  /**
+   * Returns the sort parameter to be looked up from the request. Potentially applies qualifiers to it.
+   *
+   * @param parameter can be {@literal null}.
+   * @return
+   */
+  protected String getSortParameter(@Nullable MethodParameter parameter) {
+
+<span class="fc" id="L185">    StringBuilder builder = new StringBuilder();</span>
+
+<span class="fc" id="L187">    String value = SpringDataAnnotationUtils.getQualifier(parameter);</span>
+
+<span class="pc bpc" id="L189" title="1 of 2 branches missed.">    if (StringUtils.hasLength(value)) {</span>
+<span class="nc" id="L190">      builder.append(value);</span>
+<span class="nc" id="L191">      builder.append(qualifierDelimiter);</span>
+    }
+
+<span class="fc" id="L194">    return builder.append(sortParameter).toString();</span>
+  }
+
+  /**
+   * Parses the given sort expressions into a {@link Sort} instance. The implementation expects the sources to be a
+   * concatenation of Strings using the given delimiter. If the last element is equal {@code ignorecase} (when using a
+   * case-insensitive comparison), the sort order will be performed without respect to case. If the last element (or the
+   * penultimate element if the last is {@code ignorecase}) can be parsed into a {@link Direction} it's considered a
+   * {@link Direction} and a simple property otherwise.
+   *
+   * @param source will never be {@literal null}.
+   * @param delimiter the delimiter to be used to split up the source elements, will never be {@literal null}.
+   * @return
+   */
+  SortRequest parseParameterIntoSort(List&lt;String&gt; source, String delimiter) {
+
+<span class="nc" id="L210">    List&lt;Order&gt; allOrders = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L212" title="All 2 branches missed.">    for (String part : source) {</span>
+
+<span class="nc bnc" id="L214" title="All 2 branches missed.">      if (part == null) {</span>
+<span class="nc" id="L215">        continue;</span>
+      }
+
+<span class="nc" id="L218">      SortOrderParser.parse(part, delimiter) //</span>
+<span class="nc" id="L219">          .parseIgnoreCase() //</span>
+<span class="nc" id="L220">          .parseDirection() //</span>
+<span class="nc" id="L221">          .forEachOrder(allOrders::add);</span>
+<span class="nc" id="L222">    }</span>
+
+<span class="nc bnc" id="L224" title="All 2 branches missed.">    return allOrders.isEmpty() ? SortRequest.unsorted() : SortRequest.by(allOrders);</span>
+  }
+
+  /**
+   * Folds the given {@link Sort} instance into a {@link List} of sort expressions, accumulating {@link Order} instances
+   * of the same direction into a single expression if they are in order.
+   *
+   * @param sort must not be {@literal null}.
+   * @return
+   */
+  protected List&lt;String&gt; foldIntoExpressions(SortRequest sort) {
+
+<span class="nc" id="L236">    List&lt;String&gt; expressions = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L237">    ExpressionBuilder builder = null;</span>
+
+<span class="nc bnc" id="L239" title="All 2 branches missed.">    for (Order order : sort.getOrders()) {</span>
+
+<span class="nc" id="L241">      Direction direction = order.getDirection();</span>
+
+<span class="nc bnc" id="L243" title="All 2 branches missed.">      if (builder == null) {</span>
+<span class="nc" id="L244">        builder = new ExpressionBuilder(direction);</span>
+<span class="nc bnc" id="L245" title="All 2 branches missed.">      } else if (!builder.hasSameDirectionAs(order)) {</span>
+<span class="nc" id="L246">        builder.dumpExpressionIfPresentInto(expressions);</span>
+<span class="nc" id="L247">        builder = new ExpressionBuilder(direction);</span>
+      }
+
+<span class="nc" id="L250">      builder.add(order.getProperty());</span>
+<span class="nc" id="L251">    }</span>
+
+<span class="nc bnc" id="L253" title="All 2 branches missed.">    return builder == null</span>
+<span class="nc" id="L254">        ? Collections.emptyList()</span>
+<span class="nc" id="L255">        : builder.dumpExpressionIfPresentInto(expressions);</span>
+  }
+
+  /**
+   * Folds the given {@link Sort} instance into two expressions. The first being the property list, the second being the
+   * direction.
+   *
+   * @throws IllegalArgumentException if a {@link Sort} with multiple {@link Direction}s has been handed in.
+   * @param sort must not be {@literal null}.
+   * @return
+   */
+  protected List&lt;String&gt; legacyFoldExpressions(SortRequest sort) {
+
+<span class="nc" id="L268">    List&lt;String&gt; expressions = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L269">    ExpressionBuilder builder = null;</span>
+
+<span class="nc bnc" id="L271" title="All 2 branches missed.">    for (Order order : sort.getOrders()) {</span>
+
+<span class="nc" id="L273">      Direction direction = order.getDirection();</span>
+
+<span class="nc bnc" id="L275" title="All 2 branches missed.">      if (builder == null) {</span>
+<span class="nc" id="L276">        builder = new ExpressionBuilder(direction);</span>
+<span class="nc bnc" id="L277" title="All 2 branches missed.">      } else if (!builder.hasSameDirectionAs(order)) {</span>
+<span class="nc" id="L278">        throw new IllegalArgumentException(</span>
+<span class="nc" id="L279">            String.format(</span>
+                &quot;%s in legacy configuration only supports a single direction to sort by&quot;,
+<span class="nc" id="L281">                getClass().getSimpleName()));</span>
+      }
+
+<span class="nc" id="L284">      builder.add(order.getProperty());</span>
+<span class="nc" id="L285">    }</span>
+
+<span class="nc bnc" id="L287" title="All 2 branches missed.">    return builder == null</span>
+<span class="nc" id="L288">        ? Collections.emptyList()</span>
+<span class="nc" id="L289">        : builder.dumpExpressionIfPresentInto(expressions);</span>
+  }
+
+  /**
+   * Returns whether the given source {@link String} consists of dots only.
+   *
+   * @param source must not be {@literal null}.
+   * @return
+   */
+  static boolean notOnlyDots(String source) {
+<span class="nc" id="L299">    return StringUtils.hasText(source.replace(&quot;.&quot;, &quot;&quot;));</span>
+  }
+
+  @Override
+  public boolean supportsParameter(MethodParameter parameter) {
+<span class="nc" id="L304">    return SortRequest.class.equals(parameter.getParameterType());</span>
+  }
+
+  @Override
+  public SortRequest resolveArgument(
+      MethodParameter parameter,
+      ModelAndViewContainer mavContainer,
+      NativeWebRequest webRequest,
+      WebDataBinderFactory binderFactory)
+      throws Exception {
+<span class="fc" id="L314">    String[] directionParameter = webRequest.getParameterValues(getSortParameter(parameter));</span>
+    // No parameter
+<span class="pc bpc" id="L316" title="1 of 2 branches missed.">    if (directionParameter == null) {</span>
+<span class="fc" id="L317">      return getDefaultFromAnnotationOrFallback(parameter);</span>
+    }
+    // Single empty parameter, e.g &quot;sort=&quot;
+<span class="nc bnc" id="L320" title="All 4 branches missed.">    if (directionParameter.length == 1 &amp;&amp; !StringUtils.hasText(directionParameter[0])) {</span>
+<span class="nc" id="L321">      return getDefaultFromAnnotationOrFallback(parameter);</span>
+    }
+<span class="nc" id="L323">    var decoded =</span>
+<span class="nc" id="L324">        Arrays.stream(directionParameter)</span>
+<span class="nc" id="L325">            .map(it -&gt; UriUtils.decode(it, StandardCharsets.UTF_8))</span>
+<span class="nc" id="L326">            .toList();</span>
+<span class="nc" id="L327">    return parseParameterIntoSort(decoded, getPropertyDelimiter());</span>
+  }
+
+  /**
+   * Helper to easily build request parameter expressions for {@link Sort} instances.
+   *
+   * @author Oliver Gierke
+   */
+  class ExpressionBuilder {
+
+<span class="nc" id="L337">    private final List&lt;String&gt; elements = new ArrayList&lt;&gt;();</span>
+    private final Direction direction;
+
+    /**
+     * Sets up a new {@link ExpressionBuilder} for properties to be sorted in the given {@link Direction}.
+     *
+     * @param direction must not be {@literal null}.
+     */
+<span class="nc" id="L345">    ExpressionBuilder(Direction direction) {</span>
+
+<span class="nc" id="L347">      Assert.notNull(direction, &quot;Direction must not be null&quot;);</span>
+<span class="nc" id="L348">      this.direction = direction;</span>
+<span class="nc" id="L349">    }</span>
+
+    /**
+     * Returns whether the given {@link Order} has the same direction as the current {@link ExpressionBuilder}.
+     *
+     * @param order must not be {@literal null}.
+     * @return
+     */
+    boolean hasSameDirectionAs(Order order) {
+<span class="nc bnc" id="L358" title="All 2 branches missed.">      return this.direction == order.getDirection();</span>
+    }
+
+    /**
+     * Adds the given property to the expression to be built.
+     *
+     * @param property
+     */
+    void add(String property) {
+<span class="nc" id="L367">      this.elements.add(property);</span>
+<span class="nc" id="L368">    }</span>
+
+    /**
+     * Dumps the expression currently in build into the given {@link List} of {@link String}s. Will only dump it in case
+     * there are properties piled up currently.
+     *
+     * @param expressions
+     * @return
+     */
+    List&lt;String&gt; dumpExpressionIfPresentInto(List&lt;String&gt; expressions) {
+
+<span class="nc bnc" id="L379" title="All 2 branches missed.">      if (elements.isEmpty()) {</span>
+<span class="nc" id="L380">        return expressions;</span>
+      }
+
+<span class="nc" id="L383">      elements.add(direction.name().toLowerCase());</span>
+<span class="nc" id="L384">      expressions.add(StringUtils.collectionToDelimitedString(elements, propertyDelimiter));</span>
+
+<span class="nc" id="L386">      return expressions;</span>
+    }
+  }
+
+  /**
+   * Parser for sort {@link Order}.
+   *
+   * @author Mark Paluch
+   * @since 2.3
+   */
+  static class SortOrderParser {
+
+    private static final String IGNORECASE = &quot;ignorecase&quot;;
+
+    private final String[] elements;
+    private final int lastIndex;
+    private final Optional&lt;Direction&gt; direction;
+    private final Optional&lt;Boolean&gt; ignoreCase;
+
+    private SortOrderParser(String[] elements) {
+<span class="nc" id="L406">      this(elements, elements.length, Optional.empty(), Optional.empty());</span>
+<span class="nc" id="L407">    }</span>
+
+    private SortOrderParser(
+        String[] elements,
+        int lastIndex,
+        Optional&lt;Direction&gt; direction,
+<span class="nc" id="L413">        Optional&lt;Boolean&gt; ignoreCase) {</span>
+<span class="nc" id="L414">      this.elements = elements;</span>
+<span class="nc" id="L415">      this.lastIndex = Math.max(0, lastIndex);</span>
+<span class="nc" id="L416">      this.direction = direction;</span>
+<span class="nc" id="L417">      this.ignoreCase = ignoreCase;</span>
+<span class="nc" id="L418">    }</span>
+
+    /**
+     * Parse the raw sort string delimited by {@code delimiter}.
+     *
+     * @param part sort part to parse.
+     * @param delimiter the delimiter to be used to split up the source elements, will never be {@literal null}.
+     * @return the parsing state object.
+     */
+    public static SortOrderParser parse(String part, String delimiter) {
+
+<span class="nc" id="L429">      String[] elements =</span>
+<span class="nc" id="L430">          Arrays.stream(part.split(delimiter)) //</span>
+<span class="nc" id="L431">              .filter(SortHandlerMethodArgumentResolver::notOnlyDots) //</span>
+<span class="nc" id="L432">              .toArray(String[]::new);</span>
+
+<span class="nc" id="L434">      return new SortOrderParser(elements);</span>
+    }
+
+    /**
+     * Parse the {@code ignoreCase} portion of the sort specification.
+     *
+     * @return a new parsing state object.
+     */
+    public SortOrderParser parseIgnoreCase() {
+
+      Optional&lt;Boolean&gt; ignoreCase =
+<span class="nc bnc" id="L445" title="All 2 branches missed.">          lastIndex &gt; 0 ? fromOptionalString(elements[lastIndex - 1]) : Optional.empty();</span>
+
+<span class="nc" id="L447">      return new SortOrderParser(</span>
+<span class="nc bnc" id="L448" title="All 2 branches missed.">          elements, lastIndex - (ignoreCase.isPresent() ? 1 : 0), direction, ignoreCase);</span>
+    }
+
+    /**
+     * Parse the {@link Order} portion of the sort specification.
+     *
+     * @return a new parsing state object.
+     */
+    public SortOrderParser parseDirection() {
+
+      Optional&lt;Direction&gt; direction =
+<span class="nc bnc" id="L459" title="All 2 branches missed.">          lastIndex &gt; 0 ? Direction.fromOptionalString(elements[lastIndex - 1]) : Optional.empty();</span>
+
+<span class="nc" id="L461">      return new SortOrderParser(</span>
+<span class="nc bnc" id="L462" title="All 2 branches missed.">          elements, lastIndex - (direction.isPresent() ? 1 : 0), direction, ignoreCase);</span>
+    }
+
+    /**
+     * Notify a {@link Consumer callback function} for each parsed {@link Order} object.
+     *
+     * @param callback block to be executed.
+     */
+    public void forEachOrder(Consumer&lt;? super Order&gt; callback) {
+
+<span class="nc bnc" id="L472" title="All 2 branches missed.">      for (int i = 0; i &lt; lastIndex; i++) {</span>
+<span class="nc" id="L473">        toOrder(elements[i]).ifPresent(callback);</span>
+      }
+<span class="nc" id="L475">    }</span>
+
+    private Optional&lt;Boolean&gt; fromOptionalString(String value) {
+<span class="nc bnc" id="L478" title="All 2 branches missed.">      return IGNORECASE.equalsIgnoreCase(value) ? Optional.of(true) : Optional.empty();</span>
+    }
+
+    private Optional&lt;Order&gt; toOrder(String property) {
+
+<span class="nc bnc" id="L483" title="All 2 branches missed.">      if (!StringUtils.hasText(property)) {</span>
+<span class="nc" id="L484">        return Optional.empty();</span>
+      }
+
+<span class="nc" id="L487">      Order order =</span>
+<span class="nc" id="L488">          direction.map(it -&gt; new Order(it, property)).orElseGet(() -&gt; Order.by(property));</span>
+
+<span class="nc bnc" id="L490" title="All 2 branches missed.">      if (ignoreCase.isPresent()) {</span>
+<span class="nc" id="L491">        return Optional.of(order.ignoreCase());</span>
+      }
+
+<span class="nc" id="L494">      return Optional.of(order);</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>RegionController.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Aggregated Reports</a> &gt; <a href="../index.html" class="el_bundle">users-service-rest-api</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.api</a> &gt; <span class="el_source">RegionController.java</span></div><h1>RegionController.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.api;
+
+import io.oigres.ecomm.service.users.Routes;
+import io.oigres.ecomm.service.users.api.model.PageResponse;
+import io.oigres.ecomm.service.users.api.model.PageResponseImpl;
+import io.oigres.ecomm.service.users.api.model.PageableRequestImpl;
+import io.oigres.ecomm.service.users.api.model.exception.StateNotFoundException;
+import io.oigres.ecomm.service.users.api.model.exception.ZipcodeNotFoundException;
+import io.oigres.ecomm.service.users.api.model.region.StateResponse;
+import io.oigres.ecomm.service.users.api.model.region.ZipCodeResponse;
+import io.oigres.ecomm.service.users.config.mapper.ResponsesMapper;
+import io.oigres.ecomm.service.users.domain.State;
+import io.oigres.ecomm.service.users.domain.ZipCode;
+import io.oigres.ecomm.service.users.exception.NotFoundException;
+import io.oigres.ecomm.service.users.exception.ZipcodeNotFoundDomainException;
+import io.oigres.ecomm.service.users.usecases.region.search.GetStateByIdUseCase;
+import io.oigres.ecomm.service.users.usecases.region.search.GetStatesUseCase;
+import io.oigres.ecomm.service.users.usecases.region.search.GetZipCodeByIdUseCase;
+import io.oigres.ecomm.service.users.usecases.region.search.GetZipCodesByStateUseCase;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
+import lombok.extern.slf4j.Slf4j;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.util.MimeTypeUtils;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping(Routes.REGION_PATH)
+@Tag(name = &quot;Region&quot;, description = &quot; &quot;)
+<span class="nc" id="L53">@Slf4j</span>
+public class RegionController extends AbstractController implements IRegionService {
+
+  private final GetStatesUseCase getStatesUseCase;
+  private final GetStateByIdUseCase getStateByIdUseCase;
+  private final GetZipCodesByStateUseCase getZipCodesByState;
+  private final GetZipCodeByIdUseCase getZipCodeByIdUseCase;
+  private final ResponsesMapper mapper;
+
+  public RegionController(
+      GetStatesUseCase getStatesUseCase,
+      GetStateByIdUseCase getStateByIdUseCase,
+      GetZipCodesByStateUseCase getZipCodesByState,
+      GetZipCodeByIdUseCase getZipCodeByIdUseCase,
+<span class="nc" id="L67">      ResponsesMapper mapper) {</span>
+<span class="nc" id="L68">    this.getStatesUseCase = getStatesUseCase;</span>
+<span class="nc" id="L69">    this.getStateByIdUseCase = getStateByIdUseCase;</span>
+<span class="nc" id="L70">    this.getZipCodesByState = getZipCodesByState;</span>
+<span class="nc" id="L71">    this.getZipCodeByIdUseCase = getZipCodeByIdUseCase;</span>
+<span class="nc" id="L72">    this.mapper = mapper;</span>
+<span class="nc" id="L73">  }</span>
+
+  @Operation(summary = &quot;Get all States&quot;)
+  @PageableAsQueryParam
+  @GetMapping(value = Routes.GET_STATES, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public PageResponse&lt;StateResponse&gt; getStates(
+      @Parameter(hidden = true, required = true) PageableRequestImpl pageable) {
+<span class="nc" id="L82">    log.debug(&quot;============ Get All States ============&quot;);</span>
+<span class="nc" id="L83">    Page&lt;State&gt; states =</span>
+<span class="nc" id="L84">        this.getStatesUseCase.handle(</span>
+<span class="nc" id="L85">            PageRequest.of(</span>
+<span class="nc" id="L86">                pageable.getPageNumber(), pageable.getPageSize(), Sort.by(&quot;id&quot;).ascending()));</span>
+<span class="nc" id="L87">    List&lt;StateResponse&gt; response = this.mapper.toStateResponse(states.getContent());</span>
+<span class="nc" id="L88">    return new PageResponseImpl&lt;&gt;(response, pageable, states.getTotalElements());</span>
+  }
+
+  @Operation(summary = &quot;Get state by&quot;)
+  @GetMapping(value = Routes.GET_STATE_BY_ID, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public StateResponse getStateById(@PathVariable(&quot;stateId&quot;) long stateId)
+      throws StateNotFoundException {
+<span class="nc" id="L97">    log.debug(&quot;============ getStateById ============&quot;);</span>
+    State state;
+    try {
+<span class="nc" id="L100">      state = getStateByIdUseCase.handle(stateId);</span>
+<span class="nc" id="L101">    } catch (NotFoundException e) {</span>
+<span class="nc" id="L102">      throw new StateNotFoundException();</span>
+<span class="nc" id="L103">    }</span>
+<span class="nc" id="L104">    return StateResponse.builder()</span>
+<span class="nc" id="L105">        .id(state.getId())</span>
+<span class="nc" id="L106">        .shortName(state.getShortName())</span>
+<span class="nc" id="L107">        .name(state.getName())</span>
+<span class="nc" id="L108">        .build();</span>
+  }
+
+  @Operation(summary = &quot;Get zip codes by state&quot;)
+  @PageableAsQueryParam
+  @GetMapping(value = Routes.ZIP_CODES, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public PageResponse&lt;ZipCodeResponse&gt; getZipCodesByState(
+      @PathVariable(&quot;stateId&quot;) Long stateId,
+      @Parameter(hidden = true, required = true) PageableRequestImpl pageable) {
+<span class="nc" id="L119">    log.debug(</span>
+        &quot;======= GetZipCodes | stateId={} page={} size={} =====&quot;,
+        stateId,
+<span class="nc" id="L122">        pageable.getPageNumber(),</span>
+<span class="nc" id="L123">        pageable.getPageSize());</span>
+<span class="nc" id="L124">    Page&lt;ZipCode&gt; zipCodes =</span>
+<span class="nc" id="L125">        this.getZipCodesByState.handle(</span>
+            stateId,
+<span class="nc" id="L127">            PageRequest.of(</span>
+<span class="nc" id="L128">                pageable.getPageNumber(), pageable.getPageSize(), Sort.by(&quot;id&quot;).ascending()));</span>
+<span class="nc" id="L129">    List&lt;ZipCodeResponse&gt; response = this.mapper.toZipCodeResponse(zipCodes.getContent());</span>
+<span class="nc" id="L130">    return new PageResponseImpl&lt;&gt;(response, pageable, zipCodes.getTotalElements());</span>
+  }
+
+  @Operation(summary = &quot;Get zipcode by id&quot;)
+  @GetMapping(value = Routes.GET_ZIPCODE_BY_ID, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public ZipCodeResponse getZipCodeById(@PathVariable(&quot;zipCodeId&quot;) long zipCodeId)
+      throws ZipcodeNotFoundException {
+<span class="nc" id="L139">    log.debug(&quot;============ getZipCodeById ============&quot;);</span>
+    ZipCode zipCode;
+    try {
+<span class="nc" id="L142">      zipCode = getZipCodeByIdUseCase.handle(zipCodeId);</span>
+<span class="nc" id="L143">    } catch (ZipcodeNotFoundDomainException ex) {</span>
+<span class="nc" id="L144">      throw new ZipcodeNotFoundException(ex.getMessage());</span>
+<span class="nc" id="L145">    }</span>
+<span class="nc" id="L146">    return ZipCodeResponse.builder()</span>
+<span class="nc" id="L147">        .id(zipCode.getId())</span>
+<span class="nc" id="L148">        .code(zipCode.getCode())</span>
+<span class="nc" id="L149">        .city(zipCode.getCity())</span>
+<span class="nc" id="L150">        .state(</span>
+<span class="nc" id="L151">            StateResponse.builder()</span>
+<span class="nc" id="L152">                .id(zipCode.getState().getId())</span>
+<span class="nc" id="L153">                .shortName(zipCode.getState().getShortName())</span>
+<span class="nc" id="L154">                .name(zipCode.getState().getName())</span>
+<span class="nc" id="L155">                .build())</span>
+<span class="nc" id="L156">        .tax(zipCode.getTax())</span>
+<span class="nc" id="L157">        .build();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

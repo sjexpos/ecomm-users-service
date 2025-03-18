@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>ProfileImage.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Aggregated Reports</a> &gt; <a href="../index.html" class="el_bundle">users-service-domain</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.domain</a> &gt; <span class="el_source">ProfileImage.java</span></div><h1>ProfileImage.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.domain;
+
+import io.oigres.ecomm.service.users.enums.ResourceStatusEnum;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+
+@Entity
+@Table(name = &quot;profile_images&quot;)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class ProfileImage extends DomainEntity {
+  private static final long serialVersionUID = -4164258600038645847L;
+
+  @Id
+  @Column(name = &quot;id&quot;)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @Column(name = &quot;image_url&quot;)
+  private String imageURL;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = &quot;status&quot;)
+  private ResourceStatusEnum status;
+
+  @CreatedDate
+  @Column(name = &quot;created_at&quot;)
+  private LocalDateTime createdAt;
+
+  public boolean isDeleted() {
+<span class="nc" id="L53">    return ResourceStatusEnum.DELETED.equals(this.status);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

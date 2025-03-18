@@ -1,0 +1,2856 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>RegionController.java</h1>
+
+<table class="src">
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/**********</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> This project is free software; you can redistribute it and/or modify it under</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> the terms of the GNU General Public License as published by the</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> Free Software Foundation; either version 3.0 of the License, or (at your</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> option) any later version. (See &#60;https://www.gnu.org/licenses/gpl-3.0.html&#62;.)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> This project is distributed in the hope that it will be useful, but WITHOUT</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> FOR A PARTICULAR PURPOSE.  See the GNU General Public License for</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> more details.</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> You should have received a copy of the GNU General Public License</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> along with this project; if not, write to the Free Software Foundation, Inc.,</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> **********/</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              </span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package io.oigres.ecomm.service.users.api;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.Routes;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.api.model.PageResponse;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.api.model.PageResponseImpl;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.api.model.PageableRequestImpl;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.api.model.exception.StateNotFoundException;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.api.model.exception.ZipcodeNotFoundException;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.api.model.region.StateResponse;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.api.model.region.ZipCodeResponse;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.config.mapper.ResponsesMapper;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.domain.State;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.domain.ZipCode;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.exception.NotFoundException;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.exception.ZipcodeNotFoundDomainException;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.usecases.region.search.GetStateByIdUseCase;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.usecases.region.search.GetStatesUseCase;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.usecases.region.search.GetZipCodeByIdUseCase;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.oigres.ecomm.service.users.usecases.region.search.GetZipCodesByStateUseCase;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.swagger.v3.oas.annotations.Operation;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.swagger.v3.oas.annotations.Parameter;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_39'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import io.swagger.v3.oas.annotations.tags.Tag;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.List;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_41'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import lombok.extern.slf4j.Slf4j;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.springdoc.core.converters.models.PageableAsQueryParam;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_43'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.springframework.data.domain.Page;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_44'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.springframework.data.domain.PageRequest;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.springframework.data.domain.Sort;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.springframework.http.HttpStatus;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_47'/>
+47
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_47'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.springframework.util.MimeTypeUtils;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_48'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.springframework.web.bind.annotation.*;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_49'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>@RestController</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_51'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>@RequestMapping(Routes.REGION_PATH)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_52'/>
+52
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_52'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>@Tag(name = &#34;Region&#34;, description = &#34; &#34;)</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_53'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>@Slf4j</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_54'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public class RegionController extends AbstractController implements IRegionService {</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_55'/>
+55
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_55'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_56'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  private final GetStatesUseCase getStatesUseCase;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_57'/>
+57
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_57'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  private final GetStateByIdUseCase getStateByIdUseCase;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_58'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  private final GetZipCodesByStateUseCase getZipCodesByState;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_59'/>
+59
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_59'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  private final GetZipCodeByIdUseCase getZipCodeByIdUseCase;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_60'/>
+60
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_60'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  private final ResponsesMapper mapper;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_61'/>
+61
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_61'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_62'/>
+62
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_62'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  public RegionController(</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_63'/>
+63
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_63'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>      GetStatesUseCase getStatesUseCase,</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_64'/>
+64
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_64'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>      GetStateByIdUseCase getStateByIdUseCase,</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_65'/>
+65
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_65'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>      GetZipCodesByStateUseCase getZipCodesByState,</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_66'/>
+66
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_66'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>      GetZipCodeByIdUseCase getZipCodeByIdUseCase,</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_67'/>
+67
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_67'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>      ResponsesMapper mapper) {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_68'/>
+68
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_68'>1</a>
+<span>
+1. &#60;init&#62; : Removed assignment to member variable getStatesUseCase &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>    this.getStatesUseCase = getStatesUseCase;</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_69'/>
+69
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_69'>1</a>
+<span>
+1. &#60;init&#62; : Removed assignment to member variable getStateByIdUseCase &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>    this.getStateByIdUseCase = getStateByIdUseCase;</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_70'/>
+70
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_70'>1</a>
+<span>
+1. &#60;init&#62; : Removed assignment to member variable getZipCodesByState &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>    this.getZipCodesByState = getZipCodesByState;</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_71'/>
+71
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_71'>1</a>
+<span>
+1. &#60;init&#62; : Removed assignment to member variable getZipCodeByIdUseCase &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>    this.getZipCodeByIdUseCase = getZipCodeByIdUseCase;</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_72'/>
+72
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_72'>1</a>
+<span>
+1. &#60;init&#62; : Removed assignment to member variable mapper &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>    this.mapper = mapper;</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_73'/>
+73
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_73'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>  }</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_74'/>
+74
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_74'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_75'/>
+75
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_75'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @Operation(summary = &#34;Get all States&#34;)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_76'/>
+76
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_76'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @PageableAsQueryParam</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_77'/>
+77
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_77'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @GetMapping(value = Routes.GET_STATES, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_78'/>
+78
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_78'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @ResponseStatus(HttpStatus.OK)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_79'/>
+79
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_79'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @Override</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_80'/>
+80
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_80'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  public PageResponse&#60;StateResponse&#62; getStates(</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_81'/>
+81
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_81'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>      @Parameter(hidden = true, required = true) PageableRequestImpl pageable) {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_82'/>
+82
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_82'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>    log.debug(&#34;============ Get All States ============&#34;);</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_83'/>
+83
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_83'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>    Page&#60;State&#62; states =</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_84'/>
+84
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_84'>1</a>
+<span>
+1. getStates : removed call to io/oigres/ecomm/service/users/usecases/region/search/GetStatesUseCase::handle &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        this.getStatesUseCase.handle(</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_85'/>
+85
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_85'>1</a>
+<span>
+1. getStates : removed call to org/springframework/data/domain/PageRequest::of &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>            PageRequest.of(</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_86'/>
+86
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_86'>7</a>
+<span>
+1. getStates : removed call to io/oigres/ecomm/service/users/api/model/PageableRequestImpl::getPageNumber &rarr; NO_COVERAGE<br/>
+2. getStates : removed call to org/springframework/data/domain/Sort::by &rarr; NO_COVERAGE<br/>
+3. getStates : removed call to io/oigres/ecomm/service/users/api/model/PageableRequestImpl::getPageSize &rarr; NO_COVERAGE<br/>
+4. getStates : removed call to org/springframework/data/domain/Sort::ascending &rarr; NO_COVERAGE<br/>
+5. getStates : Substituted 1 with 0 &rarr; NO_COVERAGE<br/>
+6. getStates : Substituted 0 with 1 &rarr; NO_COVERAGE<br/>
+7. getStates : replaced call to org/springframework/data/domain/Sort::ascending with receiver &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                pageable.getPageNumber(), pageable.getPageSize(), Sort.by(&#34;id&#34;).ascending()));</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_87'/>
+87
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_87'>3</a>
+<span>
+1. getStates : removed call to io/oigres/ecomm/service/users/config/mapper/ResponsesMapper::toStateResponse &rarr; NO_COVERAGE<br/>
+2. getStates : replaced call to io/oigres/ecomm/service/users/config/mapper/ResponsesMapper::toStateResponse with argument &rarr; NO_COVERAGE<br/>
+3. getStates : removed call to org/springframework/data/domain/Page::getContent &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>    List&#60;StateResponse&#62; response = this.mapper.toStateResponse(states.getContent());</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_88'/>
+88
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_88'>3</a>
+<span>
+1. getStates : removed call to org/springframework/data/domain/Page::getTotalElements &rarr; NO_COVERAGE<br/>
+2. getStates : replaced return value with null for io/oigres/ecomm/service/users/api/RegionController::getStates &rarr; NO_COVERAGE<br/>
+3. getStates : removed call to io/oigres/ecomm/service/users/api/model/PageResponseImpl::&#60;init&#62; &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>    return new PageResponseImpl&#60;&#62;(response, pageable, states.getTotalElements());</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_89'/>
+89
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_89'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  }</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_90'/>
+90
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_90'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_91'/>
+91
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_91'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @Operation(summary = &#34;Get state by&#34;)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_92'/>
+92
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_92'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @GetMapping(value = Routes.GET_STATE_BY_ID, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_93'/>
+93
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_93'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @ResponseStatus(HttpStatus.OK)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_94'/>
+94
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_94'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @Override</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_95'/>
+95
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_95'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  public StateResponse getStateById(@PathVariable(&#34;stateId&#34;) long stateId)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_96'/>
+96
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_96'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>      throws StateNotFoundException {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_97'/>
+97
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_97'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>    log.debug(&#34;============ getStateById ============&#34;);</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_98'/>
+98
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_98'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    State state;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_99'/>
+99
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_99'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    try {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_100'/>
+100
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_100'>1</a>
+<span>
+1. getStateById : removed call to io/oigres/ecomm/service/users/usecases/region/search/GetStateByIdUseCase::handle &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>      state = getStateByIdUseCase.handle(stateId);</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_101'/>
+101
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_101'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>    } catch (NotFoundException e) {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_102'/>
+102
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_102'>1</a>
+<span>
+1. getStateById : removed call to io/oigres/ecomm/service/users/api/model/exception/StateNotFoundException::&#60;init&#62; &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>      throw new StateNotFoundException();</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_103'/>
+103
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_103'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>    }</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_104'/>
+104
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_104'>2</a>
+<span>
+1. getStateById : removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse::builder &rarr; NO_COVERAGE<br/>
+2. getStateById : replaced return value with null for io/oigres/ecomm/service/users/api/RegionController::getStateById &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>    return StateResponse.builder()</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_105'/>
+105
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_105'>3</a>
+<span>
+1. getStateById : replaced call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::id with receiver &rarr; NO_COVERAGE<br/>
+2. getStateById : removed call to io/oigres/ecomm/service/users/domain/State::getId &rarr; NO_COVERAGE<br/>
+3. getStateById : removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::id &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        .id(state.getId())</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_106'/>
+106
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_106'>3</a>
+<span>
+1. getStateById : removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::shortName &rarr; NO_COVERAGE<br/>
+2. getStateById : replaced call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::shortName with receiver &rarr; NO_COVERAGE<br/>
+3. getStateById : removed call to io/oigres/ecomm/service/users/domain/State::getShortName &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        .shortName(state.getShortName())</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_107'/>
+107
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_107'>3</a>
+<span>
+1. getStateById : replaced call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::name with receiver &rarr; NO_COVERAGE<br/>
+2. getStateById : removed call to io/oigres/ecomm/service/users/domain/State::getName &rarr; NO_COVERAGE<br/>
+3. getStateById : removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::name &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        .name(state.getName())</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_108'/>
+108
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_108'>1</a>
+<span>
+1. getStateById : removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::build &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        .build();</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_109'/>
+109
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_109'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  }</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_110'/>
+110
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_110'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_111'/>
+111
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_111'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @Operation(summary = &#34;Get zip codes by state&#34;)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_112'/>
+112
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_112'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @PageableAsQueryParam</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_113'/>
+113
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_113'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @GetMapping(value = Routes.ZIP_CODES, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_114'/>
+114
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_114'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @ResponseStatus(HttpStatus.OK)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_115'/>
+115
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_115'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @Override</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_116'/>
+116
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_116'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  public PageResponse&#60;ZipCodeResponse&#62; getZipCodesByState(</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_117'/>
+117
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_117'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>      @PathVariable(&#34;stateId&#34;) Long stateId,</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_118'/>
+118
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_118'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>      @Parameter(hidden = true, required = true) PageableRequestImpl pageable) {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_119'/>
+119
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_119'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>    log.debug(</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_120'/>
+120
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_120'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        &#34;======= GetZipCodes | stateId={} page={} size={} =====&#34;,</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_121'/>
+121
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_121'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        stateId,</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_122'/>
+122
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_122'>3</a>
+<span>
+1. getZipCodesByState : removed call to java/lang/Integer::valueOf &rarr; NO_COVERAGE<br/>
+2. getZipCodesByState : removed call to io/oigres/ecomm/service/users/api/model/PageableRequestImpl::getPageNumber &rarr; NO_COVERAGE<br/>
+3. getZipCodesByState : Substituted 2 with 3 &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        pageable.getPageNumber(),</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_123'/>
+123
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_123'>2</a>
+<span>
+1. getZipCodesByState : removed call to java/lang/Integer::valueOf &rarr; NO_COVERAGE<br/>
+2. getZipCodesByState : removed call to io/oigres/ecomm/service/users/api/model/PageableRequestImpl::getPageSize &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        pageable.getPageSize());</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_124'/>
+124
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_124'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>    Page&#60;ZipCode&#62; zipCodes =</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_125'/>
+125
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_125'>1</a>
+<span>
+1. getZipCodesByState : removed call to io/oigres/ecomm/service/users/usecases/region/search/GetZipCodesByStateUseCase::handle &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        this.getZipCodesByState.handle(</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_126'/>
+126
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_126'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            stateId,</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_127'/>
+127
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_127'>1</a>
+<span>
+1. getZipCodesByState : removed call to org/springframework/data/domain/PageRequest::of &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>            PageRequest.of(</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_128'/>
+128
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_128'>7</a>
+<span>
+1. getZipCodesByState : removed call to io/oigres/ecomm/service/users/api/model/PageableRequestImpl::getPageNumber &rarr; NO_COVERAGE<br/>
+2. getZipCodesByState : Substituted 0 with 1 &rarr; NO_COVERAGE<br/>
+3. getZipCodesByState : replaced call to org/springframework/data/domain/Sort::ascending with receiver &rarr; NO_COVERAGE<br/>
+4. getZipCodesByState : Substituted 1 with 0 &rarr; NO_COVERAGE<br/>
+5. getZipCodesByState : removed call to io/oigres/ecomm/service/users/api/model/PageableRequestImpl::getPageSize &rarr; NO_COVERAGE<br/>
+6. getZipCodesByState : removed call to org/springframework/data/domain/Sort::ascending &rarr; NO_COVERAGE<br/>
+7. getZipCodesByState : removed call to org/springframework/data/domain/Sort::by &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                pageable.getPageNumber(), pageable.getPageSize(), Sort.by(&#34;id&#34;).ascending()));</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_129'/>
+129
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_129'>3</a>
+<span>
+1. getZipCodesByState : replaced call to io/oigres/ecomm/service/users/config/mapper/ResponsesMapper::toZipCodeResponse with argument &rarr; NO_COVERAGE<br/>
+2. getZipCodesByState : removed call to io/oigres/ecomm/service/users/config/mapper/ResponsesMapper::toZipCodeResponse &rarr; NO_COVERAGE<br/>
+3. getZipCodesByState : removed call to org/springframework/data/domain/Page::getContent &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>    List&#60;ZipCodeResponse&#62; response = this.mapper.toZipCodeResponse(zipCodes.getContent());</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_130'/>
+130
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_130'>3</a>
+<span>
+1. getZipCodesByState : removed call to org/springframework/data/domain/Page::getTotalElements &rarr; NO_COVERAGE<br/>
+2. getZipCodesByState : replaced return value with null for io/oigres/ecomm/service/users/api/RegionController::getZipCodesByState &rarr; NO_COVERAGE<br/>
+3. getZipCodesByState : removed call to io/oigres/ecomm/service/users/api/model/PageResponseImpl::&#60;init&#62; &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>    return new PageResponseImpl&#60;&#62;(response, pageable, zipCodes.getTotalElements());</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_131'/>
+131
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_131'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  }</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_132'/>
+132
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_132'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_133'/>
+133
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_133'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @Operation(summary = &#34;Get zipcode by id&#34;)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_134'/>
+134
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_134'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @GetMapping(value = Routes.GET_ZIPCODE_BY_ID, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_135'/>
+135
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_135'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @ResponseStatus(HttpStatus.OK)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_136'/>
+136
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_136'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @Override</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_137'/>
+137
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_137'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  public ZipCodeResponse getZipCodeById(@PathVariable(&#34;zipCodeId&#34;) long zipCodeId)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_138'/>
+138
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_138'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>      throws ZipcodeNotFoundException {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_139'/>
+139
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_139'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>    log.debug(&#34;============ getZipCodeById ============&#34;);</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_140'/>
+140
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_140'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ZipCode zipCode;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_141'/>
+141
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_141'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    try {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_142'/>
+142
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_142'>1</a>
+<span>
+1. getZipCodeById : removed call to io/oigres/ecomm/service/users/usecases/region/search/GetZipCodeByIdUseCase::handle &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>      zipCode = getZipCodeByIdUseCase.handle(zipCodeId);</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_143'/>
+143
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_143'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>    } catch (ZipcodeNotFoundDomainException ex) {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_144'/>
+144
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_144'>2</a>
+<span>
+1. getZipCodeById : removed call to io/oigres/ecomm/service/users/exception/ZipcodeNotFoundDomainException::getMessage &rarr; NO_COVERAGE<br/>
+2. getZipCodeById : removed call to io/oigres/ecomm/service/users/api/model/exception/ZipcodeNotFoundException::&#60;init&#62; &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>      throw new ZipcodeNotFoundException(ex.getMessage());</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_145'/>
+145
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_145'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>    }</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_146'/>
+146
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_146'>2</a>
+<span>
+1. getZipCodeById : removed call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse::builder &rarr; NO_COVERAGE<br/>
+2. getZipCodeById : replaced return value with null for io/oigres/ecomm/service/users/api/RegionController::getZipCodeById &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>    return ZipCodeResponse.builder()</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_147'/>
+147
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_147'>3</a>
+<span>
+1. getZipCodeById : removed call to io/oigres/ecomm/service/users/domain/ZipCode::getId &rarr; NO_COVERAGE<br/>
+2. getZipCodeById : replaced call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::id with receiver &rarr; NO_COVERAGE<br/>
+3. getZipCodeById : removed call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::id &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        .id(zipCode.getId())</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_148'/>
+148
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_148'>3</a>
+<span>
+1. getZipCodeById : removed call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::code &rarr; NO_COVERAGE<br/>
+2. getZipCodeById : replaced call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::code with receiver &rarr; NO_COVERAGE<br/>
+3. getZipCodeById : removed call to io/oigres/ecomm/service/users/domain/ZipCode::getCode &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        .code(zipCode.getCode())</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_149'/>
+149
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_149'>3</a>
+<span>
+1. getZipCodeById : replaced call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::city with receiver &rarr; NO_COVERAGE<br/>
+2. getZipCodeById : removed call to io/oigres/ecomm/service/users/domain/ZipCode::getCity &rarr; NO_COVERAGE<br/>
+3. getZipCodeById : removed call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::city &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        .city(zipCode.getCity())</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_150'/>
+150
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_150'>2</a>
+<span>
+1. getZipCodeById : replaced call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::state with receiver &rarr; NO_COVERAGE<br/>
+2. getZipCodeById : removed call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::state &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        .state(</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_151'/>
+151
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_151'>1</a>
+<span>
+1. getZipCodeById : removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse::builder &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>            StateResponse.builder()</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_152'/>
+152
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_152'>4</a>
+<span>
+1. getZipCodeById : removed call to io/oigres/ecomm/service/users/domain/State::getId &rarr; NO_COVERAGE<br/>
+2. getZipCodeById : replaced call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::id with receiver &rarr; NO_COVERAGE<br/>
+3. getZipCodeById : removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::id &rarr; NO_COVERAGE<br/>
+4. getZipCodeById : removed call to io/oigres/ecomm/service/users/domain/ZipCode::getState &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                .id(zipCode.getState().getId())</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_153'/>
+153
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_153'>4</a>
+<span>
+1. getZipCodeById : removed call to io/oigres/ecomm/service/users/domain/ZipCode::getState &rarr; NO_COVERAGE<br/>
+2. getZipCodeById : removed call to io/oigres/ecomm/service/users/domain/State::getShortName &rarr; NO_COVERAGE<br/>
+3. getZipCodeById : replaced call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::shortName with receiver &rarr; NO_COVERAGE<br/>
+4. getZipCodeById : removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::shortName &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                .shortName(zipCode.getState().getShortName())</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_154'/>
+154
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_154'>4</a>
+<span>
+1. getZipCodeById : removed call to io/oigres/ecomm/service/users/domain/State::getName &rarr; NO_COVERAGE<br/>
+2. getZipCodeById : replaced call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::name with receiver &rarr; NO_COVERAGE<br/>
+3. getZipCodeById : removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::name &rarr; NO_COVERAGE<br/>
+4. getZipCodeById : removed call to io/oigres/ecomm/service/users/domain/ZipCode::getState &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                .name(zipCode.getState().getName())</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_155'/>
+155
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_155'>1</a>
+<span>
+1. getZipCodeById : removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::build &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                .build())</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_156'/>
+156
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_156'>3</a>
+<span>
+1. getZipCodeById : removed call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::tax &rarr; NO_COVERAGE<br/>
+2. getZipCodeById : replaced call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::tax with receiver &rarr; NO_COVERAGE<br/>
+3. getZipCodeById : removed call to io/oigres/ecomm/service/users/domain/ZipCode::getTax &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        .tax(zipCode.getTax())</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_157'/>
+157
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_157'>1</a>
+<span>
+1. getZipCodeById : removed call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::build &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        .build();</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_158'/>
+158
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_158'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  }</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@689d9df_159'/>
+159
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_159'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_68'>68</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_68'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b></span></span> Removed assignment to member variable getStatesUseCase &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_69'>69</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_69'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b></span></span> Removed assignment to member variable getStateByIdUseCase &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_70'>70</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_70'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b></span></span> Removed assignment to member variable getZipCodesByState &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_71'>71</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_71'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b></span></span> Removed assignment to member variable getZipCodeByIdUseCase &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_72'>72</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_72'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b></span></span> Removed assignment to member variable mapper &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_84'>84</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_84'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getStates<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/usecases/region/search/GetStatesUseCase::handle &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_85'>85</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_85'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getStates<br/><b>Killed by : </b></span></span> removed call to org/springframework/data/domain/PageRequest::of &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_86'>86</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_86'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getStates<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/PageableRequestImpl::getPageNumber &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getStates<br/><b>Killed by : </b></span></span> removed call to org/springframework/data/domain/Sort::by &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getStates<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/PageableRequestImpl::getPageSize &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>getStates<br/><b>Killed by : </b></span></span> removed call to org/springframework/data/domain/Sort::ascending &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>getStates<br/><b>Killed by : </b></span></span> Substituted 1 with 0 &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>getStates<br/><b>Killed by : </b></span></span> Substituted 0 with 1 &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>7.<span><b>7</b><br/><b>Location : </b>getStates<br/><b>Killed by : </b></span></span> replaced call to org/springframework/data/domain/Sort::ascending with receiver &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_87'>87</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_87'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getStates<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/config/mapper/ResponsesMapper::toStateResponse &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getStates<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/config/mapper/ResponsesMapper::toStateResponse with argument &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getStates<br/><b>Killed by : </b></span></span> removed call to org/springframework/data/domain/Page::getContent &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_88'>88</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_88'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getStates<br/><b>Killed by : </b></span></span> removed call to org/springframework/data/domain/Page::getTotalElements &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getStates<br/><b>Killed by : </b></span></span> replaced return value with null for io/oigres/ecomm/service/users/api/RegionController::getStates &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getStates<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/PageResponseImpl::&#60;init&#62; &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_100'>100</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_100'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getStateById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/usecases/region/search/GetStateByIdUseCase::handle &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_102'>102</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_102'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getStateById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/exception/StateNotFoundException::&#60;init&#62; &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_104'>104</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_104'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getStateById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse::builder &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getStateById<br/><b>Killed by : </b></span></span> replaced return value with null for io/oigres/ecomm/service/users/api/RegionController::getStateById &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_105'>105</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_105'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getStateById<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::id with receiver &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getStateById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/State::getId &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getStateById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::id &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_106'>106</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_106'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getStateById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::shortName &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getStateById<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::shortName with receiver &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getStateById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/State::getShortName &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_107'>107</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_107'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getStateById<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::name with receiver &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getStateById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/State::getName &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getStateById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::name &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_108'>108</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_108'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getStateById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::build &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_122'>122</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_122'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> removed call to java/lang/Integer::valueOf &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/PageableRequestImpl::getPageNumber &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> Substituted 2 with 3 &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_123'>123</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_123'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> removed call to java/lang/Integer::valueOf &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/PageableRequestImpl::getPageSize &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_125'>125</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_125'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/usecases/region/search/GetZipCodesByStateUseCase::handle &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_127'>127</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_127'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> removed call to org/springframework/data/domain/PageRequest::of &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_128'>128</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_128'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/PageableRequestImpl::getPageNumber &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> Substituted 0 with 1 &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> replaced call to org/springframework/data/domain/Sort::ascending with receiver &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> Substituted 1 with 0 &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/PageableRequestImpl::getPageSize &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> removed call to org/springframework/data/domain/Sort::ascending &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>7.<span><b>7</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> removed call to org/springframework/data/domain/Sort::by &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_129'>129</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_129'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/config/mapper/ResponsesMapper::toZipCodeResponse with argument &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/config/mapper/ResponsesMapper::toZipCodeResponse &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> removed call to org/springframework/data/domain/Page::getContent &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_130'>130</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_130'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> removed call to org/springframework/data/domain/Page::getTotalElements &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> replaced return value with null for io/oigres/ecomm/service/users/api/RegionController::getZipCodesByState &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getZipCodesByState<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/PageResponseImpl::&#60;init&#62; &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_142'>142</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_142'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/usecases/region/search/GetZipCodeByIdUseCase::handle &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_144'>144</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_144'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/exception/ZipcodeNotFoundDomainException::getMessage &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/exception/ZipcodeNotFoundException::&#60;init&#62; &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_146'>146</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_146'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse::builder &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> replaced return value with null for io/oigres/ecomm/service/users/api/RegionController::getZipCodeById &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_147'>147</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_147'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/ZipCode::getId &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::id with receiver &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::id &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_148'>148</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_148'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::code &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::code with receiver &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/ZipCode::getCode &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_149'>149</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_149'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::city with receiver &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/ZipCode::getCity &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::city &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_150'>150</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_150'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::state with receiver &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::state &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_151'>151</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_151'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse::builder &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_152'>152</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_152'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/State::getId &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::id with receiver &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::id &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/ZipCode::getState &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_153'>153</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_153'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/ZipCode::getState &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/State::getShortName &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::shortName with receiver &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::shortName &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_154'>154</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_154'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/State::getName &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::name with receiver &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::name &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/ZipCode::getState &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_155'>155</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_155'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder::build &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_156'>156</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_156'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::tax &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> replaced call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::tax with receiver &rarr; NO_COVERAGE</span>
+</div> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/domain/ZipCode::getTax &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@689d9df_157'>157</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@689d9df_157'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getZipCodeById<br/><b>Killed by : </b></span></span> removed call to io/oigres/ecomm/service/users/api/model/region/ZipCodeResponse$ZipCodeResponseBuilder::build &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+</ul>
+
+<br/>
+
+Report generated by <a href='https://pitest.org'>PIT</a> 1.16.2
+
+</body>
+</html>

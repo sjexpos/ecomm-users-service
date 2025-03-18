@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PageableRequest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">API</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.api.model</a> &gt; <span class="el_source">PageableRequest.java</span></div><h1>PageableRequest.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.api.model;
+
+import java.util.Optional;
+
+/**
+ * Abstract interface for pagination information.
+ *
+ * @author Sergio Exposito
+ */
+public interface PageableRequest {
+
+  /**
+   * Returns a {@link PageableRequest} instance representing no pagination setup.
+   *
+   * @return
+   */
+  static PageableRequest unpaged() {
+<span class="nc" id="L35">    return UnpagedRequest.INSTANCE;</span>
+  }
+
+  /**
+   * Creates a new {@link PageableRequest} for the first page (page number {@code 0}) given {@code pageSize} .
+   *
+   * @param pageSize the size of the page to be returned, must be greater than 0.
+   * @return a new {@link PageableRequest}.
+   * @since 2.5
+   */
+  static PageableRequest ofSize(int pageSize) {
+<span class="nc" id="L46">    return PageableRequestImpl.of(0, pageSize);</span>
+  }
+
+  /**
+   * Returns whether the current {@link PageableRequest} contains pagination information.
+   *
+   * @return
+   */
+  default boolean isPaged() {
+<span class="nc" id="L55">    return true;</span>
+  }
+
+  /**
+   * Returns whether the current {@link PageableRequest} does not contain pagination information.
+   *
+   * @return
+   */
+  default boolean isUnpaged() {
+<span class="nc bnc" id="L64" title="All 2 branches missed.">    return !isPaged();</span>
+  }
+
+  /**
+   * Returns the page to be returned.
+   *
+   * @return the page to be returned.
+   */
+  int getPageNumber();
+
+  /**
+   * Returns the number of items to be returned.
+   *
+   * @return the number of items of that page
+   */
+  int getPageSize();
+
+  /**
+   * Returns the offset to be taken according to the underlying page and page size.
+   *
+   * @return the offset to be taken
+   */
+  long getOffset();
+
+  /**
+   * Returns the sorting parameters.
+   *
+   * @return
+   */
+  SortRequest getSort();
+
+  /**
+   * Returns the current {@link SortRequest} or the given one if the current one is unsorted.
+   *
+   * @param sort must not be {@literal null}.
+   * @return
+   */
+  default SortRequest getSortOr(SortRequest sort) {
+<span class="nc bnc" id="L102" title="All 2 branches missed.">    return getSort().isSorted() ? getSort() : sort;</span>
+  }
+
+  /**
+   * Returns the {@link PageableRequest} requesting the next {@link PageResponse}.
+   *
+   * @return
+   */
+  PageableRequest next();
+
+  /**
+   * Returns the previous {@link PageableRequest} or the first {@link PageableRequest} if the current one already is the first one.
+   *
+   * @return
+   */
+  PageableRequest previousOrFirst();
+
+  /**
+   * Returns the {@link PageableRequest} requesting the first page.
+   *
+   * @return
+   */
+  PageableRequest first();
+
+  /**
+   * Creates a new {@link PageableRequest} with {@code pageNumber} applied.
+   *
+   * @param pageNumber
+   * @return a new {@link PageableRequestImpl}.
+   * @since 2.5
+   */
+  PageableRequest withPage(int pageNumber);
+
+  /**
+   * Returns whether there's a previous {@link PageableRequest} we can access from the current one. Will return
+   * {@literal false} in case the current {@link PageableRequest} already refers to the first page.
+   *
+   * @return
+   */
+  boolean hasPrevious();
+
+  /**
+   * Returns an {@link Optional} so that it can easily be mapped on.
+   *
+   * @return
+   */
+  default Optional&lt;PageableRequest&gt; toOptional() {
+<span class="nc bnc" id="L149" title="All 2 branches missed.">    return isUnpaged() ? Optional.empty() : Optional.of(this);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

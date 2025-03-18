@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>ConfigPrinter.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Aggregated Reports</a> &gt; <a href="../index.html" class="el_bundle">users-service-spring-boot</a> &gt; <a href="index.source.html" class="el_package">org.redisson.config</a> &gt; <span class="el_source">ConfigPrinter.java</span></div><h1>ConfigPrinter.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package org.redisson.config;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.cache.CacheException;
+import org.redisson.hibernate.RedissonRegionFactory;
+import org.slf4j.Logger;
+
+<span class="nc" id="L28">public class ConfigPrinter {</span>
+
+  public void print(Logger log, String configPath) {
+<span class="nc" id="L31">    Config config = loadRedissonConfig(configPath);</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">    if (config.isClusterConfig()) {</span>
+<span class="nc" id="L33">      ClusterServersConfig clusterServersConfig = config.getClusterServersConfig();</span>
+<span class="nc" id="L34">      log.info(&quot;Client name: {}&quot;, clusterServersConfig.getClientName());</span>
+<span class="nc" id="L35">      log.info(&quot;Nodes: {}&quot;, clusterServersConfig.getNodeAddresses());</span>
+<span class="nc" id="L36">      log.info(&quot;Username: {}&quot;, clusterServersConfig.getUsername());</span>
+<span class="nc" id="L37">      String rawPassword = clusterServersConfig.getPassword();</span>
+<span class="nc" id="L38">      String password =</span>
+<span class="nc" id="L39">          rawPassword.substring(0, 1)</span>
+<span class="nc" id="L40">              + StringUtils.repeat(&quot;*&quot;, rawPassword.length() - 2)</span>
+<span class="nc" id="L41">              + rawPassword.substring(rawPassword.length() - 1);</span>
+
+<span class="nc" id="L43">      log.info(&quot;Password: {}&quot;, password);</span>
+<span class="nc" id="L44">      log.info(&quot;Connection timeout: {}&quot;, clusterServersConfig.getConnectTimeout());</span>
+<span class="nc" id="L45">      log.info(&quot;Timeout: {}&quot;, clusterServersConfig.getTimeout());</span>
+<span class="nc" id="L46">      log.info(</span>
+<span class="nc" id="L47">          &quot;Master connection pool size: {}&quot;, clusterServersConfig.getMasterConnectionPoolSize());</span>
+<span class="nc" id="L48">      log.info(&quot;Slave connection pool size: {}&quot;, clusterServersConfig.getSlaveConnectionPoolSize());</span>
+<span class="nc" id="L49">      log.info(&quot;Retry attempts: {}&quot;, clusterServersConfig.getRetryAttempts());</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">    } else if (config.getSingleServerConfig() != null) {</span>
+<span class="nc" id="L51">      SingleServerConfig singleServerConfig = config.getSingleServerConfig();</span>
+<span class="nc" id="L52">      log.info(&quot;Client name: {}&quot;, singleServerConfig.getClientName());</span>
+<span class="nc" id="L53">      log.info(&quot;Address: {}&quot;, singleServerConfig.getAddress());</span>
+<span class="nc" id="L54">      log.info(&quot;Username: {}&quot;, singleServerConfig.getUsername());</span>
+<span class="nc" id="L55">      log.info(&quot;Password: {}&quot;, singleServerConfig.getPassword());</span>
+<span class="nc" id="L56">      log.info(&quot;Connection timeout: {}&quot;, singleServerConfig.getConnectTimeout());</span>
+<span class="nc" id="L57">      log.info(&quot;Connection pool size: {}&quot;, singleServerConfig.getConnectionPoolSize());</span>
+<span class="nc" id="L58">      log.info(&quot;Timeout: {}&quot;, singleServerConfig.getTimeout());</span>
+<span class="nc" id="L59">      log.info(&quot;Retry attempts: {}&quot;, singleServerConfig.getRetryAttempts());</span>
+    }
+<span class="nc" id="L61">  }</span>
+
+  protected Config loadRedissonConfig(String configPath) {
+<span class="nc" id="L64">    Config config = null;</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">    if (StringUtils.isBlank(configPath)) {</span>
+<span class="nc" id="L66">      config = loadConfig(RedissonRegionFactory.class.getClassLoader(), &quot;redisson.json&quot;);</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">      if (config == null) {</span>
+<span class="nc" id="L68">        config = loadConfig(RedissonRegionFactory.class.getClassLoader(), &quot;redisson.yaml&quot;);</span>
+      }
+    } else {
+<span class="nc" id="L71">      config = loadConfig(RedissonRegionFactory.class.getClassLoader(), configPath);</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">      if (config == null) {</span>
+<span class="nc" id="L73">        config = loadConfig(configPath);</span>
+      }
+    }
+<span class="nc bnc" id="L76" title="All 2 branches missed.">    if (config == null) {</span>
+<span class="nc" id="L77">      throw new CacheException(&quot;Unable to locate Redisson configuration&quot;);</span>
+    }
+<span class="nc" id="L79">    return config;</span>
+  }
+
+  private Config loadConfig(String configPath) {
+<span class="nc" id="L83">    Path path = Path.of(configPath);</span>
+    try {
+<span class="nc" id="L85">      return Config.fromYAML(path.toFile());</span>
+<span class="nc" id="L86">    } catch (IOException e) {</span>
+      // trying next format
+      try {
+<span class="nc" id="L89">        return Config.fromJSON(path.toFile());</span>
+<span class="nc" id="L90">      } catch (IOException e1) {</span>
+<span class="nc" id="L91">        throw new CacheException(&quot;Can't parse default yaml config&quot;, e1);</span>
+      }
+    }
+  }
+
+  private Config loadConfig(ClassLoader classLoader, String fileName) {
+<span class="nc" id="L97">    InputStream is = classLoader.getResourceAsStream(fileName);</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">    if (is != null) {</span>
+      try {
+<span class="nc" id="L100">        return Config.fromYAML(is);</span>
+<span class="nc" id="L101">      } catch (IOException e) {</span>
+        try {
+<span class="nc" id="L103">          is = classLoader.getResourceAsStream(fileName);</span>
+<span class="nc" id="L104">          return Config.fromJSON(is);</span>
+<span class="nc" id="L105">        } catch (IOException e1) {</span>
+<span class="nc" id="L106">          throw new CacheException(&quot;Can't parse yaml config&quot;, e1);</span>
+        }
+      }
+    }
+<span class="nc" id="L110">    return null;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>LoggingRequestFilter.java</h1>
+
+<table class="src">
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/**********</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> This project is free software; you can redistribute it and/or modify it under</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> the terms of the GNU General Public License as published by the</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> Free Software Foundation; either version 3.0 of the License, or (at your</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> option) any later version. (See &#60;https://www.gnu.org/licenses/gpl-3.0.html&#62;.)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> This project is distributed in the hope that it will be useful, but WITHOUT</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> FOR A PARTICULAR PURPOSE.  See the GNU General Public License for</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> more details.</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> You should have received a copy of the GNU General Public License</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> along with this project; if not, write to the Free Software Foundation, Inc.,</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> **********/</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              </span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package io.oigres.ecomm.service.users.web.http;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import jakarta.servlet.Filter;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import jakarta.servlet.FilterChain;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import jakarta.servlet.ServletException;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import jakarta.servlet.ServletRequest;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import jakarta.servlet.ServletResponse;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import jakarta.servlet.http.HttpServletRequest;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import jakarta.servlet.http.HttpServletResponse;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.io.IOException;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.lang.management.ManagementFactory;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.lang.management.MemoryMXBean;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.List;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.regex.Pattern;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import lombok.extern.slf4j.Slf4j;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.apache.commons.io.FileUtils;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>@Slf4j</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public class LoggingRequestFilter implements Filter {</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>  private static final List&#60;Pattern&#62; EXCLUDED_PATHS =</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>      List.of(</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_39'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>          Pattern.compile(&#34;/&#34;),</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>          Pattern.compile(&#34;/favicon.ico&#34;),</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_41'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>          Pattern.compile(&#34;/actuator&#34;),</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>          Pattern.compile(&#34;/actuator/.*&#34;),</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_43'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>          Pattern.compile(&#34;/swagger&#34;),</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_44'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>          Pattern.compile(&#34;/swagger/.*&#34;),</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>          Pattern.compile(&#34;/swagger-ui&#34;),</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>          Pattern.compile(&#34;/swagger-ui/.*&#34;),</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_47'/>
+47
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_47'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>          Pattern.compile(&#34;/api/swagger-config&#34;));</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_48'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_49'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  private final MemoryMXBean memoryBean;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_51'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>  public LoggingRequestFilter() {</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_52'/>
+52
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_52'>2</a>
+<span>
+1. &#60;init&#62; : Removed assignment to member variable memoryBean &rarr; SURVIVED<br/>
+2. &#60;init&#62; : removed call to java/lang/management/ManagementFactory::getMemoryMXBean &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>    this.memoryBean = ManagementFactory.getMemoryMXBean();</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_53'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>  }</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_54'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_55'/>
+55
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_55'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  @Override</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_56'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_57'/>
+57
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_57'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>      throws IOException, ServletException {</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_58'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    HttpServletRequest httpRequest = (HttpServletRequest) request;</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_59'/>
+59
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_59'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    HttpServletResponse httpResponse = (HttpServletResponse) response;</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_60'/>
+60
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_60'>5</a>
+<span>
+1. doFilter : negated conditional &rarr; SURVIVED<br/>
+2. doFilter : removed call to jakarta/servlet/http/HttpServletRequest::getMethod &rarr; SURVIVED<br/>
+3. doFilter : removed conditional - replaced equality check with false &rarr; SURVIVED<br/>
+4. doFilter : removed call to jakarta/servlet/http/HttpServletRequest::getMethod &rarr; SURVIVED<br/>
+5. doFilter : removed conditional - replaced equality check with true &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>    String method = httpRequest.getMethod() != null ? httpRequest.getMethod() : &#34;&#34;;</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_61'/>
+61
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_61'>5</a>
+<span>
+1. doFilter : removed call to jakarta/servlet/http/HttpServletRequest::getRequestURI &rarr; SURVIVED<br/>
+2. doFilter : removed conditional - replaced equality check with true &rarr; SURVIVED<br/>
+3. doFilter : removed conditional - replaced equality check with false &rarr; SURVIVED<br/>
+4. doFilter : negated conditional &rarr; SURVIVED<br/>
+5. doFilter : removed call to jakarta/servlet/http/HttpServletRequest::getRequestURI &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>    String requestUri = httpRequest.getRequestURI() != null ? httpRequest.getRequestURI() : &#34;&#34;;</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_62'/>
+62
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_62'>5</a>
+<span>
+1. doFilter : removed conditional - replaced equality check with false &rarr; SURVIVED<br/>
+2. doFilter : removed conditional - replaced equality check with true &rarr; SURVIVED<br/>
+3. doFilter : removed call to jakarta/servlet/http/HttpServletRequest::getQueryString &rarr; SURVIVED<br/>
+4. doFilter : negated conditional &rarr; SURVIVED<br/>
+5. doFilter : removed call to jakarta/servlet/http/HttpServletRequest::getQueryString &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>    String queryString = httpRequest.getQueryString() != null ? httpRequest.getQueryString() : &#34;&#34;;</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_63'/>
+63
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_63'>9</a>
+<span>
+1. lambda$doFilter$0 : replaced boolean return with true for io/oigres/ecomm/service/users/web/http/LoggingRequestFilter::lambda$doFilter$0 &rarr; SURVIVED<br/>
+2. lambda$doFilter$0 : replaced boolean return with false for io/oigres/ecomm/service/users/web/http/LoggingRequestFilter::lambda$doFilter$0 &rarr; SURVIVED<br/>
+3. lambda$doFilter$0 : removed call to java/util/regex/Matcher::matches &rarr; SURVIVED<br/>
+4. doFilter : removed conditional - replaced equality check with true &rarr; SURVIVED<br/>
+5. doFilter : removed call to java/util/stream/Stream::anyMatch &rarr; SURVIVED<br/>
+6. doFilter : removed conditional - replaced equality check with false &rarr; SURVIVED<br/>
+7. doFilter : negated conditional &rarr; SURVIVED<br/>
+8. doFilter : removed call to java/util/List::stream &rarr; KILLED<br/>
+9. lambda$doFilter$0 : removed call to java/util/regex/Pattern::matcher &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>    if (EXCLUDED_PATHS.stream().anyMatch(p -&#62; p.matcher(requestUri).matches())) {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_64'/>
+64
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_64'>1</a>
+<span>
+1. doFilter : removed call to jakarta/servlet/FilterChain::doFilter &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>      chain.doFilter(request, response);</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_65'/>
+65
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_65'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>      return;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_66'/>
+66
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_66'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_67'/>
+67
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_67'>1</a>
+<span>
+1. doFilter : removed call to java/lang/System::currentTimeMillis &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>    long start = System.currentTimeMillis();</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_68'/>
+68
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_68'>2</a>
+<span>
+1. doFilter : removed call to java/lang/management/MemoryUsage::getUsed &rarr; SURVIVED<br/>
+2. doFilter : removed call to java/lang/management/MemoryMXBean::getHeapMemoryUsage &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>    long startHeap = memoryBean.getHeapMemoryUsage().getUsed();</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_69'/>
+69
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_69'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    log.info(String.format(&#34;BEGIN - %s %s %s&#34;, method, requestUri, queryString));</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_70'/>
+70
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_70'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    try {</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_71'/>
+71
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_71'>1</a>
+<span>
+1. doFilter : removed call to jakarta/servlet/FilterChain::doFilter &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>      chain.doFilter(request, response);</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_72'/>
+72
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_72'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    } finally {</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_73'/>
+73
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_73'>1</a>
+<span>
+1. doFilter : removed call to java/lang/System::currentTimeMillis &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>      long end = System.currentTimeMillis();</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_74'/>
+74
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_74'>2</a>
+<span>
+1. doFilter : removed call to java/lang/management/MemoryUsage::getUsed &rarr; SURVIVED<br/>
+2. doFilter : removed call to java/lang/management/MemoryMXBean::getHeapMemoryUsage &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>      long endHeap = memoryBean.getHeapMemoryUsage().getUsed();</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_75'/>
+75
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_75'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>      log.info(</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_76'/>
+76
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_76'>2</a>
+<span>
+1. doFilter : replaced call to java/lang/String::format with argument &rarr; SURVIVED<br/>
+2. doFilter : removed call to java/lang/String::format &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>          String.format(</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_77'/>
+77
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_77'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>              &#34;END - %s %s - status: %s - time: %dms - heap: %s&#34;,</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_78'/>
+78
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_78'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>              method,</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_79'/>
+79
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_79'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>              requestUri,</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_80'/>
+80
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_80'>4</a>
+<span>
+1. doFilter : removed call to jakarta/servlet/http/HttpServletResponse::getStatus &rarr; SURVIVED<br/>
+2. doFilter : Replaced long subtraction with addition &rarr; SURVIVED<br/>
+3. doFilter : removed call to java/lang/Integer::valueOf &rarr; SURVIVED<br/>
+4. doFilter : Substituted 3 with 4 &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>              httpResponse.getStatus(),</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_81'/>
+81
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_81'>3</a>
+<span>
+1. doFilter : removed call to java/lang/Long::valueOf &rarr; SURVIVED<br/>
+2. doFilter : Replaced long subtraction with addition &rarr; SURVIVED<br/>
+3. doFilter : Substituted 4 with 5 &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>              (end - start),</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_82'/>
+82
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_82'>1</a>
+<span>
+1. doFilter : removed call to org/apache/commons/io/FileUtils::byteCountToDisplaySize &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>              FileUtils.byteCountToDisplaySize(endHeap - startHeap)));</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_83'/>
+83
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_83'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_84'/>
+84
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_84'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>  }</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@69322af5_85'/>
+85
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_85'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@69322af5_52'>52</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_52'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b></span></span> Removed assignment to member variable memoryBean &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=<init>,-methodDesc=()V],-indexes=[9],-mutator=org.pitest.mutationtest.engine.gregor.mutators.experimental.MemberVariableMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=<init>,-methodDesc=()V],-indexes=[9],-mutator=org.pitest.mutationtest.engine.gregor.mutators.experimental.MemberVariableMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=<init>,-methodDesc=()V],-indexes=[9],-mutator=org.pitest.mutationtest.engine.gregor.mutators.experimental.MemberVariableMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b></span></span> removed call to java/lang/management/ManagementFactory::getMemoryMXBean &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=<init>,-methodDesc=()V],-indexes=[8],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=<init>,-methodDesc=()V],-indexes=[8],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=<init>,-methodDesc=()V],-indexes=[8],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@69322af5_60'>60</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_60'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> negated conditional &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[15],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[15],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[15],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed call to jakarta/servlet/http/HttpServletRequest::getMethod &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[17],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[17],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[17],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed conditional - replaced equality check with false &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[15],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[15],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[15],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed call to jakarta/servlet/http/HttpServletRequest::getMethod &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[14],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[14],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[14],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed conditional - replaced equality check with true &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[15],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[15],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[15],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@69322af5_61'>61</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_61'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b>io.oigres.ecomm.service.users.api.UsersControllerTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.UsersControllerTest]/[method:test()]</span></span> removed call to jakarta/servlet/http/HttpServletRequest::getRequestURI &rarr; KILLED</span>
+</div> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed call to jakarta/servlet/http/HttpServletRequest::getRequestURI &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[28],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[28],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[28],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed conditional - replaced equality check with true &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[29],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[29],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[29],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed conditional - replaced equality check with false &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[29],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[29],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[29],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> negated conditional &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[29],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[29],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[29],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@69322af5_62'>62</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_62'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed conditional - replaced equality check with false &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[43],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[43],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[43],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed conditional - replaced equality check with true &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[43],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[43],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[43],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed call to jakarta/servlet/http/HttpServletRequest::getQueryString &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[42],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[42],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[42],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> negated conditional &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[43],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[43],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[43],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='NO_COVERAGE'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed call to jakarta/servlet/http/HttpServletRequest::getQueryString &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@69322af5_63'>63</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_63'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b>io.oigres.ecomm.service.users.api.UsersControllerTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.UsersControllerTest]/[method:test()]</span></span> removed call to java/util/List::stream &rarr; KILLED</span>
+</div> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>lambda$doFilter$0<br/><b>Killed by : </b></span></span> replaced boolean return with true for io/oigres/ecomm/service/users/web/http/LoggingRequestFilter::lambda$doFilter$0 &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=lambda$doFilter$0,-methodDesc=(Ljava/lang/String;Ljava/util/regex/Pattern;)Z],-indexes=[7],-mutator=org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=lambda$doFilter$0,-methodDesc=(Ljava/lang/String;Ljava/util/regex/Pattern;)Z],-indexes=[7],-mutator=org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=lambda$doFilter$0,-methodDesc=(Ljava/lang/String;Ljava/util/regex/Pattern;)Z],-indexes=[7],-mutator=org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>lambda$doFilter$0<br/><b>Killed by : </b></span></span> replaced boolean return with false for io/oigres/ecomm/service/users/web/http/LoggingRequestFilter::lambda$doFilter$0 &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=lambda$doFilter$0,-methodDesc=(Ljava/lang/String;Ljava/util/regex/Pattern;)Z],-indexes=[7],-mutator=org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanFalseReturnValsMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=lambda$doFilter$0,-methodDesc=(Ljava/lang/String;Ljava/util/regex/Pattern;)Z],-indexes=[7],-mutator=org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanFalseReturnValsMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=lambda$doFilter$0,-methodDesc=(Ljava/lang/String;Ljava/util/regex/Pattern;)Z],-indexes=[7],-mutator=org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanFalseReturnValsMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>lambda$doFilter$0<br/><b>Killed by : </b></span></span> removed call to java/util/regex/Matcher::matches &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=lambda$doFilter$0,-methodDesc=(Ljava/lang/String;Ljava/util/regex/Pattern;)Z],-indexes=[6],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=lambda$doFilter$0,-methodDesc=(Ljava/lang/String;Ljava/util/regex/Pattern;)Z],-indexes=[6],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=lambda$doFilter$0,-methodDesc=(Ljava/lang/String;Ljava/util/regex/Pattern;)Z],-indexes=[6],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed conditional - replaced equality check with true &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[60],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[60],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[60],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>lambda$doFilter$0<br/><b>Killed by : </b>io.oigres.ecomm.service.users.api.UsersControllerTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.UsersControllerTest]/[method:test()]</span></span> removed call to java/util/regex/Pattern::matcher &rarr; KILLED</span>
+</div> <p class='SURVIVED'><span class='pop'>7.<span><b>7</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed call to java/util/stream/Stream::anyMatch &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[59],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[59],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[59],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>8.<span><b>8</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed conditional - replaced equality check with false &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[60],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[60],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[60],-mutator=org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>9.<span><b>9</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> negated conditional &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[60],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[60],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[60],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@69322af5_64'>64</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_64'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed call to jakarta/servlet/FilterChain::doFilter &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@69322af5_67'>67</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_67'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed call to java/lang/System::currentTimeMillis &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[73],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[73],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[73],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@69322af5_68'>68</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_68'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b>io.oigres.ecomm.service.users.api.UsersControllerTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.UsersControllerTest]/[method:test()]</span></span> removed call to java/lang/management/MemoryMXBean::getHeapMemoryUsage &rarr; KILLED</span>
+</div> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed call to java/lang/management/MemoryUsage::getUsed &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[80],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[80],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[80],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@69322af5_71'>71</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_71'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b>io.oigres.ecomm.service.users.api.UsersControllerTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.UsersControllerTest]/[method:test()]</span></span> removed call to jakarta/servlet/FilterChain::doFilter &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@69322af5_73'>73</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_73'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed call to java/lang/System::currentTimeMillis &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[173,-110],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[173,-110],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[173,-110],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@69322af5_74'>74</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_74'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b>io.oigres.ecomm.service.users.api.UsersControllerTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.UsersControllerTest]/[method:test()]</span></span> removed call to java/lang/management/MemoryMXBean::getHeapMemoryUsage &rarr; KILLED</span>
+</div> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed call to java/lang/management/MemoryUsage::getUsed &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[180,-117],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[180,-117],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[180,-117],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@69322af5_76'>76</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_76'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> replaced call to java/lang/String::format with argument &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[224,-161],-mutator=org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[224,-161],-mutator=org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[224,-161],-mutator=org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed call to java/lang/String::format &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[224,-161],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[224,-161],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[224,-161],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@69322af5_80'>80</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_80'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed call to jakarta/servlet/http/HttpServletResponse::getStatus &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[201,-138],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[201,-138],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[201,-138],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> Replaced long subtraction with addition &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[208,-145],-mutator=org.pitest.mutationtest.engine.gregor.mutators.MathMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[208,-145],-mutator=org.pitest.mutationtest.engine.gregor.mutators.MathMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[208,-145],-mutator=org.pitest.mutationtest.engine.gregor.mutators.MathMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed call to java/lang/Integer::valueOf &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[202,-139],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[202,-139],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[202,-139],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> Substituted 3 with 4 &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[205,-142],-mutator=org.pitest.mutationtest.engine.gregor.mutators.InlineConstantMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[205,-142],-mutator=org.pitest.mutationtest.engine.gregor.mutators.InlineConstantMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[205,-142],-mutator=org.pitest.mutationtest.engine.gregor.mutators.InlineConstantMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@69322af5_81'>81</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_81'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed call to java/lang/Long::valueOf &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[211,-148],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[211,-148],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[211,-148],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b>io.oigres.ecomm.service.users.api.UsersControllerTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.UsersControllerTest]/[method:test()]</span></span> Substituted 4 with 5 &rarr; KILLED</span>
+</div> <p class='SURVIVED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> Replaced long subtraction with addition &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[217,-154],-mutator=org.pitest.mutationtest.engine.gregor.mutators.MathMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[217,-154],-mutator=org.pitest.mutationtest.engine.gregor.mutators.MathMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[217,-154],-mutator=org.pitest.mutationtest.engine.gregor.mutators.MathMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@69322af5_82'>82</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@69322af5_82'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>doFilter<br/><b>Killed by : </b></span></span> removed call to org/apache/commons/io/FileUtils::byteCountToDisplaySize &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[220,-157],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[220,-157],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=io.oigres.ecomm.service.users.web.http.LoggingRequestFilter,-method=doFilter,-methodDesc=(Ljakarta/servlet/ServletRequest;Ljakarta/servlet/ServletResponse;Ljakarta/servlet/FilterChain;)V],-indexes=[220,-157],-mutator=org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator]" style="display:none;">Covered by tests:
+<ul>
+</ul>
+</div></div> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+</ul>
+
+<br/>
+
+Report generated by <a href='https://pitest.org'>PIT</a> 1.16.2
+
+</body>
+</html>

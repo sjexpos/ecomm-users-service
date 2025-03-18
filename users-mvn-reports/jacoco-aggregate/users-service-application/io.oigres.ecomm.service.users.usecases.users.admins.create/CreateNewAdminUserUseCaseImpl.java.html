@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>CreateNewAdminUserUseCaseImpl.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Aggregated Reports</a> &gt; <a href="../index.html" class="el_bundle">users-service-application</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.usecases.users.admins.create</a> &gt; <span class="el_source">CreateNewAdminUserUseCaseImpl.java</span></div><h1>CreateNewAdminUserUseCaseImpl.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.usecases.users.admins.create;
+
+import io.oigres.ecomm.service.users.constants.ProfileErrorMessages;
+import io.oigres.ecomm.service.users.domain.Profile;
+import io.oigres.ecomm.service.users.domain.ProfileType;
+import io.oigres.ecomm.service.users.domain.User;
+import io.oigres.ecomm.service.users.domain.profile.AdminProfile;
+import io.oigres.ecomm.service.users.enums.ProfileTypeEnum;
+import io.oigres.ecomm.service.users.exception.profile.DeletedProfileException;
+import io.oigres.ecomm.service.users.exception.profile.ExistingProfileException;
+import io.oigres.ecomm.service.users.exception.profile.TypeNotFoundProfileException;
+import io.oigres.ecomm.service.users.repository.UserRepository;
+import io.oigres.ecomm.service.users.repository.profiles.ProfileTypeRepository;
+import jakarta.transaction.Transactional;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+
+@Component
+<span class="fc" id="L40">@Slf4j</span>
+public class CreateNewAdminUserUseCaseImpl implements CreateNewAdminUserUseCase {
+  private final UserRepository userRepository;
+  private final ProfileTypeRepository profileTypeRepository;
+  private final PasswordEncoder passwordEncoder;
+
+  public CreateNewAdminUserUseCaseImpl(
+      UserRepository userRepository,
+      ProfileTypeRepository profileTypeRepository,
+<span class="fc" id="L49">      PasswordEncoder passwordEncoder) {</span>
+<span class="fc" id="L50">    this.userRepository = userRepository;</span>
+<span class="fc" id="L51">    this.profileTypeRepository = profileTypeRepository;</span>
+<span class="fc" id="L52">    this.passwordEncoder = passwordEncoder;</span>
+<span class="fc" id="L53">  }</span>
+
+  @Override
+  @Transactional(Transactional.TxType.REQUIRED)
+  public AdminProfile handle(AdminProfile adminProfile)
+      throws DeletedProfileException, ExistingProfileException, TypeNotFoundProfileException {
+<span class="fc" id="L59">    Optional&lt;User&gt; opUser = this.userRepository.findByEmail(adminProfile.getUser().getEmail());</span>
+    User user;
+<span class="fc bfc" id="L61" title="All 2 branches covered.">    if (opUser.isPresent()) {</span>
+<span class="fc" id="L62">      user = opUser.orElseThrow(IllegalStateException::new);</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">      if (user.isDeleted()) {</span>
+<span class="fc" id="L64">        throw new DeletedProfileException(ProfileErrorMessages.PROFILE_DELETED);</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">      } else if (isAdmin(user)) {</span>
+<span class="fc" id="L66">        throw new ExistingProfileException(ProfileErrorMessages.PROFILE_ALREADY_EXIST);</span>
+      }
+    } else {
+<span class="fc" id="L69">      Set&lt;Profile&gt; profileSet = new HashSet&lt;&gt;();</span>
+      user =
+<span class="fc" id="L71">          User.builder()</span>
+<span class="fc" id="L72">              .password(this.passwordEncoder.encode(adminProfile.getUser().getPassword()))</span>
+<span class="fc" id="L73">              .email(adminProfile.getUser().getEmail())</span>
+<span class="fc" id="L74">              .profiles(profileSet)</span>
+<span class="fc" id="L75">              .build();</span>
+    }
+<span class="fc" id="L77">    ProfileType profileType =</span>
+        profileTypeRepository
+<span class="fc" id="L79">            .findByProfile(ProfileTypeEnum.ADMIN)</span>
+<span class="fc" id="L80">            .orElseThrow(</span>
+                () -&gt;
+<span class="nc" id="L82">                    new TypeNotFoundProfileException(ProfileErrorMessages.PROFILE_TYPE_NOT_FOUND));</span>
+
+<span class="fc" id="L84">    adminProfile.setProfileType(profileType);</span>
+<span class="fc" id="L85">    adminProfile.setEnabled(Boolean.TRUE);</span>
+<span class="fc" id="L86">    adminProfile.setUser(user);</span>
+<span class="fc" id="L87">    user.getProfiles().add(adminProfile);</span>
+<span class="fc" id="L88">    this.userRepository.save(user);</span>
+<span class="fc" id="L89">    return adminProfile;</span>
+  }
+
+  private Boolean isAdmin(User user) {
+<span class="fc" id="L93">    return Profile.isAlreadyOfProfileType(user, ProfileTypeEnum.ADMIN);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

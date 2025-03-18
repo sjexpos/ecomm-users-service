@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PageResponse.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">API</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.api.model</a> &gt; <span class="el_source">PageResponse.java</span></div><h1>PageResponse.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.api.model;
+
+import java.util.Collections;
+
+/**
+ * A page is a sublist of a list of objects. It allows gain information about the position of it in the containing
+ * entire list.
+ *
+ * @param &lt;T&gt;
+ * @author Sergio Exposito
+ */
+public interface PageResponse&lt;T&gt; extends SliceResponse&lt;T&gt; {
+
+  /**
+   * Creates a new empty {@link PageResponse}.
+   *
+   * @return
+   * @since 2.0
+   */
+  static &lt;T&gt; PageResponse&lt;T&gt; empty() {
+<span class="nc" id="L38">    return empty(PageableRequest.unpaged());</span>
+  }
+
+  /**
+   * Creates a new empty {@link PageResponse} for the given {@link PageableRequest}.
+   *
+   * @param pageable must not be {@literal null}.
+   * @return
+   * @since 2.0
+   */
+  static &lt;T&gt; PageResponse&lt;T&gt; empty(PageableRequest pageable) {
+<span class="nc" id="L49">    return new PageResponseImpl&lt;&gt;(Collections.emptyList(), pageable, 0);</span>
+  }
+
+  /**
+   * Returns the number of total pages.
+   *
+   * @return the number of total pages
+   */
+  int getTotalPages();
+
+  /**
+   * Returns the total amount of elements.
+   *
+   * @return the total amount of elements
+   */
+  long getTotalElements();
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

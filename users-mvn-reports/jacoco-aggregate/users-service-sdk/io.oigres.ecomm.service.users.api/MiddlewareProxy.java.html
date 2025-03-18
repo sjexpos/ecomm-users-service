@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>MiddlewareProxy.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Aggregated Reports</a> &gt; <a href="../index.html" class="el_bundle">users-service-sdk</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.api</a> &gt; <span class="el_source">MiddlewareProxy.java</span></div><h1>MiddlewareProxy.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.api;
+
+import com.google.gson.Gson;
+import io.oigres.ecomm.service.users.Constants;
+import io.oigres.ecomm.service.users.api.model.JacksonPageImpl;
+import io.oigres.ecomm.service.users.api.model.PageResponse;
+import io.oigres.ecomm.service.users.api.model.exception.GenericExceptionTracker;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Proxy;
+import java.lang.reflect.Type;
+import java.net.URI;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Future;
+import java.util.function.Function;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.ClientResponse;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
+import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
+import org.springframework.web.reactive.function.client.WebClient.ResponseSpec;
+import org.springframework.web.reactive.function.client.WebClientRequestException;
+import org.springframework.web.util.UriBuilder;
+import reactor.core.publisher.Mono;
+
+public class MiddlewareProxy implements InvocationHandler {
+<span class="nc" id="L54">  private final Logger log = Logger.getLogger(getClass().getName());</span>
+
+  private final WebClient webClient;
+<span class="nc" id="L57">  private final Gson gson = new Gson();</span>
+
+<span class="nc" id="L59">  public MiddlewareProxy(final WebClient webClient) {</span>
+<span class="nc" id="L60">    this.webClient = webClient;</span>
+<span class="nc" id="L61">  }</span>
+
+  // EI_EXPOSE_REP
+  public WebClient getWebClient() {
+<span class="nc" id="L65">    return this.webClient;</span>
+  }
+
+  protected ResponseSpec buildResponseSpecFromRequestHeadersSpec(RequestHeadersSpec&lt;?&gt; request) {
+<span class="nc" id="L69">    return request</span>
+<span class="nc" id="L70">        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)</span>
+<span class="nc" id="L71">        .accept(MediaType.APPLICATION_JSON)</span>
+<span class="nc" id="L72">        .retrieve()</span>
+<span class="nc" id="L73">        .onStatus(HttpStatusCode::is4xxClientError, this::error4xxHandling)</span>
+<span class="nc" id="L74">        .onStatus(HttpStatusCode::is5xxServerError, this::error5xxHandling);</span>
+  }
+
+  protected &lt;T&gt; Mono&lt;T&gt; makeGet(RequestHeadersSpec&lt;?&gt; request, Class&lt;T&gt; responseClass) {
+<span class="nc" id="L78">    return buildResponseSpecFromRequestHeadersSpec(request)</span>
+<span class="nc" id="L79">        .bodyToMono(responseClass)</span>
+<span class="nc" id="L80">        .contextCapture();</span>
+  }
+
+  protected &lt;T&gt; Mono&lt;T&gt; makeGet(
+      RequestHeadersSpec&lt;?&gt; request, ParameterizedTypeReference&lt;T&gt; responseTypeRef) {
+<span class="nc" id="L85">    return buildResponseSpecFromRequestHeadersSpec(request)</span>
+<span class="nc" id="L86">        .bodyToMono(responseTypeRef)</span>
+<span class="nc" id="L87">        .contextCapture();</span>
+  }
+
+  protected &lt;T&gt; Mono&lt;T&gt; makeDelete(RequestHeadersSpec&lt;?&gt; request, Class&lt;T&gt; responseClass) {
+<span class="nc" id="L91">    return buildResponseSpecFromRequestHeadersSpec(request)</span>
+<span class="nc" id="L92">        .bodyToMono(responseClass)</span>
+<span class="nc" id="L93">        .contextCapture();</span>
+  }
+
+  protected &lt;T&gt; Mono&lt;T&gt; makeDelete(
+      RequestHeadersSpec&lt;?&gt; request, ParameterizedTypeReference&lt;T&gt; responseTypeRef) {
+<span class="nc" id="L98">    return buildResponseSpecFromRequestHeadersSpec(request)</span>
+<span class="nc" id="L99">        .bodyToMono(responseTypeRef)</span>
+<span class="nc" id="L100">        .contextCapture();</span>
+  }
+
+  protected RequestBodySpec buildRequestBodySpec(RequestBodySpec request) {
+<span class="nc" id="L104">    return request.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);</span>
+  }
+
+  protected ResponseSpec buildResponseSpecFromRequestBodySpec(
+      RequestBodySpec request, Object requestData) {
+<span class="nc" id="L109">    RequestBodySpec postBody = buildRequestBodySpec(request);</span>
+<span class="nc" id="L110">    ResponseSpec responseSpec = null;</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">    if (requestData != null) {</span>
+<span class="nc" id="L112">      responseSpec = postBody.body(BodyInserters.fromValue(requestData)).retrieve();</span>
+    } else {
+<span class="nc" id="L114">      responseSpec = postBody.retrieve();</span>
+    }
+<span class="nc" id="L116">    return responseSpec</span>
+<span class="nc" id="L117">        .onStatus(HttpStatusCode::is4xxClientError, this::error4xxHandling)</span>
+<span class="nc" id="L118">        .onStatus(HttpStatusCode::is5xxServerError, this::error5xxHandling);</span>
+  }
+
+  protected &lt;T&gt; Mono&lt;T&gt; makePost(
+      RequestBodySpec request, Object requestData, Class&lt;T&gt; responseClass) {
+<span class="nc" id="L123">    return buildResponseSpecFromRequestBodySpec(request, requestData)</span>
+<span class="nc" id="L124">        .bodyToMono(responseClass)</span>
+<span class="nc" id="L125">        .contextCapture();</span>
+  }
+
+  protected &lt;T&gt; Mono&lt;T&gt; makePost(
+      RequestBodySpec request, Object requestData, ParameterizedTypeReference&lt;T&gt; responseTypeRef) {
+<span class="nc" id="L130">    return buildResponseSpecFromRequestBodySpec(request, requestData)</span>
+<span class="nc" id="L131">        .bodyToMono(responseTypeRef)</span>
+<span class="nc" id="L132">        .contextCapture();</span>
+  }
+
+  protected &lt;T&gt; Mono&lt;T&gt; makePut(
+      RequestBodySpec request, Object requestData, Class&lt;T&gt; responseClass) {
+<span class="nc" id="L137">    return buildResponseSpecFromRequestBodySpec(request, requestData)</span>
+<span class="nc" id="L138">        .bodyToMono(responseClass)</span>
+<span class="nc" id="L139">        .contextCapture();</span>
+  }
+
+  protected &lt;T&gt; Mono&lt;T&gt; makePut(
+      RequestBodySpec request, Object requestData, ParameterizedTypeReference&lt;T&gt; responseTypeRef) {
+<span class="nc" id="L144">    return buildResponseSpecFromRequestBodySpec(request, requestData)</span>
+<span class="nc" id="L145">        .bodyToMono(responseTypeRef)</span>
+<span class="nc" id="L146">        .contextCapture();</span>
+  }
+
+  protected &lt;T&gt; Mono&lt;T&gt; makePatch(
+      RequestBodySpec request, Object requestData, Class&lt;T&gt; responseClass) {
+<span class="nc" id="L151">    return buildResponseSpecFromRequestBodySpec(request, requestData)</span>
+<span class="nc" id="L152">        .bodyToMono(responseClass)</span>
+<span class="nc" id="L153">        .contextCapture();</span>
+  }
+
+  protected &lt;T&gt; Mono&lt;T&gt; makePatch(
+      RequestBodySpec request, Object requestData, ParameterizedTypeReference&lt;T&gt; responseTypeRef) {
+<span class="nc" id="L158">    return buildResponseSpecFromRequestBodySpec(request, requestData)</span>
+<span class="nc" id="L159">        .bodyToMono(responseTypeRef)</span>
+<span class="nc" id="L160">        .contextCapture();</span>
+  }
+
+  public &lt;T&gt; T get(Function&lt;UriBuilder, URI&gt; uriFunction, Class&lt;T&gt; responseClass) {
+<span class="nc" id="L164">    return (T) makeGet(getWebClient().get().uri(uriFunction), responseClass).block();</span>
+  }
+
+  public &lt;T&gt; T get(
+      Function&lt;UriBuilder, URI&gt; uriFunction, ParameterizedTypeReference&lt;T&gt; responseTypeRef) {
+<span class="nc" id="L169">    return (T) makeGet(getWebClient().get().uri(uriFunction), responseTypeRef).block();</span>
+  }
+
+  public &lt;T&gt; PageResponse&lt;T&gt; getPage(
+      Function&lt;UriBuilder, URI&gt; uriFunction, final Class&lt;T&gt; responseClass) {
+<span class="nc" id="L174">    ParameterizedTypeReference&lt;JacksonPageImpl&lt;T&gt;&gt; typeReference =</span>
+<span class="nc" id="L175">        new ParameterizedTypeReference&lt;JacksonPageImpl&lt;T&gt;&gt;() {</span>
+          @Override
+          public Type getType() {
+<span class="nc" id="L178">            Type type =</span>
+<span class="nc" id="L179">                new ParameterizedType() {</span>
+
+                  @Override
+                  public Type[] getActualTypeArguments() {
+<span class="nc" id="L183">                    Type[] types = new Type[1];</span>
+<span class="nc" id="L184">                    types[0] = responseClass;</span>
+<span class="nc" id="L185">                    return types;</span>
+                  }
+
+                  @Override
+                  public Type getRawType() {
+<span class="nc" id="L190">                    return JacksonPageImpl.class;</span>
+                  }
+
+                  @Override
+                  public Type getOwnerType() {
+<span class="nc" id="L195">                    return JacksonPageImpl.class;</span>
+                  }
+                };
+<span class="nc" id="L198">            return type;</span>
+          }
+        };
+<span class="nc" id="L201">    return get(uriFunction, typeReference);</span>
+  }
+
+  public &lt;T&gt; Future&lt;T&gt; getAsync(Function&lt;UriBuilder, URI&gt; uriFunction, Class&lt;T&gt; responseClass) {
+<span class="nc" id="L205">    return (Future&lt;T&gt;) makeGet(getWebClient().get().uri(uriFunction), responseClass).toFuture();</span>
+  }
+
+  public &lt;T&gt; Future&lt;T&gt; getAsync(
+      Function&lt;UriBuilder, URI&gt; uriFunction, ParameterizedTypeReference&lt;T&gt; responseTypeRef) {
+<span class="nc" id="L210">    return (Future&lt;T&gt;) makeGet(getWebClient().get().uri(uriFunction), responseTypeRef).toFuture();</span>
+  }
+
+  public &lt;T&gt; Future&lt;? extends PageResponse&lt;T&gt;&gt; getPageAsync(
+      Function&lt;UriBuilder, URI&gt; uriFunction, Class&lt;T&gt; responseClass) {
+<span class="nc" id="L215">    ParameterizedTypeReference&lt;JacksonPageImpl&lt;T&gt;&gt; typeReference =</span>
+<span class="nc" id="L216">        new ParameterizedTypeReference&lt;JacksonPageImpl&lt;T&gt;&gt;() {};</span>
+<span class="nc" id="L217">    return getAsync(uriFunction, typeReference);</span>
+  }
+
+  public &lt;T&gt; T post(
+      Function&lt;UriBuilder, URI&gt; uriFunction, Object requestData, Class&lt;T&gt; responseClass) {
+<span class="nc" id="L222">    return (T) makePost(getWebClient().post().uri(uriFunction), requestData, responseClass).block();</span>
+  }
+
+  public &lt;T&gt; T post(
+      Function&lt;UriBuilder, URI&gt; uriFunction,
+      Object requestData,
+      ParameterizedTypeReference&lt;T&gt; responseTypeRef) {
+<span class="nc" id="L229">    return (T)</span>
+<span class="nc" id="L230">        makePost(getWebClient().post().uri(uriFunction), requestData, responseTypeRef).block();</span>
+  }
+
+  public &lt;T&gt; Future&lt;T&gt; postAsync(
+      Function&lt;UriBuilder, URI&gt; uriFunction, Object requestData, Class&lt;T&gt; elementClass) {
+<span class="nc" id="L235">    return (Future&lt;T&gt;)</span>
+<span class="nc" id="L236">        makePost(getWebClient().post().uri(uriFunction), requestData, elementClass).toFuture();</span>
+  }
+
+  public &lt;T&gt; Future&lt;T&gt; postAsync(
+      Function&lt;UriBuilder, URI&gt; uriFunction,
+      Object requestData,
+      ParameterizedTypeReference&lt;T&gt; responseTypeRef) {
+<span class="nc" id="L243">    return (Future&lt;T&gt;)</span>
+<span class="nc" id="L244">        makePost(getWebClient().post().uri(uriFunction), requestData, responseTypeRef).toFuture();</span>
+  }
+
+  public &lt;T&gt; T put(
+      Function&lt;UriBuilder, URI&gt; uriFunction, Object requestData, Class&lt;T&gt; responseClass) {
+<span class="nc" id="L249">    return (T) makePut(getWebClient().put().uri(uriFunction), requestData, responseClass).block();</span>
+  }
+
+  public &lt;T&gt; T put(
+      Function&lt;UriBuilder, URI&gt; uriFunction,
+      Object requestData,
+      ParameterizedTypeReference&lt;T&gt; responseTypeRef) {
+<span class="nc" id="L256">    return (T) makePut(getWebClient().put().uri(uriFunction), requestData, responseTypeRef).block();</span>
+  }
+
+  public &lt;T&gt; Future&lt;T&gt; putAsync(
+      Function&lt;UriBuilder, URI&gt; uriFunction, Object requestData, Class&lt;T&gt; elementClass) {
+<span class="nc" id="L261">    return (Future&lt;T&gt;)</span>
+<span class="nc" id="L262">        makePut(getWebClient().put().uri(uriFunction), requestData, elementClass).toFuture();</span>
+  }
+
+  public &lt;T&gt; Future&lt;T&gt; putAsync(
+      Function&lt;UriBuilder, URI&gt; uriFunction,
+      Object requestData,
+      ParameterizedTypeReference&lt;T&gt; responseTypeRef) {
+<span class="nc" id="L269">    return (Future&lt;T&gt;)</span>
+<span class="nc" id="L270">        makePut(getWebClient().put().uri(uriFunction), requestData, responseTypeRef).toFuture();</span>
+  }
+
+  public &lt;T&gt; T delete(Function&lt;UriBuilder, URI&gt; uriFunction, Class&lt;T&gt; responseClass) {
+<span class="nc" id="L274">    return (T) makeGet(getWebClient().delete().uri(uriFunction), responseClass).block();</span>
+  }
+
+  public &lt;T&gt; T delete(
+      Function&lt;UriBuilder, URI&gt; uriFunction, ParameterizedTypeReference&lt;T&gt; responseTypeRef) {
+<span class="nc" id="L279">    return (T) makeGet(getWebClient().delete().uri(uriFunction), responseTypeRef).block();</span>
+  }
+
+  public &lt;T&gt; Future&lt;T&gt; deleteAsync(Function&lt;UriBuilder, URI&gt; uriFunction, Class&lt;T&gt; responseClass) {
+<span class="nc" id="L283">    return (Future&lt;T&gt;)</span>
+<span class="nc" id="L284">        makeDelete(getWebClient().delete().uri(uriFunction), responseClass).toFuture();</span>
+  }
+
+  public &lt;T&gt; Future&lt;T&gt; deleteAsync(
+      Function&lt;UriBuilder, URI&gt; uriFunction, ParameterizedTypeReference&lt;T&gt; responseTypeRef) {
+<span class="nc" id="L289">    return (Future&lt;T&gt;)</span>
+<span class="nc" id="L290">        makeDelete(getWebClient().delete().uri(uriFunction), responseTypeRef).toFuture();</span>
+  }
+
+  public &lt;T&gt; T patch(
+      Function&lt;UriBuilder, URI&gt; uriFunction, Object requestData, Class&lt;T&gt; responseClass) {
+<span class="nc" id="L295">    return (T)</span>
+<span class="nc" id="L296">        makePatch(getWebClient().patch().uri(uriFunction), requestData, responseClass).block();</span>
+  }
+
+  public &lt;T&gt; T patch(Function&lt;UriBuilder, URI&gt; uriFunction, Class&lt;T&gt; responseClass) {
+<span class="nc" id="L300">    return (T) makePatch(getWebClient().patch().uri(uriFunction), null, responseClass).block();</span>
+  }
+
+  public &lt;T&gt; T patch(
+      Function&lt;UriBuilder, URI&gt; uriFunction,
+      Object requestData,
+      ParameterizedTypeReference&lt;T&gt; responseTypeRef) {
+<span class="nc" id="L307">    return (T)</span>
+<span class="nc" id="L308">        makePatch(getWebClient().patch().uri(uriFunction), requestData, responseTypeRef).block();</span>
+  }
+
+  public &lt;T&gt; Future&lt;T&gt; patchAsync(
+      Function&lt;UriBuilder, URI&gt; uriFunction, Object requestData, Class&lt;T&gt; elementClass) {
+<span class="nc" id="L313">    return (Future&lt;T&gt;)</span>
+<span class="nc" id="L314">        makePatch(getWebClient().patch().uri(uriFunction), requestData, elementClass).toFuture();</span>
+  }
+
+  public &lt;T&gt; Future&lt;T&gt; patchAsync(
+      Function&lt;UriBuilder, URI&gt; uriFunction,
+      Object requestData,
+      ParameterizedTypeReference&lt;T&gt; responseTypeRef) {
+<span class="nc" id="L321">    return (Future&lt;T&gt;)</span>
+<span class="nc" id="L322">        makePatch(getWebClient().patch().uri(uriFunction), requestData, responseTypeRef).toFuture();</span>
+  }
+
+  public Mono&lt;Exception&gt; error4xxHandling(ClientResponse clientResponse) {
+<span class="nc" id="L326">    return clientResponse.bodyToMono(String.class).contextCapture().flatMap(this::error4xxHandling);</span>
+  }
+
+  private Mono&lt;Exception&gt; error4xxHandling(String errorBody) {
+<span class="nc" id="L330">    GenericExceptionTracker tracker = gson.fromJson(errorBody, GenericExceptionTracker.class);</span>
+<span class="nc bnc" id="L331" title="All 2 branches missed.">    if (MethodArgumentNotValidException.class.getName().equals(tracker.getException())) {</span>
+<span class="nc" id="L332">      RemoteMethodArgumentNotValidException exception = new RemoteMethodArgumentNotValidException();</span>
+<span class="nc" id="L333">      Map&lt;?, ?&gt; map = gson.fromJson(errorBody, Map.class);</span>
+<span class="nc bnc" id="L334" title="All 2 branches missed.">      if (map.containsKey(&quot;errors&quot;)) {</span>
+<span class="nc" id="L335">        List&lt;?&gt; errors = (List&lt;?&gt;) map.get(&quot;errors&quot;);</span>
+<span class="nc bnc" id="L336" title="All 2 branches missed.">        if (!errors.isEmpty()) {</span>
+<span class="nc bnc" id="L337" title="All 2 branches missed.">          for (Object error : errors) {</span>
+<span class="nc" id="L338">            String errorStr = gson.toJson(error);</span>
+<span class="nc" id="L339">            RemoteMethodArgumentNotValidException.Error e =</span>
+<span class="nc" id="L340">                gson.fromJson(errorStr, RemoteMethodArgumentNotValidException.Error.class);</span>
+<span class="nc" id="L341">            exception.addError(e);</span>
+<span class="nc" id="L342">          }</span>
+        }
+      }
+<span class="nc" id="L345">      return Mono.error(exception);</span>
+    }
+    try {
+<span class="nc" id="L348">      Class&lt;?&gt; clazz = Class.forName(tracker.getException());</span>
+<span class="nc" id="L349">      Throwable throwable =</span>
+<span class="nc" id="L350">          (Throwable) clazz.getConstructor(String.class).newInstance(tracker.getMessage());</span>
+<span class="nc" id="L351">      return Mono.error(throwable);</span>
+<span class="nc" id="L352">    } catch (ClassNotFoundException e) {</span>
+<span class="nc" id="L353">      return Mono.error(new RuntimeException(tracker.getMessage()));</span>
+<span class="nc" id="L354">    } catch (InvocationTargetException</span>
+        | InstantiationException
+        | IllegalAccessException
+        | NoSuchMethodException e) {
+<span class="nc" id="L358">      return Mono.error(e);</span>
+    }
+  }
+
+  public Mono&lt;Exception&gt; error5xxHandling(ClientResponse clientResponse) {
+<span class="nc" id="L363">    return Mono.error(new RemoteServiceUnavailableException(Constants.ERROR_500_USER_MESSAGE));</span>
+  }
+
+  @Override
+  public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    try {
+<span class="nc" id="L369">      return method.invoke(this, args);</span>
+<span class="nc" id="L370">    } catch (InvocationTargetException e) {</span>
+<span class="nc" id="L371">      Throwable targetException = e.getTargetException();</span>
+<span class="nc bnc" id="L372" title="All 2 branches missed.">      if (WebClientRequestException.class.isAssignableFrom(targetException.getClass())) {</span>
+<span class="nc" id="L373">        throw new RuntimeException(Constants.ERROR_500_USER_MESSAGE);</span>
+      }
+<span class="nc bnc" id="L375" title="All 2 branches missed.">      if (RemoteMethodArgumentNotValidException.class.isAssignableFrom(</span>
+<span class="nc" id="L376">          targetException.getClass())) {</span>
+<span class="nc" id="L377">        throw targetException;</span>
+      }
+<span class="nc bnc" id="L379" title="All 2 branches missed.">      if (RuntimeException.class.isAssignableFrom(targetException.getClass())) {</span>
+<span class="nc" id="L380">        Throwable originalException = targetException.getCause();</span>
+<span class="nc" id="L381">        Class&lt;?&gt;[] thrownExceptions = method.getExceptionTypes();</span>
+<span class="nc bnc" id="L382" title="All 2 branches missed.">        for (int i = 0; i &lt; thrownExceptions.length; i++) {</span>
+<span class="nc bnc" id="L383" title="All 2 branches missed.">          if (thrownExceptions[i].isAssignableFrom(originalException.getClass())) {</span>
+<span class="nc" id="L384">            throw originalException;</span>
+          }
+        }
+<span class="nc" id="L387">        throw targetException;</span>
+      }
+<span class="nc" id="L389">      throw e;</span>
+<span class="nc" id="L390">    } catch (Throwable t) {</span>
+<span class="nc" id="L391">      log.log(Level.SEVERE, &quot;&quot;, t);</span>
+<span class="nc" id="L392">      return null;</span>
+    }
+  }
+
+  public &lt;T&gt; T createExceptionProxy(Class&lt;T&gt; clazz) {
+<span class="nc" id="L397">    return (T)</span>
+<span class="nc" id="L398">        Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class&lt;?&gt;[] {clazz}, this);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

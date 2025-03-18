@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConsumerProfile.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Domain</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.domain.profile</a> &gt; <span class="el_source">ConsumerProfile.java</span></div><h1>ConsumerProfile.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.domain.profile;
+
+import io.oigres.ecomm.service.users.domain.*;
+import io.oigres.ecomm.service.users.enums.ConsumerTypeEnum;
+import io.oigres.ecomm.service.users.enums.ResourceStatusEnum;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import lombok.*;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@DiscriminatorValue(&quot;2&quot;)
+public class ConsumerProfile extends Profile {
+  private static final long serialVersionUID = -4164258600038645847L;
+
+  @Column(name = &quot;first_name&quot;)
+  private String firstName;
+
+  @Column(name = &quot;last_name&quot;)
+  private String lastName;
+
+  @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinColumn(name = &quot;profile_image_id&quot;)
+  private ProfileImage profileImage;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = &quot;gender_id&quot;)
+  private Gender gender;
+
+  @Column(name = &quot;phone&quot;)
+  private String phone;
+
+  @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinColumn(name = &quot;card_id&quot;)
+  private Card card;
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = &quot;zip_code_id&quot;)
+  private ZipCode zipCode;
+
+  @Column(name = &quot;verified&quot;)
+  private Boolean verified;
+
+  @Builder
+  public ConsumerProfile(
+      Long id,
+      User user,
+      ProfileType profileType,
+      Boolean enabled,
+      LocalDateTime createdAt,
+      String createdBy,
+      LocalDateTime modifiedAt,
+      String modifiedBy,
+      LocalDateTime deletedAt,
+      String deletedBy,
+      String firstName,
+      String lastName,
+      ProfileImage profileImage,
+      Gender gender,
+      String phone,
+      Card card,
+      ZipCode zipCode,
+      Boolean verified) {
+<span class="nc" id="L84">    super(</span>
+        id,
+        user,
+        profileType,
+        enabled,
+        createdAt,
+        createdBy,
+        modifiedAt,
+        modifiedBy,
+        deletedAt,
+        deletedBy);
+<span class="nc" id="L95">    this.firstName = firstName;</span>
+<span class="nc" id="L96">    this.lastName = lastName;</span>
+<span class="nc" id="L97">    this.profileImage = profileImage;</span>
+<span class="nc" id="L98">    this.gender = gender;</span>
+<span class="nc" id="L99">    this.phone = phone;</span>
+<span class="nc" id="L100">    this.card = card;</span>
+<span class="nc" id="L101">    this.zipCode = zipCode;</span>
+<span class="nc" id="L102">    this.verified = verified;</span>
+<span class="nc" id="L103">  }</span>
+
+  public ConsumerTypeEnum getUserType() {
+<span class="nc bnc" id="L106" title="All 2 branches missed.">    if (card != null) {</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">      if (card.getMmjCard()) {</span>
+<span class="nc" id="L108">        return ConsumerTypeEnum.MEDICAL;</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">      } else if (card.getIdCard()) {</span>
+<span class="nc" id="L110">        return ConsumerTypeEnum.RECREATIONAL;</span>
+      }
+    }
+<span class="nc" id="L113">    return null;</span>
+  }
+
+  public void setUserType(ConsumerTypeEnum userType) {
+<span class="nc bnc" id="L117" title="All 2 branches missed.">    if (userType != null) {</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">      if (card == null) card = new Card();</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">      if (userType.equals(ConsumerTypeEnum.MEDICAL)) {</span>
+<span class="nc" id="L120">        card.setMmjCard(Boolean.TRUE);</span>
+<span class="nc" id="L121">        card.setIdCard(Boolean.FALSE);</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">      } else if (userType.equals(ConsumerTypeEnum.RECREATIONAL)) {</span>
+<span class="nc" id="L123">        card.setMmjCard(Boolean.FALSE);</span>
+<span class="nc" id="L124">        card.setIdCard(Boolean.TRUE);</span>
+      }
+    }
+<span class="nc" id="L127">  }</span>
+
+  public String getMmjCardImage() {
+<span class="nc" id="L130">    String response = null;</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">    if (card != null) {</span>
+      response =
+<span class="nc bnc" id="L133" title="All 2 branches missed.">          card.getMmjCard()</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">              ? ((card.getCardImage() != null</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">                      &amp;&amp; ResourceStatusEnum.UPLOADED.equals(card.getCardImage().getStatus()))</span>
+<span class="nc" id="L136">                  ? card.getCardImage().getImageURL()</span>
+<span class="nc" id="L137">                  : null)</span>
+<span class="nc" id="L138">              : null;</span>
+    }
+<span class="nc" id="L140">    return response;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

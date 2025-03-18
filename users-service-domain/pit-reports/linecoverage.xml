@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='&lt;init&gt;()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='&lt;init&gt;()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.DomainEntity' method='&lt;init&gt;()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='setModifiedBy(Ljava/lang/String;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='getModifiedAt()Ljava/time/LocalDateTime;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.profile.AdminProfile$AdminProfileBuilder' method='build()Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.profile.AdminProfile$AdminProfileBuilder' method='build()Lio/oigres/ecomm/service/users/domain/profile/AdminProfile;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='getModifiedBy()Ljava/lang/String;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='setId(Ljava/lang/Long;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='setModifiedAt(Ljava/time/LocalDateTime;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='setEmail(Ljava/lang/String;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='getId()Ljava/lang/Long;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.profile.AdminProfile$AdminProfileBuilder' method='&lt;init&gt;()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='getCreatedAt()Ljava/time/LocalDateTime;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.profile.AdminProfile$AdminProfileBuilder' method='&lt;init&gt;()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.DomainEntity' method='&lt;init&gt;()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.Profile' method='&lt;init&gt;(Ljava/lang/Long;Lio/oigres/ecomm/service/users/domain/User;Lio/oigres/ecomm/service/users/domain/ProfileType;Ljava/lang/Boolean;Ljava/time/LocalDateTime;Ljava/lang/String;Ljava/time/LocalDateTime;Ljava/lang/String;Ljava/time/LocalDateTime;Ljava/lang/String;)V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.Profile' method='&lt;init&gt;(Ljava/lang/Long;Lio/oigres/ecomm/service/users/domain/User;Lio/oigres/ecomm/service/users/domain/ProfileType;Ljava/lang/Boolean;Ljava/time/LocalDateTime;Ljava/lang/String;Ljava/time/LocalDateTime;Ljava/lang/String;Ljava/time/LocalDateTime;Ljava/lang/String;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='setCreatedBy(Ljava/lang/String;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.profile.AdminProfile' method='builder()Lio/oigres/ecomm/service/users/domain/profile/AdminProfile$AdminProfileBuilder;' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.profile.AdminProfile' method='builder()Lio/oigres/ecomm/service/users/domain/profile/AdminProfile$AdminProfileBuilder;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='14'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='&lt;init&gt;(Ljava/lang/Long;Ljava/lang/String;Ljava/lang/String;Ljava/util/Set;Ljava/time/LocalDateTime;Ljava/lang/String;Ljava/time/LocalDateTime;Ljava/lang/String;Ljava/time/LocalDateTime;Ljava/lang/String;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='setPassword(Ljava/lang/String;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='13'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='builder()Lio/oigres/ecomm/service/users/domain/User$UserBuilder;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='12'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='11'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='&lt;init&gt;(Ljava/lang/Long;Ljava/lang/String;Ljava/lang/String;Ljava/util/Set;Ljava/time/LocalDateTime;Ljava/lang/String;Ljava/time/LocalDateTime;Ljava/lang/String;Ljava/time/LocalDateTime;Ljava/lang/String;)V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='10'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='9'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='8'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='builder()Lio/oigres/ecomm/service/users/domain/User$UserBuilder;' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='7'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='6'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='5'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='4'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='3'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='2'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='getPassword()Ljava/lang/String;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.profile.AdminProfile' method='&lt;init&gt;(Ljava/lang/Long;Lio/oigres/ecomm/service/users/domain/User;Lio/oigres/ecomm/service/users/domain/ProfileType;Ljava/lang/Boolean;Ljava/time/LocalDateTime;Ljava/lang/String;Ljava/time/LocalDateTime;Ljava/lang/String;Ljava/time/LocalDateTime;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/oigres/ecomm/service/users/domain/ProfileImage;Ljava/lang/String;)V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.profile.AdminProfile' method='&lt;init&gt;(Ljava/lang/Long;Lio/oigres/ecomm/service/users/domain/User;Lio/oigres/ecomm/service/users/domain/ProfileType;Ljava/lang/Boolean;Ljava/time/LocalDateTime;Ljava/lang/String;Ljava/time/LocalDateTime;Ljava/lang/String;Ljava/time/LocalDateTime;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/oigres/ecomm/service/users/domain/ProfileImage;Ljava/lang/String;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='30'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='29'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User$UserBuilder' method='&lt;init&gt;()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='28'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='27'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='26'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='getEmail()Ljava/lang/String;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='setCreatedAt(Ljava/time/LocalDateTime;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='25'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='24'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='23'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='22'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='21'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='20'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='19'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='18'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='17'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='16'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User$UserBuilder' method='build()Lio/oigres/ecomm/service/users/domain/User;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='15'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User$UserBuilder' method='build()Lio/oigres/ecomm/service/users/domain/User;' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='getCreatedBy()Ljava/lang/String;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='setProfiles(Ljava/util/Set;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User' method='getProfiles()Ljava/util/Set;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='39'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='38'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='37'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='36'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='35'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='34'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='33'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='32'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.User$UserBuilder' method='&lt;init&gt;()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.domain.UserTest' method='check_get_and_set()V' number='31'><tests>
+<test name='io.oigres.ecomm.service.users.domain.UserTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.domain.UserTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+</coverage>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>ChangeCardImageStatusUseCaseImpl.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Aggregated Reports</a> &gt; <a href="../index.html" class="el_bundle">users-service-application</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.usecases.users.images</a> &gt; <span class="el_source">ChangeCardImageStatusUseCaseImpl.java</span></div><h1>ChangeCardImageStatusUseCaseImpl.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.usecases.users.images;
+
+import io.oigres.ecomm.service.users.domain.Card;
+import io.oigres.ecomm.service.users.domain.CardImage;
+import io.oigres.ecomm.service.users.enums.ResourceStatusEnum;
+import io.oigres.ecomm.service.users.repository.profiles.CardImageRepository;
+import io.oigres.ecomm.service.users.repository.profiles.CardRepository;
+import io.oigres.ecomm.service.users.repository.profiles.ConsumerProfileRepository;
+import java.time.LocalDateTime;
+import org.springframework.stereotype.Component;
+
+@Component
+public class ChangeCardImageStatusUseCaseImpl implements ChangeCardImageStatusUseCase {
+  private final CardImageRepository cardImageRepository;
+  private final CardRepository cardRepository;
+  private final ConsumerProfileRepository consumerProfileRepository;
+
+  public ChangeCardImageStatusUseCaseImpl(
+      CardImageRepository cardImageRepository,
+      ConsumerProfileRepository consumerProfileRepository,
+<span class="nc" id="L38">      CardRepository cardRepository) {</span>
+<span class="nc" id="L39">    this.cardImageRepository = cardImageRepository;</span>
+<span class="nc" id="L40">    this.consumerProfileRepository = consumerProfileRepository;</span>
+<span class="nc" id="L41">    this.cardRepository = cardRepository;</span>
+<span class="nc" id="L42">  }</span>
+
+  @Override
+  public CardImage handle(String imageUrl) {
+<span class="nc" id="L46">    return cardImageRepository</span>
+<span class="nc" id="L47">        .findByImageURL(imageUrl)</span>
+<span class="nc" id="L48">        .map(</span>
+            i -&gt; {
+<span class="nc bnc" id="L50" title="All 2 branches missed.">              if (!ResourceStatusEnum.UPLOADED.equals(i.getStatus())) {</span>
+<span class="nc" id="L51">                i.setStatus(ResourceStatusEnum.UPLOADED);</span>
+<span class="nc" id="L52">                markUserAsActive(imageUrl);</span>
+<span class="nc" id="L53">                i = cardImageRepository.save(i);</span>
+              }
+<span class="nc" id="L55">              return i;</span>
+            })
+<span class="nc" id="L57">        .orElseGet(</span>
+            () -&gt; {
+              CardImage cardImage =
+<span class="nc" id="L60">                  CardImage.builder().status(ResourceStatusEnum.PENDING).imageURL(imageUrl).build();</span>
+<span class="nc" id="L61">              CardImage savedCardImage = cardImageRepository.save(cardImage);</span>
+              Card card =
+<span class="nc" id="L63">                  Card.builder()</span>
+<span class="nc" id="L64">                      .mmjCard(true)</span>
+<span class="nc" id="L65">                      .idCard(true)</span>
+<span class="nc" id="L66">                      .createdAt(LocalDateTime.now())</span>
+<span class="nc" id="L67">                      .cardImage(savedCardImage)</span>
+<span class="nc" id="L68">                      .build();</span>
+<span class="nc" id="L69">              cardRepository.save(card);</span>
+<span class="nc" id="L70">              return savedCardImage;</span>
+            });
+  }
+
+  private void markUserAsActive(String imageUrl) {
+<span class="nc" id="L75">    consumerProfileRepository</span>
+<span class="nc" id="L76">        .findByCardImageUrl(imageUrl)</span>
+<span class="nc" id="L77">        .ifPresent(</span>
+            c -&gt; {
+<span class="nc bnc" id="L79" title="All 2 branches missed.">              if (!c.getEnabled()) {</span>
+<span class="nc" id="L80">                c.setEnabled(true);</span>
+<span class="nc" id="L81">                consumerProfileRepository.save(c);</span>
+              }
+<span class="nc" id="L83">            });</span>
+<span class="nc" id="L84">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>S3EventHandler.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Aggregated Reports</a> &gt; <a href="../index.html" class="el_bundle">users-service-uploads-detector</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm</a> &gt; <span class="el_source">S3EventHandler.java</span></div><h1>S3EventHandler.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.events.S3Event;
+import com.amazonaws.services.lambda.runtime.events.SQSBatchResponse;
+import com.amazonaws.services.lambda.runtime.events.SQSBatchResponse.BatchItemFailure;
+import com.amazonaws.services.lambda.runtime.events.SQSEvent;
+import com.amazonaws.services.lambda.runtime.events.SQSEvent.SQSMessage;
+import com.amazonaws.services.lambda.runtime.events.models.s3.S3EventNotification;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import com.google.gson.JsonSyntaxException;
+import io.oigres.ecomm.service.users.api.UsersService;
+import io.oigres.ecomm.service.users.api.UsersServiceProxy;
+import java.lang.reflect.Type;
+import java.time.Duration;
+import java.util.ArrayList;
+import org.joda.time.DateTime;
+import org.joda.time.format.ISODateTimeFormat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.netty.http.client.HttpClient;
+
+public class S3EventHandler implements RequestHandler&lt;SQSEvent, SQSBatchResponse&gt; {
+<span class="nc" id="L52">  private Logger log = LoggerFactory.getLogger(getClass());</span>
+
+  private UsersService usersService;
+  private WebClient webClient;
+  private Gson gson;
+  private static final String BUCKET_PREFIX = &quot;users/&quot;;
+
+<span class="nc" id="L59">  public S3EventHandler() {</span>
+<span class="nc" id="L60">    log.info(&quot;**************************** S3EventHandler ****************************&quot;);</span>
+<span class="nc" id="L61">    String serviceUri = System.getenv(&quot;USERS_SERVICE_URI&quot;);</span>
+<span class="nc" id="L62">    log.info(&quot;Service URI: {}&quot;, serviceUri);</span>
+<span class="nc" id="L63">    webClient = WebClient.builder().build();</span>
+<span class="nc" id="L64">    webClient =</span>
+<span class="nc" id="L65">        WebClient.builder()</span>
+<span class="nc" id="L66">            .baseUrl(serviceUri)</span>
+<span class="nc" id="L67">            .clientConnector(</span>
+                new ReactorClientHttpConnector(
+<span class="nc" id="L69">                    HttpClient.create().responseTimeout(Duration.ofMillis(15000))))</span>
+<span class="nc" id="L70">            .build();</span>
+<span class="nc" id="L71">    usersService = new UsersServiceProxy(webClient);</span>
+<span class="nc" id="L72">    gson =</span>
+        new GsonBuilder()
+<span class="nc" id="L74">            .enableComplexMapKeySerialization()</span>
+<span class="nc" id="L75">            .serializeNulls()</span>
+<span class="nc" id="L76">            .registerTypeAdapter(</span>
+                DateTime.class,
+<span class="nc" id="L78">                new JsonSerializer&lt;DateTime&gt;() {</span>
+                  @Override
+                  public JsonElement serialize(
+                      DateTime json, Type typeOfSrc, JsonSerializationContext context) {
+<span class="nc" id="L82">                    return new JsonPrimitive(ISODateTimeFormat.dateTime().print(json));</span>
+                  }
+                })
+<span class="nc" id="L85">            .registerTypeAdapter(</span>
+                DateTime.class,
+<span class="nc" id="L87">                new JsonDeserializer&lt;DateTime&gt;() {</span>
+                  @Override
+                  public DateTime deserialize(
+                      JsonElement json, Type typeOfT, JsonDeserializationContext context)
+                      throws JsonParseException {
+<span class="nc" id="L92">                    DateTime dt = ISODateTimeFormat.dateTime().parseDateTime(json.getAsString());</span>
+<span class="nc" id="L93">                    return dt;</span>
+                  }
+                })
+<span class="nc" id="L96">            .setPrettyPrinting()</span>
+<span class="nc" id="L97">            .setVersion(1.0)</span>
+<span class="nc" id="L98">            .create();</span>
+<span class="nc" id="L99">  }</span>
+
+  @Override
+  public SQSBatchResponse handleRequest(SQSEvent event, Context context) {
+<span class="nc" id="L103">    log.info(&quot;**************************** handleRequest ****************************&quot;);</span>
+<span class="nc" id="L104">    log.debug(&quot;SQS Event: &quot; + gson.toJson(event));</span>
+<span class="nc" id="L105">    log.debug(&quot;-----------------------------------------------------------------------&quot;);</span>
+<span class="nc" id="L106">    SQSBatchResponse response = new SQSBatchResponse();</span>
+<span class="nc" id="L107">    response.setBatchItemFailures(new ArrayList&lt;&gt;());</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">    if (event.getRecords() != null) {</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">      for (SQSMessage msg : event.getRecords()) {</span>
+<span class="nc" id="L110">        S3Event s3Event = null;</span>
+<span class="nc" id="L111">        String msgId = msg.getMessageId();</span>
+<span class="nc" id="L112">        String body = msg.getBody();</span>
+<span class="nc" id="L113">        log.info(&quot;Processing SQS message: {}&quot;, msgId);</span>
+        try {
+<span class="nc" id="L115">          body = body.replace(&quot;Records&quot;, &quot;records&quot;);</span>
+<span class="nc" id="L116">          s3Event = gson.fromJson(body, S3Event.class);</span>
+<span class="nc" id="L117">        } catch (JsonSyntaxException e) {</span>
+<span class="nc" id="L118">          log.warn(&quot;Invalid S3Event format: &quot;, e);</span>
+<span class="nc" id="L119">          log.warn(body);</span>
+<span class="nc" id="L120">          continue;</span>
+<span class="nc" id="L121">        }</span>
+        try {
+<span class="nc" id="L123">          doWork(s3Event, context);</span>
+<span class="nc" id="L124">        } catch (Exception e) {</span>
+<span class="nc" id="L125">          log.warn(&quot;SQS message will be retry because of: &quot;, e);</span>
+<span class="nc" id="L126">          response.getBatchItemFailures().add(new BatchItemFailure(msgId));</span>
+<span class="nc" id="L127">        }</span>
+<span class="nc" id="L128">      }</span>
+    }
+<span class="nc" id="L130">    log.info(&quot;***********************************************************************&quot;);</span>
+<span class="nc" id="L131">    return response;</span>
+  }
+
+  public void doWork(S3Event s3Event, Context context) {
+<span class="nc" id="L135">    log.debug(&quot;S3 Event: &quot; + gson.toJson(s3Event));</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">    for (S3EventNotification.S3EventNotificationRecord record : s3Event.getRecords()) {</span>
+<span class="nc" id="L137">      String objectKey = record.getS3().getObject().getKey();</span>
+<span class="nc" id="L138">      log.info(&quot;S3 key {} was created&quot;, objectKey);</span>
+<span class="nc" id="L139">      String resourceName = objectKey.substring(objectKey.lastIndexOf(&quot;/&quot;) + 1);</span>
+<span class="nc" id="L140">      String folderPath = objectKey.replace(resourceName, &quot;&quot;).replace(BUCKET_PREFIX, &quot;&quot;);</span>
+<span class="nc" id="L141">      log.info(&quot;Resource Name: &quot; + resourceName);</span>
+<span class="nc" id="L142">      log.info(&quot;Folder path: : &quot; + folderPath);</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">      if (BlobType.PROFILE_IMAGE.getFolder().equals(folderPath)) {</span>
+<span class="nc" id="L144">        log.info(&quot;Changing status for profile image {}&quot;, objectKey);</span>
+<span class="nc" id="L145">        usersService.changeProfileImageStatus(objectKey);</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">      } else if (BlobType.MMJ_CARD_IMAGE.getFolder().equals(folderPath)) {</span>
+<span class="nc" id="L147">        log.info(&quot;Changing status for mmj card image {}&quot;, objectKey);</span>
+<span class="nc" id="L148">        usersService.updateCardImageStatus(objectKey);</span>
+      }
+<span class="nc" id="L150">    }</span>
+<span class="nc" id="L151">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

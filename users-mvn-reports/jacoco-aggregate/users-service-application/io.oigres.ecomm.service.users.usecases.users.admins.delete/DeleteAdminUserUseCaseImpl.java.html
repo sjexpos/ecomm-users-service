@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>DeleteAdminUserUseCaseImpl.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Aggregated Reports</a> &gt; <a href="../index.html" class="el_bundle">users-service-application</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.usecases.users.admins.delete</a> &gt; <span class="el_source">DeleteAdminUserUseCaseImpl.java</span></div><h1>DeleteAdminUserUseCaseImpl.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.usecases.users.admins.delete;
+
+import io.oigres.ecomm.service.users.domain.profile.AdminProfile;
+import io.oigres.ecomm.service.users.exception.UserNotFoundException;
+import io.oigres.ecomm.service.users.exception.profile.NotFoundProfileException;
+import io.oigres.ecomm.service.users.repository.UserRepository;
+import io.oigres.ecomm.service.users.repository.profiles.AdminProfileRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Component;
+
+@Component
+@Transactional
+public class DeleteAdminUserUseCaseImpl implements DeleteAdminUserUseCase {
+  private final UserRepository userRepository;
+  private final AdminProfileRepository adminProfileRepository;
+
+  public DeleteAdminUserUseCaseImpl(
+<span class="fc" id="L35">      UserRepository userRepository, AdminProfileRepository adminProfileRepository) {</span>
+<span class="fc" id="L36">    this.userRepository = userRepository;</span>
+<span class="fc" id="L37">    this.adminProfileRepository = adminProfileRepository;</span>
+<span class="fc" id="L38">  }</span>
+
+  @Override
+  @Transactional(Transactional.TxType.REQUIRED)
+  public AdminProfile handle(Long userId) throws NotFoundProfileException, UserNotFoundException {
+<span class="fc" id="L43">    AdminProfile profile =</span>
+<span class="fc" id="L44">        adminProfileRepository.findById(userId).orElseThrow(NotFoundProfileException::new);</span>
+<span class="fc" id="L45">    Boolean isLastDeletedProfile = Boolean.FALSE;</span>
+<span class="fc" id="L46">    if (profile.getUser().getProfiles().stream()</span>
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        .filter(p -&gt; !p.getId().equals(profile.getId()))</span>
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">        .allMatch(p -&gt; p.isDeleted())) {</span>
+<span class="fc" id="L49">      isLastDeletedProfile = Boolean.TRUE;</span>
+    }
+<span class="fc" id="L51">    profile.setEnabled(Boolean.FALSE);</span>
+<span class="fc" id="L52">    profile.delete();</span>
+<span class="fc" id="L53">    adminProfileRepository.save(profile);</span>
+
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">    if (isLastDeletedProfile) {</span>
+<span class="fc" id="L56">      profile.getUser().delete();</span>
+<span class="fc" id="L57">      userRepository.save(profile.getUser());</span>
+    }
+<span class="fc" id="L59">    return profile;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,1021 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UsersController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">- Rest API</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.api</a> &gt; <span class="el_source">UsersController.java</span></div><h1>UsersController.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.api;
+
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.oigres.ecomm.service.users.Routes;
+import io.oigres.ecomm.service.users.api.model.*;
+import io.oigres.ecomm.service.users.api.model.admin.*;
+import io.oigres.ecomm.service.users.api.model.consumer.*;
+import io.oigres.ecomm.service.users.api.model.dispensary.*;
+import io.oigres.ecomm.service.users.api.model.exception.InvalidRequestException;
+import io.oigres.ecomm.service.users.api.model.exception.NotFoundException;
+import io.oigres.ecomm.service.users.api.model.exception.UnauthorizedException;
+import io.oigres.ecomm.service.users.api.model.exception.UserTypeNotFoundException;
+import io.oigres.ecomm.service.users.api.model.exception.profile.*;
+import io.oigres.ecomm.service.users.api.model.profile.ActiveStatusProfileResponse;
+import io.oigres.ecomm.service.users.config.mapper.ResponsesMapper;
+import io.oigres.ecomm.service.users.domain.*;
+import io.oigres.ecomm.service.users.domain.profile.AdminProfile;
+import io.oigres.ecomm.service.users.domain.profile.ConsumerProfile;
+import io.oigres.ecomm.service.users.domain.profile.DispensaryProfile;
+import io.oigres.ecomm.service.users.enums.BlobType;
+import io.oigres.ecomm.service.users.enums.ConsumerTypeEnum;
+import io.oigres.ecomm.service.users.enums.ProfileTypeEnum;
+import io.oigres.ecomm.service.users.enums.ResourceStatusEnum;
+import io.oigres.ecomm.service.users.exception.*;
+import io.oigres.ecomm.service.users.exception.profile.*;
+import io.oigres.ecomm.service.users.usecases.uploads.GetStoreLocationUseCase;
+import io.oigres.ecomm.service.users.usecases.users.admins.create.CreateNewAdminUserUseCase;
+import io.oigres.ecomm.service.users.usecases.users.admins.delete.DeleteAdminUserUseCase;
+import io.oigres.ecomm.service.users.usecases.users.admins.enable.DisableAdminUseCase;
+import io.oigres.ecomm.service.users.usecases.users.admins.enable.EnableAdminUseCase;
+import io.oigres.ecomm.service.users.usecases.users.admins.list.GetAllAdminsUseCase;
+import io.oigres.ecomm.service.users.usecases.users.admins.search.GetAdminByIdUseCase;
+import io.oigres.ecomm.service.users.usecases.users.admins.update.UpdateAdminUseCase;
+import io.oigres.ecomm.service.users.usecases.users.consumers.create.CreateNewConsumerUserUseCase;
+import io.oigres.ecomm.service.users.usecases.users.consumers.delete.DeleteConsumerUserUseCase;
+import io.oigres.ecomm.service.users.usecases.users.consumers.list.GetAllConsumersUseCase;
+import io.oigres.ecomm.service.users.usecases.users.consumers.search.GetConsumerByIdUseCase;
+import io.oigres.ecomm.service.users.usecases.users.consumers.update.UpdateConsumerUseCase;
+import io.oigres.ecomm.service.users.usecases.users.delete.DeleteUserUseCase;
+import io.oigres.ecomm.service.users.usecases.users.dispensaries.create.CreateNewDispensaryUserUseCase;
+import io.oigres.ecomm.service.users.usecases.users.dispensaries.delete.DeleteDispensaryUserUseCase;
+import io.oigres.ecomm.service.users.usecases.users.dispensaries.list.GetAllDispensariesUseCase;
+import io.oigres.ecomm.service.users.usecases.users.dispensaries.search.GetDispensaryByDispensaryIdUseCase;
+import io.oigres.ecomm.service.users.usecases.users.dispensaries.search.GetDispensaryByIdUseCase;
+import io.oigres.ecomm.service.users.usecases.users.dispensaries.update.UpdateDispensaryUseCase;
+import io.oigres.ecomm.service.users.usecases.users.gender.GetAllGendersUseCase;
+import io.oigres.ecomm.service.users.usecases.users.gender.GetGenderByIdUseCase;
+import io.oigres.ecomm.service.users.usecases.users.images.ChangeCardImageStatusUseCase;
+import io.oigres.ecomm.service.users.usecases.users.images.ChangeProfileImageStatusUseCase;
+import io.oigres.ecomm.service.users.usecases.users.images.model.UpdateProfileImageDTO;
+import io.oigres.ecomm.service.users.usecases.users.list.GetAllUsersUseCase;
+import io.oigres.ecomm.service.users.usecases.users.profiles.ToggleEnabledProfileUseCaseImpl;
+import io.oigres.ecomm.service.users.usecases.users.search.GetUserByIdUseCase;
+import io.oigres.ecomm.service.users.usecases.users.sendcode.SendCodeUseCase;
+import io.oigres.ecomm.service.users.usecases.users.utils.ImageUtils;
+import io.oigres.ecomm.service.users.usecases.users.validate.ValidateUserUseCase;
+import io.oigres.ecomm.service.users.usecases.users.verifycode.VerifyCodeUseCase;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.util.MimeTypeUtils;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping(Routes.USERS_CONTROLLER_PATH)
+@Tag(name = &quot;Users&quot;)
+<span class="fc" id="L100">@Slf4j</span>
+public class UsersController extends AbstractController implements UsersService {
+
+  private final CreateNewAdminUserUseCase createNewAdminUserUseCase;
+  private final CreateNewConsumerUserUseCase createNewConsumerUserUseCase;
+  private final CreateNewDispensaryUserUseCase createNewDispensaryUserUseCase;
+  private final GetAllUsersUseCase getAllUsersUseCase;
+  private final GetUserByIdUseCase getUserByIdUseCase;
+  private final GetAdminByIdUseCase getAdminByIdUseCase;
+  private final GetConsumerByIdUseCase getConsumerByIdUseCase;
+  private final GetDispensaryByIdUseCase getDispensaryByIdUseCase;
+  private final GetDispensaryByDispensaryIdUseCase getDispensaryByDispensaryIdUseCase;
+  private final GetAllAdminsUseCase getAllAdminsUseCase;
+  private final GetAllConsumersUseCase getAllConsumersUseCase;
+  private final GetAllDispensariesUseCase getAllDispensariesUseCase;
+  private final UpdateAdminUseCase updateAdminUseCase;
+  private final UpdateConsumerUseCase updateConsumerUseCase;
+  private final UpdateDispensaryUseCase updateDispensaryUseCase;
+  private final DeleteUserUseCase deleteUserUseCase;
+  private final DeleteAdminUserUseCase deleteAdminUserUseCase;
+  private final DeleteConsumerUserUseCase deleteConsumerUserUseCase;
+  private final DeleteDispensaryUserUseCase deleteDispensaryUserUseCase;
+  private final ValidateUserUseCase validateUserUseCase;
+  private final SendCodeUseCase sendCodeUseCase;
+  private final VerifyCodeUseCase verifyCodeUseCase;
+  private final GetAllGendersUseCase getAllGendersUseCase;
+  private final GetGenderByIdUseCase getGenderByIdUseCase;
+  private final EnableAdminUseCase enableAdminUseCase;
+  private final DisableAdminUseCase disableAdminUseCase;
+  private final ToggleEnabledProfileUseCaseImpl toggleEnabledProfileUseCaseImpl;
+  private final GetStoreLocationUseCase getStoreLocationUseCase;
+  private final ChangeProfileImageStatusUseCase changeProfileImageStatusUseCase;
+  private final ChangeCardImageStatusUseCase changeCardImageStatusUseCase;
+  private final ResponsesMapper responsesMapper;
+
+  public UsersController(
+      CreateNewAdminUserUseCase createNewAdminUserUseCase,
+      CreateNewConsumerUserUseCase createNewConsumerUserUseCase,
+      CreateNewDispensaryUserUseCase createNewDispensaryUserUseCase,
+      GetAllUsersUseCase getAllUsersUseCase,
+      GetUserByIdUseCase getUserByIdUseCase,
+      GetAdminByIdUseCase getAdminByIdUseCase,
+      GetConsumerByIdUseCase getConsumerByIdUseCase,
+      GetDispensaryByIdUseCase getDispensaryByIdUseCase,
+      GetDispensaryByDispensaryIdUseCase getDispensaryByDispensaryIdUseCase,
+      GetAllAdminsUseCase getAllAdminsUseCase,
+      GetAllConsumersUseCase getAllConsumersUseCase,
+      GetAllDispensariesUseCase getAllDispensariesUseCase,
+      UpdateAdminUseCase updateAdminUseCase,
+      UpdateConsumerUseCase updateConsumerUseCase,
+      UpdateDispensaryUseCase updateDispensaryUseCase,
+      DeleteUserUseCase deleteUserUseCase,
+      DeleteAdminUserUseCase deleteAdminUserUseCase,
+      DeleteConsumerUserUseCase deleteConsumerUserUseCase,
+      DeleteDispensaryUserUseCase deleteDispensaryUserUseCase,
+      ValidateUserUseCase validateUserUseCase,
+      SendCodeUseCase sendCodeUseCase,
+      VerifyCodeUseCase verifyCodeUseCase,
+      GetAllGendersUseCase getAllGendersUseCase,
+      GetGenderByIdUseCase getGenderByIdUseCase,
+      EnableAdminUseCase enableAdminUseCase,
+      DisableAdminUseCase disableAdminUseCase,
+      ToggleEnabledProfileUseCaseImpl toggleEnabledProfileUseCaseImpl,
+      GetStoreLocationUseCase getStoreLocationUseCase,
+      ChangeProfileImageStatusUseCase changeProfileImageStatusUseCase,
+      ChangeCardImageStatusUseCase changeCardImageStatusUseCase,
+<span class="fc" id="L166">      ResponsesMapper responsesMapper) {</span>
+<span class="fc" id="L167">    this.createNewAdminUserUseCase = createNewAdminUserUseCase;</span>
+<span class="fc" id="L168">    this.createNewConsumerUserUseCase = createNewConsumerUserUseCase;</span>
+<span class="fc" id="L169">    this.createNewDispensaryUserUseCase = createNewDispensaryUserUseCase;</span>
+<span class="fc" id="L170">    this.getAllUsersUseCase = getAllUsersUseCase;</span>
+<span class="fc" id="L171">    this.getUserByIdUseCase = getUserByIdUseCase;</span>
+<span class="fc" id="L172">    this.getAdminByIdUseCase = getAdminByIdUseCase;</span>
+<span class="fc" id="L173">    this.getConsumerByIdUseCase = getConsumerByIdUseCase;</span>
+<span class="fc" id="L174">    this.getDispensaryByIdUseCase = getDispensaryByIdUseCase;</span>
+<span class="fc" id="L175">    this.getDispensaryByDispensaryIdUseCase = getDispensaryByDispensaryIdUseCase;</span>
+<span class="fc" id="L176">    this.getAllAdminsUseCase = getAllAdminsUseCase;</span>
+<span class="fc" id="L177">    this.getAllConsumersUseCase = getAllConsumersUseCase;</span>
+<span class="fc" id="L178">    this.getAllDispensariesUseCase = getAllDispensariesUseCase;</span>
+<span class="fc" id="L179">    this.updateAdminUseCase = updateAdminUseCase;</span>
+<span class="fc" id="L180">    this.updateConsumerUseCase = updateConsumerUseCase;</span>
+<span class="fc" id="L181">    this.updateDispensaryUseCase = updateDispensaryUseCase;</span>
+<span class="fc" id="L182">    this.deleteUserUseCase = deleteUserUseCase;</span>
+<span class="fc" id="L183">    this.deleteAdminUserUseCase = deleteAdminUserUseCase;</span>
+<span class="fc" id="L184">    this.deleteConsumerUserUseCase = deleteConsumerUserUseCase;</span>
+<span class="fc" id="L185">    this.deleteDispensaryUserUseCase = deleteDispensaryUserUseCase;</span>
+<span class="fc" id="L186">    this.validateUserUseCase = validateUserUseCase;</span>
+<span class="fc" id="L187">    this.sendCodeUseCase = sendCodeUseCase;</span>
+<span class="fc" id="L188">    this.verifyCodeUseCase = verifyCodeUseCase;</span>
+<span class="fc" id="L189">    this.getAllGendersUseCase = getAllGendersUseCase;</span>
+<span class="fc" id="L190">    this.getGenderByIdUseCase = getGenderByIdUseCase;</span>
+<span class="fc" id="L191">    this.enableAdminUseCase = enableAdminUseCase;</span>
+<span class="fc" id="L192">    this.disableAdminUseCase = disableAdminUseCase;</span>
+<span class="fc" id="L193">    this.toggleEnabledProfileUseCaseImpl = toggleEnabledProfileUseCaseImpl;</span>
+<span class="fc" id="L194">    this.getStoreLocationUseCase = getStoreLocationUseCase;</span>
+<span class="fc" id="L195">    this.changeProfileImageStatusUseCase = changeProfileImageStatusUseCase;</span>
+<span class="fc" id="L196">    this.changeCardImageStatusUseCase = changeCardImageStatusUseCase;</span>
+<span class="fc" id="L197">    this.responsesMapper = responsesMapper;</span>
+<span class="fc" id="L198">  }</span>
+
+  @Operation(summary = &quot;Get all users&quot;)
+  @PageableAsQueryParam
+  @GetMapping(produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @RateLimiter(name = &quot;get-all-users-endpoint&quot;)
+  public PageResponse&lt;GetAllUsersResponse&gt; getAllUsers(
+      @Parameter(hidden = true) @PageableDefault(page = 0, size = 40) PageableRequest pageable) {
+<span class="fc" id="L207">    log.info(&quot;############ call getAllUsers ############&quot;);</span>
+<span class="fc" id="L208">    Page&lt;User&gt; users =</span>
+<span class="fc" id="L209">        this.getAllUsersUseCase.handle(</span>
+<span class="fc" id="L210">            PageRequest.of(</span>
+<span class="fc" id="L211">                pageable.getPageNumber(), pageable.getPageSize(), Sort.by(&quot;id&quot;).ascending()));</span>
+<span class="fc" id="L212">    List&lt;GetAllUsersResponse&gt; response =</span>
+<span class="fc" id="L213">        this.responsesMapper.toGetAllUsersResponse(users.getContent());</span>
+<span class="fc" id="L214">    return new PageResponseImpl&lt;&gt;(response, pageable, users.getTotalElements());</span>
+  }
+
+  @Operation(summary = &quot;Create a new Admin user&quot;)
+  @PostMapping(value = Routes.PROFILE_ADMIN_USER, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.CREATED)
+  @Override
+  @RateLimiter(name = &quot;create-new-admin-user-endpoint&quot;)
+  public CreateAdminUserResponse createNewAdminUser(
+      @RequestBody @Valid CreateAdminUserRequest request)
+      throws ProfileException, ProfileTypeNotFoundException {
+<span class="nc" id="L225">    log.info(&quot;############ call createNewAdminUser [{}] ############&quot;, request.getEmail());</span>
+    try {
+<span class="nc" id="L227">      AdminProfile adminProfile =</span>
+<span class="nc" id="L228">          this.createNewAdminUserUseCase.handle(this.responsesMapper.toAdminProfile(request));</span>
+<span class="nc" id="L229">      return this.responsesMapper.toCreateAdminUserResponse(adminProfile);</span>
+<span class="nc" id="L230">    } catch (DeletedProfileException e) {</span>
+<span class="nc" id="L231">      throw new ProfileDeletedException(e.getMessage());</span>
+<span class="nc" id="L232">    } catch (ExistingProfileException e) {</span>
+<span class="nc" id="L233">      throw new ProfileExistingException(e.getMessage());</span>
+<span class="nc" id="L234">    } catch (TypeNotFoundProfileException e) {</span>
+<span class="nc" id="L235">      throw new ProfileTypeNotFoundException(e.getMessage());</span>
+    }
+  }
+
+  @Operation(summary = &quot;Create a new Consumer&quot;)
+  @PostMapping(
+      value = Routes.PROFILE_CONSUMER_USER,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.CREATED)
+  @Override
+  public CreateConsumerUserResponse createNewConsumerUser(
+      @RequestBody @Valid CreateConsumerUserRequest request)
+      throws ProfileException,
+          io.oigres.ecomm.service.users.api.model.exception.StateNotFoundException,
+          io.oigres.ecomm.service.users.api.model.exception.GenderNotFoundException,
+          io.oigres.ecomm.service.users.api.model.exception.ZipcodeNotFoundException,
+          UserTypeNotFoundException,
+          ProfileTypeNotFoundException {
+<span class="nc" id="L253">    log.info(&quot;############ call createNewConsumerUser [{}] ############&quot;, request.getEmail());</span>
+    try {
+<span class="nc" id="L255">      ConsumerProfile consumerProfile =</span>
+<span class="nc" id="L256">          this.createNewConsumerUserUseCase.handle(</span>
+<span class="nc" id="L257">              request.getEmail(),</span>
+<span class="nc" id="L258">              request.getPassword(),</span>
+<span class="nc" id="L259">              request.getFirstName(),</span>
+<span class="nc" id="L260">              request.getLastName(),</span>
+<span class="nc" id="L261">              request.getPhone(),</span>
+<span class="nc" id="L262">              request.getAvatar(),</span>
+<span class="nc" id="L263">              request.getCardImageURL(),</span>
+<span class="nc bnc" id="L264" title="All 2 branches missed.">              Objects.isNull(request.getUserType())</span>
+<span class="nc" id="L265">                  ? null</span>
+<span class="nc" id="L266">                  : ConsumerTypeEnum.getById(request.getUserType().getId()).orElse(null),</span>
+<span class="nc" id="L267">              request.getGenderId(),</span>
+<span class="nc" id="L268">              request.getZipcodeStateId(),</span>
+<span class="nc" id="L269">              request.getZipcodeId());</span>
+<span class="nc" id="L270">      return this.responsesMapper.toCreateConsumerUserResponse(consumerProfile);</span>
+<span class="nc" id="L271">    } catch (DeletedProfileException e) {</span>
+<span class="nc" id="L272">      throw new ProfileDeletedException(e.getMessage());</span>
+<span class="nc" id="L273">    } catch (ExistingProfileException e) {</span>
+<span class="nc" id="L274">      throw new ProfileExistingException(e.getMessage());</span>
+<span class="nc" id="L275">    } catch (TypeNotFoundProfileException e) {</span>
+<span class="nc" id="L276">      throw new ProfileTypeNotFoundException(e.getMessage());</span>
+<span class="nc" id="L277">    } catch (StateNotFoundException e) {</span>
+<span class="nc" id="L278">      throw new io.oigres.ecomm.service.users.api.model.exception.StateNotFoundException(</span>
+<span class="nc" id="L279">          e.getMessage());</span>
+<span class="nc" id="L280">    } catch (GenderNotFoundException e) {</span>
+<span class="nc" id="L281">      throw new io.oigres.ecomm.service.users.api.model.exception.GenderNotFoundException(</span>
+<span class="nc" id="L282">          e.getMessage());</span>
+<span class="nc" id="L283">    } catch (ZipcodeNotFoundDomainException e) {</span>
+<span class="nc" id="L284">      throw new io.oigres.ecomm.service.users.api.model.exception.ZipcodeNotFoundException(</span>
+<span class="nc" id="L285">          e.getMessage());</span>
+<span class="nc" id="L286">    } catch (io.oigres.ecomm.service.users.exception.profile.UserTypeNotFoundException e) {</span>
+<span class="nc" id="L287">      throw new UserTypeNotFoundException(e.getMessage());</span>
+    }
+  }
+
+  @Operation(summary = &quot;Create a new Dispensary user&quot;)
+  @PostMapping(
+      value = Routes.PROFILE_DISPENSARY_USER,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.CREATED)
+  @Override
+  public CreateDispensaryUserResponse createNewDispensaryUser(
+      @RequestBody @Valid CreateDispensaryUserRequest request)
+      throws ProfileException, ProfileTypeNotFoundException {
+<span class="nc" id="L300">    log.info(</span>
+        &quot;############ call createNewDispensaryUser [{}, {}] ############&quot;,
+<span class="nc" id="L302">        request.getEmail(),</span>
+<span class="nc" id="L303">        request.getDispensaryId());</span>
+    try {
+<span class="nc" id="L305">      DispensaryProfile dispensaryProfile =</span>
+<span class="nc" id="L306">          this.createNewDispensaryUserUseCase.handle(</span>
+<span class="nc" id="L307">              this.responsesMapper.toCreateDispensaryUserRequest(request));</span>
+<span class="nc" id="L308">      return this.responsesMapper.toCreateDispensaryUserResponse(dispensaryProfile);</span>
+<span class="nc" id="L309">    } catch (DeletedProfileException e) {</span>
+<span class="nc" id="L310">      throw new ProfileDeletedException(e.getMessage());</span>
+<span class="nc" id="L311">    } catch (ExistingProfileException e) {</span>
+<span class="nc" id="L312">      throw new ProfileExistingException(e.getMessage());</span>
+<span class="nc" id="L313">    } catch (TypeNotFoundProfileException e) {</span>
+<span class="nc" id="L314">      throw new ProfileTypeNotFoundException(e.getMessage());</span>
+    }
+  }
+
+  @Operation(summary = &quot;Retrieve information for a user&quot;)
+  @GetMapping(value = Routes.GET_USER, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Deprecated
+  public GetUserResponse getUserById(@PathVariable(&quot;userId&quot;) Long userId) throws NotFoundException {
+<span class="nc" id="L323">    log.info(&quot;############ call getUserById [{}] ############&quot;, userId);</span>
+    User user;
+    try {
+<span class="nc" id="L326">      user = this.getUserByIdUseCase.handle(userId);</span>
+<span class="nc" id="L327">    } catch (UserNotFoundException e) {</span>
+<span class="nc" id="L328">      throw new NotFoundException();</span>
+<span class="nc" id="L329">    }</span>
+<span class="nc" id="L330">    return GetUserResponse.builder().userId(user.getId()).build();</span>
+  }
+
+  @Operation(summary = &quot;Retrieve information for an Admin&quot;)
+  @GetMapping(
+      value = Routes.GET_PROFILE_ADMIN_USER,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public GetAdminUserResponse getAdminUserById(@PathVariable(&quot;userId&quot;) Long userId)
+      throws NotFoundException {
+<span class="nc" id="L341">    log.info(&quot;############ call getAdminUserById [{}] ############&quot;, userId);</span>
+    try {
+<span class="nc" id="L343">      AdminProfile adminProfile = getAdminByIdUseCase.handle(userId);</span>
+<span class="nc" id="L344">      String url = ImageUtils.getProfileImageURLForAdminUser(adminProfile);</span>
+<span class="nc" id="L345">      return this.responsesMapper.toGetAdminUserResponse(adminProfile, url);</span>
+<span class="nc" id="L346">    } catch (NotFoundProfileException e) {</span>
+<span class="nc" id="L347">      throw new NotFoundException(e.getMessage());</span>
+    }
+  }
+
+  @Operation(summary = &quot;Retrieve information for a Consumer&quot;)
+  @GetMapping(
+      value = Routes.GET_PROFILE_CONSUMER_USER,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public GetConsumerUserResponse getConsumerUserById(@PathVariable(&quot;userId&quot;) Long userId)
+      throws NotFoundException {
+<span class="nc" id="L359">    log.info(&quot;############ call getConsumerUserById [{}] ############&quot;, userId);</span>
+    try {
+<span class="nc" id="L361">      ConsumerProfile cp = getConsumerByIdUseCase.handle(userId);</span>
+<span class="nc" id="L362">      String url = ImageUtils.getProfileImageURLForConsumerUser(cp);</span>
+<span class="nc" id="L363">      return this.responsesMapper.toGetConsumerUserResponse(cp, url);</span>
+<span class="nc" id="L364">    } catch (NotFoundProfileException e) {</span>
+<span class="nc" id="L365">      throw new NotFoundException(e.getMessage());</span>
+    }
+  }
+
+  @Operation(summary = &quot;Retrieve information for a Dispensary&quot;)
+  @GetMapping(
+      value = Routes.GET_PROFILE_DISPENSARY_USER,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public GetDispensaryUserResponse getDispensaryUserById(@PathVariable(&quot;userId&quot;) Long userId)
+      throws NotFoundException {
+<span class="nc" id="L377">    log.info(&quot;############ call getDispensaryUserById [{}] ############&quot;, userId);</span>
+    try {
+<span class="nc" id="L379">      DispensaryProfile dispensaryProfile = getDispensaryByIdUseCase.handle(userId);</span>
+<span class="nc" id="L380">      return this.responsesMapper.toGetDispensaryUserResponse(dispensaryProfile);</span>
+<span class="nc" id="L381">    } catch (NotFoundProfileException e) {</span>
+<span class="nc" id="L382">      throw new NotFoundException(e.getMessage());</span>
+    }
+  }
+
+  @Operation(summary = &quot;Retrieve information for a Dispensary&quot;)
+  @GetMapping(
+      value = Routes.GET_PROFILE_DISPENSARY_USER_BY_DISPENSARY_ID,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public GetDispensaryUserResponse getDispensaryUserByDispensaryId(
+      @PathVariable(&quot;dispensaryId&quot;) Long dispensaryId) throws NotFoundException {
+<span class="nc" id="L394">    log.info(&quot;############ call getDispensaryUserByDispensaryId [{}] ############&quot;, dispensaryId);</span>
+    try {
+<span class="nc" id="L396">      DispensaryProfile dispensaryProfile = getDispensaryByDispensaryIdUseCase.handle(dispensaryId);</span>
+<span class="nc" id="L397">      return this.responsesMapper.toGetDispensaryUserResponse(dispensaryProfile);</span>
+<span class="nc" id="L398">    } catch (NotFoundProfileException e) {</span>
+<span class="nc" id="L399">      throw new NotFoundException(e.getMessage());</span>
+    }
+  }
+
+  @Operation(summary = &quot;Get all Admins&quot;)
+  @PageableAsQueryParam
+  @GetMapping(
+      value = Routes.GET_ALL_PROFILE_ADMIN_USER,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public PageResponse&lt;GetAllAdminUsersResponse&gt; getAllAdmins(
+      @Parameter(hidden = true, required = true) PageableRequest pageable) {
+<span class="nc" id="L412">    log.info(&quot;############ call getAllAdmins ############&quot;);</span>
+<span class="nc" id="L413">    Page&lt;AdminProfile&gt; adminProfilePage =</span>
+<span class="nc" id="L414">        getAllAdminsUseCase.handle(</span>
+<span class="nc" id="L415">            PageRequest.of(</span>
+<span class="nc" id="L416">                pageable.getPageNumber(), pageable.getPageSize(), Sort.by(&quot;id&quot;).ascending()));</span>
+<span class="nc" id="L417">    List&lt;GetAllAdminUsersResponse&gt; getAllAdminUsersResponseList =</span>
+<span class="nc" id="L418">        adminProfilePage.getContent().stream()</span>
+<span class="nc" id="L419">            .map(</span>
+                adminProfile -&gt; {
+<span class="nc" id="L421">                  String url = ImageUtils.getProfileImageURLForAdminUser(adminProfile);</span>
+<span class="nc" id="L422">                  return this.responsesMapper.toGetAllAdminUsersResponse(adminProfile, url);</span>
+                })
+<span class="nc" id="L424">            .collect(Collectors.toList());</span>
+<span class="nc" id="L425">    return new PageResponseImpl&lt;&gt;(</span>
+<span class="nc" id="L426">        getAllAdminUsersResponseList, pageable, adminProfilePage.getTotalElements());</span>
+  }
+
+  @Operation(summary = &quot;Get all Consumers&quot;)
+  @PageableAsQueryParam
+  @GetMapping(
+      value = Routes.GET_ALL_PROFILE_CONSUMER_USER,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public PageResponse&lt;GetAllConsumerUsersResponse&gt; getAllConsumers(
+      @Parameter(hidden = true, required = true) PageableRequest pageable) {
+<span class="nc" id="L438">    log.info(&quot;############ call getAllConsumers ############&quot;);</span>
+<span class="nc" id="L439">    Page&lt;ConsumerProfile&gt; consumerProfilePage =</span>
+<span class="nc" id="L440">        getAllConsumersUseCase.handle(</span>
+<span class="nc" id="L441">            PageRequest.of(</span>
+<span class="nc" id="L442">                pageable.getPageNumber(), pageable.getPageSize(), Sort.by(&quot;id&quot;).ascending()));</span>
+<span class="nc" id="L443">    List&lt;GetAllConsumerUsersResponse&gt; getAllConsumerUsersResponseList =</span>
+<span class="nc" id="L444">        this.responsesMapper.toGetAllConsumerUsersResponse(consumerProfilePage.getContent());</span>
+<span class="nc" id="L445">    return new PageResponseImpl&lt;&gt;(</span>
+<span class="nc" id="L446">        getAllConsumerUsersResponseList, pageable, consumerProfilePage.getTotalElements());</span>
+  }
+
+  @Operation(summary = &quot;Get all Dispensaries&quot;)
+  @PageableAsQueryParam
+  @GetMapping(
+      value = Routes.GET_ALL_PROFILE_DISPENSARY_USER,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public PageResponse&lt;GetAllDispensaryUsersResponse&gt; getAllDispensaries(
+      @Parameter(hidden = true, required = true) PageableRequest pageable) {
+<span class="nc" id="L458">    log.info(&quot;############ call getAllDispensaries ############&quot;);</span>
+<span class="nc" id="L459">    Page&lt;DispensaryProfile&gt; dispensaryProfilePage =</span>
+<span class="nc" id="L460">        getAllDispensariesUseCase.handle(</span>
+<span class="nc" id="L461">            PageRequest.of(</span>
+<span class="nc" id="L462">                pageable.getPageNumber(), pageable.getPageSize(), Sort.by(&quot;id&quot;).ascending()));</span>
+<span class="nc" id="L463">    List&lt;GetAllDispensaryUsersResponse&gt; getAllDispensaryUsersResponseList =</span>
+<span class="nc" id="L464">        this.responsesMapper.toGetAllDispensaryUsersResponse(dispensaryProfilePage.getContent());</span>
+<span class="nc" id="L465">    return new PageResponseImpl&lt;&gt;(</span>
+<span class="nc" id="L466">        getAllDispensaryUsersResponseList, pageable, dispensaryProfilePage.getTotalElements());</span>
+  }
+
+  @Operation(summary = &quot;Update Admin by user id&quot;)
+  @PutMapping(value = Routes.UPDATE_ADMIN_USER, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public UpdateAdminProfileResponse updateAdmin(
+      @Parameter(
+              name = &quot;userId&quot;,
+              required = true,
+              description = &quot;identifier associated with the user (1..N)&quot;)
+          @Min(value = 1, message = &quot;userId should be greater than zero&quot;)
+          @PathVariable(name = &quot;userId&quot;)
+          Long userId,
+      @RequestBody @Valid UpdateAdminProfileRequest request)
+      throws NotFoundException {
+<span class="nc" id="L483">    log.info(&quot;############ call updateAdmin [{}] ############&quot;, userId);</span>
+<span class="nc" id="L484">    AdminProfile adminProfile = this.responsesMapper.toAdminProfile(request);</span>
+    try {
+<span class="nc" id="L486">      return this.responsesMapper.toUpdateAdminProfileResponse(</span>
+<span class="nc" id="L487">          updateAdminUseCase.handle(userId, adminProfile));</span>
+<span class="nc" id="L488">    } catch (ProfileUserException e) {</span>
+<span class="nc" id="L489">      throw new NotFoundException(e.getMessage());</span>
+    }
+  }
+
+  @Operation(summary = &quot;Update Consumer by user id&quot;)
+  @PutMapping(value = Routes.UPDATE_CONSUMER_USER, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public UpdateConsumerProfileResponse updateConsumer(
+      @Parameter(
+              name = &quot;userId&quot;,
+              required = true,
+              description = &quot;identifier associated with the user (0..N)&quot;)
+          @Min(value = 0, message = &quot;userId should be greater than &quot; + &quot;zero&quot;)
+          @PathVariable(name = &quot;userId&quot;)
+          Long userId,
+      @RequestBody @Valid UpdateConsumerProfileRequest request)
+      throws NotFoundException {
+<span class="nc" id="L507">    log.info(&quot;############ call updateConsumer [{}] ############&quot;, userId);</span>
+<span class="nc" id="L508">    ConsumerProfile consumerProfile = this.responsesMapper.toConsumerProfile(request);</span>
+<span class="nc" id="L509">    consumerProfile.setProfileImage(</span>
+        new ProfileImage(
+<span class="nc" id="L511">            null, request.getAvatar(), ResourceStatusEnum.PENDING, LocalDateTime.now()));</span>
+
+    try {
+<span class="nc" id="L514">      ConsumerProfile profile = updateConsumerUseCase.handle(userId, consumerProfile);</span>
+<span class="nc" id="L515">      return this.responsesMapper.toUpdateConsumerProfileResponse(profile);</span>
+<span class="nc" id="L516">    } catch (ProfileUserException</span>
+        | GenderNotFoundException
+        | StateNotFoundException
+        | ZipcodeNotFoundDomainException e) {
+<span class="nc" id="L520">      throw new NotFoundException(e.getMessage());</span>
+    }
+  }
+
+  @Operation(summary = &quot;Update Dispensary by user id&quot;)
+  @PutMapping(
+      value = Routes.UPDATE_DISPENSARY_USER,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public UpdateDispensaryProfileResponse updateDispensary(
+      @Parameter(
+              name = &quot;userId&quot;,
+              required = true,
+              description = &quot;identifier associated with the user (0..N)&quot;)
+          @Min(value = 0, message = &quot;userId should be greater than &quot; + &quot;zero&quot;)
+          @PathVariable(name = &quot;userId&quot;)
+          Long userId,
+      @RequestBody @Valid UpdateDispensaryProfileRequest request)
+      throws NotFoundException {
+<span class="nc" id="L540">    log.info(&quot;############ call updateDispensary [{}] ############&quot;, userId);</span>
+<span class="nc" id="L541">    DispensaryProfile dispensaryProfile = this.responsesMapper.toDispensaryProfile(request);</span>
+    try {
+<span class="nc" id="L543">      return this.responsesMapper.toUpdateDispensaryProfileResponse(</span>
+<span class="nc" id="L544">          updateDispensaryUseCase.handle(userId, dispensaryProfile));</span>
+<span class="nc" id="L545">    } catch (ProfileUserException e) {</span>
+<span class="nc" id="L546">      throw new NotFoundException(e.getMessage());</span>
+    }
+  }
+
+  @Override
+  @Operation(summary = &quot;Remove a user&quot;)
+  @DeleteMapping(value = Routes.DELETE_USER, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public DeleteUserResponse deleteUserById(@PathVariable(&quot;userId&quot;) Long userId)
+      throws NotFoundException {
+<span class="nc" id="L556">    log.info(&quot;############ call deleteUserById [{}] ############&quot;, userId);</span>
+    try {
+<span class="nc" id="L558">      this.deleteUserUseCase.handle(userId);</span>
+<span class="nc" id="L559">    } catch (UserNotFoundException e) {</span>
+<span class="nc" id="L560">      throw new NotFoundException();</span>
+<span class="nc" id="L561">    }</span>
+<span class="nc" id="L562">    return DeleteUserResponse.builder().id(userId).build();</span>
+  }
+
+  @Override
+  @Operation(summary = &quot;Remove admin profile by user id&quot;)
+  @DeleteMapping(value = Routes.DELETE_ADMIN_USER, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public DeleteAdminProfileResponse deleteAdminUserById(
+      @Parameter(
+              name = &quot;userId&quot;,
+              required = true,
+              description = &quot;identifier associated with the user (0..N)&quot;)
+          @Min(value = 0, message = &quot;userId should be greater than zero&quot;)
+          @PathVariable(&quot;userId&quot;)
+          Long userId)
+      throws NotFoundException {
+<span class="nc" id="L578">    log.info(&quot;############ call deleteAdminUserById [{}] ############&quot;, userId);</span>
+    try {
+<span class="nc" id="L580">      AdminProfile profile = this.deleteAdminUserUseCase.handle(userId);</span>
+<span class="nc" id="L581">      return this.responsesMapper.toDeleteAdminProfileResponse(profile);</span>
+<span class="nc" id="L582">    } catch (UserNotFoundException | NotFoundProfileException e) {</span>
+<span class="nc" id="L583">      throw new NotFoundException(e.getMessage());</span>
+    }
+  }
+
+  @Override
+  @Operation(summary = &quot;Remove consumer profile by user id&quot;)
+  @DeleteMapping(
+      value = Routes.DELETE_CONSUMER_USER,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public DeleteConsumerProfileResponse deleteConsumerUserById(
+      @Parameter(
+              name = &quot;userId&quot;,
+              required = true,
+              description = &quot;identifier associated with the user (0..N)&quot;)
+          @Min(value = 0, message = &quot;userId should be greater than zero&quot;)
+          @PathVariable(&quot;userId&quot;)
+          Long userId)
+      throws NotFoundException {
+<span class="nc" id="L602">    log.info(&quot;############ call deleteConsumerUserById [{}] ############&quot;, userId);</span>
+    try {
+<span class="nc" id="L604">      ConsumerProfile profile = this.deleteConsumerUserUseCase.handle(userId);</span>
+<span class="nc" id="L605">      return this.responsesMapper.toDeleteConsumerProfileResponse(profile);</span>
+<span class="nc" id="L606">    } catch (UserNotFoundException | NotFoundProfileException e) {</span>
+<span class="nc" id="L607">      throw new NotFoundException(e.getMessage());</span>
+    }
+  }
+
+  @Override
+  @Operation(summary = &quot;Remove dispensary profile by dispensaryId&quot;)
+  @DeleteMapping(
+      value = Routes.DELETE_DISPENSARY_USER,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public DeleteDispensaryProfileResponse deleteDispensaryUserByDispensaryId(
+      @Parameter(
+              name = &quot;dispensaryId&quot;,
+              required = true,
+              description = &quot;identifier associated with the dispensary profile (1..N)&quot;)
+          @Min(value = 1, message = &quot;dispensaryId should be greater than zero&quot;)
+          @PathVariable(&quot;dispensaryId&quot;)
+          Long dispensaryId)
+      throws NotFoundException {
+<span class="nc" id="L626">    log.info(</span>
+        &quot;############ call deleteDispensaryUserByDispensaryId [{}] ############&quot;, dispensaryId);
+    try {
+<span class="nc" id="L629">      DispensaryProfile profile = this.deleteDispensaryUserUseCase.handle(dispensaryId);</span>
+<span class="nc" id="L630">      return this.responsesMapper.toDeleteDispensaryProfileResponse(profile);</span>
+<span class="nc" id="L631">    } catch (UserNotFoundException | NotFoundProfileException e) {</span>
+<span class="nc" id="L632">      throw new NotFoundException(e.getMessage());</span>
+    }
+  }
+
+  @Override
+  @Operation(summary = &quot;Activate an Admin profile&quot;)
+  @PatchMapping(value = Routes.ACTIVATE_ADMIN_USER, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public ActiveStatusProfileResponse activateAdmin(
+      @Parameter(
+              name = &quot;userId&quot;,
+              required = true,
+              description = &quot;identifier associated with the user (0..N)&quot;)
+          @Min(value = 1, message = &quot;userId should be greater than zero&quot;)
+          @PathVariable(name = &quot;userId&quot;)
+          Long userId)
+      throws ProfileException, ProfileNotFoundException, ProfileTypeNotFoundException {
+<span class="nc" id="L649">    log.info(&quot;############ call activeAdmin [{}] ############&quot;, userId);</span>
+    try {
+<span class="nc" id="L651">      Profile profile = enableAdminUseCase.handle(userId);</span>
+<span class="nc" id="L652">      return this.responsesMapper.toActiveStatusProfileResponse(profile);</span>
+<span class="nc" id="L653">    } catch (NotFoundProfileException e) {</span>
+<span class="nc" id="L654">      throw new ProfileNotFoundException(e.getMessage());</span>
+<span class="nc" id="L655">    } catch (TypeNotFoundProfileException e) {</span>
+<span class="nc" id="L656">      throw new ProfileTypeNotFoundException(e.getMessage());</span>
+<span class="nc" id="L657">    } catch (BadRequestProfileException | EnableStatusProfileException e) {</span>
+<span class="nc" id="L658">      throw new ProfileException(e.getMessage());</span>
+    }
+  }
+
+  @Override
+  @Operation(summary = &quot;Deactivate an Admin profile&quot;)
+  @PatchMapping(
+      value = Routes.DEACTIVATE_ADMIN_USER,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public ActiveStatusProfileResponse deactivateAdmin(
+      @Parameter(
+              name = &quot;userId&quot;,
+              required = true,
+              description = &quot;identifier associated with the user (0..N)&quot;)
+          @Min(value = 1, message = &quot;userId should be greater than zero&quot;)
+          @PathVariable(name = &quot;userId&quot;)
+          Long userId)
+      throws ProfileException, ProfileNotFoundException, ProfileTypeNotFoundException {
+<span class="nc" id="L677">    log.info(&quot;############ call deactivateAdmin [{}] ############&quot;, userId);</span>
+    try {
+<span class="nc" id="L679">      Profile profile = disableAdminUseCase.handle(userId);</span>
+<span class="nc" id="L680">      return this.responsesMapper.toActiveStatusProfileResponse(profile);</span>
+<span class="nc" id="L681">    } catch (NotFoundProfileException e) {</span>
+<span class="nc" id="L682">      throw new ProfileNotFoundException(e.getMessage());</span>
+<span class="nc" id="L683">    } catch (TypeNotFoundProfileException e) {</span>
+<span class="nc" id="L684">      throw new ProfileTypeNotFoundException(e.getMessage());</span>
+<span class="nc" id="L685">    } catch (BadRequestProfileException | EnableStatusProfileException e) {</span>
+<span class="nc" id="L686">      throw new ProfileException(e.getMessage());</span>
+    }
+  }
+
+  @Override
+  @Operation(summary = &quot;Activate a ConsumerUser profile&quot;)
+  @PatchMapping(
+      value = Routes.ACTIVATE_CONSUMER_USER,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public ActiveStatusProfileResponse activateConsumerUser(
+      @Parameter(
+              name = &quot;userId&quot;,
+              required = true,
+              description = &quot;identifier associated with the user (1..N)&quot;)
+          @Min(value = 1, message = &quot;userId should be greater than zero&quot;)
+          @PathVariable(name = &quot;userId&quot;)
+          Long userId)
+      throws ProfileNotFoundException, ProfileEnableStatusExceptionResponseApi {
+<span class="nc" id="L705">    log.info(&quot;############ call activateConsumerUser [{}] ############&quot;, userId);</span>
+    try {
+<span class="nc" id="L707">      return this.responsesMapper.toActiveStatusProfileResponse(</span>
+<span class="nc" id="L708">          toggleEnabledProfileUseCaseImpl.handle(userId, ProfileTypeEnum.CONSUMER, Boolean.TRUE));</span>
+<span class="nc" id="L709">    } catch (NotFoundProfileException e) {</span>
+<span class="nc" id="L710">      throw new ProfileNotFoundException(e.getMessage());</span>
+<span class="nc" id="L711">    } catch (EnableStatusProfileException e) {</span>
+<span class="nc" id="L712">      throw new ProfileEnableStatusExceptionResponseApi(e.getMessage());</span>
+    }
+  }
+
+  @Override
+  @Operation(summary = &quot;Deactivate a ConsumerUser profile&quot;)
+  @PatchMapping(
+      value = Routes.DEACTIVATE_CONSUMER_USER,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public ActiveStatusProfileResponse deactivateConsumerUser(
+      @Parameter(
+              name = &quot;userId&quot;,
+              required = true,
+              description = &quot;identifier associated with the user (1..N)&quot;)
+          @Min(value = 1, message = &quot;userId should be greater than zero&quot;)
+          @PathVariable(name = &quot;userId&quot;)
+          Long userId)
+      throws ProfileNotFoundException, ProfileEnableStatusExceptionResponseApi {
+<span class="nc" id="L731">    log.info(&quot;############ call deactivateConsumerUser [{}] ############&quot;, userId);</span>
+    try {
+<span class="nc" id="L733">      return this.responsesMapper.toActiveStatusProfileResponse(</span>
+<span class="nc" id="L734">          toggleEnabledProfileUseCaseImpl.handle(userId, ProfileTypeEnum.CONSUMER, Boolean.FALSE));</span>
+<span class="nc" id="L735">    } catch (NotFoundProfileException e) {</span>
+<span class="nc" id="L736">      throw new ProfileNotFoundException(e.getMessage());</span>
+<span class="nc" id="L737">    } catch (EnableStatusProfileException e) {</span>
+<span class="nc" id="L738">      throw new ProfileEnableStatusExceptionResponseApi(e.getMessage());</span>
+    }
+  }
+
+  @Override
+  @Operation(summary = &quot;Activate a dispensary profile&quot;)
+  @PatchMapping(
+      value = Routes.ACTIVATE_DISPENSARY_USER,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public ActiveStatusProfileResponse activateDispensaryUser(
+      @Parameter(
+              name = &quot;userId&quot;,
+              required = true,
+              description = &quot;identifier associated with the user (1..N)&quot;)
+          @Min(value = 1, message = &quot;userId should be greater than zero&quot;)
+          @PathVariable(name = &quot;userId&quot;)
+          Long userId)
+      throws ProfileNotFoundException, ProfileEnableStatusExceptionResponseApi {
+<span class="nc" id="L757">    log.info(&quot;############ call activateConsumerUser [{}] ############&quot;, userId);</span>
+    try {
+<span class="nc" id="L759">      return this.responsesMapper.toActiveStatusProfileResponse(</span>
+<span class="nc" id="L760">          toggleEnabledProfileUseCaseImpl.handle(userId, ProfileTypeEnum.DISPENSARY, Boolean.TRUE));</span>
+<span class="nc" id="L761">    } catch (NotFoundProfileException e) {</span>
+<span class="nc" id="L762">      throw new ProfileNotFoundException(e.getMessage());</span>
+<span class="nc" id="L763">    } catch (EnableStatusProfileException e) {</span>
+<span class="nc" id="L764">      throw new ProfileEnableStatusExceptionResponseApi(e.getMessage());</span>
+    }
+  }
+
+  @Override
+  @Operation(summary = &quot;Deactivate a dispensary profile&quot;)
+  @PatchMapping(
+      value = Routes.DEACTIVATE_DISPENSARY_USER,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public ActiveStatusProfileResponse deactivateDispensaryUser(
+      @Parameter(
+              name = &quot;userId&quot;,
+              required = true,
+              description = &quot;identifier associated with the user (1..N)&quot;)
+          @Min(value = 1, message = &quot;userId should be greater than zero&quot;)
+          @PathVariable(name = &quot;userId&quot;)
+          Long userId)
+      throws ProfileNotFoundException, ProfileEnableStatusExceptionResponseApi {
+<span class="nc" id="L783">    log.info(&quot;############ call activateConsumerUser [{}] ############&quot;, userId);</span>
+    try {
+<span class="nc" id="L785">      return this.responsesMapper.toActiveStatusProfileResponse(</span>
+<span class="nc" id="L786">          toggleEnabledProfileUseCaseImpl.handle(</span>
+              userId, ProfileTypeEnum.DISPENSARY, Boolean.FALSE));
+<span class="nc" id="L788">    } catch (NotFoundProfileException e) {</span>
+<span class="nc" id="L789">      throw new ProfileNotFoundException(e.getMessage());</span>
+<span class="nc" id="L790">    } catch (EnableStatusProfileException e) {</span>
+<span class="nc" id="L791">      throw new ProfileEnableStatusExceptionResponseApi(e.getMessage());</span>
+    }
+  }
+
+  private ValidateProfileResponse createValidateProfileResponse(Profile profile) {
+<span class="nc bnc" id="L796" title="All 2 branches missed.">    if (profile == null) {</span>
+<span class="nc" id="L797">      return null;</span>
+    }
+<span class="nc bnc" id="L799" title="All 2 branches missed.">    if (DispensaryProfile.class.isAssignableFrom(profile.getClass())) {</span>
+<span class="nc" id="L800">      DispensaryProfile dp = (DispensaryProfile) profile;</span>
+<span class="nc" id="L801">      return new ValidateProfileResponse(</span>
+<span class="nc" id="L802">          profile.getId(),</span>
+<span class="nc" id="L803">          profile.getProfileType().getProfile().name(),</span>
+<span class="nc" id="L804">          dp.getEnabled(),</span>
+<span class="nc" id="L805">          dp.getDispensaryId());</span>
+    }
+<span class="nc" id="L807">    return new ValidateProfileResponse(</span>
+<span class="nc" id="L808">        profile.getId(), profile.getProfileType().getProfile().name(), profile.getEnabled());</span>
+  }
+
+  @Override
+  @Operation(summary = &quot;Check if email and password are valid&quot;)
+  @PostMapping(value = Routes.VALIDATE_USER, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public ValidateUserResponse validateUser(
+      @Parameter(description = &quot;Credentials&quot;, required = true) @RequestBody @Valid
+          ValidateUserRequest request)
+      throws NotFoundException, UnauthorizedException {
+<span class="nc" id="L819">    log.info(&quot;############ call validateUser [{}] ############&quot;, request.getEmail());</span>
+    User user;
+    try {
+<span class="nc" id="L822">      user = validateUserUseCase.handle(request.getEmail(), request.getPassword());</span>
+<span class="nc" id="L823">    } catch (UserNotFoundException e) {</span>
+<span class="nc" id="L824">      throw new NotFoundException(e.getMessage());</span>
+<span class="nc" id="L825">    } catch (PasswordInvalidException e) {</span>
+<span class="nc" id="L826">      throw new UnauthorizedException(e.getMessage());</span>
+<span class="nc" id="L827">    }</span>
+<span class="nc" id="L828">    return ValidateUserResponse.builder()</span>
+<span class="nc" id="L829">        .userId(user.getId())</span>
+<span class="nc" id="L830">        .profiles(</span>
+<span class="nc bnc" id="L831" title="All 2 branches missed.">            user.getProfiles() != null</span>
+<span class="nc" id="L832">                ? user.getProfiles().stream()</span>
+<span class="nc" id="L833">                    .map(this::createValidateProfileResponse)</span>
+<span class="nc" id="L834">                    .collect(Collectors.toList())</span>
+<span class="nc" id="L835">                : null)</span>
+<span class="nc" id="L836">        .build();</span>
+  }
+
+  @Override
+  @Operation(summary = &quot;Create and send a validation code&quot;)
+  @PostMapping(value = Routes.SEND_CODE, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public void sendCode(@RequestBody @Valid SendCodeRequest request)
+      throws NotFoundException, InvalidRequestException {
+<span class="nc" id="L845">    log.info(&quot;############ call sendCode [{}] ############&quot;, request.getEmail());</span>
+    try {
+<span class="nc" id="L847">      sendCodeUseCase.handle(request.getEmail());</span>
+<span class="nc" id="L848">    } catch (UserNotFoundException e) {</span>
+<span class="nc" id="L849">      throw new NotFoundException(e.getMessage());</span>
+<span class="nc" id="L850">    } catch (InvalidException e) {</span>
+<span class="nc" id="L851">      throw new InvalidRequestException(e.getMessage());</span>
+<span class="nc" id="L852">    }</span>
+<span class="nc" id="L853">  }</span>
+
+  @Override
+  @Operation(summary = &quot;Verify if validation code is valid&quot;)
+  @PostMapping(value = Routes.VERIFY_CODE, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public void verifyCode(@RequestBody @Valid VerifyCodeRequest request)
+      throws NotFoundException, InvalidRequestException {
+<span class="nc" id="L861">    log.info(&quot;############ call verifyCode [{}] ############&quot;, request.getEmail());</span>
+    try {
+<span class="nc" id="L863">      verifyCodeUseCase.handle(request.getEmail(), request.getCode());</span>
+<span class="nc" id="L864">    } catch (UserNotFoundException e) {</span>
+<span class="nc" id="L865">      throw new NotFoundException(e.getMessage());</span>
+<span class="nc" id="L866">    } catch (InvalidException e) {</span>
+<span class="nc" id="L867">      throw new InvalidRequestException(e.getMessage());</span>
+<span class="nc" id="L868">    }</span>
+<span class="nc" id="L869">  }</span>
+
+  @Operation(summary = &quot;Search users&quot;)
+  @PostMapping(value = Routes.SEARCH_USERS, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public PageResponse&lt;Object&gt; searchUsers() {
+<span class="nc" id="L875">    log.info(&quot;############ call searchUsers ############&quot;);</span>
+<span class="nc" id="L876">    return null;</span>
+  }
+
+  @Operation(summary = &quot;Get all genders&quot;)
+  @PageableAsQueryParam
+  @GetMapping(value = Routes.GET_ALL_GENDERS, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public PageResponse&lt;GenderResponse&gt; getAllGenders(
+      @Parameter(hidden = true, required = true) PageableRequest pageable) {
+<span class="nc" id="L886">    log.debug(&quot;############ call getAllGenders ############&quot;);</span>
+<span class="nc" id="L887">    Page&lt;Gender&gt; genders =</span>
+<span class="nc" id="L888">        this.getAllGendersUseCase.handle(</span>
+<span class="nc" id="L889">            PageRequest.of(</span>
+<span class="nc" id="L890">                pageable.getPageNumber(), pageable.getPageSize(), Sort.by(&quot;id&quot;).ascending()));</span>
+<span class="nc" id="L891">    List&lt;GenderResponse&gt; response = this.responsesMapper.toGenderResponse(genders.getContent());</span>
+<span class="nc" id="L892">    return new PageResponseImpl&lt;&gt;(response, pageable, genders.getTotalElements());</span>
+  }
+
+  @Operation(summary = &quot;Get gender by id&quot;)
+  @GetMapping(value = Routes.GET_GENDER_BY_ID, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public GenderResponse getGenderById(@PathVariable(&quot;genderId&quot;) long genderId)
+      throws io.oigres.ecomm.service.users.api.model.exception.GenderNotFoundException {
+<span class="nc" id="L901">    log.debug(&quot;############ call getGenderById ############&quot;);</span>
+    Gender gender;
+    try {
+<span class="nc" id="L904">      gender = getGenderByIdUseCase.handle(genderId);</span>
+<span class="nc" id="L905">    } catch (io.oigres.ecomm.service.users.exception.NotFoundException e) {</span>
+<span class="nc" id="L906">      throw new io.oigres.ecomm.service.users.api.model.exception.GenderNotFoundException();</span>
+<span class="nc" id="L907">    }</span>
+<span class="nc" id="L908">    return GenderResponse.builder().id(gender.getId()).genderName(gender.getGenderName()).build();</span>
+  }
+
+  @Operation(summary = &quot;Get all user types&quot;)
+  @PageableAsQueryParam
+  @GetMapping(value = Routes.GET_ALL_USERTYPES, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public PageResponse&lt;UserTypeResponse&gt; getAllUserTypes(
+      @Parameter(hidden = true, required = true) PageableRequest pageable) {
+<span class="nc" id="L918">    log.debug(&quot;############ call getAllUserTypes ############&quot;);</span>
+    List&lt;UserTypeResponse&gt; response =
+<span class="nc" id="L920">        Arrays.stream(ConsumerTypeEnum.values())</span>
+<span class="nc" id="L921">            .map(ct -&gt; UserTypeResponse.builder().id(ct.getId()).name(ct.getPrettyName()).build())</span>
+<span class="nc" id="L922">            .collect(Collectors.toList());</span>
+<span class="nc" id="L923">    return new PageResponseImpl&lt;&gt;(response, pageable, response.size());</span>
+  }
+
+  @Operation(summary = &quot;Get user type by id&quot;)
+  @GetMapping(value = Routes.GET_USERTYPE_BY_ID, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public UserTypeResponse getUserTypeById(@PathVariable(&quot;userTypeId&quot;) long userTypeId)
+      throws UserTypeNotFoundException {
+<span class="nc" id="L932">    log.debug(&quot;############ call getUserTypeById ############&quot;);</span>
+<span class="nc" id="L933">    ConsumerTypeEnum userType =</span>
+<span class="nc" id="L934">        ConsumerTypeEnum.getById(userTypeId).orElseThrow(UserTypeNotFoundException::new);</span>
+<span class="nc" id="L935">    return UserTypeResponse.builder().id(userType.getId()).name(userType.getPrettyName()).build();</span>
+  }
+
+  @Operation(summary = &quot;Retrieve state tax for a user&quot;)
+  @GetMapping(value = Routes.GET_USER_STATE, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public GetConsumerStateTax getStateTaxByUserId(@PathVariable(&quot;userId&quot;) Long userId)
+      throws NotFoundException {
+<span class="nc" id="L943">    log.info(&quot;############ call getStateTaxByUserId [{}] ############&quot;, userId);</span>
+    try {
+<span class="nc" id="L945">      ConsumerProfile consumerProfile = getConsumerByIdUseCase.handle(userId);</span>
+<span class="nc" id="L946">      return GetConsumerStateTax.builder().tax(consumerProfile.getZipCode().getTax()).build();</span>
+<span class="nc" id="L947">    } catch (NotFoundProfileException e) {</span>
+<span class="nc" id="L948">      throw new NotFoundException(e.getMessage());</span>
+    }
+  }
+
+  @Override
+  @Operation(summary = &quot;Change profile image status to UPLOADED&quot;)
+  @PatchMapping(
+      value = Routes.EDIT_PROFILE_IMAGE_STATUS,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public UpdateProfileImageResponse changeProfileImageStatus(@RequestParam String imageUrl) {
+<span class="nc" id="L959">    log.info(&quot;############ call changeProfileImageStatus [{}] ############&quot;, imageUrl);</span>
+<span class="nc" id="L960">    UpdateProfileImageDTO response = this.changeProfileImageStatusUseCase.handle(imageUrl);</span>
+
+<span class="nc" id="L962">    return UpdateProfileImageResponse.builder()</span>
+<span class="nc" id="L963">        .id(response.getId())</span>
+<span class="nc" id="L964">        .status(response.getStatus())</span>
+<span class="nc" id="L965">        .imageURL(response.getImageURL())</span>
+<span class="nc" id="L966">        .build();</span>
+  }
+
+  @Operation(summary = &quot;Get URL where a user's avatar image should be uploaded&quot;)
+  @GetMapping(
+      value = Routes.GET_AVATAR_IMAGE_UPLOAD_LOCATION,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public ImageUploadLocationResponse getAvatarImageUploadLocation(
+      @Parameter(description = &quot;File extension which will be uploaded&quot;, required = true)
+          @NotNull @NotBlank
+          @RequestParam(&quot;extension&quot;)
+          String extension) {
+<span class="nc" id="L980">    StoreLocation location = this.getStoreLocationUseCase.handle(BlobType.PROFILE_IMAGE, extension);</span>
+
+<span class="nc" id="L982">    return ImageUploadLocationResponse.builder()</span>
+<span class="nc" id="L983">        .uploadURL(location.getUploadURL().toString())</span>
+<span class="nc" id="L984">        .httpMethod(location.getHttpMethod())</span>
+<span class="nc" id="L985">        .key(location.getKey())</span>
+<span class="nc" id="L986">        .build();</span>
+  }
+
+  @Operation(summary = &quot;Get URL where a user's MMJCard image should be uploaded&quot;)
+  @GetMapping(
+      value = Routes.GET_MMJCARD_IMAGE_UPLOAD_LOCATION,
+      produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  @Override
+  public ImageUploadLocationResponse getMmjCardImageUploadLocation(
+      @Parameter(description = &quot;File extension which will be uploaded&quot;, required = true)
+          @NotNull @NotBlank
+          @RequestParam(&quot;extension&quot;)
+          String extension) {
+<span class="nc" id="L1000">    StoreLocation location =</span>
+<span class="nc" id="L1001">        this.getStoreLocationUseCase.handle(BlobType.MMJ_CARD_IMAGE, extension);</span>
+
+<span class="nc" id="L1003">    return ImageUploadLocationResponse.builder()</span>
+<span class="nc" id="L1004">        .uploadURL(location.getUploadURL().toString())</span>
+<span class="nc" id="L1005">        .httpMethod(location.getHttpMethod())</span>
+<span class="nc" id="L1006">        .key(location.getKey())</span>
+<span class="nc" id="L1007">        .build();</span>
+  }
+
+  @Override
+  @Operation(summary = &quot;Change card image status to UPLOADED&quot;)
+  @PatchMapping(value = Routes.UPLOADS_CARDS, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  public UpdateCardImageToUploadedStateResponse updateCardImageStatus(
+      @RequestParam String imageUrl) {
+<span class="nc" id="L1016">    log.info(&quot;############ call changeBrandImageStatus [{}] ############&quot;, imageUrl);</span>
+<span class="nc" id="L1017">    return this.responsesMapper.toUpdateCardImageToUploadedStateResponse(</span>
+<span class="nc" id="L1018">        changeCardImageStatusUseCase.handle(imageUrl));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

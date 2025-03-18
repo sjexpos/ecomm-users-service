@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>GlobalExceptionHandler.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Aggregated Reports</a> &gt; <a href="../index.html" class="el_bundle">users-service-spring-boot</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.web</a> &gt; <span class="el_source">GlobalExceptionHandler.java</span></div><h1>GlobalExceptionHandler.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.web;
+
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
+import io.oigres.ecomm.service.users.api.model.CommonErrorHandlerResponse;
+import io.oigres.ecomm.service.users.api.model.exception.*;
+import io.oigres.ecomm.service.users.api.model.exception.profile.ProfileException;
+import io.oigres.ecomm.service.users.api.model.exception.profile.ProfileTypeNotFoundException;
+import io.oigres.ecomm.service.users.exception.DomainException;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.ServletWebRequest;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+@ControllerAdvice
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+<span class="nc" id="L52">  private final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);</span>
+
+  private final BasicErrorController basicErrorController;
+
+  public GlobalExceptionHandler(BasicErrorController basicErrorController) {
+<span class="nc" id="L57">    super();</span>
+<span class="nc" id="L58">    this.basicErrorController = basicErrorController;</span>
+<span class="nc" id="L59">  }</span>
+
+  protected ResponseEntity&lt;Object&gt; customHandleException(
+      HttpStatusCode status, Exception ex, HttpServletRequest request) {
+<span class="nc" id="L63">    LOGGER.debug(</span>
+<span class="nc" id="L64">        String.format(</span>
+            &quot;Handling exception %s, it will response status %s (%s) &quot;,
+<span class="nc" id="L66">            ex.getClass().getSimpleName(), status.toString(), status.value()));</span>
+<span class="nc" id="L67">    request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, status.value());</span>
+<span class="nc" id="L68">    request.setAttribute(RequestDispatcher.ERROR_EXCEPTION, ex);</span>
+<span class="nc" id="L69">    request.setAttribute(RequestDispatcher.ERROR_REQUEST_URI, request.getRequestURI());</span>
+<span class="nc" id="L70">    ResponseEntity&lt;Map&lt;String, Object&gt;&gt; error = this.basicErrorController.error(request);</span>
+<span class="nc" id="L71">    return super.handleExceptionInternal(</span>
+<span class="nc" id="L72">        ex, error.getBody(), new HttpHeaders(), status, new ServletWebRequest(request));</span>
+  }
+
+  @ExceptionHandler(ConstraintViolationException.class)
+  public ResponseEntity&lt;Object&gt; handleConstraintViolationException(
+      ConstraintViolationException ex, HttpServletRequest request) {
+<span class="nc" id="L78">    return customHandleException(HttpStatus.BAD_REQUEST, ex, request);</span>
+  }
+
+  @ExceptionHandler(IllegalArgumentException.class)
+  public ResponseEntity&lt;Object&gt; handleIllegalArgumentException(
+      IllegalArgumentException ex, HttpServletRequest request) {
+<span class="nc" id="L84">    return customHandleException(HttpStatus.BAD_REQUEST, ex, request);</span>
+  }
+
+  @Override
+  protected ResponseEntity&lt;Object&gt; handleMethodArgumentNotValid(
+      MethodArgumentNotValidException ex,
+      HttpHeaders headers,
+      HttpStatusCode status,
+      WebRequest request) {
+<span class="nc" id="L93">    LOGGER.info(</span>
+<span class="nc" id="L94">        String.format(</span>
+            &quot;Handling exception %s, it will response status %s (%s) &quot;,
+<span class="nc" id="L96">            ex.getClass().getSimpleName(), status.toString(), status.value()));</span>
+<span class="nc" id="L97">    List&lt;String&gt; errorList = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L98">    List&lt;ObjectError&gt; exceptionMessage = ex.getBindingResult().getAllErrors();</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">    for (ObjectError error : exceptionMessage) {</span>
+<span class="nc" id="L100">      errorList.add(error.getDefaultMessage());</span>
+<span class="nc" id="L101">    }</span>
+<span class="nc" id="L102">    return new ResponseEntity&lt;&gt;(</span>
+<span class="nc" id="L103">        CommonErrorHandlerResponse.builder()</span>
+<span class="nc" id="L104">            .error(Integer.toString(status.value()))</span>
+<span class="nc" id="L105">            .status(status.value())</span>
+<span class="nc" id="L106">            .message(errorList.toString())</span>
+<span class="nc" id="L107">            .path(&quot;&quot;)</span>
+<span class="nc" id="L108">            .build(),</span>
+        status);
+  }
+
+  @ExceptionHandler({
+    DataIntegrityViolationException.class,
+    JpaObjectRetrievalFailureException.class
+  })
+  public ResponseEntity&lt;Object&gt; handleDataIntegrityViolationException(
+      Exception ex, HttpServletRequest request) {
+<span class="nc" id="L118">    return customHandleException(HttpStatus.BAD_REQUEST, ex, request);</span>
+  }
+
+  @Override
+  protected ResponseEntity&lt;Object&gt; handleExceptionInternal(
+      Exception ex,
+      @Nullable Object body,
+      HttpHeaders headers,
+      HttpStatusCode statusCode,
+      WebRequest request) {
+<span class="nc bnc" id="L128" title="All 4 branches missed.">    if (body == null &amp;&amp; request instanceof ServletWebRequest) {</span>
+<span class="nc" id="L129">      return customHandleException(statusCode, ex, ((ServletWebRequest) request).getRequest());</span>
+    }
+<span class="nc" id="L131">    return super.handleExceptionInternal(ex, body, headers, statusCode, request);</span>
+  }
+
+  @ExceptionHandler(DomainException.class)
+  public ResponseEntity&lt;Object&gt; handleDomainException(
+      DomainException ex, HttpServletRequest request) {
+<span class="nc" id="L137">    return customHandleException(HttpStatus.BAD_REQUEST, ex, request);</span>
+  }
+
+  @ExceptionHandler(InvalidRequestException.class)
+  public ResponseEntity&lt;Object&gt; handleInvalidRequestException(
+      InvalidRequestException ex, HttpServletRequest request) {
+<span class="nc" id="L143">    return customHandleException(HttpStatus.BAD_REQUEST, ex, request);</span>
+  }
+
+  @ExceptionHandler(RequestNotPermitted.class)
+  public ResponseEntity&lt;Object&gt; handleRequestNotPermitted(
+      RequestNotPermitted ex, HttpServletRequest request) {
+<span class="nc" id="L149">    logger.warn(&quot;RATE LIMIT EXCEEDED: &quot; + ex.getMessage());</span>
+<span class="nc" id="L150">    return customHandleException(HttpStatus.TOO_MANY_REQUESTS, ex, request);</span>
+  }
+
+  @ExceptionHandler(NotFoundException.class)
+  public ResponseEntity&lt;Object&gt; handleNotFoundException(
+      NotFoundException ex, HttpServletRequest request) {
+<span class="nc" id="L156">    return customHandleException(HttpStatus.NOT_FOUND, ex, request);</span>
+  }
+
+  @ExceptionHandler(UnauthorizedException.class)
+  public ResponseEntity&lt;Object&gt; handleNotFoundException(
+      UnauthorizedException ex, HttpServletRequest request) {
+<span class="nc" id="L162">    return customHandleException(HttpStatus.UNAUTHORIZED, ex, request);</span>
+  }
+
+  @ExceptionHandler(ProfileTypeNotFoundException.class)
+  public ResponseEntity&lt;Object&gt; handleProfileTypeNotFoundException(
+      ProfileTypeNotFoundException ex, HttpServletRequest request) {
+<span class="nc" id="L168">    return customHandleException(HttpStatus.NOT_FOUND, ex, request);</span>
+  }
+
+  @ExceptionHandler(ProfileException.class)
+  public ResponseEntity&lt;Object&gt; handleProfileException(
+      ProfileException ex, HttpServletRequest request) {
+<span class="nc" id="L174">    return customHandleException(HttpStatus.BAD_REQUEST, ex, request);</span>
+  }
+
+  @ExceptionHandler(GenderNotFoundException.class)
+  public ResponseEntity&lt;Object&gt; handleGenderNotFoundException(
+      GenderNotFoundException ex, HttpServletRequest request) {
+<span class="nc" id="L180">    return customHandleException(HttpStatus.NOT_FOUND, ex, request);</span>
+  }
+
+  @ExceptionHandler(StateNotFoundException.class)
+  public ResponseEntity&lt;Object&gt; handleStateNotFoundException(
+      StateNotFoundException ex, HttpServletRequest request) {
+<span class="nc" id="L186">    return customHandleException(HttpStatus.NOT_FOUND, ex, request);</span>
+  }
+
+  @ExceptionHandler(ZipcodeNotFoundException.class)
+  public ResponseEntity&lt;Object&gt; handleZipcodeNotFoundException(
+      ZipcodeNotFoundException ex, HttpServletRequest request) {
+<span class="nc" id="L192">    return customHandleException(HttpStatus.NOT_FOUND, ex, request);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

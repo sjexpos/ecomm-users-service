@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ResponsesMapper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">- Rest API</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.config.mapper</a> &gt; <span class="el_source">ResponsesMapper.java</span></div><h1>ResponsesMapper.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.config.mapper;
+
+import io.oigres.ecomm.service.users.api.model.GenderResponse;
+import io.oigres.ecomm.service.users.api.model.GetAllUsersResponse;
+import io.oigres.ecomm.service.users.api.model.UpdateCardImageToUploadedStateResponse;
+import io.oigres.ecomm.service.users.api.model.admin.*;
+import io.oigres.ecomm.service.users.api.model.consumer.*;
+import io.oigres.ecomm.service.users.api.model.dispensary.*;
+import io.oigres.ecomm.service.users.api.model.enums.ConsumerTypeApiEnum;
+import io.oigres.ecomm.service.users.api.model.profile.ActiveStatusProfileResponse;
+import io.oigres.ecomm.service.users.api.model.region.StateResponse;
+import io.oigres.ecomm.service.users.api.model.region.ZipCodeResponse;
+import io.oigres.ecomm.service.users.api.txoutbox.UserOutbox;
+import io.oigres.ecomm.service.users.domain.*;
+import io.oigres.ecomm.service.users.domain.profile.AdminProfile;
+import io.oigres.ecomm.service.users.domain.profile.ConsumerProfile;
+import io.oigres.ecomm.service.users.domain.profile.DispensaryProfile;
+import io.oigres.ecomm.service.users.enums.ConsumerTypeEnum;
+import io.oigres.ecomm.service.users.usecases.users.utils.ImageUtils;
+import java.util.List;
+import java.util.Objects;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
+
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+<span class="fc" id="L43">public abstract class ResponsesMapper {</span>
+
+  public GetAllUsersResponse toGetAllUsersResponse(User user) {
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">    if (user == null) {</span>
+<span class="nc" id="L47">      return null;</span>
+    }
+<span class="fc" id="L49">    return GetAllUsersResponse.builder().userId(user.getId()).email(user.getEmail()).build();</span>
+  }
+
+  public abstract List&lt;GetAllUsersResponse&gt; toGetAllUsersResponse(List&lt;User&gt; users);
+
+  public AdminProfile toAdminProfile(CreateAdminUserRequest request) {
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">    if (request == null) {</span>
+<span class="nc" id="L56">      return null;</span>
+    }
+<span class="fc" id="L58">    User user = User.builder().email(request.getEmail()).password(request.getPassword()).build();</span>
+<span class="fc" id="L59">    ProfileImage profileImage = ProfileImage.builder().imageURL(request.getAvatar()).build();</span>
+<span class="fc" id="L60">    return AdminProfile.builder()</span>
+<span class="fc" id="L61">        .user(user)</span>
+<span class="fc" id="L62">        .firstName(request.getFirstName())</span>
+<span class="fc" id="L63">        .lastName(request.getLastName())</span>
+<span class="fc" id="L64">        .phone(request.getPhone())</span>
+<span class="fc" id="L65">        .profileImage(profileImage)</span>
+<span class="fc" id="L66">        .build();</span>
+  }
+
+  public CreateAdminUserResponse toCreateAdminUserResponse(AdminProfile profile) {
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">    if (profile == null) {</span>
+<span class="nc" id="L71">      return null;</span>
+    }
+<span class="fc" id="L73">    return CreateAdminUserResponse.builder()</span>
+<span class="fc" id="L74">        .id(profile.getId())</span>
+<span class="fc" id="L75">        .firstName(profile.getFirstName())</span>
+<span class="fc" id="L76">        .lastName(profile.getLastName())</span>
+<span class="fc" id="L77">        .phone(profile.getPhone())</span>
+<span class="fc" id="L78">        .isActive(profile.getEnabled())</span>
+<span class="fc" id="L79">        .avatar(profile.getProfileImage().getImageURL())</span>
+<span class="fc" id="L80">        .email(profile.getUser().getEmail())</span>
+<span class="fc" id="L81">        .build();</span>
+  }
+
+  public CreateConsumerUserResponse toCreateConsumerUserResponse(ConsumerProfile profile) {
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">    if (profile == null) {</span>
+<span class="nc" id="L86">      return null;</span>
+    }
+<span class="fc" id="L88">    return CreateConsumerUserResponse.builder()</span>
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">        .id(Objects.isNull(profile.getUser()) ? null : profile.getUser().getId())</span>
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">        .email(Objects.isNull(profile.getUser()) ? null : profile.getUser().getEmail())</span>
+<span class="fc" id="L91">        .firstName(profile.getFirstName())</span>
+<span class="fc" id="L92">        .lastName(profile.getLastName())</span>
+<span class="fc" id="L93">        .avatar(</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">            Objects.isNull(profile.getProfileImage())</span>
+<span class="nc" id="L95">                ? null</span>
+<span class="fc" id="L96">                : profile.getProfileImage().getImageURL())</span>
+<span class="fc" id="L97">        .phone(profile.getPhone())</span>
+<span class="fc" id="L98">        .cardImageURL(</span>
+<span class="pc bpc" id="L99" title="2 of 4 branches missed.">            Objects.isNull(profile.getCard()) || Objects.isNull(profile.getCard().getCardImage())</span>
+<span class="nc" id="L100">                ? null</span>
+<span class="fc" id="L101">                : profile.getCard().getCardImage().getImageURL())</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        .zipcodeId(Objects.isNull(profile.getZipCode()) ? null : profile.getZipCode().getId())</span>
+<span class="fc" id="L103">        .zipcodeStateId(</span>
+<span class="pc bpc" id="L104" title="2 of 4 branches missed.">            Objects.isNull(profile.getZipCode()) || Objects.isNull(profile.getZipCode().getState())</span>
+<span class="nc" id="L105">                ? null</span>
+<span class="fc" id="L106">                : profile.getZipCode().getState().getId())</span>
+<span class="fc" id="L107">        .userType(</span>
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">            Objects.isNull(profile.getUserType())</span>
+<span class="nc" id="L109">                ? null</span>
+<span class="fc" id="L110">                : ConsumerTypeApiEnum.findById(profile.getUserType().getId()))</span>
+<span class="fc" id="L111">        .isActive(profile.getEnabled())</span>
+<span class="fc" id="L112">        .verified(profile.getVerified())</span>
+<span class="fc" id="L113">        .build();</span>
+  }
+
+  public DispensaryProfile toCreateDispensaryUserRequest(CreateDispensaryUserRequest request) {
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">    if (request == null) {</span>
+<span class="nc" id="L118">      return null;</span>
+    }
+<span class="fc" id="L120">    User user = User.builder().email(request.getEmail()).password(request.getPassword()).build();</span>
+<span class="fc" id="L121">    return DispensaryProfile.builder().dispensaryId(request.getDispensaryId()).user(user).build();</span>
+  }
+
+  public CreateDispensaryUserResponse toCreateDispensaryUserResponse(DispensaryProfile profile) {
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">    if (profile == null) {</span>
+<span class="nc" id="L126">      return null;</span>
+    }
+<span class="fc" id="L128">    return CreateDispensaryUserResponse.builder()</span>
+<span class="fc" id="L129">        .dispensaryId(profile.getDispensaryId())</span>
+<span class="fc" id="L130">        .id(profile.getId())</span>
+<span class="fc" id="L131">        .email(profile.getUser().getEmail())</span>
+<span class="fc" id="L132">        .isActive(profile.getEnabled())</span>
+<span class="fc" id="L133">        .build();</span>
+  }
+
+  public GetAdminUserResponse toGetAdminUserResponse(AdminProfile adminProfile, String url) {
+<span class="pc bpc" id="L137" title="1 of 2 branches missed.">    if (adminProfile == null) {</span>
+<span class="nc" id="L138">      return null;</span>
+    }
+<span class="fc" id="L140">    return GetAdminUserResponse.builder()</span>
+<span class="fc" id="L141">        .userId(adminProfile.getUser().getId())</span>
+<span class="fc" id="L142">        .email(adminProfile.getUser().getEmail())</span>
+<span class="fc" id="L143">        .phone(adminProfile.getPhone())</span>
+<span class="fc" id="L144">        .firstName(adminProfile.getFirstName())</span>
+<span class="fc" id="L145">        .lastName(adminProfile.getLastName())</span>
+<span class="fc" id="L146">        .isActive(adminProfile.getEnabled())</span>
+<span class="fc" id="L147">        .avatar(url)</span>
+<span class="fc" id="L148">        .build();</span>
+  }
+
+  public GetConsumerUserResponse toGetConsumerUserResponse(ConsumerProfile profile, String url) {
+<span class="pc bpc" id="L152" title="1 of 2 branches missed.">    if (profile == null) {</span>
+<span class="nc" id="L153">      return null;</span>
+    }
+<span class="fc" id="L155">    return GetConsumerUserResponse.builder()</span>
+<span class="fc" id="L156">        .userId(profile.getUser().getId())</span>
+<span class="fc" id="L157">        .firstName(profile.getFirstName())</span>
+<span class="fc" id="L158">        .lastName(profile.getLastName())</span>
+<span class="fc" id="L159">        .email(profile.getUser().getEmail())</span>
+<span class="fc" id="L160">        .phone(profile.getPhone())</span>
+<span class="fc" id="L161">        .isActive(profile.getEnabled())</span>
+<span class="fc" id="L162">        .avatar(profile.getProfileImage().getImageURL())</span>
+<span class="fc" id="L163">        .userType(ConsumerTypeApiEnum.findById(profile.getUserType().getId()))</span>
+<span class="fc" id="L164">        .genderId(profile.getGender().getId())</span>
+<span class="fc" id="L165">        .mmjCard(profile.getMmjCardImage())</span>
+<span class="fc" id="L166">        .zipcodeId(profile.getZipCode().getId())</span>
+<span class="fc" id="L167">        .zipcodeStateId(profile.getZipCode().getState().getId())</span>
+<span class="fc" id="L168">        .verified(profile.getVerified())</span>
+<span class="fc" id="L169">        .avatar(url)</span>
+<span class="fc" id="L170">        .build();</span>
+  }
+
+  public GetDispensaryUserResponse toGetDispensaryUserResponse(DispensaryProfile profile) {
+<span class="pc bpc" id="L174" title="1 of 2 branches missed.">    if (profile == null) {</span>
+<span class="nc" id="L175">      return null;</span>
+    }
+<span class="fc" id="L177">    return GetDispensaryUserResponse.builder()</span>
+<span class="fc" id="L178">        .dispensaryId(profile.getDispensaryId())</span>
+<span class="fc" id="L179">        .userId(profile.getUser().getId())</span>
+<span class="fc" id="L180">        .email(profile.getUser().getEmail())</span>
+<span class="fc" id="L181">        .isActive(profile.getEnabled())</span>
+<span class="fc" id="L182">        .build();</span>
+  }
+
+  public GetAllAdminUsersResponse toGetAllAdminUsersResponse(
+      AdminProfile adminProfile, String url) {
+<span class="nc bnc" id="L187" title="All 2 branches missed.">    if (adminProfile == null) {</span>
+<span class="nc" id="L188">      return null;</span>
+    }
+<span class="nc" id="L190">    return GetAllAdminUsersResponse.builder()</span>
+<span class="nc" id="L191">        .userId(adminProfile.getUser().getId())</span>
+<span class="nc" id="L192">        .email(adminProfile.getUser().getEmail())</span>
+<span class="nc" id="L193">        .phone(adminProfile.getPhone())</span>
+<span class="nc" id="L194">        .firstName(adminProfile.getFirstName())</span>
+<span class="nc" id="L195">        .lastName(adminProfile.getLastName())</span>
+<span class="nc" id="L196">        .isActive(adminProfile.getEnabled())</span>
+<span class="nc" id="L197">        .avatar(url)</span>
+<span class="nc" id="L198">        .build();</span>
+  }
+
+  public GetAllConsumerUsersResponse toGetAllConsumerUsersResponse(ConsumerProfile cp) {
+<span class="nc bnc" id="L202" title="All 2 branches missed.">    if (cp == null) {</span>
+<span class="nc" id="L203">      return null;</span>
+    }
+<span class="nc" id="L205">    return GetAllConsumerUsersResponse.builder()</span>
+<span class="nc" id="L206">        .userId(cp.getUser().getId())</span>
+<span class="nc" id="L207">        .email(cp.getUser().getEmail())</span>
+<span class="nc" id="L208">        .firstName(cp.getFirstName())</span>
+<span class="nc" id="L209">        .lastName(cp.getLastName())</span>
+<span class="nc" id="L210">        .avatar(ImageUtils.getProfileImageURLForConsumerUser(cp))</span>
+<span class="nc" id="L211">        .gender(cp.getGender().getGenderName())</span>
+<span class="nc" id="L212">        .phone(cp.getPhone())</span>
+<span class="nc" id="L213">        .state(cp.getZipCode().getState().getName())</span>
+<span class="nc" id="L214">        .zipCode(cp.getZipCode().getCode().toString())</span>
+<span class="nc" id="L215">        .userType(cp.getUserType().getPrettyName())</span>
+<span class="nc" id="L216">        .isActive(cp.getEnabled())</span>
+<span class="nc" id="L217">        .verified(cp.getVerified())</span>
+<span class="nc" id="L218">        .build();</span>
+  }
+
+  public abstract List&lt;GetAllConsumerUsersResponse&gt; toGetAllConsumerUsersResponse(
+      List&lt;ConsumerProfile&gt; profiles);
+
+  public GetAllDispensaryUsersResponse toGetAllDispensaryUsersResponse(
+      DispensaryProfile dispensaryProfile) {
+<span class="nc bnc" id="L226" title="All 2 branches missed.">    if (dispensaryProfile == null) {</span>
+<span class="nc" id="L227">      return null;</span>
+    }
+<span class="nc" id="L229">    return GetAllDispensaryUsersResponse.builder()</span>
+<span class="nc" id="L230">        .dispensaryId(dispensaryProfile.getDispensaryId())</span>
+<span class="nc" id="L231">        .userId(dispensaryProfile.getUser().getId())</span>
+<span class="nc" id="L232">        .email(dispensaryProfile.getUser().getEmail())</span>
+<span class="nc" id="L233">        .isActive(dispensaryProfile.getEnabled())</span>
+<span class="nc" id="L234">        .build();</span>
+  }
+
+  public abstract List&lt;GetAllDispensaryUsersResponse&gt; toGetAllDispensaryUsersResponse(
+      List&lt;DispensaryProfile&gt; profiles);
+
+  public AdminProfile toAdminProfile(UpdateAdminProfileRequest request) {
+<span class="nc bnc" id="L241" title="All 2 branches missed.">    if (request == null) {</span>
+<span class="nc" id="L242">      return null;</span>
+    }
+<span class="nc" id="L244">    return AdminProfile.builder()</span>
+<span class="nc" id="L245">        .user(User.builder().email(request.getEmail()).password(request.getPassword()).build())</span>
+<span class="nc" id="L246">        .phone(request.getPhone())</span>
+<span class="nc" id="L247">        .firstName(request.getFirstName())</span>
+<span class="nc" id="L248">        .lastName(request.getLastName())</span>
+<span class="nc" id="L249">        .profileImage(ProfileImage.builder().imageURL(request.getImg()).build())</span>
+<span class="nc" id="L250">        .build();</span>
+  }
+
+  public UpdateAdminProfileResponse toUpdateAdminProfileResponse(AdminProfile profile) {
+<span class="nc bnc" id="L254" title="All 2 branches missed.">    if (profile == null) {</span>
+<span class="nc" id="L255">      return null;</span>
+    }
+<span class="nc" id="L257">    return UpdateAdminProfileResponse.builder()</span>
+<span class="nc" id="L258">        .id(profile.getId())</span>
+<span class="nc" id="L259">        .email(profile.getUser().getEmail())</span>
+<span class="nc" id="L260">        .img(profile.getProfileImage().getImageURL())</span>
+<span class="nc" id="L261">        .phone(profile.getPhone())</span>
+<span class="nc" id="L262">        .firstName(profile.getFirstName())</span>
+<span class="nc" id="L263">        .lastName(profile.getLastName())</span>
+<span class="nc" id="L264">        .isActive(profile.getEnabled())</span>
+<span class="nc" id="L265">        .build();</span>
+  }
+
+  public ConsumerProfile toConsumerProfile(UpdateConsumerProfileRequest request) {
+<span class="nc bnc" id="L269" title="All 2 branches missed.">    if (request == null) {</span>
+<span class="nc" id="L270">      return null;</span>
+    }
+    ConsumerProfile profile =
+<span class="nc" id="L273">        ConsumerProfile.builder()</span>
+<span class="nc" id="L274">            .firstName(request.getFirstName())</span>
+<span class="nc" id="L275">            .lastName(request.getLastName())</span>
+<span class="nc" id="L276">            .phone(request.getPhone())</span>
+<span class="nc" id="L277">            .profileImage(ProfileImage.builder().imageURL(request.getAvatar()).build())</span>
+<span class="nc" id="L278">            .zipCode(</span>
+<span class="nc" id="L279">                ZipCode.builder()</span>
+<span class="nc" id="L280">                    .id(request.getZipcodeId())</span>
+<span class="nc" id="L281">                    .state(State.builder().id(request.getZipcodeStateId()).build())</span>
+<span class="nc" id="L282">                    .build())</span>
+<span class="nc" id="L283">            .card(</span>
+<span class="nc" id="L284">                Card.builder()</span>
+<span class="nc" id="L285">                    .cardImage(CardImage.builder().imageURL(request.getCardImageURL()).build())</span>
+<span class="nc" id="L286">                    .build())</span>
+<span class="nc" id="L287">            .gender(Gender.builder().id(request.getGenderId()).build())</span>
+<span class="nc" id="L288">            .user(User.builder().email(request.getPassword()).build())</span>
+<span class="nc" id="L289">            .build();</span>
+<span class="nc" id="L290">    profile.setUserType(ConsumerTypeEnum.getById(request.getUserType().getId()).orElse(null));</span>
+<span class="nc" id="L291">    return profile;</span>
+  }
+
+  public UpdateConsumerProfileResponse toUpdateConsumerProfileResponse(ConsumerProfile profile) {
+<span class="nc bnc" id="L295" title="All 2 branches missed.">    if (profile == null) {</span>
+<span class="nc" id="L296">      return null;</span>
+    }
+<span class="nc" id="L298">    return UpdateConsumerProfileResponse.builder()</span>
+<span class="nc" id="L299">        .id(profile.getId())</span>
+<span class="nc" id="L300">        .firstName(profile.getFirstName())</span>
+<span class="nc" id="L301">        .lastName(profile.getLastName())</span>
+<span class="nc" id="L302">        .email(profile.getUser().getEmail())</span>
+<span class="nc" id="L303">        .genderId(profile.getGender().getId())</span>
+<span class="nc" id="L304">        .isActive(profile.getEnabled())</span>
+<span class="nc" id="L305">        .mmjCard(profile.getMmjCardImage())</span>
+<span class="nc" id="L306">        .phone(profile.getPhone())</span>
+<span class="nc" id="L307">        .userType(ConsumerTypeApiEnum.findById(profile.getUserType().getId()))</span>
+<span class="nc" id="L308">        .verified(profile.getVerified())</span>
+<span class="nc" id="L309">        .zipcodeId(profile.getZipCode().getId())</span>
+<span class="nc" id="L310">        .zipcodeStateId(profile.getZipCode().getState().getId())</span>
+<span class="nc bnc" id="L311" title="All 2 branches missed.">        .avatar(profile.getProfileImage() != null ? profile.getProfileImage().getImageURL() : null)</span>
+<span class="nc" id="L312">        .build();</span>
+  }
+
+  public DispensaryProfile toDispensaryProfile(UpdateDispensaryProfileRequest request) {
+<span class="nc bnc" id="L316" title="All 2 branches missed.">    if (request == null) {</span>
+<span class="nc" id="L317">      return null;</span>
+    }
+<span class="nc" id="L319">    return DispensaryProfile.builder()</span>
+<span class="nc" id="L320">        .user(User.builder().password(request.getPassword()).build())</span>
+<span class="nc" id="L321">        .dispensaryId(request.getDispensaryId())</span>
+<span class="nc" id="L322">        .build();</span>
+  }
+
+  public UpdateDispensaryProfileResponse toUpdateDispensaryProfileResponse(
+      DispensaryProfile profile) {
+<span class="nc bnc" id="L327" title="All 2 branches missed.">    if (profile == null) {</span>
+<span class="nc" id="L328">      return null;</span>
+    }
+<span class="nc" id="L330">    return UpdateDispensaryProfileResponse.builder()</span>
+<span class="nc" id="L331">        .dispensaryId(profile.getDispensaryId())</span>
+<span class="nc" id="L332">        .email(profile.getUser().getEmail())</span>
+<span class="nc" id="L333">        .id(profile.getId())</span>
+<span class="nc" id="L334">        .isActive(profile.getEnabled())</span>
+<span class="nc" id="L335">        .build();</span>
+  }
+
+  public DeleteAdminProfileResponse toDeleteAdminProfileResponse(AdminProfile profile) {
+<span class="nc bnc" id="L339" title="All 2 branches missed.">    if (profile == null) {</span>
+<span class="nc" id="L340">      return null;</span>
+    }
+<span class="nc" id="L342">    return DeleteAdminProfileResponse.builder()</span>
+<span class="nc" id="L343">        .id(profile.getId())</span>
+<span class="nc" id="L344">        .firstName(profile.getFirstName())</span>
+<span class="nc" id="L345">        .lastName(profile.getLastName())</span>
+<span class="nc" id="L346">        .phone(profile.getPhone())</span>
+<span class="nc" id="L347">        .isActive(profile.getEnabled())</span>
+<span class="nc" id="L348">        .email(profile.getUser().getEmail())</span>
+<span class="nc" id="L349">        .avatar(profile.getProfileImage().getImageURL())</span>
+<span class="nc" id="L350">        .build();</span>
+  }
+
+  public DeleteConsumerProfileResponse toDeleteConsumerProfileResponse(ConsumerProfile profile) {
+<span class="nc bnc" id="L354" title="All 2 branches missed.">    if (profile == null) {</span>
+<span class="nc" id="L355">      return null;</span>
+    }
+<span class="nc" id="L357">    return DeleteConsumerProfileResponse.builder()</span>
+<span class="nc" id="L358">        .id(profile.getId())</span>
+<span class="nc" id="L359">        .email(profile.getUser().getEmail())</span>
+<span class="nc" id="L360">        .firstName(profile.getFirstName())</span>
+<span class="nc" id="L361">        .lastName(profile.getLastName())</span>
+<span class="nc" id="L362">        .phone(profile.getPhone())</span>
+<span class="nc" id="L363">        .avatar(profile.getProfileImage().getImageURL())</span>
+<span class="nc" id="L364">        .gender(profile.getGender().getGenderName())</span>
+<span class="nc" id="L365">        .isActive(profile.getEnabled())</span>
+<span class="nc" id="L366">        .mmjCard(profile.getMmjCardImage())</span>
+<span class="nc" id="L367">        .zipCode(profile.getZipCode().getCity())</span>
+<span class="nc" id="L368">        .state(profile.getZipCode().getState().getName())</span>
+<span class="nc" id="L369">        .userType(profile.getUserType().getPrettyName())</span>
+<span class="nc" id="L370">        .verified(profile.getVerified())</span>
+<span class="nc" id="L371">        .build();</span>
+  }
+
+  public DeleteDispensaryProfileResponse toDeleteDispensaryProfileResponse(
+      DispensaryProfile profile) {
+<span class="nc bnc" id="L376" title="All 2 branches missed.">    if (profile == null) {</span>
+<span class="nc" id="L377">      return null;</span>
+    }
+<span class="nc" id="L379">    return DeleteDispensaryProfileResponse.builder()</span>
+<span class="nc" id="L380">        .dispensaryId(profile.getDispensaryId())</span>
+<span class="nc" id="L381">        .id(profile.getId())</span>
+<span class="nc" id="L382">        .email(profile.getUser().getEmail())</span>
+<span class="nc" id="L383">        .isActive(profile.getEnabled())</span>
+<span class="nc" id="L384">        .build();</span>
+  }
+
+  public ActiveStatusProfileResponse toActiveStatusProfileResponse(Profile profile) {
+<span class="nc bnc" id="L388" title="All 2 branches missed.">    if (profile == null) {</span>
+<span class="nc" id="L389">      return null;</span>
+    }
+<span class="nc" id="L391">    return ActiveStatusProfileResponse.builder()</span>
+<span class="nc" id="L392">        .id(profile.getUser().getId())</span>
+<span class="nc" id="L393">        .enabled(profile.getEnabled())</span>
+<span class="nc" id="L394">        .build();</span>
+  }
+
+  public GenderResponse toGenderResponse(Gender gender) {
+<span class="nc bnc" id="L398" title="All 2 branches missed.">    if (gender == null) {</span>
+<span class="nc" id="L399">      return null;</span>
+    }
+<span class="nc" id="L401">    return GenderResponse.builder().id(gender.getId()).genderName(gender.getGenderName()).build();</span>
+  }
+
+  public abstract List&lt;GenderResponse&gt; toGenderResponse(List&lt;Gender&gt; genders);
+
+  public UpdateCardImageToUploadedStateResponse toUpdateCardImageToUploadedStateResponse(
+      CardImage cardImage) {
+<span class="nc bnc" id="L408" title="All 2 branches missed.">    if (cardImage == null) {</span>
+<span class="nc" id="L409">      return null;</span>
+    }
+<span class="nc" id="L411">    return UpdateCardImageToUploadedStateResponse.builder()</span>
+<span class="nc" id="L412">        .id(cardImage.getId())</span>
+<span class="nc" id="L413">        .imageURL(cardImage.getImageURL())</span>
+<span class="nc" id="L414">        .status(cardImage.getStatus().name())</span>
+<span class="nc" id="L415">        .build();</span>
+  }
+
+  public abstract UserOutbox toUserOutbox(User user);
+
+  public abstract StateResponse toStateResponse(State state);
+
+  public abstract List&lt;StateResponse&gt; toStateResponse(List&lt;State&gt; states);
+
+  public abstract ZipCodeResponse toZipCodeResponse(ZipCode zipCode);
+
+  public abstract List&lt;ZipCodeResponse&gt; toZipCodeResponse(List&lt;ZipCode&gt; zipCodes);
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>UsersServiceProxy.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Aggregated Reports</a> &gt; <a href="../index.html" class="el_bundle">users-service-sdk</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.api</a> &gt; <span class="el_source">UsersServiceProxy.java</span></div><h1>UsersServiceProxy.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.api;
+
+import io.oigres.ecomm.service.users.Constants;
+import io.oigres.ecomm.service.users.Routes;
+import io.oigres.ecomm.service.users.api.model.*;
+import io.oigres.ecomm.service.users.api.model.admin.*;
+import io.oigres.ecomm.service.users.api.model.consumer.*;
+import io.oigres.ecomm.service.users.api.model.dispensary.*;
+import io.oigres.ecomm.service.users.api.model.exception.InvalidRequestException;
+import io.oigres.ecomm.service.users.api.model.exception.NotFoundException;
+import io.oigres.ecomm.service.users.api.model.exception.UnauthorizedException;
+import io.oigres.ecomm.service.users.api.model.exception.UserTypeNotFoundException;
+import io.oigres.ecomm.service.users.api.model.exception.profile.ProfileException;
+import io.oigres.ecomm.service.users.api.model.profile.ActiveStatusProfileResponse;
+import io.oigres.ecomm.service.users.api.profiles.AsyncAdminUsersService;
+import io.oigres.ecomm.service.users.api.profiles.AsyncConsumerUsersService;
+import io.oigres.ecomm.service.users.api.profiles.AsyncDispensaryUsersService;
+import io.swagger.v3.oas.annotations.Parameter;
+import java.net.URI;
+import java.util.concurrent.Future;
+import java.util.function.Function;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientRequestException;
+import org.springframework.web.util.UriBuilder;
+import reactor.core.publisher.Mono;
+
+public class UsersServiceProxy extends MiddlewareProxy
+    implements UsersService,
+        AsyncUsersService,
+        AsyncAdminUsersService,
+        AsyncConsumerUsersService,
+        AsyncDispensaryUsersService {
+
+  public UsersServiceProxy(WebClient webClient) {
+<span class="nc" id="L55">    super(webClient);</span>
+<span class="nc" id="L56">  }</span>
+
+  // --------------------------------- getAllUsers --------------------------------- //
+
+  public PageResponse&lt;GetAllUsersResponse&gt; getAllUsers(PageableRequest pageable) {
+<span class="nc" id="L61">    return getPage(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L63">            uriBuilder</span>
+<span class="nc" id="L64">                .path(Routes.USERS_CONTROLLER_PATH)</span>
+<span class="nc" id="L65">                .queryParam(&quot;page&quot;, pageable.getPageNumber())</span>
+<span class="nc" id="L66">                .queryParam(&quot;size&quot;, pageable.getPageSize())</span>
+<span class="nc" id="L67">                .build(pageable),</span>
+        GetAllUsersResponse.class);
+  }
+
+  // --------------------------------- createNewAdminUser --------------------------------- //
+
+  @Override
+  public CreateAdminUserResponse createNewAdminUser(CreateAdminUserRequest request)
+      throws ProfileException {
+<span class="nc" id="L76">    return post(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L78">            uriBuilder.path(Routes.USERS_CONTROLLER_PATH.concat(Routes.PROFILE_ADMIN_USER)).build(),</span>
+        request,
+        CreateAdminUserResponse.class);
+  }
+
+  // --------------------------------- createNewConsumerUser --------------------------------- //
+
+  private Function&lt;UriBuilder, URI&gt; createNewConsumerUser_Call() {
+<span class="nc" id="L86">    return uriBuilder -&gt;</span>
+<span class="nc" id="L87">        uriBuilder.path(Routes.USERS_CONTROLLER_PATH.concat(Routes.PROFILE_CONSUMER_USER)).build();</span>
+  }
+
+  @Override
+  public CreateConsumerUserResponse createNewConsumerUser(CreateConsumerUserRequest request)
+      throws ProfileException {
+<span class="nc" id="L93">    return post(createNewConsumerUser_Call(), request, CreateConsumerUserResponse.class);</span>
+  }
+
+  // --------------------------------- createNewDispensaryUser --------------------------------- //
+
+  @Override
+  public CreateDispensaryUserResponse createNewDispensaryUser(CreateDispensaryUserRequest request)
+      throws ProfileException {
+<span class="nc" id="L101">    return post(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L103">            uriBuilder</span>
+<span class="nc" id="L104">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.PROFILE_DISPENSARY_USER))</span>
+<span class="nc" id="L105">                .build(),</span>
+        request,
+        CreateDispensaryUserResponse.class);
+  }
+
+  // --------------------------------- getUserById --------------------------------- //
+
+  private Function&lt;UriBuilder, URI&gt; getUserById_Call(Long userId) {
+<span class="nc" id="L113">    return uriBuilder -&gt;</span>
+<span class="nc" id="L114">        uriBuilder.path(Routes.REGION_PATH.concat(Routes.GET_STATE_BY_ID)).build(userId);</span>
+  }
+
+  @Override
+  public GetUserResponse getUserById(Long userId) throws NotFoundException {
+<span class="nc" id="L119">    return get(getUserById_Call(userId), GetUserResponse.class);</span>
+  }
+
+  // --------------------------------- getAdminUserById --------------------------------- //
+
+  private Function&lt;UriBuilder, URI&gt; getAdminUserById_Call(Long userId) {
+<span class="nc" id="L125">    return uriBuilder -&gt;</span>
+<span class="nc" id="L126">        uriBuilder</span>
+<span class="nc" id="L127">            .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.GET_PROFILE_ADMIN_USER))</span>
+<span class="nc" id="L128">            .build(userId);</span>
+  }
+
+  @Override
+  public GetAdminUserResponse getAdminUserById(Long userId) throws NotFoundException {
+<span class="nc" id="L133">    return get(getAdminUserById_Call(userId), GetAdminUserResponse.class);</span>
+  }
+
+  @Override
+  public Future&lt;GetAdminUserResponse&gt; getAdminUserByIdAsync(long userId) {
+<span class="nc" id="L138">    return getAsync(getAdminUserById_Call(userId), GetAdminUserResponse.class);</span>
+  }
+
+  // --------------------------------- getConsumerUserById --------------------------------- //
+
+  private Function&lt;UriBuilder, URI&gt; getConsumerUserById_Call(Long userId) {
+<span class="nc" id="L144">    return uriBuilder -&gt;</span>
+<span class="nc" id="L145">        uriBuilder</span>
+<span class="nc" id="L146">            .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.GET_PROFILE_CONSUMER_USER))</span>
+<span class="nc" id="L147">            .build(userId);</span>
+  }
+
+  @Override
+  public GetConsumerUserResponse getConsumerUserById(Long userId) throws NotFoundException {
+<span class="nc" id="L152">    return get(getConsumerUserById_Call(userId), GetConsumerUserResponse.class);</span>
+  }
+
+  @Override
+  public Future&lt;GetConsumerUserResponse&gt; getConsumerUserByIdAsync(Long userId) {
+<span class="nc" id="L157">    return getAsync(getConsumerUserById_Call(userId), GetConsumerUserResponse.class);</span>
+  }
+
+  // --------------------------------- getDispensaryUserById --------------------------------- //
+
+  private Function&lt;UriBuilder, URI&gt; getDispensaryUserById_Call(Long userId) {
+<span class="nc" id="L163">    return uriBuilder -&gt;</span>
+<span class="nc" id="L164">        uriBuilder</span>
+<span class="nc" id="L165">            .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.GET_PROFILE_DISPENSARY_USER))</span>
+<span class="nc" id="L166">            .build(userId);</span>
+  }
+
+  @Override
+  public GetDispensaryUserResponse getDispensaryUserById(Long userId) throws NotFoundException {
+<span class="nc" id="L171">    return get(getDispensaryUserById_Call(userId), GetDispensaryUserResponse.class);</span>
+  }
+
+  @Override
+  public Future&lt;GetDispensaryUserResponse&gt; getDispensaryUserByIdAsync(Long userId) {
+<span class="nc" id="L176">    return getAsync(getDispensaryUserById_Call(userId), GetDispensaryUserResponse.class);</span>
+  }
+
+  // --------------------------------- getDispensaryUserByDispensaryId
+  // --------------------------------- //
+
+  private Function&lt;UriBuilder, URI&gt; getDispensaryUserByDispensaryId_Call(Long dispensaryId) {
+<span class="nc" id="L183">    return uriBuilder -&gt;</span>
+<span class="nc" id="L184">        uriBuilder</span>
+<span class="nc" id="L185">            .path(</span>
+<span class="nc" id="L186">                Routes.USERS_CONTROLLER_PATH.concat(</span>
+                    Routes.GET_PROFILE_DISPENSARY_USER_BY_DISPENSARY_ID))
+<span class="nc" id="L188">            .build(dispensaryId);</span>
+  }
+
+  @Override
+  public GetDispensaryUserResponse getDispensaryUserByDispensaryId(Long dispensaryId)
+      throws NotFoundException {
+<span class="nc" id="L194">    return get(getDispensaryUserByDispensaryId_Call(dispensaryId), GetDispensaryUserResponse.class);</span>
+  }
+
+  @Override
+  public Future&lt;GetDispensaryUserResponse&gt; getDispensaryByDispensaryIdAsync(Long dispensaryId) {
+<span class="nc" id="L199">    return getAsync(</span>
+<span class="nc" id="L200">        getDispensaryUserByDispensaryId_Call(dispensaryId), GetDispensaryUserResponse.class);</span>
+  }
+
+  // --------------------------------- getAllAdmins --------------------------------- //
+
+  @Override
+  public PageResponse&lt;GetAllAdminUsersResponse&gt; getAllAdmins(PageableRequest pageable) {
+<span class="nc" id="L207">    return getPage(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L209">            uriBuilder</span>
+<span class="nc" id="L210">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.GET_ALL_PROFILE_ADMIN_USER))</span>
+<span class="nc" id="L211">                .queryParam(&quot;page&quot;, pageable.getPageNumber())</span>
+<span class="nc" id="L212">                .queryParam(&quot;size&quot;, pageable.getPageSize())</span>
+<span class="nc" id="L213">                .build(pageable),</span>
+        GetAllAdminUsersResponse.class);
+  }
+
+  // --------------------------------- getAllAdmins --------------------------------- //
+
+  @Override
+  public PageResponse&lt;GetAllConsumerUsersResponse&gt; getAllConsumers(PageableRequest pageable) {
+<span class="nc" id="L221">    return getPage(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L223">            uriBuilder</span>
+<span class="nc" id="L224">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.GET_ALL_PROFILE_CONSUMER_USER))</span>
+<span class="nc" id="L225">                .queryParam(&quot;page&quot;, pageable.getPageNumber())</span>
+<span class="nc" id="L226">                .queryParam(&quot;size&quot;, pageable.getPageSize())</span>
+<span class="nc" id="L227">                .build(pageable),</span>
+        GetAllConsumerUsersResponse.class);
+  }
+
+  // --------------------------------- getAllDispensaries --------------------------------- //
+
+  @Override
+  public PageResponse&lt;GetAllDispensaryUsersResponse&gt; getAllDispensaries(PageableRequest pageable) {
+<span class="nc" id="L235">    return getPage(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L237">            uriBuilder</span>
+<span class="nc" id="L238">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.GET_ALL_PROFILE_DISPENSARY_USER))</span>
+<span class="nc" id="L239">                .queryParam(&quot;page&quot;, pageable.getPageNumber())</span>
+<span class="nc" id="L240">                .queryParam(&quot;size&quot;, pageable.getPageSize())</span>
+<span class="nc" id="L241">                .build(pageable),</span>
+        GetAllDispensaryUsersResponse.class);
+  }
+
+  // --------------------------------- updateAdmin --------------------------------- //
+
+  @Override
+  public UpdateAdminProfileResponse updateAdmin(Long profileId, UpdateAdminProfileRequest request)
+      throws NotFoundException {
+<span class="nc" id="L250">    return put(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L252">            uriBuilder</span>
+<span class="nc" id="L253">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.UPDATE_ADMIN_USER))</span>
+<span class="nc" id="L254">                .build(profileId),</span>
+        request,
+        UpdateAdminProfileResponse.class);
+  }
+
+  // --------------------------------- updateConsumer --------------------------------- //
+
+  @Override
+  public UpdateConsumerProfileResponse updateConsumer(
+      Long userId, UpdateConsumerProfileRequest request) throws NotFoundException {
+<span class="nc" id="L264">    return put(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L266">            uriBuilder</span>
+<span class="nc" id="L267">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.UPDATE_CONSUMER_USER))</span>
+<span class="nc" id="L268">                .build(userId),</span>
+        request,
+        UpdateConsumerProfileResponse.class);
+  }
+
+  // --------------------------------- updateDispensary --------------------------------- //
+
+  @Override
+  public UpdateDispensaryProfileResponse updateDispensary(
+      Long userId, UpdateDispensaryProfileRequest request) throws NotFoundException {
+<span class="nc" id="L278">    return put(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L280">            uriBuilder</span>
+<span class="nc" id="L281">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.UPDATE_DISPENSARY_USER))</span>
+<span class="nc" id="L282">                .build(userId),</span>
+        request,
+        UpdateDispensaryProfileResponse.class);
+  }
+
+  // --------------------------------- validateUserCommon --------------------------------- //
+
+  private Function&lt;UriBuilder, URI&gt; validateUser_Call() {
+<span class="nc" id="L290">    return uriBuilder -&gt;</span>
+<span class="nc" id="L291">        uriBuilder.path(Routes.USERS_CONTROLLER_PATH.concat(Routes.VALIDATE_USER)).build();</span>
+  }
+
+  @Override
+  public ValidateUserResponse validateUser(ValidateUserRequest request)
+      throws NotFoundException, UnauthorizedException {
+<span class="nc" id="L297">    return post(validateUser_Call(), request, ValidateUserResponse.class);</span>
+  }
+
+  @Override
+  public Future&lt;ValidateUserResponse&gt; validateUserAsync(ValidateUserRequest request) {
+<span class="nc" id="L302">    return postAsync(validateUser_Call(), request, ValidateUserResponse.class);</span>
+  }
+
+  // --------------------------------- deleteUserById --------------------------------- //
+
+  @Override
+  public DeleteUserResponse deleteUserById(Long userId) {
+<span class="nc" id="L309">    return delete(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L311">            uriBuilder.path(Routes.USERS_CONTROLLER_PATH.concat(Routes.DELETE_USER)).build(userId),</span>
+        DeleteUserResponse.class);
+  }
+
+  // --------------------------------- deleteAdminUserById --------------------------------- //
+
+  @Override
+  public DeleteAdminProfileResponse deleteAdminUserById(Long userId) throws NotFoundException {
+<span class="nc" id="L319">    return delete(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L321">            uriBuilder</span>
+<span class="nc" id="L322">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.DELETE_ADMIN_USER))</span>
+<span class="nc" id="L323">                .build(userId),</span>
+        DeleteAdminProfileResponse.class);
+  }
+
+  // --------------------------------- deleteConsumerUserById --------------------------------- //
+
+  @Override
+  public DeleteConsumerProfileResponse deleteConsumerUserById(Long userId)
+      throws NotFoundException {
+<span class="nc" id="L332">    return delete(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L334">            uriBuilder</span>
+<span class="nc" id="L335">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.DELETE_CONSUMER_USER))</span>
+<span class="nc" id="L336">                .build(userId),</span>
+        DeleteConsumerProfileResponse.class);
+  }
+
+  // --------------------------------- deleteDispensaryUserById --------------------------------- //
+
+  @Override
+  public DeleteDispensaryProfileResponse deleteDispensaryUserByDispensaryId(Long dispensaryId)
+      throws NotFoundException {
+<span class="nc" id="L345">    return delete(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L347">            uriBuilder</span>
+<span class="nc" id="L348">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.DELETE_DISPENSARY_USER))</span>
+<span class="nc" id="L349">                .build(dispensaryId),</span>
+        DeleteDispensaryProfileResponse.class);
+  }
+
+  // --------------------------------- activateAdmin --------------------------------- //
+
+  @Override
+  public ActiveStatusProfileResponse activateAdmin(Long userId) throws ProfileException {
+<span class="nc" id="L357">    return patch(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L359">            uriBuilder</span>
+<span class="nc" id="L360">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.ACTIVATE_ADMIN_USER))</span>
+<span class="nc" id="L361">                .build(userId),</span>
+        ActiveStatusProfileResponse.class);
+  }
+
+  // --------------------------------- deactivateAdmin --------------------------------- //
+
+  @Override
+  public ActiveStatusProfileResponse deactivateAdmin(Long userId) throws ProfileException {
+<span class="nc" id="L369">    return patch(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L371">            uriBuilder</span>
+<span class="nc" id="L372">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.DEACTIVATE_ADMIN_USER))</span>
+<span class="nc" id="L373">                .build(userId),</span>
+        ActiveStatusProfileResponse.class);
+  }
+
+  // --------------------------------- activateConsumerUser --------------------------------- //
+
+  @Override
+  public ActiveStatusProfileResponse activateConsumerUser(Long userId) {
+<span class="nc" id="L381">    return patch(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L383">            uriBuilder</span>
+<span class="nc" id="L384">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.ACTIVATE_CONSUMER_USER))</span>
+<span class="nc" id="L385">                .build(userId),</span>
+        ActiveStatusProfileResponse.class);
+  }
+
+  // --------------------------------- deactivateConsumerUser --------------------------------- //
+
+  @Override
+  public ActiveStatusProfileResponse deactivateConsumerUser(Long userId) {
+<span class="nc" id="L393">    return patch(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L395">            uriBuilder</span>
+<span class="nc" id="L396">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.DEACTIVATE_CONSUMER_USER))</span>
+<span class="nc" id="L397">                .build(userId),</span>
+        ActiveStatusProfileResponse.class);
+  }
+
+  // --------------------------------- activateDispensaryUser --------------------------------- //
+
+  @Override
+  public ActiveStatusProfileResponse activateDispensaryUser(Long userId) {
+<span class="nc" id="L405">    return patch(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L407">            uriBuilder</span>
+<span class="nc" id="L408">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.ACTIVATE_DISPENSARY_USER))</span>
+<span class="nc" id="L409">                .build(userId),</span>
+        ActiveStatusProfileResponse.class);
+  }
+
+  // --------------------------------- deactivateDispensaryUser --------------------------------- //
+
+  @Override
+  public ActiveStatusProfileResponse deactivateDispensaryUser(Long userId) {
+<span class="nc" id="L417">    return patch(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L419">            uriBuilder</span>
+<span class="nc" id="L420">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.DEACTIVATE_DISPENSARY_USER))</span>
+<span class="nc" id="L421">                .build(userId),</span>
+        ActiveStatusProfileResponse.class);
+  }
+
+  // --------------------------------- sendCode --------------------------------- //
+
+  @Override
+  public void sendCode(SendCodeRequest request) throws NotFoundException, InvalidRequestException {
+<span class="nc" id="L429">    post(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L431">            uriBuilder.path(Routes.USERS_CONTROLLER_PATH.concat(Routes.SEND_CODE)).build(),</span>
+        request,
+        Void.class);
+<span class="nc" id="L434">  }</span>
+
+  // --------------------------------- verifyCode --------------------------------- //
+
+  @Override
+  public void verifyCode(VerifyCodeRequest request)
+      throws NotFoundException, InvalidRequestException {
+<span class="nc" id="L441">    post(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L443">            uriBuilder.path(Routes.USERS_CONTROLLER_PATH.concat(Routes.VERIFY_CODE)).build(),</span>
+        request,
+        Void.class);
+<span class="nc" id="L446">  }</span>
+
+  // --------------------------------- getAllGenders --------------------------------- //
+
+  @Override
+  public PageResponse&lt;GenderResponse&gt; getAllGenders(PageableRequest pageable) {
+<span class="nc" id="L452">    return getPage(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L454">            uriBuilder</span>
+<span class="nc" id="L455">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.GET_ALL_GENDERS))</span>
+<span class="nc" id="L456">                .queryParam(&quot;page&quot;, pageable.getPageNumber())</span>
+<span class="nc" id="L457">                .queryParam(&quot;size&quot;, pageable.getPageSize())</span>
+<span class="nc" id="L458">                .build(pageable),</span>
+        GenderResponse.class);
+  }
+
+  // --------------------------------- getGenderById --------------------------------- //
+
+  private Function&lt;UriBuilder, URI&gt; getGenderById_Call(long genderId) {
+<span class="nc" id="L465">    return uriBuilder -&gt;</span>
+<span class="nc" id="L466">        uriBuilder</span>
+<span class="nc" id="L467">            .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.GET_GENDER_BY_ID))</span>
+<span class="nc" id="L468">            .build(genderId);</span>
+  }
+
+  @Override
+  public GenderResponse getGenderById(long genderId)
+      throws io.oigres.ecomm.service.users.api.model.exception.GenderNotFoundException {
+<span class="nc" id="L474">    return get(getGenderById_Call(genderId), GenderResponse.class);</span>
+  }
+
+  @Override
+  public Future&lt;GenderResponse&gt; getGenderByIdAsync(long genderId)
+      throws io.oigres.ecomm.service.users.api.model.exception.GenderNotFoundException {
+<span class="nc" id="L480">    return getAsync(getGenderById_Call(genderId), GenderResponse.class);</span>
+  }
+
+  // --------------------------------- getAllUserTypes --------------------------------- //
+
+  @Override
+  public PageResponse&lt;UserTypeResponse&gt; getAllUserTypes(
+      @Parameter(hidden = true, required = true) PageableRequest pageable) {
+<span class="nc" id="L488">    return getPage(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L490">            uriBuilder</span>
+<span class="nc" id="L491">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.GET_ALL_USERTYPES))</span>
+<span class="nc" id="L492">                .queryParam(&quot;page&quot;, pageable.getPageNumber())</span>
+<span class="nc" id="L493">                .queryParam(&quot;size&quot;, pageable.getPageSize())</span>
+<span class="nc" id="L494">                .build(pageable),</span>
+        UserTypeResponse.class);
+  }
+
+  // --------------------------------- getUserTypeById --------------------------------- //
+
+  private Function&lt;UriBuilder, URI&gt; getUserTypeById_Call(long userTypeId) {
+<span class="nc" id="L501">    return uriBuilder -&gt;</span>
+<span class="nc" id="L502">        uriBuilder</span>
+<span class="nc" id="L503">            .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.GET_USERTYPE_BY_ID))</span>
+<span class="nc" id="L504">            .build(userTypeId);</span>
+  }
+
+  @Override
+  public UserTypeResponse getUserTypeById(long userTypeId) throws UserTypeNotFoundException {
+<span class="nc" id="L509">    return get(getUserTypeById_Call(userTypeId), UserTypeResponse.class);</span>
+  }
+
+  @Override
+  public Future&lt;UserTypeResponse&gt; getUserTypeByIdAsync(long userTypeId)
+      throws UserTypeNotFoundException {
+<span class="nc" id="L515">    return getAsync(getUserTypeById_Call(userTypeId), UserTypeResponse.class);</span>
+  }
+
+  // --------------------------------- getStateTaxByUserId --------------------------------- //
+
+  private Function&lt;UriBuilder, URI&gt; getStateTaxByUserId_Call(Long userId) {
+<span class="nc" id="L521">    return uriBuilder -&gt;</span>
+<span class="nc" id="L522">        uriBuilder.path(Routes.USERS_CONTROLLER_PATH.concat(Routes.GET_USER_STATE)).build(userId);</span>
+  }
+
+  @Override
+  public GetConsumerStateTax getStateTaxByUserId(Long userId) throws NotFoundException {
+<span class="nc" id="L527">    return get(getStateTaxByUserId_Call(userId), GetConsumerStateTax.class);</span>
+  }
+
+  @Override
+  public ImageUploadLocationResponse getMmjCardImageUploadLocation(String imageExtension) {
+    try {
+<span class="nc" id="L533">      return getWebClient()</span>
+<span class="nc" id="L534">          .get()</span>
+<span class="nc" id="L535">          .uri(</span>
+              uriBuilder -&gt;
+<span class="nc" id="L537">                  uriBuilder</span>
+<span class="nc" id="L538">                      .path(</span>
+<span class="nc" id="L539">                          Routes.USERS_CONTROLLER_PATH.concat(</span>
+                              Routes.GET_MMJCARD_IMAGE_UPLOAD_LOCATION))
+<span class="nc" id="L541">                      .queryParam(&quot;extension&quot;, imageExtension)</span>
+<span class="nc" id="L542">                      .build(imageExtension))</span>
+<span class="nc" id="L543">          .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)</span>
+<span class="nc" id="L544">          .accept(MediaType.APPLICATION_JSON)</span>
+<span class="nc" id="L545">          .retrieve()</span>
+<span class="nc" id="L546">          .onStatus(HttpStatusCode::is4xxClientError, this::error4xxHandling)</span>
+<span class="nc" id="L547">          .onStatus(HttpStatusCode::is5xxServerError, this::error5xxHandling)</span>
+<span class="nc" id="L548">          .bodyToMono(ImageUploadLocationResponse.class)</span>
+<span class="nc" id="L549">          .contextCapture()</span>
+<span class="nc" id="L550">          .block();</span>
+<span class="nc" id="L551">    } catch (WebClientRequestException e) {</span>
+<span class="nc" id="L552">      throw new RuntimeException(Constants.ERROR_500_USER_MESSAGE);</span>
+    }
+  }
+
+  @Override
+  public ImageUploadLocationResponse getAvatarImageUploadLocation(String extension) {
+    try {
+<span class="nc" id="L559">      return getWebClient()</span>
+<span class="nc" id="L560">          .get()</span>
+<span class="nc" id="L561">          .uri(</span>
+              uriBuilder -&gt;
+<span class="nc" id="L563">                  uriBuilder</span>
+<span class="nc" id="L564">                      .path(</span>
+<span class="nc" id="L565">                          Routes.USERS_CONTROLLER_PATH.concat(</span>
+                              Routes.GET_AVATAR_IMAGE_UPLOAD_LOCATION))
+<span class="nc" id="L567">                      .queryParam(&quot;extension&quot;, extension)</span>
+<span class="nc" id="L568">                      .build(extension))</span>
+<span class="nc" id="L569">          .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)</span>
+<span class="nc" id="L570">          .accept(MediaType.APPLICATION_JSON)</span>
+<span class="nc" id="L571">          .retrieve()</span>
+<span class="nc" id="L572">          .onStatus(HttpStatusCode::is4xxClientError, this::error4xxHandling)</span>
+<span class="nc" id="L573">          .onStatus(HttpStatusCode::is5xxServerError, this::error5xxHandling)</span>
+<span class="nc" id="L574">          .bodyToMono(ImageUploadLocationResponse.class)</span>
+<span class="nc" id="L575">          .contextCapture()</span>
+<span class="nc" id="L576">          .block();</span>
+<span class="nc" id="L577">    } catch (WebClientRequestException e) {</span>
+<span class="nc" id="L578">      throw new RuntimeException(Constants.ERROR_500_USER_MESSAGE);</span>
+    }
+  }
+
+  @Override
+  public UpdateCardImageToUploadedStateResponse updateCardImageStatus(String imageUrl) {
+<span class="nc" id="L584">    return updateCardImageStatusMono(imageUrl).block();</span>
+  }
+
+  private Mono&lt;UpdateCardImageToUploadedStateResponse&gt; updateCardImageStatusMono(String imageUrl) {
+<span class="nc" id="L588">    return getWebClient()</span>
+<span class="nc" id="L589">        .patch()</span>
+<span class="nc" id="L590">        .uri(</span>
+            uriBuilder -&gt;
+<span class="nc" id="L592">                uriBuilder</span>
+<span class="nc" id="L593">                    .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.UPLOADS_CARDS))</span>
+<span class="nc" id="L594">                    .queryParam(&quot;imageUrl&quot;, imageUrl)</span>
+<span class="nc" id="L595">                    .build())</span>
+<span class="nc" id="L596">        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)</span>
+<span class="nc" id="L597">        .accept(MediaType.APPLICATION_JSON)</span>
+<span class="nc" id="L598">        .retrieve()</span>
+<span class="nc" id="L599">        .bodyToMono(UpdateCardImageToUploadedStateResponse.class)</span>
+<span class="nc" id="L600">        .contextCapture();</span>
+  }
+
+  @Override
+  public Future&lt;GetConsumerStateTax&gt; getStateTaxByUserIdAsync(Long userId)
+      throws NotFoundException {
+<span class="nc" id="L606">    return getAsync(getStateTaxByUserId_Call(userId), GetConsumerStateTax.class);</span>
+  }
+
+  // --------------------------------- changeProfileImageStatus --------------------------------- //
+
+  @Override
+  public UpdateProfileImageResponse changeProfileImageStatus(String imageUrl) {
+<span class="nc" id="L613">    return patch(</span>
+        uriBuilder -&gt;
+<span class="nc" id="L615">            uriBuilder</span>
+<span class="nc" id="L616">                .path(Routes.USERS_CONTROLLER_PATH.concat(Routes.EDIT_PROFILE_IMAGE_STATUS))</span>
+<span class="nc" id="L617">                .queryParam(&quot;imageUrl&quot;, imageUrl)</span>
+<span class="nc" id="L618">                .build(),</span>
+        null,
+        UpdateProfileImageResponse.class);
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

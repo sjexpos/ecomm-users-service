@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UpdateConsumerUseCaseImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Application</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.usecases.users.consumers.update</a> &gt; <span class="el_source">UpdateConsumerUseCaseImpl.java</span></div><h1>UpdateConsumerUseCaseImpl.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.usecases.users.consumers.update;
+
+import io.oigres.ecomm.service.users.constants.ProfileErrorMessages;
+import io.oigres.ecomm.service.users.domain.*;
+import io.oigres.ecomm.service.users.domain.profile.ConsumerProfile;
+import io.oigres.ecomm.service.users.enums.ConsumerTypeEnum;
+import io.oigres.ecomm.service.users.enums.ResourceStatusEnum;
+import io.oigres.ecomm.service.users.exception.GenderNotFoundException;
+import io.oigres.ecomm.service.users.exception.StateNotFoundException;
+import io.oigres.ecomm.service.users.exception.ZipcodeNotFoundDomainException;
+import io.oigres.ecomm.service.users.exception.profile.NotFoundProfileException;
+import io.oigres.ecomm.service.users.exception.profile.ProfileUserException;
+import io.oigres.ecomm.service.users.repository.GenderRepository;
+import io.oigres.ecomm.service.users.repository.ProfileImageRepository;
+import io.oigres.ecomm.service.users.repository.StateRepository;
+import io.oigres.ecomm.service.users.repository.ZipCodeRepository;
+import io.oigres.ecomm.service.users.repository.profiles.CardImageRepository;
+import io.oigres.ecomm.service.users.repository.profiles.ConsumerProfileRepository;
+import io.oigres.ecomm.service.users.repository.profiles.ProfileRepository;
+import jakarta.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.util.List;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+
+@Component
+public class UpdateConsumerUseCaseImpl implements UpdateConsumerUseCase {
+  private final ProfileRepository profileRepository;
+  private final ConsumerProfileRepository consumerProfileRepository;
+  private final GenderRepository genderRepository;
+  private final StateRepository stateRepository;
+  private final ZipCodeRepository zipCodeRepository;
+  private final ProfileImageRepository profileImageRepository;
+  private final CardImageRepository cardImageRepository;
+  private final PasswordEncoder passwordEncoder;
+
+  public UpdateConsumerUseCaseImpl(
+      ProfileRepository profileRepository,
+      ConsumerProfileRepository consumerProfileRepository,
+      GenderRepository genderRepository,
+      StateRepository stateRepository,
+      ZipCodeRepository zipCodeRepository,
+      ProfileImageRepository profileImageRepository,
+      CardImageRepository cardImageRepository,
+<span class="nc" id="L63">      PasswordEncoder passwordEncoder) {</span>
+<span class="nc" id="L64">    this.profileRepository = profileRepository;</span>
+<span class="nc" id="L65">    this.consumerProfileRepository = consumerProfileRepository;</span>
+<span class="nc" id="L66">    this.genderRepository = genderRepository;</span>
+<span class="nc" id="L67">    this.stateRepository = stateRepository;</span>
+<span class="nc" id="L68">    this.zipCodeRepository = zipCodeRepository;</span>
+<span class="nc" id="L69">    this.profileImageRepository = profileImageRepository;</span>
+<span class="nc" id="L70">    this.cardImageRepository = cardImageRepository;</span>
+<span class="nc" id="L71">    this.passwordEncoder = passwordEncoder;</span>
+<span class="nc" id="L72">  }</span>
+
+  private void updateCardImage(ConsumerProfile current, ConsumerProfile request) {
+<span class="nc" id="L75">    CardImage currentCardImage = current.getCard().getCardImage();</span>
+
+<span class="nc bnc" id="L77" title="All 2 branches missed.">    if (currentCardImage != null</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        &amp;&amp; !request.getCard().getCardImage().getImageURL().equals(currentCardImage.getImageURL())) {</span>
+<span class="nc" id="L79">      currentCardImage.setStatus(ResourceStatusEnum.DELETED);</span>
+<span class="nc" id="L80">      cardImageRepository.save(currentCardImage);</span>
+<span class="nc" id="L81">      CardImage image =</span>
+          cardImageRepository
+<span class="nc" id="L83">              .findByImageURL(request.getCard().getCardImage().getImageURL())</span>
+<span class="nc" id="L84">              .orElse(</span>
+<span class="nc" id="L85">                  CardImage.builder()</span>
+<span class="nc" id="L86">                      .imageURL(request.getCard().getCardImage().getImageURL())</span>
+<span class="nc" id="L87">                      .status(ResourceStatusEnum.PENDING)</span>
+<span class="nc" id="L88">                      .build());</span>
+<span class="nc" id="L89">      cardImageRepository.save(image);</span>
+<span class="nc" id="L90">      current.getCard().setCardImage(image);</span>
+    }
+<span class="nc" id="L92">  }</span>
+
+  @Override
+  @Transactional(Transactional.TxType.REQUIRED)
+  public ConsumerProfile handle(Long userId, ConsumerProfile request)
+      throws ProfileUserException,
+          GenderNotFoundException,
+          StateNotFoundException,
+          ZipcodeNotFoundDomainException {
+<span class="nc" id="L101">    ConsumerProfile current =</span>
+<span class="nc" id="L102">        consumerProfileRepository.findById(userId).orElseThrow(NotFoundProfileException::new);</span>
+
+<span class="nc bnc" id="L104" title="All 2 branches missed.">    if (request.getProfileImage() == null) {</span>
+<span class="nc" id="L105">      request.setProfileImage(</span>
+<span class="nc" id="L106">          new ProfileImage(null, null, ResourceStatusEnum.PENDING, LocalDateTime.now()));</span>
+    }
+<span class="nc bnc" id="L108" title="All 2 branches missed.">    if (request.getProfileImage().getImageURL() != null</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        &amp;&amp; !StringUtils.hasText(request.getProfileImage().getImageURL())) {</span>
+<span class="nc" id="L110">      throw new ProfileUserException(ProfileErrorMessages.INVALID_PROFILE_IMAGE);</span>
+    }
+
+<span class="nc bnc" id="L113" title="All 2 branches missed.">    if (request.getUser() != null</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">        &amp;&amp; request.getUser().getPassword() != null</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        &amp;&amp; !passwordEncoder.matches(</span>
+<span class="nc" id="L116">            request.getUser().getPassword(), current.getUser().getPassword())) {</span>
+<span class="nc" id="L117">      current.getUser().setPassword(passwordEncoder.encode(request.getUser().getPassword()));</span>
+    }
+
+<span class="nc bnc" id="L120" title="All 2 branches missed.">    if (request.getUserType().getId() != null) {</span>
+<span class="nc" id="L121">      current.setUserType(</span>
+<span class="nc" id="L122">          ConsumerTypeEnum.getById(request.getUserType().getId())</span>
+<span class="nc" id="L123">              .orElseThrow(NotFoundProfileException::new));</span>
+    }
+
+<span class="nc bnc" id="L126" title="All 2 branches missed.">    if (request.getEnabled() != null) {</span>
+<span class="nc" id="L127">      current.setEnabled(request.getEnabled());</span>
+    }
+
+<span class="nc" id="L130">    Gender gender =</span>
+        genderRepository
+<span class="nc" id="L132">            .findById(request.getGender().getId())</span>
+<span class="nc" id="L133">            .orElseThrow(() -&gt; new GenderNotFoundException(ProfileErrorMessages.GENDER_NOT_EXIST));</span>
+
+<span class="nc" id="L135">    State state =</span>
+        this.stateRepository
+<span class="nc" id="L137">            .findById(request.getZipCode().getState().getId())</span>
+<span class="nc" id="L138">            .orElseThrow(() -&gt; new StateNotFoundException(ProfileErrorMessages.STATE_NOT_FOUND));</span>
+
+<span class="nc" id="L140">    ZipCode zipCode =</span>
+        this.zipCodeRepository
+<span class="nc" id="L142">            .findById(request.getZipCode().getId())</span>
+<span class="nc" id="L143">            .orElseThrow(</span>
+<span class="nc" id="L144">                () -&gt; new ZipcodeNotFoundDomainException(ProfileErrorMessages.ZIPCODE_NOT_FOUND));</span>
+
+<span class="nc" id="L146">    request.setGender(gender);</span>
+<span class="nc" id="L147">    zipCode.setState(state);</span>
+<span class="nc" id="L148">    request.setZipCode(zipCode);</span>
+
+<span class="nc" id="L150">    updateConsumer(request, current);</span>
+<span class="nc" id="L151">    updateProfileImage(current, request);</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">    if (request.getCard().getCardImage() != null) updateCardImage(current, request);</span>
+
+<span class="nc" id="L154">    return consumerProfileRepository.save(current);</span>
+  }
+
+  private void updateConsumer(ConsumerProfile request, ConsumerProfile current) {
+<span class="nc" id="L158">    current.setFirstName(request.getFirstName());</span>
+<span class="nc" id="L159">    current.setLastName(request.getLastName());</span>
+<span class="nc" id="L160">    current.getCard().setMmjCard(request.getCard().getMmjCard());</span>
+<span class="nc" id="L161">    current.getCard().setIdCard(request.getCard().getIdCard());</span>
+<span class="nc" id="L162">    current.setGender(request.getGender());</span>
+<span class="nc" id="L163">    current.setPhone(request.getPhone());</span>
+<span class="nc" id="L164">    current.setZipCode(request.getZipCode());</span>
+<span class="nc" id="L165">  }</span>
+
+  private void updateProfileImage(ConsumerProfile current, ConsumerProfile request)
+      throws ProfileUserException {
+<span class="nc" id="L169">    ProfileImage currentProfileImage = current.getProfileImage();</span>
+<span class="nc" id="L170">    ProfileImage newProfileImage = request.getProfileImage();</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">    if (currentProfileImage != null</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">        &amp;&amp; !currentProfileImage.getImageURL().equals(newProfileImage.getImageURL())) {</span>
+<span class="nc" id="L173">      currentProfileImage.setStatus(ResourceStatusEnum.DELETED);</span>
+<span class="nc" id="L174">      current.setProfileImage(null);</span>
+<span class="nc" id="L175">      profileImageRepository.save(currentProfileImage);</span>
+    }
+<span class="nc bnc" id="L177" title="All 4 branches missed.">    if (newProfileImage.getImageURL() != null</span>
+        &amp;&amp; (currentProfileImage == null
+<span class="nc bnc" id="L179" title="All 2 branches missed.">            || !newProfileImage.getImageURL().equals(currentProfileImage.getImageURL()))) {</span>
+<span class="nc" id="L180">      List&lt;Profile&gt; profiles =</span>
+<span class="nc" id="L181">          this.profileRepository.existsByNotIdAndProfileImage_ImageURL(</span>
+<span class="nc" id="L182">              current.getId(), newProfileImage.getImageURL());</span>
+<span class="nc bnc" id="L183" title="All 2 branches missed.">      if (!profiles.isEmpty()) {</span>
+<span class="nc" id="L184">        throw new ProfileUserException(ProfileErrorMessages.IMAGE_ALREADY_EXISTS);</span>
+      }
+<span class="nc" id="L186">      profileImageRepository.save(newProfileImage);</span>
+<span class="nc" id="L187">      current.setProfileImage(newProfileImage);</span>
+    }
+<span class="nc" id="L189">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

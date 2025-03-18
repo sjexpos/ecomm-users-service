@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>CleanUpBrokenCardImagesUseCaseImpl.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Aggregated Reports</a> &gt; <a href="../index.html" class="el_bundle">users-service-application</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.usecases.users.images</a> &gt; <span class="el_source">CleanUpBrokenCardImagesUseCaseImpl.java</span></div><h1>CleanUpBrokenCardImagesUseCaseImpl.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.usecases.users.images;
+
+import io.oigres.ecomm.service.users.domain.Card;
+import io.oigres.ecomm.service.users.domain.CardImage;
+import io.oigres.ecomm.service.users.enums.ResourceStatusEnum;
+import io.oigres.ecomm.service.users.repository.BlobRepository;
+import io.oigres.ecomm.service.users.repository.profiles.CardImageRepository;
+import io.oigres.ecomm.service.users.repository.profiles.CardRepository;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+@Component
+<span class="nc" id="L40">@Slf4j</span>
+public class CleanUpBrokenCardImagesUseCaseImpl implements CleanUpBrokenCardImagesUseCase {
+  private final CardImageRepository cardImageRepository;
+  private final CardRepository cardRepository;
+  private final BlobRepository blobRepository;
+
+  public CleanUpBrokenCardImagesUseCaseImpl(
+      CardImageRepository cardImageRepository,
+      CardRepository cardRepository,
+<span class="nc" id="L49">      BlobRepository blobRepository) {</span>
+<span class="nc" id="L50">    this.cardImageRepository = cardImageRepository;</span>
+<span class="nc" id="L51">    this.cardRepository = cardRepository;</span>
+<span class="nc" id="L52">    this.blobRepository = blobRepository;</span>
+<span class="nc" id="L53">  }</span>
+
+  @Override
+  @Transactional
+  public void handle(Pageable pageable, Duration timeOffset) {
+<span class="nc" id="L58">    List&lt;ResourceStatusEnum&gt; statuses =</span>
+<span class="nc" id="L59">        Arrays.asList(ResourceStatusEnum.PENDING, ResourceStatusEnum.DELETED);</span>
+<span class="nc" id="L60">    Page&lt;CardImage&gt; elegibleForDeletionAssets =</span>
+<span class="nc" id="L61">        cardImageRepository.findElegibleForDeletion(pageable, statuses);</span>
+<span class="nc" id="L62">    List&lt;CardImage&gt; selectedForDeletionAssets =</span>
+<span class="nc" id="L63">        elegibleForDeletionAssets.getContent().stream()</span>
+<span class="nc" id="L64">            .filter(</span>
+                cardImage -&gt;
+<span class="nc bnc" id="L66" title="All 4 branches missed.">                    (cardImage.getModifiedAt() != null || cardImage.getCreatedAt() != null)</span>
+<span class="nc" id="L67">                        &amp;&amp; LocalDateTime.now()</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">                            .isAfter(</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">                                (cardImage.getModifiedAt() != null</span>
+<span class="nc" id="L70">                                        ? cardImage.getModifiedAt()</span>
+<span class="nc" id="L71">                                        : cardImage.getCreatedAt())</span>
+<span class="nc" id="L72">                                    .plus(timeOffset)))</span>
+<span class="nc" id="L73">            .collect(Collectors.toList());</span>
+<span class="nc" id="L74">    processAssetsMarkedAsDeleted(selectedForDeletionAssets);</span>
+<span class="nc" id="L75">    deleteAssetsFromDatabase(selectedForDeletionAssets);</span>
+<span class="nc" id="L76">  }</span>
+
+  private void processAssetsMarkedAsDeleted(List&lt;CardImage&gt; selectedForDeletionAssets) {
+<span class="nc" id="L79">    List&lt;CardImage&gt; selectedForDeletionAssetsWithDeletedStatus =</span>
+<span class="nc" id="L80">        selectedForDeletionAssets.stream()</span>
+<span class="nc" id="L81">            .filter(cardImage -&gt; ResourceStatusEnum.DELETED.equals(cardImage.getStatus()))</span>
+<span class="nc" id="L82">            .collect(Collectors.toList());</span>
+
+<span class="nc bnc" id="L84" title="All 2 branches missed.">    if (!selectedForDeletionAssetsWithDeletedStatus.isEmpty()) {</span>
+<span class="nc" id="L85">      List&lt;String&gt; keysToDeleteFromS3 =</span>
+<span class="nc" id="L86">          selectedForDeletionAssetsWithDeletedStatus.stream()</span>
+<span class="nc" id="L87">              .map(CardImage::getImageURL)</span>
+<span class="nc" id="L88">              .collect(Collectors.toList());</span>
+
+<span class="nc" id="L90">      List&lt;String&gt; deletedKeys = blobRepository.deleteAllByKey(keysToDeleteFromS3);</span>
+
+<span class="nc bnc" id="L92" title="All 4 branches missed.">      if (!deletedKeys.isEmpty() &amp;&amp; deletedKeys.size() &lt; keysToDeleteFromS3.size()) {</span>
+<span class="nc" id="L93">        List&lt;CardImage&gt; notDeletedFromS3 = Collections.emptyList();</span>
+<span class="nc" id="L94">        selectedForDeletionAssetsWithDeletedStatus.forEach(</span>
+            cardImage -&gt; {
+<span class="nc bnc" id="L96" title="All 2 branches missed.">              if (!deletedKeys.contains(cardImage.getImageURL())) {</span>
+<span class="nc" id="L97">                notDeletedFromS3.add(cardImage);</span>
+              }
+<span class="nc" id="L99">            });</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">        if (!notDeletedFromS3.isEmpty()) {</span>
+<span class="nc" id="L101">          selectedForDeletionAssets.removeAll(notDeletedFromS3);</span>
+        }
+      }
+    }
+<span class="nc" id="L105">  }</span>
+
+  private void deleteAssetsFromDatabase(List&lt;CardImage&gt; selectedForDeletionAssets) {
+<span class="nc bnc" id="L108" title="All 4 branches missed.">    if (selectedForDeletionAssets != null &amp;&amp; !selectedForDeletionAssets.isEmpty()) {</span>
+<span class="nc" id="L109">      List&lt;Long&gt; selectedForDeletionAssetsIds =</span>
+<span class="nc" id="L110">          selectedForDeletionAssets.stream().map(CardImage::getId).collect(Collectors.toList());</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">      if (!selectedForDeletionAssetsIds.isEmpty()) {</span>
+<span class="nc" id="L112">        log.info(&quot;cleaned up ids list: {}&quot;, selectedForDeletionAssetsIds);</span>
+<span class="nc" id="L113">        selectedForDeletionAssets.forEach(</span>
+            cardImage -&gt; {
+<span class="nc" id="L115">              Optional&lt;Card&gt; cardOptional =</span>
+<span class="nc" id="L116">                  cardRepository.findByCardImage_imageURL(cardImage.getImageURL());</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">              if (cardOptional.isPresent()) {</span>
+<span class="nc" id="L118">                Card card = cardOptional.orElseThrow();</span>
+<span class="nc" id="L119">                card.setCardImage(null);</span>
+<span class="nc" id="L120">                cardRepository.save(card);</span>
+              }
+<span class="nc" id="L122">            });</span>
+<span class="nc" id="L123">        cardImageRepository.deleteByIdIn(selectedForDeletionAssetsIds);</span>
+      }
+    }
+<span class="nc" id="L126">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

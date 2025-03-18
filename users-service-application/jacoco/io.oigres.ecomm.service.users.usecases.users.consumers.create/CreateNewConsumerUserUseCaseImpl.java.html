@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CreateNewConsumerUserUseCaseImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Application</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.usecases.users.consumers.create</a> &gt; <span class="el_source">CreateNewConsumerUserUseCaseImpl.java</span></div><h1>CreateNewConsumerUserUseCaseImpl.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.usecases.users.consumers.create;
+
+import io.oigres.ecomm.service.users.constants.ProfileErrorMessages;
+import io.oigres.ecomm.service.users.domain.*;
+import io.oigres.ecomm.service.users.domain.profile.ConsumerProfile;
+import io.oigres.ecomm.service.users.enums.ConsumerTypeEnum;
+import io.oigres.ecomm.service.users.enums.ProfileTypeEnum;
+import io.oigres.ecomm.service.users.enums.ResourceStatusEnum;
+import io.oigres.ecomm.service.users.exception.GenderNotFoundException;
+import io.oigres.ecomm.service.users.exception.StateNotFoundException;
+import io.oigres.ecomm.service.users.exception.ZipcodeNotFoundDomainException;
+import io.oigres.ecomm.service.users.exception.profile.*;
+import io.oigres.ecomm.service.users.repository.*;
+import io.oigres.ecomm.service.users.repository.profiles.CardImageRepository;
+import io.oigres.ecomm.service.users.repository.profiles.CardRepository;
+import io.oigres.ecomm.service.users.repository.profiles.ConsumerProfileRepository;
+import io.oigres.ecomm.service.users.repository.profiles.ProfileTypeRepository;
+import jakarta.transaction.Transactional;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+
+@Component
+public class CreateNewConsumerUserUseCaseImpl implements CreateNewConsumerUserUseCase {
+  private final UserRepository userRepository;
+  private final ProfileTypeRepository profileTypeRepository;
+  private final GenderRepository genderRepository;
+  private final StateRepository stateRepository;
+  private final ZipCodeRepository zipCodeRepository;
+  private final CardImageRepository cardImageRepository;
+  private final ProfileImageRepository profileImageRepository;
+  private final CardRepository cardRepository;
+  private final ConsumerProfileRepository consumerProfileRepository;
+  private final PasswordEncoder passwordEncoder;
+
+  public CreateNewConsumerUserUseCaseImpl(
+      UserRepository userRepository,
+      ProfileTypeRepository profileTypeRepository,
+      GenderRepository genderRepository,
+      StateRepository stateRepository,
+      ZipCodeRepository zipCodeRepository,
+      CardImageRepository cardImageRepository,
+      ProfileImageRepository profileImageRepository,
+      CardRepository cardRepository,
+      ConsumerProfileRepository consumerProfileRepository,
+<span class="nc" id="L65">      PasswordEncoder passwordEncoder) {</span>
+<span class="nc" id="L66">    this.userRepository = userRepository;</span>
+<span class="nc" id="L67">    this.profileTypeRepository = profileTypeRepository;</span>
+<span class="nc" id="L68">    this.genderRepository = genderRepository;</span>
+<span class="nc" id="L69">    this.stateRepository = stateRepository;</span>
+<span class="nc" id="L70">    this.zipCodeRepository = zipCodeRepository;</span>
+<span class="nc" id="L71">    this.cardImageRepository = cardImageRepository;</span>
+<span class="nc" id="L72">    this.profileImageRepository = profileImageRepository;</span>
+<span class="nc" id="L73">    this.cardRepository = cardRepository;</span>
+<span class="nc" id="L74">    this.consumerProfileRepository = consumerProfileRepository;</span>
+<span class="nc" id="L75">    this.passwordEncoder = passwordEncoder;</span>
+<span class="nc" id="L76">  }</span>
+
+  @Override
+  @Transactional(Transactional.TxType.REQUIRED)
+  public ConsumerProfile handle(
+      String email,
+      String password,
+      String firstName,
+      String lastName,
+      String phone,
+      String avatar,
+      String cardImageURL,
+      ConsumerTypeEnum userType,
+      Long genderId,
+      Long zipcodeStateId,
+      Long zipcodeId)
+      throws DeletedProfileException,
+          ExistingProfileException,
+          TypeNotFoundProfileException,
+          GenderNotFoundException,
+          ZipcodeNotFoundDomainException,
+          StateNotFoundException,
+          UserTypeNotFoundException {
+<span class="nc" id="L99">    Optional&lt;User&gt; opUser = this.userRepository.findByEmail(email);</span>
+
+    User user;
+<span class="nc bnc" id="L102" title="All 2 branches missed.">    if (opUser.isPresent()) {</span>
+<span class="nc" id="L103">      user = opUser.orElseThrow(IllegalStateException::new);</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">      if (user.isDeleted()) {</span>
+<span class="nc" id="L105">        throw new DeletedProfileException(ProfileErrorMessages.PROFILE_DELETED);</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">      } else if (isConsumer(user)) {</span>
+<span class="nc" id="L107">        throw new ExistingProfileException(ProfileErrorMessages.PROFILE_ALREADY_EXIST);</span>
+      }
+    } else {
+<span class="nc" id="L110">      Set&lt;Profile&gt; profileSet = new HashSet&lt;&gt;();</span>
+      user =
+<span class="nc" id="L112">          User.builder()</span>
+<span class="nc" id="L113">              .password(this.passwordEncoder.encode((password)))</span>
+<span class="nc" id="L114">              .email(email)</span>
+<span class="nc" id="L115">              .profiles(profileSet)</span>
+<span class="nc" id="L116">              .build();</span>
+    }
+    ConsumerProfile consumerProfile =
+<span class="nc" id="L119">        ConsumerProfile.builder().firstName(firstName).lastName(lastName).phone(phone).build();</span>
+
+<span class="nc" id="L121">    evalAndSetMmjCardImage(cardImageURL, consumerProfile);</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">    if (avatar != null) evalAndSetAvatarImage(avatar, consumerProfile);</span>
+
+<span class="nc bnc" id="L124" title="All 4 branches missed.">    if (userType != null &amp;&amp; userType.getId() != null) {</span>
+<span class="nc" id="L125">      consumerProfile.setUserType(</span>
+<span class="nc" id="L126">          ConsumerTypeEnum.getById(userType.getId())</span>
+<span class="nc" id="L127">              .orElseThrow(</span>
+<span class="nc" id="L128">                  () -&gt; new UserTypeNotFoundException(ProfileErrorMessages.USER_TYPE_NOT_EXIST)));</span>
+    }
+<span class="nc" id="L130">    ProfileType profileType =</span>
+        this.profileTypeRepository
+<span class="nc" id="L132">            .findByProfile(ProfileTypeEnum.CONSUMER)</span>
+<span class="nc" id="L133">            .orElseThrow(</span>
+                () -&gt;
+<span class="nc" id="L135">                    new TypeNotFoundProfileException(ProfileErrorMessages.PROFILE_TYPE_NOT_FOUND));</span>
+
+<span class="nc" id="L137">    Gender gender =</span>
+        genderRepository
+<span class="nc" id="L139">            .findById(genderId)</span>
+<span class="nc" id="L140">            .orElseThrow(() -&gt; new GenderNotFoundException(ProfileErrorMessages.GENDER_NOT_EXIST));</span>
+
+<span class="nc" id="L142">    State state =</span>
+        this.stateRepository
+<span class="nc" id="L144">            .findById(zipcodeStateId)</span>
+<span class="nc" id="L145">            .orElseThrow(() -&gt; new StateNotFoundException(ProfileErrorMessages.STATE_NOT_FOUND));</span>
+
+<span class="nc" id="L147">    ZipCode zipCode =</span>
+        this.zipCodeRepository
+<span class="nc" id="L149">            .findById(zipcodeId)</span>
+<span class="nc" id="L150">            .orElseThrow(</span>
+<span class="nc" id="L151">                () -&gt; new ZipcodeNotFoundDomainException(ProfileErrorMessages.ZIPCODE_NOT_FOUND));</span>
+<span class="nc" id="L152">    zipCode.setState(state);</span>
+
+<span class="nc" id="L154">    consumerProfile.setZipCode(zipCode);</span>
+<span class="nc" id="L155">    consumerProfile.setGender(gender);</span>
+<span class="nc" id="L156">    consumerProfile.setVerified(Boolean.FALSE);</span>
+<span class="nc" id="L157">    consumerProfile.setProfileType(profileType);</span>
+<span class="nc bnc" id="L158" title="All 2 branches missed.">    if (ResourceStatusEnum.UPLOADED.equals(consumerProfile.getCard().getCardImage().getStatus()))</span>
+<span class="nc" id="L159">      consumerProfile.setEnabled(Boolean.TRUE);</span>
+<span class="nc" id="L160">    else consumerProfile.setEnabled(Boolean.FALSE);</span>
+<span class="nc" id="L161">    consumerProfile.setUser(user);</span>
+<span class="nc" id="L162">    user.getProfiles().add(consumerProfile);</span>
+<span class="nc" id="L163">    this.userRepository.save(user);</span>
+<span class="nc" id="L164">    return consumerProfile;</span>
+  }
+
+  private void evalAndSetAvatarImage(String avatarUrl, ConsumerProfile consumerProfile)
+      throws ExistingProfileException {
+<span class="nc bnc" id="L169" title="All 2 branches missed.">    if (consumerProfileRepository.existsByProfileImage_ImageURL(avatarUrl))</span>
+<span class="nc" id="L170">      throw new ExistingProfileException(ProfileErrorMessages.PROFILE_ERROR_AVATAR_IMAGE_USED);</span>
+<span class="nc" id="L171">    ProfileImage image =</span>
+        profileImageRepository
+<span class="nc" id="L173">            .findByImageURL(avatarUrl)</span>
+<span class="nc" id="L174">            .or(</span>
+                () -&gt;
+<span class="nc" id="L176">                    Optional.of(</span>
+<span class="nc" id="L177">                        ProfileImage.builder()</span>
+<span class="nc" id="L178">                            .imageURL(avatarUrl)</span>
+<span class="nc" id="L179">                            .status(ResourceStatusEnum.PENDING)</span>
+<span class="nc" id="L180">                            .build()))</span>
+<span class="nc" id="L181">            .orElse(null);</span>
+<span class="nc" id="L182">    consumerProfile.setProfileImage(image);</span>
+<span class="nc" id="L183">  }</span>
+
+  private void evalAndSetMmjCardImage(String cardImageURL, ConsumerProfile consumerProfile)
+      throws ExistingProfileException {
+<span class="nc" id="L187">    Optional&lt;Card&gt; cardOpt = cardRepository.findByCardImage_imageURL(cardImageURL);</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">    if (cardOpt.isPresent())</span>
+<span class="nc" id="L189">      throw new ExistingProfileException(ProfileErrorMessages.PROFILE_ERROR_MMJCARDIMAGE_USED);</span>
+<span class="nc" id="L190">    CardImage image =</span>
+        cardImageRepository
+<span class="nc" id="L192">            .findByImageURL(cardImageURL)</span>
+<span class="nc" id="L193">            .or(() -&gt; Optional.of(createCardImageUrlPending(cardImageURL)))</span>
+<span class="nc" id="L194">            .orElse(null);</span>
+<span class="nc" id="L195">    Card card = Card.builder().mmjCard(true).cardImage(image).idCard(true).build();</span>
+<span class="nc" id="L196">    consumerProfile.setCard(card);</span>
+<span class="nc" id="L197">  }</span>
+
+  private CardImage createCardImageUrlPending(String imageUrl) {
+<span class="nc" id="L200">    return CardImage.builder().imageURL(imageUrl).status(ResourceStatusEnum.PENDING).build();</span>
+  }
+
+  private Boolean isConsumer(User user) {
+<span class="nc" id="L204">    return Profile.isAlreadyOfProfileType(user, ProfileTypeEnum.CONSUMER);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

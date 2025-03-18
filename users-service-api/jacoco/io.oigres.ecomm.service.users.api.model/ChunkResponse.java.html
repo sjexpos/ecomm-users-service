@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChunkResponse.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">API</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.api.model</a> &gt; <span class="el_source">ChunkResponse.java</span></div><h1>ChunkResponse.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.api.model;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * A chunk of data restricted by the configured {@link PageableRequest}.
+ *
+ * @param &lt;T&gt;
+ * @author Sergio Exposito
+ */
+public abstract class ChunkResponse&lt;T&gt; implements SliceResponse&lt;T&gt; {
+  private static final long serialVersionUID = 867755909294344406L;
+
+<span class="nc" id="L33">  private final List&lt;T&gt; content = new ArrayList&lt;&gt;();</span>
+  private final PageableRequest pageable;
+
+  /**
+   * Creates a new {@link ChunkResponse} with the given content and the given governing {@link PageableRequest}.
+   *
+   * @param content must not be {@literal null}.
+   * @param pageable must not be {@literal null}.
+   */
+<span class="nc" id="L42">  public ChunkResponse(List&lt;T&gt; content, PageableRequest pageable) {</span>
+<span class="nc" id="L43">    this.content.addAll(content);</span>
+<span class="nc" id="L44">    this.pageable = pageable;</span>
+<span class="nc" id="L45">  }</span>
+
+  /*
+   * (non-Javadoc)
+   * @see org.springframework.data.domain.Slice#getNumber()
+   */
+  public int getNumber() {
+<span class="nc bnc" id="L52" title="All 2 branches missed.">    return pageable.isPaged() ? pageable.getPageNumber() : 0;</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see org.springframework.data.domain.Slice#getSize()
+   */
+  public int getSize() {
+<span class="nc bnc" id="L60" title="All 2 branches missed.">    return pageable.isPaged() ? pageable.getPageSize() : content.size();</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see org.springframework.data.domain.Slice#getNumberOfElements()
+   */
+  public int getNumberOfElements() {
+<span class="nc" id="L68">    return content.size();</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see org.springframework.data.domain.Slice#hasPrevious()
+   */
+  public boolean hasPrevious() {
+<span class="nc bnc" id="L76" title="All 2 branches missed.">    return getNumber() &gt; 0;</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see org.springframework.data.domain.Slice#isFirst()
+   */
+  public boolean isFirst() {
+<span class="nc bnc" id="L84" title="All 2 branches missed.">    return !hasPrevious();</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see org.springframework.data.domain.Slice#isLast()
+   */
+  public boolean isLast() {
+<span class="nc bnc" id="L92" title="All 2 branches missed.">    return !hasNext();</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see org.springframework.data.domain.Slice#nextPageable()
+   */
+  public PageableRequest nextPageable() {
+<span class="nc bnc" id="L100" title="All 2 branches missed.">    return hasNext() ? pageable.next() : PageableRequest.unpaged();</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see org.springframework.data.domain.Slice#previousPageable()
+   */
+  public PageableRequest previousPageable() {
+<span class="nc bnc" id="L108" title="All 2 branches missed.">    return hasPrevious() ? pageable.previousOrFirst() : PageableRequest.unpaged();</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see org.springframework.data.domain.Slice#hasContent()
+   */
+  public boolean hasContent() {
+<span class="nc bnc" id="L116" title="All 2 branches missed.">    return !content.isEmpty();</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see org.springframework.data.domain.Slice#getContent()
+   */
+  public List&lt;T&gt; getContent() {
+<span class="nc" id="L124">    return Collections.unmodifiableList(content);</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see org.springframework.data.domain.Slice#getPageable()
+   */
+  @Override
+  public PageableRequest getPageable() {
+<span class="nc" id="L133">    return pageable;</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see org.springframework.data.domain.Slice#getSort()
+   */
+  @Override
+  public SortRequest getSort() {
+<span class="nc" id="L142">    return pageable.getSort();</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(Object obj) {
+
+<span class="nc bnc" id="L152" title="All 2 branches missed.">    if (this == obj) {</span>
+<span class="nc" id="L153">      return true;</span>
+    }
+
+<span class="nc bnc" id="L156" title="All 2 branches missed.">    if (!(obj instanceof ChunkResponse&lt;?&gt;)) {</span>
+<span class="nc" id="L157">      return false;</span>
+    }
+
+<span class="nc" id="L160">    ChunkResponse&lt;?&gt; that = (ChunkResponse&lt;?&gt;) obj;</span>
+
+<span class="nc" id="L162">    boolean contentEqual = this.content.equals(that.content);</span>
+<span class="nc" id="L163">    boolean pageableEqual = this.pageable.equals(that.pageable);</span>
+
+<span class="nc bnc" id="L165" title="All 4 branches missed.">    return contentEqual &amp;&amp; pageableEqual;</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode() {
+
+<span class="nc" id="L175">    int result = 17;</span>
+
+<span class="nc" id="L177">    result += 31 * pageable.hashCode();</span>
+<span class="nc" id="L178">    result += 31 * content.hashCode();</span>
+
+<span class="nc" id="L180">    return result;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

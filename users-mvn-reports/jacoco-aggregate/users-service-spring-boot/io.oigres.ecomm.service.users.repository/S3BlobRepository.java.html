@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>S3BlobRepository.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Aggregated Reports</a> &gt; <a href="../index.html" class="el_bundle">users-service-spring-boot</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.repository</a> &gt; <span class="el_source">S3BlobRepository.java</span></div><h1>S3BlobRepository.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.repository;
+
+import io.oigres.ecomm.service.users.config.UsersAssetsConfig;
+import io.oigres.ecomm.service.users.domain.StoreLocation;
+import io.oigres.ecomm.service.users.enums.BlobType;
+import java.time.Duration;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Repository;
+import software.amazon.awssdk.awscore.exception.AwsServiceException;
+import software.amazon.awssdk.core.exception.SdkClientException;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.DeleteObjectsRequest;
+import software.amazon.awssdk.services.s3.model.DeleteObjectsResponse;
+import software.amazon.awssdk.services.s3.model.DeletedObject;
+import software.amazon.awssdk.services.s3.model.ObjectIdentifier;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
+import software.amazon.awssdk.services.s3.presigner.model.PresignedPutObjectRequest;
+import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignRequest;
+
+@Repository
+<span class="nc" id="L43">@Slf4j</span>
+public class S3BlobRepository implements BlobRepository {
+
+  private final String bucketName;
+  private final String rootFolder;
+  private final Duration signatureDurationInMinutes;
+  private final S3Presigner presigner;
+  private final S3Client s3Client;
+
+<span class="nc" id="L52">  public S3BlobRepository(UsersAssetsConfig config, S3Presigner presigner, S3Client s3Client) {</span>
+<span class="nc" id="L53">    this.bucketName = config.getBucket().getName();</span>
+<span class="nc" id="L54">    this.rootFolder = config.getBucket().getRootFolder();</span>
+<span class="nc" id="L55">    this.signatureDurationInMinutes = config.getBucket().getSignatureDuration();</span>
+<span class="nc" id="L56">    this.presigner = presigner;</span>
+<span class="nc" id="L57">    this.s3Client = s3Client;</span>
+<span class="nc" id="L58">  }</span>
+
+  public StoreLocation getStoreLocation(BlobType blobType, String extension) {
+<span class="nc" id="L61">    String filename = UUID.randomUUID().toString().replace(&quot;-&quot;, &quot;&quot;);</span>
+<span class="nc" id="L62">    String key =</span>
+<span class="nc" id="L63">        String.format(&quot;%s/%s/%s.%s&quot;, this.rootFolder, blobType.getFolder(), filename, extension);</span>
+    PutObjectRequest putObjectRequest =
+<span class="nc" id="L65">        PutObjectRequest.builder().bucket(this.bucketName).key(key).build();</span>
+    PutObjectPresignRequest putObjectPresignRequest =
+<span class="nc" id="L67">        PutObjectPresignRequest.builder()</span>
+<span class="nc" id="L68">            .signatureDuration(this.signatureDurationInMinutes)</span>
+<span class="nc" id="L69">            .putObjectRequest(putObjectRequest)</span>
+<span class="nc" id="L70">            .build();</span>
+<span class="nc" id="L71">    PresignedPutObjectRequest presignedRequest =</span>
+<span class="nc" id="L72">        this.presigner.presignPutObject(putObjectPresignRequest);</span>
+    StoreLocation location =
+<span class="nc" id="L74">        StoreLocation.builder()</span>
+<span class="nc" id="L75">            .uploadURL(presignedRequest.url())</span>
+<span class="nc" id="L76">            .httpMethod(presignedRequest.httpRequest().method().name())</span>
+<span class="nc" id="L77">            .key(key)</span>
+<span class="nc" id="L78">            .build();</span>
+<span class="nc" id="L79">    return location;</span>
+  }
+
+  @Override
+  public List&lt;String&gt; deleteAllByKey(List&lt;String&gt; keysList) {
+<span class="nc" id="L84">    List&lt;String&gt; resultList = Collections.emptyList();</span>
+<span class="nc bnc" id="L85" title="All 4 branches missed.">    if (keysList != null &amp;&amp; !keysList.isEmpty()) {</span>
+      try {
+<span class="nc" id="L87">        List&lt;ObjectIdentifier&gt; objectIdentifierList =</span>
+<span class="nc" id="L88">            keysList.stream()</span>
+<span class="nc" id="L89">                .map(</span>
+                    key -&gt; {
+<span class="nc" id="L91">                      return ObjectIdentifier.builder().key(key).build();</span>
+                    })
+<span class="nc" id="L93">                .collect(Collectors.toList());</span>
+        DeleteObjectsRequest deleteObjectsRequest =
+<span class="nc" id="L95">            DeleteObjectsRequest.builder()</span>
+<span class="nc" id="L96">                .bucket(this.bucketName)</span>
+<span class="nc" id="L97">                .delete(delete -&gt; delete.objects(objectIdentifierList))</span>
+<span class="nc" id="L98">                .build();</span>
+<span class="nc" id="L99">        DeleteObjectsResponse deletedObjectsResponse = s3Client.deleteObjects(deleteObjectsRequest);</span>
+<span class="nc bnc" id="L100" title="All 4 branches missed.">        if (deletedObjectsResponse.hasDeleted() &amp;&amp; !deletedObjectsResponse.deleted().isEmpty()) {</span>
+<span class="nc" id="L101">          resultList =</span>
+<span class="nc" id="L102">              deletedObjectsResponse.deleted().stream()</span>
+<span class="nc" id="L103">                  .map(DeletedObject::key)</span>
+<span class="nc" id="L104">                  .collect(Collectors.toList());</span>
+        }
+<span class="nc" id="L106">      } catch (AwsServiceException | SdkClientException e) {</span>
+<span class="nc" id="L107">        log.error(&quot;Error removing keys: &quot;, e);</span>
+<span class="nc" id="L108">      }</span>
+    }
+<span class="nc" id="L110">    return resultList;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Routes.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">API</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users</a> &gt; <span class="el_source">Routes.java</span></div><h1>Routes.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users;
+
+<span class="nc" id="L20">public class Routes {</span>
+
+  public static final String API_PREFIX = &quot;/api&quot;;
+
+  public static final String USERS_CONTROLLER_PATH = API_PREFIX + &quot;/v1/users&quot;;
+  public static final String PROFILE_ADMIN_USER = &quot;/profile/admin&quot;;
+  public static final String PROFILE_CONSUMER_USER = &quot;/profile/consumer&quot;;
+  public static final String PROFILE_DISPENSARY_USER = &quot;/profile/dispensary&quot;;
+  public static final String SEARCH_USERS = &quot;/search&quot;;
+  public static final String GET_USER = &quot;/{userId}&quot;;
+  public static final String GET_PROFILE_ADMIN_USER = &quot;/profile/admins/{userId}&quot;;
+  public static final String GET_PROFILE_CONSUMER_USER = &quot;/profile/consumers/{userId}&quot;;
+  public static final String GET_PROFILE_DISPENSARY_USER = &quot;/profile/dispensaries/{userId}&quot;;
+  public static final String GET_PROFILE_DISPENSARY_USER_BY_DISPENSARY_ID =
+      &quot;/profile/dispensaries/bydispensaryid/{dispensaryId}&quot;;
+  public static final String GET_ALL_PROFILE_ADMIN_USER = &quot;/profile/admins&quot;;
+  public static final String GET_ALL_PROFILE_CONSUMER_USER = &quot;/profile/consumers&quot;;
+  public static final String GET_ALL_PROFILE_DISPENSARY_USER = &quot;/profile/dispensaries&quot;;
+  public static final String UPDATE_ADMIN_USER = &quot;/profile/admins/{userId}&quot;;
+  public static final String ACTIVATE_ADMIN_USER = &quot;/profile/admins/{userId}/activate&quot;;
+  public static final String DEACTIVATE_ADMIN_USER = &quot;/profile/admins/{userId}/deactivate&quot;;
+  public static final String ACTIVATE_CONSUMER_USER = &quot;/profile/consumers/{userId}/activate&quot;;
+  public static final String DEACTIVATE_CONSUMER_USER = &quot;/profile/consumers/{userId}/deactivate&quot;;
+  public static final String ACTIVATE_DISPENSARY_USER = &quot;/profile/dispensaries/{userId}/activate&quot;;
+  public static final String DEACTIVATE_DISPENSARY_USER =
+      &quot;/profile/dispensaries/{userId}/deactivate&quot;;
+  public static final String UPDATE_CONSUMER_USER = &quot;/profile/consumers/{userId}&quot;;
+  public static final String UPDATE_DISPENSARY_USER = &quot;/profile/dispensaries/{userId}&quot;;
+  public static final String UPLOADS_CARDS = &quot;/profile/uploads/mmjcard&quot;;
+  public static final String DELETE_USER = &quot;/{userId}&quot;;
+
+  public static final String DELETE_ADMIN_USER = &quot;/admin/{userId}&quot;;
+  public static final String DELETE_CONSUMER_USER = &quot;/consumer/{userId}&quot;;
+  public static final String DELETE_DISPENSARY_USER = &quot;/dispensary/{dispensaryId}&quot;;
+  public static final String VALIDATE_USER = &quot;/validate&quot;;
+  public static final String SEND_CODE = &quot;/send-code&quot;;
+  public static final String VERIFY_CODE = &quot;/verify-code&quot;;
+  public static final String GET_ALL_GENDERS = &quot;/genders&quot;;
+  public static final String GET_GENDER_BY_ID = &quot;/genders/{genderId}&quot;;
+  public static final String GET_USER_STATE = &quot;/{userId}/state&quot;;
+  public static final String GET_ALL_USERTYPES = &quot;/usertypes&quot;;
+  public static final String GET_USERTYPE_BY_ID = &quot;/usertypes/{userTypeId}&quot;;
+  public static final String GET_AVATAR_IMAGE_UPLOAD_LOCATION = &quot;/uploads/avatar&quot;;
+  public static final String EDIT_PROFILE_IMAGE_STATUS = &quot;/uploads/avatar&quot;;
+  public static final String GET_MMJCARD_IMAGE_UPLOAD_LOCATION =
+      &quot;/profile/consumers/uploads/mmjcard&quot;;
+
+  public static final String REGION_PATH = API_PREFIX + &quot;/v1/region&quot;;
+  public static final String GET_STATES = &quot;/states&quot;;
+  public static final String GET_STATE_BY_ID = &quot;/states/{stateId}&quot;;
+  public static final String ZIP_CODES = &quot;/states/{stateId}/zipcodes&quot;;
+  public static final String GET_ZIPCODE_BY_ID = &quot;/states/zipcodes/{zipCodeId}&quot;;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

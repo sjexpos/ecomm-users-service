@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SliceResponse.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">API</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.api.model</a> &gt; <span class="el_source">SliceResponse.java</span></div><h1>SliceResponse.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.api.model;
+
+import java.io.Serializable;
+import java.util.List;
+
+/**
+ * A slice of data that indicates whether there's a next or previous slice available. Allows to obtain a
+ * {@link PageableRequest} to request a previous or next {@link SliceResponse}.
+ *
+ * @author Sergio Exposito
+ */
+public interface SliceResponse&lt;T&gt; extends Serializable {
+
+  /**
+   * Returns the number of the current {@link SliceResponse}. Is always non-negative.
+   *
+   * @return the number of the current {@link SliceResponse}.
+   */
+  int getNumber();
+
+  /**
+   * Returns the size of the {@link SliceResponse}.
+   *
+   * @return the size of the {@link SliceResponse}.
+   */
+  int getSize();
+
+  /**
+   * Returns the number of elements currently on this {@link SliceResponse}.
+   *
+   * @return the number of elements currently on this {@link SliceResponse}.
+   */
+  int getNumberOfElements();
+
+  /**
+   * Returns the page content as {@link List}.
+   *
+   * @return
+   */
+  List&lt;T&gt; getContent();
+
+  /**
+   * Returns whether the {@link SliceResponse} has content at all.
+   *
+   * @return
+   */
+  boolean hasContent();
+
+  /**
+   * Returns the sorting parameters for the {@link SliceResponse}.
+   *
+   * @return
+   */
+  SortRequest getSort();
+
+  /**
+   * Returns whether the current {@link SliceResponse} is the first one.
+   *
+   * @return
+   */
+  boolean isFirst();
+
+  /**
+   * Returns whether the current {@link SliceResponse} is the last one.
+   *
+   * @return
+   */
+  boolean isLast();
+
+  /**
+   * Returns if there is a next {@link SliceResponse}.
+   *
+   * @return if there is a next {@link SliceResponse}.
+   */
+  boolean hasNext();
+
+  /**
+   * Returns if there is a previous {@link SliceResponse}.
+   *
+   * @return if there is a previous {@link SliceResponse}.
+   */
+  boolean hasPrevious();
+
+  /**
+   * Returns the {@link PageableRequest} that's been used to request the current {@link SliceResponse}.
+   *
+   * @return
+   * @since 2.0
+   */
+  default PageableRequest getPageable() {
+<span class="nc" id="L108">    return PageableRequestImpl.of(getNumber(), getSize(), getSort());</span>
+  }
+
+  /**
+   * Returns the {@link PageableRequest} to request the next {@link SliceResponse}. Can be {@link PageableRequest#unpaged()} in case the
+   * current {@link SliceResponse} is already the last one. Clients should check {@link #hasNext()} before calling this method.
+   *
+   * @return
+   * @see #nextOrLastPageable()
+   */
+  PageableRequest nextPageable();
+
+  /**
+   * Returns the {@link PageableRequest} to request the previous {@link SliceResponse}. Can be {@link PageableRequest#unpaged()} in case the
+   * current {@link SliceResponse} is already the first one. Clients should check {@link #hasPrevious()} before calling this
+   * method.
+   *
+   * @return
+   * @see #previousPageable()
+   */
+  PageableRequest previousPageable();
+
+  /**
+   * Returns the {@link PageableRequest} describing the next slice or the one describing the current slice in case it's the
+   * last one.
+   *
+   * @return
+   * @since 2.2
+   */
+  default PageableRequest nextOrLastPageable() {
+<span class="nc bnc" id="L138" title="All 2 branches missed.">    return hasNext() ? nextPageable() : getPageable();</span>
+  }
+
+  /**
+   * Returns the {@link PageableRequest} describing the previous slice or the one describing the current slice in case it's the
+   * first one.
+   *
+   * @return
+   * @since 2.2
+   */
+  default PageableRequest previousOrFirstPageable() {
+<span class="nc bnc" id="L149" title="All 2 branches missed.">    return hasPrevious() ? previousPageable() : getPageable();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

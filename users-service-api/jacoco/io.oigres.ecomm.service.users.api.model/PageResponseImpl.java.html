@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PageResponseImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">API</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.api.model</a> &gt; <span class="el_source">PageResponseImpl.java</span></div><h1>PageResponseImpl.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.api.model;
+
+import java.util.List;
+import lombok.Getter;
+
+/**
+ * Basic {@code Page} implementation.
+ *
+ * @param &lt;T&gt; the type of which the page consists.
+ * @author Sergio Exposito
+ */
+public class PageResponseImpl&lt;T&gt; extends ChunkResponse&lt;T&gt; implements PageResponse&lt;T&gt; {
+
+  private static final long serialVersionUID = 867755909294344406L;
+  @Getter private final long total;
+
+  /**
+   * Constructor of {@code PageImpl}.
+   *
+   * @param content the content of this page, must not be {@literal null}.
+   * @param pageable the paging information, must not be {@literal null}.
+   * @param total the total amount of items available. The total might be adapted considering the length of the content
+   *          given, if it is going to be the content of the last page. This is in place to mitigate inconsistencies.
+   */
+  public PageResponseImpl(List&lt;T&gt; content, PageableRequest pageable, long total) {
+
+<span class="nc" id="L44">    super(content, pageable);</span>
+
+<span class="nc" id="L46">    this.total =</span>
+        pageable
+<span class="nc" id="L48">            .toOptional()</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">            .filter(it -&gt; !content.isEmpty()) //</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">            .filter(it -&gt; it.getOffset() + it.getPageSize() &gt; total) //</span>
+<span class="nc" id="L51">            .map(it -&gt; it.getOffset() + content.size()) //</span>
+<span class="nc" id="L52">            .orElse(total);</span>
+<span class="nc" id="L53">  }</span>
+
+  /**
+   * Creates a new {@link PageResponseImpl} with the given content. This will result in the created {@link PageResponse} being identical
+   * to the entire {@link List}.
+   *
+   * @param content must not be {@literal null}.
+   */
+  public PageResponseImpl(List&lt;T&gt; content) {
+<span class="nc bnc" id="L62" title="All 2 branches missed.">    this(content, PageableRequest.unpaged(), null == content ? 0 : content.size());</span>
+<span class="nc" id="L63">  }</span>
+
+  /*
+   * (non-Javadoc)
+   * @see org.springframework.data.domain.Page#getTotalPages()
+   */
+  @Override
+  public int getTotalPages() {
+<span class="nc bnc" id="L71" title="All 2 branches missed.">    return getSize() == 0 ? 1 : (int) Math.ceil((double) total / (double) getSize());</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see org.springframework.data.domain.Page#getTotalElements()
+   */
+  @Override
+  public long getTotalElements() {
+<span class="nc" id="L80">    return total;</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see org.springframework.data.domain.Slice#hasNext()
+   */
+  @Override
+  public boolean hasNext() {
+<span class="nc bnc" id="L89" title="All 2 branches missed.">    return getNumber() + 1 &lt; getTotalPages();</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see org.springframework.data.domain.Slice#isLast()
+   */
+  @Override
+  public boolean isLast() {
+<span class="nc bnc" id="L98" title="All 2 branches missed.">    return !hasNext();</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+
+<span class="nc" id="L108">    String contentType = &quot;UNKNOWN&quot;;</span>
+<span class="nc" id="L109">    List&lt;T&gt; content = getContent();</span>
+
+<span class="nc bnc" id="L111" title="All 4 branches missed.">    if (!content.isEmpty() &amp;&amp; content.get(0) != null) {</span>
+<span class="nc" id="L112">      contentType = content.get(0).getClass().getName();</span>
+    }
+
+<span class="nc" id="L115">    return String.format(</span>
+<span class="nc" id="L116">        &quot;Page %s of %d containing %s instances&quot;, getNumber() + 1, getTotalPages(), contentType);</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(Object obj) {
+
+<span class="nc bnc" id="L126" title="All 2 branches missed.">    if (this == obj) {</span>
+<span class="nc" id="L127">      return true;</span>
+    }
+
+<span class="nc bnc" id="L130" title="All 2 branches missed.">    if (!(obj instanceof PageResponseImpl&lt;?&gt;)) {</span>
+<span class="nc" id="L131">      return false;</span>
+    }
+
+<span class="nc" id="L134">    PageResponseImpl&lt;?&gt; that = (PageResponseImpl&lt;?&gt;) obj;</span>
+
+<span class="nc bnc" id="L136" title="All 4 branches missed.">    return this.total == that.total &amp;&amp; super.equals(obj);</span>
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode() {
+
+<span class="nc" id="L146">    int result = 17;</span>
+
+<span class="nc" id="L148">    result += 31 * (int) (total ^ total &gt;&gt;&gt; 32);</span>
+<span class="nc" id="L149">    result += 31 * super.hashCode();</span>
+
+<span class="nc" id="L151">    return result;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>PageableRequestHandlerMethodArgumentResolver.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Aggregated Reports</a> &gt; <a href="../index.html" class="el_bundle">users-service-rest-api</a> &gt; <a href="index.source.html" class="el_package">org.springframework.data.web</a> &gt; <span class="el_source">PageableRequestHandlerMethodArgumentResolver.java</span></div><h1>PageableRequestHandlerMethodArgumentResolver.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package org.springframework.data.web;
+
+import io.oigres.ecomm.service.users.api.model.PageableRequest;
+import io.oigres.ecomm.service.users.api.model.PageableRequestImpl;
+import io.oigres.ecomm.service.users.api.model.SortRequest;
+import java.lang.reflect.Method;
+import java.util.Optional;
+import org.springframework.core.MethodParameter;
+import org.springframework.core.annotation.MergedAnnotation;
+import org.springframework.core.annotation.MergedAnnotations;
+import org.springframework.data.domain.Sort;
+import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.support.WebDataBinderFactory;
+import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.method.support.ModelAndViewContainer;
+
+public class PageableRequestHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
+
+  private static final String INVALID_DEFAULT_PAGE_SIZE =
+      &quot;Invalid default page size configured for method %s; Must not be less than one&quot;;
+
+  private static final String DEFAULT_PAGE_PARAMETER = &quot;page&quot;;
+  private static final String DEFAULT_SIZE_PARAMETER = &quot;size&quot;;
+  private static final String DEFAULT_PREFIX = &quot;&quot;;
+  private static final String DEFAULT_QUALIFIER_DELIMITER = &quot;_&quot;;
+  private static final int DEFAULT_MAX_PAGE_SIZE = 2000;
+<span class="fc" id="L47">  static final PageableRequest DEFAULT_PAGE_REQUEST = PageableRequestImpl.of(0, 20);</span>
+
+<span class="fc" id="L49">  private PageableRequest fallbackPageable = DEFAULT_PAGE_REQUEST;</span>
+<span class="fc" id="L50">  private String pageParameterName = DEFAULT_PAGE_PARAMETER;</span>
+<span class="fc" id="L51">  private String sizeParameterName = DEFAULT_SIZE_PARAMETER;</span>
+<span class="fc" id="L52">  private String prefix = DEFAULT_PREFIX;</span>
+<span class="fc" id="L53">  private String qualifierDelimiter = DEFAULT_QUALIFIER_DELIMITER;</span>
+<span class="fc" id="L54">  private int maxPageSize = DEFAULT_MAX_PAGE_SIZE;</span>
+<span class="fc" id="L55">  private boolean oneIndexedParameters = false;</span>
+
+<span class="fc" id="L57">  private static final SortRequestHandlerMethodArgumentResolver DEFAULT_SORT_RESOLVER =</span>
+      new SortRequestHandlerMethodArgumentResolver();
+  private SortRequestHandlerMethodArgumentResolver sortResolver;
+
+  /**
+   * Constructs an instance of this resolved with a default {@link SortHandlerMethodArgumentResolver}.
+   */
+  public PageableRequestHandlerMethodArgumentResolver() {
+<span class="fc" id="L65">    this(null);</span>
+<span class="fc" id="L66">  }</span>
+
+  /**
+   * Constructs an instance of this resolver with the specified {@link SortArgumentResolver}.
+   *
+   * @param sortResolver the sort resolver to use
+   * @since 1.13
+   */
+  public PageableRequestHandlerMethodArgumentResolver(
+<span class="fc" id="L75">      @Nullable SortRequestHandlerMethodArgumentResolver sortResolver) {</span>
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">    this.sortResolver = sortResolver == null ? DEFAULT_SORT_RESOLVER : sortResolver;</span>
+<span class="fc" id="L77">  }</span>
+
+  /**
+   * Configures the {@link PageableRequest} to be used as fallback in case no {@link PageableDefault} can be found at the
+   * method parameter to be resolved.
+   * &lt;p&gt;
+   * If you set this to {@literal PageableRequest#unpaged()}, be aware that your controller methods will get an {@code unpaged}
+   * instance handed into them in case no {@link PageableRequest} data can be found in the request.
+   *
+   * @param fallbackPageable the {@link Pageable} to be used as general fallback.
+   */
+  public void setFallbackPageable(PageableRequest fallbackPageable) {
+
+<span class="nc" id="L90">    Assert.notNull(fallbackPageable, &quot;Fallback Pageable must not be null&quot;);</span>
+
+<span class="nc" id="L92">    this.fallbackPageable = fallbackPageable;</span>
+<span class="nc" id="L93">  }</span>
+
+  /**
+   * Returns whether the given {@link PageableRequest} is the fallback one.
+   *
+   * @param pageable can be {@literal null}.
+   * @return
+   */
+  public boolean isFallbackPageable(PageableRequest pageable) {
+<span class="nc" id="L102">    return fallbackPageable.equals(pageable);</span>
+  }
+
+  /**
+   * Configures the maximum page size to be accepted. This allows to put an upper boundary of the page size to prevent
+   * potential attacks trying to issue an {@link OutOfMemoryError}. Defaults to {@link #DEFAULT_MAX_PAGE_SIZE}.
+   *
+   * @param maxPageSize the maxPageSize to set
+   */
+  public void setMaxPageSize(int maxPageSize) {
+<span class="nc" id="L112">    this.maxPageSize = maxPageSize;</span>
+<span class="nc" id="L113">  }</span>
+
+  /**
+   * Retrieves the maximum page size to be accepted. This allows to put an upper boundary of the page size to prevent
+   * potential attacks trying to issue an {@link OutOfMemoryError}. Defaults to {@link #DEFAULT_MAX_PAGE_SIZE}.
+   *
+   * @return the maximum page size allowed.
+   */
+  protected int getMaxPageSize() {
+<span class="nc" id="L122">    return this.maxPageSize;</span>
+  }
+
+  /**
+   * Configures the parameter name to be used to find the page number in the request. Defaults to {@code page}.
+   *
+   * @param pageParameterName the parameter name to be used, must not be {@literal null} or empty.
+   */
+  public void setPageParameterName(String pageParameterName) {
+
+<span class="nc" id="L132">    Assert.hasText(pageParameterName, &quot;Page parameter name must not be null or empty&quot;);</span>
+<span class="nc" id="L133">    this.pageParameterName = pageParameterName;</span>
+<span class="nc" id="L134">  }</span>
+
+  /**
+   * Retrieves the parameter name to be used to find the page number in the request. Defaults to {@code page}.
+   *
+   * @return the parameter name to be used, never {@literal null} or empty.
+   */
+  protected String getPageParameterName() {
+<span class="fc" id="L142">    return this.pageParameterName;</span>
+  }
+
+  /**
+   * Configures the parameter name to be used to find the page size in the request. Defaults to {@code size}.
+   *
+   * @param sizeParameterName the parameter name to be used, must not be {@literal null} or empty.
+   */
+  public void setSizeParameterName(String sizeParameterName) {
+
+<span class="nc" id="L152">    Assert.hasText(sizeParameterName, &quot;Size parameter name must not be null or empty&quot;);</span>
+<span class="nc" id="L153">    this.sizeParameterName = sizeParameterName;</span>
+<span class="nc" id="L154">  }</span>
+
+  /**
+   * Retrieves the parameter name to be used to find the page size in the request. Defaults to {@code size}.
+   *
+   * @return the parameter name to be used, never {@literal null} or empty.
+   */
+  protected String getSizeParameterName() {
+<span class="fc" id="L162">    return this.sizeParameterName;</span>
+  }
+
+  /**
+   * Configures a general prefix to be prepended to the page number and page size parameters. Useful to namespace the
+   * property names used in case they are clashing with ones used by your application. By default, no prefix is used.
+   *
+   * @param prefix the prefix to be used or {@literal null} to reset to the default.
+   */
+  public void setPrefix(String prefix) {
+<span class="nc bnc" id="L172" title="All 2 branches missed.">    this.prefix = prefix == null ? DEFAULT_PREFIX : prefix;</span>
+<span class="nc" id="L173">  }</span>
+
+  /**
+   * The delimiter to be used between the qualifier and the actual page number and size properties. Defaults to
+   * {@code _}. So a qualifier of {@code foo} will result in a page number parameter of {@code foo_page}.
+   *
+   * @param qualifierDelimiter the delimiter to be used or {@literal null} to reset to the default.
+   */
+  public void setQualifierDelimiter(String qualifierDelimiter) {
+<span class="nc" id="L182">    this.qualifierDelimiter =</span>
+<span class="nc bnc" id="L183" title="All 2 branches missed.">        qualifierDelimiter == null ? DEFAULT_QUALIFIER_DELIMITER : qualifierDelimiter;</span>
+<span class="nc" id="L184">  }</span>
+
+  /**
+   * Configures whether to expose and assume 1-based page number indexes in the request parameters. Defaults to
+   * {@literal false}, meaning a page number of 0 in the request equals the first page. If this is set to
+   * {@literal true}, a page number of 1 in the request will be considered the first page.
+   *
+   * @param oneIndexedParameters the oneIndexedParameters to set
+   */
+  public void setOneIndexedParameters(boolean oneIndexedParameters) {
+<span class="nc" id="L194">    this.oneIndexedParameters = oneIndexedParameters;</span>
+<span class="nc" id="L195">  }</span>
+
+  /**
+   * Indicates whether to expose and assume 1-based page number indexes in the request parameters. Defaults to
+   * {@literal false}, meaning a page number of 0 in the request equals the first page. If this is set to
+   * {@literal true}, a page number of 1 in the request will be considered the first page.
+   *
+   * @return whether to assume 1-based page number indexes in the request parameters.
+   */
+  protected boolean isOneIndexedParameters() {
+<span class="nc" id="L205">    return this.oneIndexedParameters;</span>
+  }
+
+  protected PageableRequest getPageable(
+      MethodParameter methodParameter,
+      @Nullable String pageString,
+      @Nullable String pageSizeString) {
+<span class="fc" id="L212">    SpringDataAnnotationUtils.assertPageableUniqueness(methodParameter);</span>
+
+<span class="fc" id="L214">    Optional&lt;PageableRequest&gt; defaultOrFallback =</span>
+<span class="fc" id="L215">        getDefaultFromAnnotationOrFallback(methodParameter).toOptional();</span>
+
+<span class="fc" id="L217">    Optional&lt;Integer&gt; page = parseAndApplyBoundaries(pageString, Integer.MAX_VALUE, true);</span>
+<span class="fc" id="L218">    Optional&lt;Integer&gt; pageSize = parseAndApplyBoundaries(pageSizeString, maxPageSize, false);</span>
+
+<span class="pc bpc" id="L220" title="4 of 6 branches missed.">    if (!(page.isPresent() &amp;&amp; pageSize.isPresent()) &amp;&amp; !defaultOrFallback.isPresent()) {</span>
+<span class="nc" id="L221">      return PageableRequest.unpaged();</span>
+    }
+
+<span class="fc" id="L224">    int p =</span>
+<span class="fc" id="L225">        page.orElseGet(</span>
+            () -&gt;
+                defaultOrFallback
+<span class="nc" id="L228">                    .map(PageableRequest::getPageNumber)</span>
+<span class="nc" id="L229">                    .orElseThrow(IllegalStateException::new));</span>
+<span class="fc" id="L230">    int ps =</span>
+<span class="fc" id="L231">        pageSize.orElseGet(</span>
+            () -&gt;
+                defaultOrFallback
+<span class="nc" id="L234">                    .map(PageableRequest::getPageSize)</span>
+<span class="nc" id="L235">                    .orElseThrow(IllegalStateException::new));</span>
+
+    // Limit lower bound
+    ps =
+<span class="pc bpc" id="L239" title="1 of 2 branches missed.">        ps &lt; 1</span>
+            ? defaultOrFallback
+<span class="nc" id="L241">                .map(PageableRequest::getPageSize)</span>
+<span class="nc" id="L242">                .orElseThrow(IllegalStateException::new)</span>
+<span class="fc" id="L243">            : ps;</span>
+    // Limit upper bound
+<span class="pc bpc" id="L245" title="1 of 2 branches missed.">    ps = ps &gt; maxPageSize ? maxPageSize : ps;</span>
+
+<span class="fc" id="L247">    return PageableRequestImpl.of(</span>
+<span class="fc" id="L248">        p, ps, defaultOrFallback.map(PageableRequest::getSort).orElseGet(SortRequest::unsorted));</span>
+  }
+
+  /**
+   * Returns the name of the request parameter to find the {@link Pageable} information in. Inspects the given
+   * {@link MethodParameter} for {@link Qualifier} present and prefixes the given source parameter name with it.
+   *
+   * @param source the basic parameter name.
+   * @param parameter the {@link MethodParameter} potentially qualified.
+   * @return the name of the request parameter.
+   */
+  protected String getParameterNameToUse(String source, @Nullable MethodParameter parameter) {
+
+<span class="fc" id="L261">    StringBuilder builder = new StringBuilder(prefix);</span>
+
+<span class="fc" id="L263">    String value = SpringDataAnnotationUtils.getQualifier(parameter);</span>
+
+<span class="pc bpc" id="L265" title="1 of 2 branches missed.">    if (StringUtils.hasLength(value)) {</span>
+<span class="nc" id="L266">      builder.append(value);</span>
+<span class="nc" id="L267">      builder.append(qualifierDelimiter);</span>
+    }
+
+<span class="fc" id="L270">    return builder.append(source).toString();</span>
+  }
+
+  private PageableRequest getDefaultFromAnnotationOrFallback(MethodParameter methodParameter) {
+
+<span class="fc" id="L275">    MergedAnnotation&lt;PageableDefault&gt; defaults =</span>
+<span class="fc" id="L276">        MergedAnnotations.from(methodParameter.getParameterAnnotations())</span>
+<span class="fc" id="L277">            .get(PageableDefault.class);</span>
+
+<span class="pc bpc" id="L279" title="1 of 2 branches missed.">    if (defaults.isPresent()) {</span>
+<span class="fc" id="L280">      return getDefaultPageRequestFrom(methodParameter, defaults);</span>
+    }
+
+<span class="nc" id="L283">    return fallbackPageable;</span>
+  }
+
+  private static PageableRequest getDefaultPageRequestFrom(
+      MethodParameter parameter, MergedAnnotation&lt;PageableDefault&gt; defaults) {
+
+<span class="fc" id="L289">    int defaultPageNumber = defaults.getInt(&quot;page&quot;);</span>
+<span class="fc" id="L290">    int defaultPageSize = defaults.getInt(&quot;size&quot;);</span>
+
+<span class="pc bpc" id="L292" title="1 of 2 branches missed.">    if (defaultPageSize &lt; 1) {</span>
+<span class="nc" id="L293">      Method annotatedMethod = parameter.getMethod();</span>
+<span class="nc" id="L294">      throw new IllegalStateException(String.format(INVALID_DEFAULT_PAGE_SIZE, annotatedMethod));</span>
+    }
+
+<span class="fc" id="L297">    String[] sort = defaults.getStringArray(&quot;sort&quot;);</span>
+<span class="pc bpc" id="L298" title="1 of 2 branches missed.">    if (sort.length == 0) {</span>
+<span class="fc" id="L299">      return PageableRequestImpl.of(defaultPageNumber, defaultPageSize);</span>
+    }
+
+<span class="nc" id="L302">    Sort.Direction direction = defaults.getEnum(&quot;direction&quot;, Sort.Direction.class);</span>
+
+<span class="nc" id="L304">    SortRequest.Direction myDirection = null;</span>
+<span class="nc bnc" id="L305" title="All 2 branches missed.">    if (direction != null) {</span>
+<span class="nc bnc" id="L306" title="All 2 branches missed.">      if (Sort.Direction.ASC.equals(direction)) {</span>
+<span class="nc" id="L307">        myDirection = SortRequest.Direction.ASC;</span>
+      } else {
+<span class="nc" id="L309">        myDirection = SortRequest.Direction.DESC;</span>
+      }
+    }
+
+<span class="nc" id="L313">    return PageableRequestImpl.of(defaultPageNumber, defaultPageSize, myDirection, sort);</span>
+  }
+
+  /**
+   * Tries to parse the given {@link String} into an integer and applies the given boundaries. Will return 0 if the
+   * {@link String} cannot be parsed.
+   *
+   * @param parameter the parameter value.
+   * @param upper the upper bound to be applied.
+   * @param shiftIndex whether to shift the index if {@link #oneIndexedParameters} is set to true.
+   * @return
+   */
+  private Optional&lt;Integer&gt; parseAndApplyBoundaries(
+      @Nullable String parameter, int upper, boolean shiftIndex) {
+
+<span class="pc bpc" id="L328" title="1 of 2 branches missed.">    if (!StringUtils.hasText(parameter)) {</span>
+<span class="nc" id="L329">      return Optional.empty();</span>
+    }
+
+    try {
+<span class="pc bpc" id="L333" title="3 of 4 branches missed.">      int parsed = Integer.parseInt(parameter) - (oneIndexedParameters &amp;&amp; shiftIndex ? 1 : 0);</span>
+<span class="pc bpc" id="L334" title="2 of 4 branches missed.">      return Optional.of(parsed &lt; 0 ? 0 : parsed &gt; upper ? upper : parsed);</span>
+<span class="nc" id="L335">    } catch (NumberFormatException e) {</span>
+<span class="nc" id="L336">      return Optional.of(0);</span>
+    }
+  }
+
+  @Override
+  public boolean supportsParameter(MethodParameter parameter) {
+<span class="fc" id="L342">    return PageableRequest.class.equals(parameter.getParameterType());</span>
+  }
+
+  @Override
+  @Nullable public PageableRequest resolveArgument(
+      MethodParameter methodParameter,
+      @Nullable ModelAndViewContainer mavContainer,
+      NativeWebRequest webRequest,
+      @Nullable WebDataBinderFactory binderFactory)
+      throws Exception {
+
+<span class="fc" id="L353">    String page =</span>
+<span class="fc" id="L354">        webRequest.getParameter(getParameterNameToUse(getPageParameterName(), methodParameter));</span>
+<span class="fc" id="L355">    String pageSize =</span>
+<span class="fc" id="L356">        webRequest.getParameter(getParameterNameToUse(getSizeParameterName(), methodParameter));</span>
+
+<span class="fc" id="L358">    SortRequest sort =</span>
+<span class="fc" id="L359">        sortResolver.resolveArgument(methodParameter, mavContainer, webRequest, binderFactory);</span>
+<span class="fc" id="L360">    PageableRequest pageable = getPageable(methodParameter, page, pageSize);</span>
+
+<span class="pc bpc" id="L362" title="2 of 4 branches missed.">    if (sort == null || !sort.isSorted()) {</span>
+<span class="fc" id="L363">      return pageable;</span>
+    }
+
+<span class="nc bnc" id="L366" title="All 2 branches missed.">    return pageable.isPaged()</span>
+<span class="nc" id="L367">        ? PageableRequestImpl.of(pageable.getPageNumber(), pageable.getPageSize(), sort)</span>
+<span class="nc" id="L368">        : PageableRequest.unpaged();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

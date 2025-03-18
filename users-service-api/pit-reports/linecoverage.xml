@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponse' method='getShortName()Ljava/lang/String;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponse$StateResponseBuilder' method='name(Ljava/lang/String;)Lio/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponseTest' method='&lt;init&gt;()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponseTest' method='&lt;init&gt;()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponseTest' method='check_get_and_set()V' number='5'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponseTest' method='check_get_and_set()V' number='6'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponseTest' method='check_get_and_set()V' number='3'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponseTest' method='check_get_and_set()V' number='4'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponseTest' method='check_get_and_set()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponseTest' method='check_get_and_set()V' number='2'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponseTest' method='check_get_and_set()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponseTest' method='check_get_and_set()V' number='11'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponseTest' method='check_get_and_set()V' number='12'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponse$StateResponseBuilder' method='&lt;init&gt;()V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponseTest' method='check_get_and_set()V' number='9'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponse' method='getName()Ljava/lang/String;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponse$StateResponseBuilder' method='&lt;init&gt;()V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponseTest' method='check_get_and_set()V' number='10'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponseTest' method='check_get_and_set()V' number='7'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponseTest' method='check_get_and_set()V' number='8'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponse' method='builder()Lio/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponse' method='builder()Lio/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder;' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponse' method='getId()Ljava/lang/Long;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponse$StateResponseBuilder' method='shortName(Ljava/lang/String;)Lio/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponse$StateResponseBuilder' method='id(Ljava/lang/Long;)Lio/oigres/ecomm/service/users/api/model/region/StateResponse$StateResponseBuilder;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponse' method='&lt;init&gt;(Ljava/lang/Long;Ljava/lang/String;Ljava/lang/String;)V' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponse' method='&lt;init&gt;(Ljava/lang/Long;Ljava/lang/String;Ljava/lang/String;)V' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponse$StateResponseBuilder' method='build()Lio/oigres/ecomm/service/users/api/model/region/StateResponse;' number='0'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+<block classname='io.oigres.ecomm.service.users.api.model.region.StateResponse$StateResponseBuilder' method='build()Lio/oigres/ecomm/service/users/api/model/region/StateResponse;' number='1'><tests>
+<test name='io.oigres.ecomm.service.users.api.model.region.StateResponseTest.[engine:junit-jupiter]/[class:io.oigres.ecomm.service.users.api.model.region.StateResponseTest]/[method:check_get_and_set()]'/>
+</tests>
+</block>
+</coverage>

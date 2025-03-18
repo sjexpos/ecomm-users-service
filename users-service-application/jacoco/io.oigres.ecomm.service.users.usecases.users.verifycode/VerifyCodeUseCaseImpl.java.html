@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VerifyCodeUseCaseImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Application</a> &gt; <a href="index.source.html" class="el_package">io.oigres.ecomm.service.users.usecases.users.verifycode</a> &gt; <span class="el_source">VerifyCodeUseCaseImpl.java</span></div><h1>VerifyCodeUseCaseImpl.java</h1><pre class="source lang-java linenums">/**********
+ This project is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3.0 of the License, or (at your
+ option) any later version. (See &lt;https://www.gnu.org/licenses/gpl-3.0.html&gt;.)
+
+ This project is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ **********/
+// Copyright (c) 2024-2025 Sergio Exposito.  All rights reserved.              
+
+package io.oigres.ecomm.service.users.usecases.users.verifycode;
+
+import io.oigres.ecomm.service.users.domain.cache.VerificationCode;
+import io.oigres.ecomm.service.users.domain.profile.ConsumerProfile;
+import io.oigres.ecomm.service.users.exception.InvalidException;
+import io.oigres.ecomm.service.users.exception.UserNotFoundException;
+import io.oigres.ecomm.service.users.repository.cache.VerificationCodeRepository;
+import io.oigres.ecomm.service.users.repository.profiles.ConsumerProfileRepository;
+import java.util.Optional;
+import org.springframework.stereotype.Component;
+
+@Component
+public class VerifyCodeUseCaseImpl implements VerifyCodeUseCase {
+  private final ConsumerProfileRepository consumerProfileRepository;
+  private final VerificationCodeRepository verificationCodeRepository;
+
+  public VerifyCodeUseCaseImpl(
+      ConsumerProfileRepository consumerProfileRepository,
+<span class="nc" id="L36">      VerificationCodeRepository verificationCodeRepository) {</span>
+<span class="nc" id="L37">    this.consumerProfileRepository = consumerProfileRepository;</span>
+<span class="nc" id="L38">    this.verificationCodeRepository = verificationCodeRepository;</span>
+<span class="nc" id="L39">  }</span>
+
+  @Override
+  public void handle(String email, String code) throws UserNotFoundException, InvalidException {
+<span class="nc" id="L43">    Optional&lt;ConsumerProfile&gt; opConsumerProfile = consumerProfileRepository.findByUserEmail(email);</span>
+<span class="nc" id="L44">    ConsumerProfile consumerProfile = opConsumerProfile.orElseThrow(UserNotFoundException::new);</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">    if (consumerProfile.getUser().isDeleted()</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        || Boolean.FALSE.equals(consumerProfile.getEnabled())) {</span>
+<span class="nc" id="L47">      throw new UserNotFoundException();</span>
+    }
+<span class="nc bnc" id="L49" title="All 2 branches missed.">    if (Boolean.TRUE.equals(consumerProfile.getVerified())) {</span>
+<span class="nc" id="L50">      throw new InvalidException(String.format(&quot;User %s is already verified&quot;, email));</span>
+    }
+<span class="nc" id="L52">    VerificationCode verificationCode = verificationCodeRepository.findByEmail(email);</span>
+<span class="nc bnc" id="L53" title="All 4 branches missed.">    if (verificationCode == null || !verificationCode.getCode().equals(code)) {</span>
+<span class="nc" id="L54">      throw new InvalidException(String.format(&quot;Invalid code %s&quot;, code));</span>
+    }
+<span class="nc" id="L56">    consumerProfile.setVerified(true);</span>
+<span class="nc" id="L57">    consumerProfileRepository.save(consumerProfile);</span>
+<span class="nc" id="L58">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
